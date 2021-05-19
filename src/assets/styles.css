@@ -46,6 +46,7 @@ html, body {
 #item-nav {
   color: #FFF;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .cart-logo {
@@ -55,12 +56,40 @@ html, body {
 /* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
 
 .home-background {
-  height: 2000px;
-  background-image: url("./img/HomeBackground.png");
+  position: absolute;
+  height: 4000px;
+  width: 100%;
+  background-image: url("./img/home-background.png");
   background-size: 100%;
-  /* background-position: center; */
   background-repeat: no-repeat;
-  /* background-position: top; */
-  /* background-size: cover; */
-  /* width: 100%; */
+}
+
+.home-logo {
+  position: relative;
+  text-align: center;
+  width: 35%;
+  margin-top: 7%;
+}
+
+.carousel-container {
+  /* position: relative; */
+  padding-top: 15%;
+}
+
+.carousel-img {
+  width: 70%;
+}
+
+.arrow {
+  height: 10%;
+  margin-top: 150%;
+
+}
+.shop-now {
+  color: #FFF;
+  font-size: 5vw;
+}
+
+.shop-now-shadow {
+  width: 30%;
 }

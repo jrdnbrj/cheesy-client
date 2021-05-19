@@ -22,7 +22,7 @@ const Header = () => {
                         <Link className="nav-link ms-5" id="item-nav" to="/">Products</Link>
                     </li>
                 </ul>
-                <img src={mediumLogo} className="medium-logo my-2 mx-2" alt="Cheesy Bittes Logo" />
+                <img src={mediumLogo} className="medium-logo my-1 mx-2" alt="Cheesy Bittes Logo" />
                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li className="nav-item">
                         <Link className="nav-link ms-5" id="item-nav" to="/">Contact us</Link>
