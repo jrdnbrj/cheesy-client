@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
+
+.navbar-bg {
+  background-color: #D89731;
+}
+
+#hamburguer-btn {
+  border: 0;
+  color: #D89731;
+}
+
+.hamburguer-icon {
+  height: 30px;
+}
+
+.medium-logo {
+  height: 60px;
+}
+
+@media (max-width: 990px) {
+  .medium-logo {
+    display: none;
+  }
+}
+
+.small-logo {
+  height: 40px;
+}
+
+@media (min-width: 991px) {
+  .small-logo {
+    display: none;
+  }
+}
+
+#item-nav {
+  color: #FFF;
+  font-weight: bold;
+}
+
+.cart-logo {
+  height: 30px;
+}
+
+/* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
+
+.home-background {
+  height: 2000px;
+  background-image: url("./img/HomeBackground.png");
+  background-size: 100%;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  /* background-position: top; */
+  /* background-size: cover; */
+  /* width: 100%; */
+}
