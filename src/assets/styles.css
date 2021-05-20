@@ -72,8 +72,7 @@ html, body {
 }
 
 .carousel-container {
-  /* position: relative; */
-  padding-top: 15%;
+  padding-top: 9%;
 }
 
 .carousel-img {
@@ -92,4 +91,113 @@ html, body {
 
 .shop-now-shadow {
   width: 30%;
+}
+
+#row-correction {
+  margin-right: 0;
+}
+
+#icons-container, #icons-container-2 {
+  padding-top: 10vw;
+}
+
+.icon-img {
+  padding-top: 10%;
+  width: 40%;
+}
+
+.wisconsin-img {
+  width: 13%;
+  height: 100%;
+}
+
+.icon-text {
+  color: #FFF;
+  text-align: center;
+  width: 40%;
+  font-size: 90%;
+  margin-top: 3%;
+}
+
+.wisconsin-img-2 {
+  width: 25vw;
+}
+
+@media (max-width: 990px) {
+  #icons-container {
+    display: none !important;
+  }
+}
+
+@media (min-width: 991px) {
+  #icons-container-2 {
+    display: none !important;
+  }
+}
+
+.icon-img-2 {
+  height: 12vw;
+}
+
+.icon-text-2 {
+  color: #FFF;
+  text-align: center;
+  width: 10vw;
+  font-size: 2vw;
+}
+
+.margin-top {
+  padding-top: 4vw;
+}
+
+.gluten {
+  padding-right: 20vw;
+}
+
+.pieces {
+  padding-left: 20vw;
+  
+}
+
+.simple {
+  padding-top: 5vw;
+  padding-left: 8vw;
+}
+
+.vegetarian {
+  padding-top: 5vw;
+  padding-right: 8vw;
+}
+
+.flickity-img {
+  width: 25%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.flickity-container {
+  overflow: hidden;
+  padding-top: 4vw;
+}
+
+.text-1, .text-2, .text-3 {
+  font-size: 1.6vw;
+  width: 10%;
+  text-align: center;
+  color: #FFF;
+  margin-top: 2vw;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.text-1 {
+  /* width: ; */
+}
+
+.text-2 {
+
+}
+
+.text-3 {
+
 }

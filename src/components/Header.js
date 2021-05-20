@@ -10,7 +10,7 @@ const Header = () => {
     return <nav className="navbar navbar-expand-lg navbar-light navbar-bg">
         <div className="container-fluid">
             <button className="navbar-toggler" id="hamburguer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#nav-tog" aria-controls="nav-tog" aria-expanded="false" aria-label="Toggle navigation">
-                <img src={hamburguerIcon} className="hamburguer-icon ms-2 me-5" alt="hamburguer-icon" />
+                <img src={hamburguerIcon} className="hamburguer-icon ms-3 me-4" alt="hamburguer-icon" />
             </button>
             <img src={smallLogo} className="small-logo my-2" alt="Cheesy Bittes Logo" />
             <div className="collapse navbar-collapse" id="nav-tog">
@@ -29,7 +29,7 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
-            <img src={cart} className="cart-logo me-2 ms-5 mb-1" alt="Cart Logo" />
+            <img src={cart} className="cart-logo me-2 ms-4 mb-1" alt="Cart Logo" />
         </div>
     </nav>
 }
