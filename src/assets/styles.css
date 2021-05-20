@@ -56,7 +56,7 @@ html, body {
 }
 
 .cart-logo {
-  width: 100%;
+  width: 90%;
 }
 
 /* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
@@ -199,19 +199,7 @@ html, body {
 .home-background-2 {
   background-color: #484870;
   height: auto;
-  /* height: 70%; */
   margin-top: 94%;
-  /* background-size: 500px; */
-}
-
-.home-background-3 {
-  position: absolute;
-  height: 4000px;
-  width: 100%;
-  background-image: url("./img/home-background-2.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  /* margin-top: 200px; */
 }
 
 @media (max-width: 990px) {
@@ -237,4 +225,94 @@ html, body {
   .text-4 {
     display: none;
   }
+}
+
+/* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */
+
+.home-background-3 {
+  /* position: relative; */
+  height: 500px;
+  background-image: url("./img/home-background-2.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-top: -1px;
+  padding-top: 25%;
+  padding-bottom: 30%;
+}
+
+.footer-text {
+  color: #D89731;
+  padding-left: 10%;
+  padding-right: 14%;
+  font-size: 1.5vw;
+}
+
+.icon {
+  padding-right: 5vw;
+  font-size: 3vw;
+}
+
+.footer-form {
+  padding-left: 10%;
+  padding-right: 10%;
+  /* padding-top: 1%; */
+}
+
+.form-logo-orange {
+  height: 4vw;
+  margin-bottom: 5%;
+}
+
+.form-input {
+  background-color: #D89731;
+  border-radius: 15px;
+  border: 0;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  margin-top: 1% !important;
+  color: #FFF;
+}
+
+.form-input::placeholder {
+  color: #FFF;
+}
+
+.form-textarea {
+  height: 150px;
+}
+
+@media (max-width: 990px) {
+  .footer-text {
+    font-size: 3.7vw;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 10%;
+    padding-top: 11%;
+  }
+  .footer-form {
+    padding-left: 14%;
+    padding-right: 14%;
+    font-size: 3vw;
+  }
+  .form-logo-orange {
+    height: 9vw;
+  }
+  .icon {
+    /* padding-right: 5vw; */
+    font-size: 5vw;
+  }
+}
+
+.form-submit {
+  color: #FFF;
+  background-color: #D89731;
+  border: 0;
+  border-radius: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

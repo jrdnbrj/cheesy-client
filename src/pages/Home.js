@@ -125,7 +125,7 @@ const Home = () => {
                 <p className="col-1 text-4"></p>
             </section>
         </section>
-        <section className="home-background-3"></section>
+        {/* <section className="home-background-3"></section> */}
     </>
 }
 
