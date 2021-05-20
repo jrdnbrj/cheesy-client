@@ -13,23 +13,26 @@ const Header = () => {
                 <img src={hamburguerIcon} className="hamburguer-icon me-1" alt="hamburguer-icon" />
             </button>
             <img src={smallLogo} className="small-logo my-2" alt="Cheesy Bittes Logo" />
+            <img src={cart} className="cart-logo-2" id="item-nav" alt="Cart Logo" />
             <div className="collapse navbar-collapse" id="nav-tog">
-                <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                        <Link className="nav-link me-5" id="item-nav" to="/">Our Family</Link>
+                <ul className="navbar-nav mx-auto">
+                    <li className="nav-item my-auto">
+                        <Link className="nav-link" id="item-nav" to="/">Our Family</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link mx-5" id="item-nav" to="/">Products</Link>
+                    <li className="nav-item my-auto">
+                        <Link className="nav-link" id="item-nav" to="/">Products</Link>
                     </li>
-                </ul>
-                <img src={mediumLogo} className="medium-logo my-3 mx-2" alt="Cheesy Bittes Logo" />
-                <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                        <Link className="nav-link mx-5" id="item-nav" to="/">Contact us</Link>
+                    <li className="nav-item mx-5">
+                        <img src={mediumLogo} className="medium-logo my-3 mx-5" alt="Cheesy Bittes Logo" />
+                    </li>
+                    <li className="nav-item my-auto">
+                        <Link className="nav-link" id="item-nav" to="/">Contact us</Link>
+                    </li>
+                    <li className="nav-item my-auto">
+                        <img src={cart} className="cart-logo" id="item-nav" alt="Cart Logo" />
                     </li>
                 </ul>
             </div>
-            <img src={cart} className="cart-logo me-2 ms-4 mb-1" alt="Cart Logo" />
         </div>
     </nav>
 }

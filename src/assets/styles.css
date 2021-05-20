@@ -28,8 +28,11 @@ html, body {
 }
 
 @media (max-width: 990px) {
-  .medium-logo {
+  .medium-logo, .cart-logo {
     display: none;
+  }
+  .cart-logo-2 {
+    height: 40px;
   }
 }
 
@@ -38,7 +41,7 @@ html, body {
 }
 
 @media (min-width: 991px) {
-  .small-logo {
+  .small-logo, .cart-logo-2 {
     display: none;
   }
 }
@@ -47,17 +50,20 @@ html, body {
   color: #FFF;
   font-weight: bold;
   font-size: 20px;
+  padding-left: 3.6vw;
+  padding-right: 3.6vw;
+  /* text-align: center; */
 }
 
 .cart-logo {
-  height: 30px;
+  width: 100%;
 }
 
 /* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
 
 .home-background {
   position: absolute;
-  height: 131%;
+  height: 103vw;
   width: 100%;
   background-image: url("./img/home-background-1.png");
   background-size: 100%;
