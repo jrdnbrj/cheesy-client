@@ -5,9 +5,9 @@ const Footer = () => {
     return <section className="row home-background-3 mx-auto" id="row-correction">
         <section className="col-xs-12 col-sm-12 col-lg-6 footer-text order-2 order-sm-2 order-lg-1">
             <p className="pb-5">We are so glad you are here! Thank you for supporting our small business and helpong us spread some love.</p>
-            <i className="bi-facebook icon icon-1"></i>
-            <i className="bi-instagram icon icon-2"></i>
-            <i className="bi-envelope-fill icon icon-3"></i>
+            <i className="bi-facebook icon"></i>
+            <i className="bi-instagram icon"></i>
+            <i className="bi-envelope-fill icon"></i>
             <p className="pt-5">Kindi Foods LLC<br />Eau Claire, Wl 547z03</p>
             <p></p>
         </section>
