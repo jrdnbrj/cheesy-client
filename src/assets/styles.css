@@ -17,10 +17,13 @@ html, body {
 #hamburguer-btn {
   border: 0;
   color: #e6981b;
+  padding: 0;
+  padding-left: 1%;
 }
 
 .hamburguer-icon {
-  height: 30px;
+  font-size: 50px;
+  color: #FFF;
 }
 
 .medium-logo {

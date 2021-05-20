@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 
-import hamburguerIcon from '../assets/img/hamburguer-icon.png';
 import mediumLogo from '../assets/img/medium-logo.png'
 import smallLogo from '../assets/img/small-logo.png'
 import cart from '../assets/img/cart.png'
@@ -10,9 +9,9 @@ const Header = () => {
     return <nav className="navbar navbar-expand-lg navbar-light navbar-bg">
         <div className="container-fluid">
             <button className="navbar-toggler" id="hamburguer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#nav-tog" aria-controls="nav-tog" aria-expanded="false" aria-label="Toggle navigation">
-                <img src={hamburguerIcon} className="hamburguer-icon me-1" alt="hamburguer-icon" />
+                <i className="bi-list hamburguer-icon" ></i>
             </button>
-            <img src={smallLogo} className="small-logo my-2" alt="Cheesy Bittes Logo" />
+            <img src={smallLogo} className="small-logo" alt="Cheesy Bittes Logo" />
             <img src={cart} className="cart-logo-2" id="item-nav" alt="Cart Logo" />
             <div className="collapse navbar-collapse" id="nav-tog">
                 <ul className="navbar-nav mx-auto">
