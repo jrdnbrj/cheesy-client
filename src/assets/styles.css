@@ -11,12 +11,12 @@ html, body {
 /* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
 
 .navbar-bg {
-  background-color: #D89731;
+  background-color: #e6981b;
 }
 
 #hamburguer-btn {
   border: 0;
-  color: #D89731;
+  color: #e6981b;
 }
 
 .hamburguer-icon {
@@ -57,9 +57,9 @@ html, body {
 
 .home-background {
   position: absolute;
-  height: 4000px;
+  height: 131%;
   width: 100%;
-  background-image: url("./img/home-background.png");
+  background-image: url("./img/home-background-1.png");
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -190,14 +190,45 @@ html, body {
   padding-right: 3%;
 }
 
-.text-1 {
-  /* width: ; */
+.home-background-2 {
+  background-color: #484870;
+  height: auto;
+  /* height: 70%; */
+  margin-top: 94%;
+  /* background-size: 500px; */
 }
 
-.text-2 {
-
+.home-background-3 {
+  position: absolute;
+  height: 4000px;
+  width: 100%;
+  background-image: url("./img/home-background-2.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /* margin-top: 200px; */
 }
 
-.text-3 {
-
+@media (max-width: 990px) {
+  .flickity-img {
+    width: 45%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .carousel-text {
+    display: inline;
+  }
+  .text-1, .text-2, .text-3 {
+    display: grid;
+    flex: auto;
+    width: 40%;
+    font-size: 2.7vw;
+    margin: auto;
+    margin-bottom: 5%;
+  }
+  .text-3 {
+    margin-bottom: 0;
+  }
+  .text-4 {
+    display: none;
+  }
 }

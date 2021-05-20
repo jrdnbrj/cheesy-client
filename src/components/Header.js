@@ -10,22 +10,22 @@ const Header = () => {
     return <nav className="navbar navbar-expand-lg navbar-light navbar-bg">
         <div className="container-fluid">
             <button className="navbar-toggler" id="hamburguer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#nav-tog" aria-controls="nav-tog" aria-expanded="false" aria-label="Toggle navigation">
-                <img src={hamburguerIcon} className="hamburguer-icon ms-3 me-4" alt="hamburguer-icon" />
+                <img src={hamburguerIcon} className="hamburguer-icon me-1" alt="hamburguer-icon" />
             </button>
             <img src={smallLogo} className="small-logo my-2" alt="Cheesy Bittes Logo" />
             <div className="collapse navbar-collapse" id="nav-tog">
                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <Link className="nav-link mx-5" id="item-nav" to="/">Our Family</Link>
+                        <Link className="nav-link me-5" id="item-nav" to="/">Our Family</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link ms-5" id="item-nav" to="/">Products</Link>
+                        <Link className="nav-link mx-5" id="item-nav" to="/">Products</Link>
                     </li>
                 </ul>
-                <img src={mediumLogo} className="medium-logo my-1 mx-2" alt="Cheesy Bittes Logo" />
+                <img src={mediumLogo} className="medium-logo my-3 mx-2" alt="Cheesy Bittes Logo" />
                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <Link className="nav-link ms-5" id="item-nav" to="/">Contact us</Link>
+                        <Link className="nav-link mx-5" id="item-nav" to="/">Contact us</Link>
                     </li>
                 </ul>
             </div>
