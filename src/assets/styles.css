@@ -44,7 +44,8 @@ html, body {
 }
 
 @media (min-width: 991px) {
-  .small-logo, .cart-logo-2 {
+  .small-logo-container, 
+    .cart-logo-2-container {
     display: none;
   }
 }
@@ -229,15 +230,14 @@ html, body {
   }
 }
 
+.home-end {
+  width: 100%;
+}
+
 /* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */
 
 .home-background-3 {
   height: 500px;
-  background-image: url("./img/home-background-2.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  margin-top: -1px;
-  padding-top: 25%;
   padding-bottom: 30%;
 }
 
@@ -246,6 +246,7 @@ html, body {
   padding-left: 10%;
   padding-right: 14%;
   font-size: 1.5vw;
+  text-align: justify;
 }
 
 .icon {
@@ -314,4 +315,162 @@ html, body {
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+/* OUR FAMILY OUR FAMILY OUR FAMILY OUR FAMILY OUR FAMILY */
+
+.background1 {
+  position: absolute;
+  height: 34vw;
+  width: 100%;
+  background-image: url("./img/family-background-1.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.family-logo {
+  position: relative;
+  text-align: center;
+  width: 35%;
+  margin-top: 7%;
+}
+
+.family-2 {
+  margin-top: 40%;
+}
+
+.icon-person {
+  height: 100%;
+  width: 5.5vw;
+}
+
+.icon-bread {
+  height: 100%;
+  width: 9vw;
+}
+
+.icon-house {
+  height: 100%;
+  width: 8vw;
+}
+
+.about-family, .how-started, .proud {
+  width: 70%;
+}
+
+.how-started {
+  margin-left: 30%;
+}
+
+.proud {
+  margin-right: 5%;
+}
+
+.family-title {
+  color: #D89731;
+  font-size: 3vw;
+}
+
+.family-group1 {
+  padding-top: 2%;
+  padding-left: 10%;
+  padding-right: 15%;
+}
+
+.paragraph {
+  font-size: 1.5vw;
+  text-align: justify;
+}
+
+.background2 {
+  width: 100%;
+}
+
+.background3, .background4 {
+  background-color: #5D8494;
+}
+
+.america {
+  width: 30%;
+  padding-top: 9%;
+  margin-left: 5%;
+}
+
+.giving-back {
+  padding-left: 10%;
+  padding-right: 5%;
+  color: #FFF;
+}
+
+.giving-back p {
+  font-size: 1.6vw;
+  text-align: justify;
+}
+
+.family-carousel {
+  overflow: hidden;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+
+.family-carousel img {
+  width: 22%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+@media (max-width: 990px) {
+  .about-family, .how-started, .proud {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+    margin-top: 6%;
+    margin-bottom: 3%;
+  }
+  .family-title {
+    font-size: 6vw;
+  }
+  .paragraph {
+    font-size: 2.5vw;
+  }
+  .family-group1 {
+    padding-right: 10%;
+  }
+  .icon-person {
+    width: 10vw;
+  }
+  .icon-bread {
+    width: 15vw;
+  }
+  .icon-house {
+    width: 13vw;
+  }
+  .giving-back {
+    padding-top: 10%;
+  }
+  .giving-back p {
+    font-size: 2.5vw;
+  }
+  .america {
+    width: 70%;
+    padding-top: 9%;
+    margin-left: 5%;
+  }
+  .family-carousel img {
+    width: 35%;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+}
+
+@media (max-width: 574px) {
+  .icon-person {
+    width: 13vw;
+  }
+  .icon-bread {
+    width: 19vw;
+  }
+  .icon-house {
+    width: 17vw;
+  }
 }

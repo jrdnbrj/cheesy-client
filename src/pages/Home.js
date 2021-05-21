@@ -5,6 +5,7 @@ import pepperJack from '../assets/img/pepper-jack-box.png'
 import rightArrow from '../assets/img/arrow-right.png'
 import leftArrow from '../assets/img/arrow-left.png'
 import shopNowShadow from '../assets/img/shop-now-shadow.png'
+import homeEnd from '../assets/img/home-background-2.png'
 // import loadingGif from '../assets/img/loading.gif'
 
 import simpleIngredients from '../assets/img/simple-ingredients.png'
@@ -119,13 +120,13 @@ const Home = () => {
             </Flickity>
             <section className="row carousel-text" id="row-correction">
                 <p className="col-1 text-4"></p>
-                <p className="col text-1">Bittes with your favorite meal? Yes, please</p>
+                <p className="col text-1">Bittes with your favorite meal? Yes, please!</p>
                 <p className="col text-2">Sweet home vibes? Pair Your Bittes</p>
-                <p className="col text-3">Bittes for great times, have fun!</p>
+                <p className="col text-3">Bittes for great times, enjoy!</p>
                 <p className="col-1 text-4"></p>
             </section>
         </section>
-        {/* <section className="home-background-3"></section> */}
+        <img src={homeEnd} className="home-end" alt="Home Background" />
     </>
 }
 
