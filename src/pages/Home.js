@@ -1,3 +1,9 @@
+import { useEffect } from 'react'
+
+import backgroundHover from '../assets/img/background-hover.png'
+import homeHeader1 from '../assets/img/home-header-1.png'
+import background4 from '../assets/img/home-background-4.png'
+import background3 from '../assets/img/home-background-3.png'
 import logo from '../assets/img/logo.png'
 import mozzarella from '../assets/img/mozzarella-box.png'
 import cheddar from '../assets/img/cheddar-box.png'
@@ -25,10 +31,33 @@ import Flickity from 'react-flickity-component'
 
 
 const Home = () => {
+
+    useEffect(() => {
+        const hover1 = document.getElementById('hover-1')
+        const hover2 = document.getElementById('hover-2')
+        const hover3 = document.getElementById('hover-3')
+        const hovers = [hover1, hover2, hover3]
+        
+        let x = 0;
+
+        const carousel = document.getElementById('carousel')
+
+        carousel.addEventListener('slide.bs.carousel', () => {
+            if (x > 1) x = 0; else x++
+            hovers.map(hover => hover.classList.remove('hover-active'))
+            hovers[x].classList.add('hover-active')
+        })
+    })
+
     return <>
         <section className="home-background">
-            <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
+            <section>
+                <img src={homeHeader1} className="home-header" alt="Home Header" />
+                <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
+            </section>
             <div id="carousel" className="carousel slide" data-bs-ride="carousel">
+                <img src={background4} className="background-1" alt="background" />
+                <section className="space-1"></section>
                 <div className="carousel-inner carousel-container">
                     <div className="carousel-item active">
                         <img src={mozzarella} className="d-block carousel-img mx-auto" alt="Mozzarella Box" />
@@ -40,6 +69,21 @@ const Home = () => {
                         <img src={pepperJack} className="d-block carousel-img mx-auto" alt="Pepper Jack Box" />
                     </div>
                 </div>
+                <section className="hover-container">
+                    <img src={backgroundHover} className="background-hover" alt="background Hover" />
+                    <section id="hover-1" className="hover-active">
+                        <p className="hover-text">Inspired in Ecuador’s traditional pan de yuca and delish Wisconsin cheese, our cheesy bittes are like nothing you have tried before. The taste is out of this world!</p>
+                        <h5 className="hover-title">MOZZARELLA</h5>
+                    </section>
+                    <section id="hover-2" className="">
+                        <p className="hover-text">Made with simple ingredients, every bite is the perfect mix of crispiness and fluff, and ooh so cheesy.​ So so cheesy!</p>
+                        <h5 className="hover-title">CHEDDAR CHEESE</h5>
+                    </section>
+                    <section id="hover-3" className="">
+                        <p className="hover-text">Perfect to share or keep to yourself, these naturally gluten-free snacks will steal your heart and make you do a happy dance. We hope you love them!</p>
+                        <h5 className="hover-title">PEPPER JACK</h5>
+                    </section>
+                </section>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
                     <img src={leftArrow} className="arrow arrow-right" aria-hidden="true" alt="Previous Arrow" />
                     <span className="visually-hidden">Previous</span>
@@ -56,6 +100,7 @@ const Home = () => {
                 <img src={shopNowShadow} className="shop-now-shadow mx-auto" alt="Shop Now Shadow" />
             </section>
         </section>
+        <img src={background3} className="background-3" alt="background Hover" />
         <section className="home-background-2">
             <section className="d-flex mt-3 justify-content-around" id="icons-container">
                 <section className="text-end">

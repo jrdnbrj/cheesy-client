@@ -64,24 +64,86 @@ html, body {
 
 /* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
 
-.home-background {
+.home-header {
   position: absolute;
-  height: 103vw;
   width: 100%;
-  background-image: url("./img/home-background-1.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
+}
+
+.background-1 {
+  position: absolute;
+  width: 100%;
+  margin-top: -13%;
+}
+
+.space-1 {
+  margin-top: 6%;
+}
+
+.background-3 {
+  position: absolute;
+  width: 100%;
+  margin-top: -16.5%;
 }
 
 .home-logo {
   position: relative;
   text-align: center;
   width: 35%;
-  margin-top: 7%;
+  padding-top: 6%;
+}
+
+.hover-container {
+  display: none;
+}
+
+.background-hover {
+  position: absolute;
+  margin-top: -56.4%;
+  width: 100%;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.carousel-container:hover + .hover-container {
+  display: flex;
+  pointer-events: none;
+  flex-direction: column;
+}
+
+#hover-1, #hover-2, #hover-3 {
+  position: relative;
+  display: none;
+}
+
+.hover-active {
+  display: block !important;
+}
+
+.hover-title {
+  z-index: 2;
+  color: #5B5980;
+  font-size: 5vw;
+  margin-top: -26%;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  text-align: center;
+  font-weight: bold;
+}
+
+.hover-text {
+  z-index: 0;
+  color: #5B5980;
+  font-size: 2.5vw;
+  margin-top: -24%;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  text-align: center;
+  font-weight: bold;
 }
 
 .carousel-container {
-  padding-top: 9%;
+  margin-top: 9%;
+  height: 100%;
 }
 
 .carousel-img {
@@ -94,11 +156,14 @@ html, body {
 
 }
 .shop-now {
+  z-index: 3;
   color: #FFF;
   font-size: 5vw;
+  margin-top: -6%;
 }
 
 .shop-now-shadow {
+  z-index: 1;
   width: 30%;
 }
 
@@ -202,7 +267,6 @@ html, body {
 .home-background-2 {
   background-color: #484870;
   height: auto;
-  margin-top: 94%;
 }
 
 @media (max-width: 990px) {
@@ -232,6 +296,7 @@ html, body {
 
 .home-end {
   width: 100%;
+  padding-top: -1%;
 }
 
 /* FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER FOOTER */
@@ -369,6 +434,7 @@ html, body {
 .family-title {
   color: #D89731;
   font-size: 3vw;
+  font-family: Nunito;
 }
 
 .family-group1 {

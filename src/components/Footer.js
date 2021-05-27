@@ -4,7 +4,7 @@ import logoOrange from '../assets/img/medium-logo-orange.png'
 const Footer = () => {
     return <section className="row home-background-3 mx-auto" id="row-correction">
         <section className="col-xs-12 col-sm-12 col-lg-6 footer-text mt-5 order-2 order-sm-2 order-lg-1">
-            <p className="pb-5">We are so glad you are here! Thank you for supporting our small business and helpong us spread some love.</p>
+            <p className="pb-5">We are so glad you are here! Thank you for supporting our small business and helping us spread some love.</p>
             <i className="bi-facebook icon"></i>
             <i className="bi-instagram icon"></i>
             <i className="bi-envelope-fill icon"></i>

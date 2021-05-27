@@ -30,7 +30,7 @@ const Family = () => {
             <section className="row" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
-                        <h5 className="col-9 family-title">All About the family</h5>
+                        <h5 className="col-9 family-title">All about the family</h5>
                         <img src={iconPerson} className="icon-person col-3 my-auto" alt="All about the family Icon" />
                     </section>
                     <p className="paragraph">We are a small, family business that decided to pair the flavors of Ecuador and Wisconsin to share them with you! We are so thankful for this journey and hope you enjoy every cheesy bitte.</p>
