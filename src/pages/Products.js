@@ -30,32 +30,37 @@ const Products = () => {
                             Ingredients / Ingredientes
                         </button>
                         <div className="dropdown-menu">
-                            Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.
+                            <div className="row" id="row-correction">
+                                <div className="col flavor">Mozzarella</div>
+                                <div className="col flavor">Pepper Jack</div>
+                                <div className="col flavor">Cheddar</div>
+                            </div>
+                            <div className="dropdown-text">Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.</div>
                         </div>
                     </div>
                     <div className="dropdown" id="allergen">
                         <button className="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Allergen Information
                         </button>
-                        <div className="dropdown-menu">
+                        <div className="dropdown-menu dropdown-text">
                             Contains eggs, milk.<br /><br />
                             Manufactured in a facility that also processes peanuts, soy, almonds, cashews, walnuts, pecans, coconut and wheat. 
-                            <img src={bread1} className="bread-1" alt="Bread" />
+                            {/* <img src={bread1} className="bread-1" alt="Bread" /> */}
                         </div>
                     </div>
                 </section>
             </section>
-            <section className="row mt-4" id="row-correction">
+            <section className="row mt-5" id="row-correction">
                 <section className="col"></section>
                 <section className="col">
                     <span className="btn-radio">BUNDLE UP</span>
                     <div class="form-check mt-4">
                         <input class="form-check-input" type="radio" name="flexRadio1" id="radio-button" />
-                        <label class="form-check-label text-light fw-bold">6 PACK</label>
+                        <label class="form-check-label radio-text">6 PACK</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadio1" id="radio-button" />
-                        <label class="form-check-label text-light fw-bold">9 PACK</label>
+                        <label class="form-check-label radio-text">9 PACK</label>
                     </div>
                 </section>
                 <section className="col">
@@ -66,11 +71,11 @@ const Products = () => {
                     <span className="ship">SHIP EVERY:</span>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadio2" id="radio-button" />
-                        <label class="form-check-label text-light fw-bold">MONTH</label>
+                        <label class="form-check-label radio-text">MONTH</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadio2" id="radio-button" />
-                        <label class="form-check-label text-light fw-bold">2 MONTHS</label>
+                        <label class="form-check-label radio-text">2 MONTHS</label>
                     </div>
                 </section>
                 <section className="col"></section>
