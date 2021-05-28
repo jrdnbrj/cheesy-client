@@ -14,10 +14,10 @@ const Products = () => {
         <img src={background1} className="products-header" alt="Products Background" />
         <section className="products-body">
             <section className="row pt-5" id="row-correction">
-                <section className="col products">
+                <section className="col-lg-6 col-sm-12 products">
                     <img src={products} className="products-header" alt="Products Background" />
                 </section>
-                <section className="col information">
+                <section className="col-lg-6 col-sm-12 information">
                     <h5>Mix them up!</h5>
                     <section className="description">
                         <span>Descripción</span><br />
@@ -51,8 +51,8 @@ const Products = () => {
                 </section>
             </section>
             <section className="row mt-5" id="row-correction">
-                <section className="col"></section>
-                <section className="col">
+                <section className="col col-hidden"></section>
+                <section className="col col-lg-3 col-sm-12 club-group">
                     <span className="btn-radio">BUNDLE UP</span>
                     <div class="form-check mt-4">
                         <input class="form-check-input" type="radio" name="flexRadio1" id="radio-button" />
@@ -63,10 +63,10 @@ const Products = () => {
                         <label class="form-check-label radio-text">9 PACK</label>
                     </div>
                 </section>
-                <section className="col">
+                <section className="col col-lg-3 col-sm-12 club-group">
                     <span className="btn-radio">BUY ONCE</span>
                 </section>
-                <section className="col">
+                <section className="col col-lg-3 col-sm-12 club-group">
                     <span className="btn-radio">JOIN THE CLUB!</span><br />
                     <span className="ship">SHIP EVERY:</span>
                     <div class="form-check">
@@ -78,7 +78,7 @@ const Products = () => {
                         <label class="form-check-label radio-text">2 MONTHS</label>
                     </div>
                 </section>
-                <section className="col"></section>
+                <section className="col col-hidden"></section>
             </section>
             <section className="address py-5">
                 <button className="btn-add">ADD TO CART</button>
