@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
 
 import backgroundHover from '../assets/img/background-hover.png'
-import homeHeader1 from '../assets/img/home-header-1.png'
+import homeHeader1 from '../assets/img/home-header-1.jpg'
+import homeHeader2 from '../assets/img/home-header-2.jpg'
+import homeHeader3 from '../assets/img/home-header-3.jpg'
 import background4 from '../assets/img/home-background-4.png'
 import background3 from '../assets/img/home-background-3.png'
 import logo from '../assets/img/logo.png'
@@ -52,7 +54,20 @@ const Home = () => {
     return <>
         <section className="home-background">
             <section>
-                <img src={homeHeader1} className="home-header" alt="Home Header" />
+                <div id="carousel-header" className="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src={homeHeader2} className="d-block home-header" alt="Home Header 2" />
+                        </div>
+                        <div className="carousel-item">
+                            <img src={homeHeader1} className="d-block home-header" alt="Home Header 1" />
+                        </div>
+                        <div className="carousel-item">
+                            <img src={homeHeader3} className="d-block home-header" alt="Home Header 3" />
+                        </div>
+                    </div>
+                </div>
+                {/* <img src={homeHeader1} className="home-header" alt="Home Header" /> */}
                 <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
             </section>
             <div id="carousel" className="carousel slide" data-bs-ride="carousel">

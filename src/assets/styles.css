@@ -65,7 +65,7 @@ html, body {
 /* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
 
 .home-header {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
 }
 
@@ -85,11 +85,15 @@ html, body {
   margin-top: -16.5%;
 }
 
+#carousel-header {
+  z-index: -1;
+}
+
 .home-logo {
   position: relative;
   text-align: center;
   width: 35%;
-  padding-top: 6%;
+  margin-top: -28%;
 }
 
 .hover-container {
