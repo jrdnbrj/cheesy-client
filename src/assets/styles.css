@@ -125,9 +125,10 @@ html, body {
 #item-nav {
   color: #FFF;
   font-weight: bold;
-  font-size: 1.3vw;
+  font-size: 1.5vw;
   padding-left: 3.6vw;
   padding-right: 3.6vw;
+  font-family: Nunito Black;
 }
 
 .cart-logo {
@@ -173,7 +174,7 @@ html, body {
 
 .background-hover {
   position: absolute;
-  margin-top: -56.4%;
+  margin-top: -57.45%;
   width: 100%;
   opacity: 0.6;
   z-index: 0;
@@ -197,12 +198,12 @@ html, body {
 .hover-title {
   z-index: 2;
   color: #5B5980;
-  font-size: 5vw;
+  font-size: 6vw;
   margin-top: -26%;
   padding-left: 15vw;
   padding-right: 15vw;
   text-align: center;
-  font-weight: bold;
+  font-family: LuckiestGuy Regular;
 }
 
 .hover-text {
@@ -213,7 +214,7 @@ html, body {
   padding-left: 15vw;
   padding-right: 15vw;
   text-align: center;
-  font-weight: bold;
+  font-family: Nunito Black;
 }
 
 .carousel-container {
@@ -235,6 +236,7 @@ html, body {
   color: #FFF;
   font-size: 5vw;
   margin-top: -6%;
+  font-family: Nunito Black;
 }
 
 .shop-now-shadow {
@@ -266,6 +268,7 @@ html, body {
   width: 40%;
   font-size: 90%;
   margin-top: 3%;
+  font-family: Nunito Black;
 }
 
 .wisconsin-img-2 {
@@ -337,6 +340,7 @@ html, body {
   margin-top: 2vw;
   padding-left: 3%;
   padding-right: 3%;
+  font-family: Nunito Black;
 }
 
 .home-background-2 {
@@ -387,6 +391,7 @@ html, body {
   padding-right: 14%;
   font-size: 1.5vw;
   text-align: justify;
+  font-family: Nunito Bold;
 }
 
 .icon {
@@ -417,6 +422,7 @@ html, body {
   margin-top: 1% !important;
   color: #FFF;
   font-size: 1vw;
+  font-family: Nunito Bold;
 }
 
 .form-input::placeholder {
@@ -461,6 +467,7 @@ html, body {
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 1vw;
+  font-family: Nunito Bold;
 }
 
 /* OUR FAMILY OUR FAMILY OUR FAMILY OUR FAMILY OUR FAMILY */
@@ -514,8 +521,9 @@ html, body {
 
 .family-title {
   color: #D89731;
-  font-size: 3vw;
-  font-family: Nunito;
+  font-size: 3.2vw;
+  white-space: nowrap;
+  font-family: LuckiestGuy Regular;
 }
 
 .family-group1 {
@@ -527,6 +535,8 @@ html, body {
 .paragraph {
   font-size: 1.5vw;
   text-align: justify;
+  color: #5B5980;
+  font-family: Nunito Bold;
 }
 
 .background2 {
@@ -548,11 +558,13 @@ html, body {
   padding-left: 10%;
   padding-right: 5%;
   color: #FFF;
+  font-family: LuckiestGuy Regular;
 }
 
 .giving-back p {
   font-size: 1.6vw;
   text-align: justify;
+  font-family: Nunito Bold;
 }
 
 .family-carousel {
@@ -653,16 +665,17 @@ html, body {
 
 .information h5 {
   font-size: 3.5vw;
-  font-weight: bold;
+  font-family: Nunito Bold Italic;
 }
 
 .description {
   font-size: 2vw;
+  font-family: Nunito Bold;
 }
 
 #price {
   font-size: 3vw;
-  font-weight: bold;
+  font-family: Nunito Bold Italic;
 }
 
 #ingredients, #allergen {
@@ -676,6 +689,7 @@ html, body {
   border: 0;
   color: #FEFEFE;
   margin-bottom: 3%;
+  font-family: Nunito Bold;
 }
 
 .flavor {
@@ -687,6 +701,7 @@ html, body {
   text-align: center;
   font-size: 1.7vw;
   margin: 2% 3%;
+  font-family: Nunito Black;
 }
 
 .dropdown-text {
@@ -696,6 +711,7 @@ html, body {
   padding: 25px;
   border-radius: 15px;
   text-align: justify;
+  font-family: Nunito Bold;
 }
 
 #allergen {
@@ -719,21 +735,18 @@ html, body {
   color: #5D8393;
   padding: 7px 12px;
   font-size: 2.7vw;
-  font-weight: bold;
   white-space: nowrap;
   border-radius: 10px;
+  font-family: LuckiestGuy Regular;
 }
 
 .radio-text {
   font-size: 1.8vw;
   color: #FEFEFE;
-  font-weight: bold;
+  font-family: LuckiestGuy Regular;
 }
 
 #radio-button {
-  /* align-self: center !important; */
-  /* align-content: center !important; */
-  /* padding-top: 5% !important; */
   float: none;
   margin-right: 5%;
 }
@@ -741,14 +754,13 @@ html, body {
 #radio-button:checked {
   background-color: #D59431;
   border-color: #D59431;
-  /* background-image: none; */
 }
 
 .ship {
   font-size: 1.5vw;
   color: #FEFEFE;
-  font-weight: bold;
   padding-left: 14%;
+  font-family: LuckiestGuy Regular;
 }
 
 .address {
@@ -759,11 +771,11 @@ html, body {
   background-color: #D59431;
   color: #FEFEFE;
   padding: 10px 20px;
-  font-size: 2vw;
-  font-weight: bold;
+  font-size: 2.3vw;
   border-radius: 10px;
   border: 0;
   margin-bottom: 5%;
+  font-family: LuckiestGuy Regular;
 }
 
 .icon-2 {
@@ -776,6 +788,11 @@ html, body {
   color: #FEFEFE;
   font-size: 2vw;
   font-weight: bold;
+  font-family: Nunito Bold;
+}
+
+.products-body address span {
+  font-family: Nunito Black;
 }
 
 .products-header-2 {

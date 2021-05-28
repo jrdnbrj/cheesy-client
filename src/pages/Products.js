@@ -3,7 +3,7 @@ import background2 from '../assets/img/products-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
 import products from '../assets/img/products.png'
-import bread1 from '../assets/img/bread-1.png'
+// import bread1 from '../assets/img/bread-1.png'
 // import bread2 from '../assets/img/bread-2.png'
 
 
@@ -83,7 +83,7 @@ const Products = () => {
             <section className="address py-5">
                 <button className="btn-add">ADD TO CART</button>
                 <address>
-                    <p>If you live within 20 miles of Eau Claire (54703) we will deliver to your door for free.</p>
+                    <p>If you live within 10 miles of Eau Claire (54703) we will deliver to your door for free.</p>
                     <span>DM us!</span>
                     <a href="https://www.facebook.com/Cheesybittes/" target="_blank" rel="noreferrer">
                         <i className="bi-facebook icon-2"></i>
