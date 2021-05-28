@@ -57,10 +57,10 @@ const Home = () => {
                 <div id="carousel-header" className="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src={homeHeader2} className="d-block home-header" alt="Home Header 2" />
+                            <img src={homeHeader1} className="d-block home-header" alt="Home Header 1" />
                         </div>
                         <div className="carousel-item">
-                            <img src={homeHeader1} className="d-block home-header" alt="Home Header 1" />
+                            <img src={homeHeader2} className="d-block home-header" alt="Home Header 2" />
                         </div>
                         <div className="carousel-item">
                             <img src={homeHeader3} className="d-block home-header" alt="Home Header 3" />
@@ -87,7 +87,7 @@ const Home = () => {
                 <section className="hover-container">
                     <img src={backgroundHover} className="background-hover" alt="background Hover" />
                     <section id="hover-1" className="hover-active">
-                        <p className="hover-text">Inspired in Ecuador’s traditional pan de yuca and delish Wisconsin cheese, our cheesy bittes are like nothing you have tried before. The taste is out of this world!</p>
+                        <p className="hover-text">Inspired by Ecuador's traditional pan de yuca and delish Wisconsin cheese, our cheesy bittes are like nothing you have tried before. The taste is out of this world!</p>
                         <h5 className="hover-title">MOZZARELLA</h5>
                     </section>
                     <section id="hover-2" className="">

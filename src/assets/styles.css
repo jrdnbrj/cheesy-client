@@ -65,14 +65,13 @@ html, body {
 /* HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME HOME */
 
 .home-header {
-  /* position: absolute; */
   width: 100%;
 }
 
 .background-1 {
   position: absolute;
   width: 100%;
-  margin-top: -13%;
+  margin-top: -14%;
 }
 
 .space-1 {
@@ -82,7 +81,7 @@ html, body {
 .background-3 {
   position: absolute;
   width: 100%;
-  margin-top: -16.5%;
+  margin-top: -17.4%;
 }
 
 #carousel-header {
@@ -93,7 +92,7 @@ html, body {
   position: relative;
   text-align: center;
   width: 35%;
-  margin-top: -28%;
+  margin-top: -27%;
 }
 
 .hover-container {
@@ -460,6 +459,7 @@ html, body {
 
 .background2 {
   width: 100%;
+  margin-top: -1px;
 }
 
 .background3, .background4 {
@@ -487,6 +487,7 @@ html, body {
   overflow: hidden;
   padding-top: 10%;
   padding-bottom: 10%;
+  margin-top: -1px;
 }
 
 .family-carousel img {
@@ -549,4 +550,133 @@ html, body {
   .icon-house {
     width: 17vw;
   }
+}
+
+/* PRODUCTS PRODUCTS PRODUCTS PRODUCTS PRODUCTS PRODUCTS PRODUCTS */
+
+.products-header {
+  width: 100%;
+  margin-top: -2%;
+}
+
+.products-body {
+  background-color: #5D8393;
+  margin-top: -1%;
+}
+
+.products {
+
+}
+
+.products img {
+  width: 80%;
+  margin-left: 25%;
+  margin-right: 10%;
+}
+
+.information {
+  color: #FEFEFE;
+  padding-left: 15%;
+}
+
+.information h5 {
+  font-size: 3.5vw;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 2vw;
+}
+
+#price {
+  font-size: 3vw;
+  font-weight: bold;
+}
+
+#ingredients {
+
+}
+
+#ingredients button, #allergen button {
+  font-size: 2vw;
+  background-color: #5D8393;
+  border: 0;
+  color: #FEFEFE;
+  margin-bottom: 3%;
+}
+
+#allergen {
+  
+}
+
+#ingredients div, #allergen div {
+  background-color: #EBBD81;
+  padding: 10%;
+  margin-right: 5%;
+  border-radius: 25px;
+  border: 0;
+  color: #5D8393;
+  font-weight: bold;
+}
+
+.bread-1 {
+  position: absolute;
+  top: -29%;
+  right: 20vw;
+  width: 25%;
+}
+
+.btn-radio {
+  background-color: #FEFEFE;
+  color: #5D8393;
+  padding: 7px 12px;
+  font-size: 2.7vw;
+  font-weight: bold;
+  white-space: nowrap;
+  border-radius: 10px;
+}
+
+#radio-button:checked {
+  background-color: #D59431;
+  border-color: #D59431;
+  /* background-image: none; */
+}
+
+.ship {
+  font-size: 1.5vw;
+  color: #FEFEFE;
+  font-weight: bold;
+  padding-left: 14%;
+}
+
+.address {
+  margin: 0 17%;
+}
+
+.btn-add {
+  background-color: #D59431;
+  color: #FEFEFE;
+  padding: 10px 20px;
+  font-size: 2vw;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 0;
+  margin-bottom: 5%;
+}
+
+.icon-2 {
+  padding-left: 5vw;
+  font-size: 3.5vw;
+  color: #FEFEFE;
+}
+
+.products-body address {
+  color: #FEFEFE;
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.products-header-2 {
+  width: 100%;
+  margin-top: -1%;
 }
