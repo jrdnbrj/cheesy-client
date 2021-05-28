@@ -31,10 +31,12 @@ const Header = () => {
                         </Link>
                     </li>
                     <li className="nav-item my-auto">
-                        <Link className="nav-link" id="item-nav" to="/">Contact us</Link>
+                        <Link className="nav-link" id="item-nav" to="/mozzarella">Contact us</Link>
                     </li>
                     <li className="nav-item my-auto">
-                        <img src={cart} className="cart-logo" id="item-nav" alt="Cart Logo" />
+                        <Link className="" id="" to="/fruit">
+                            <img src={cart} className="cart-logo" id="item-nav" alt="Cart Logo" />
+                        </Link>
                     </li>
                 </ul>
             </div>

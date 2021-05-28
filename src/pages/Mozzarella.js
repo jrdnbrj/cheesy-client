@@ -2,7 +2,7 @@ import background1 from '../assets/img/products-background-1.png'
 import background2 from '../assets/img/products-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
-import products from '../assets/img/products.png'
+import mozarella from '../assets/img/product-mozzarella.png'
 // import bread1 from '../assets/img/bread-1.png'
 // import bread2 from '../assets/img/bread-2.png'
 
@@ -15,27 +15,22 @@ const Products = () => {
         <section className="products-body">
             <section className="row pt-5" id="row-correction">
                 <section className="col-lg-5 col-sm-12 products">
-                    <img src={products} className="products-header" alt="Products Background" />
+                    <img src={mozarella} className="products-header" alt="Products Background" />
                 </section>
                 <section className="col-lg-7 col-sm-12 information">
-                    <h5>Mix them up!</h5>
+                    <h5>Mozzarella Cheesy Bittes</h5>
                     <section className="description">
                         <span>Description</span><br />
                         <span>Frozen, ready to bake</span><br />
-                        <span>15 Pieces (12.6 OZ)</span>
+                        <span>15 Pieces (12 OZ)</span>
                     </section>
                     <p id="price">$ 5.45</p>
                     <div className="dropdown" id="ingredients">
                         <button className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Ingredients
                         </button>
-                        <div className="dropdown-menu">
-                            <div className="row" id="row-correction">
-                                <div className="col flavor">Mozzarella</div>
-                                <div className="col flavor">Pepper Jack</div>
-                                <div className="col flavor">Cheddar</div>
-                            </div>
-                            <div className="dropdown-text">Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.</div>
+                        <div className="dropdown-menu dropdown-text">
+                            Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.
                         </div>
                     </div>
                     <div className="dropdown" id="allergen">

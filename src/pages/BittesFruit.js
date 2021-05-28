@@ -2,7 +2,12 @@ import background1 from '../assets/img/products-background-1.png'
 import background2 from '../assets/img/products-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
-import products from '../assets/img/products.png'
+import bittesFruit from '../assets/img/product-bittes-fruits.png'
+
+import strawberry from '../assets/img/strawberry.png'
+import passion from '../assets/img/passion.png'
+import soursop from '../assets/img/soursop.png'
+import blackberry from '../assets/img/blackberry.png'
 // import bread1 from '../assets/img/bread-1.png'
 // import bread2 from '../assets/img/bread-2.png'
 
@@ -15,14 +20,14 @@ const Products = () => {
         <section className="products-body">
             <section className="row pt-5" id="row-correction">
                 <section className="col-lg-5 col-sm-12 products">
-                    <img src={products} className="products-header" alt="Products Background" />
+                    <img src={bittesFruit} className="products-header" alt="Products Background" />
                 </section>
                 <section className="col-lg-7 col-sm-12 information">
-                    <h5>Mix them up!</h5>
+                    <h5>Bittes & Fruit</h5>
                     <section className="description">
-                        <span>Description</span><br />
+                        <span>Descripción</span><br />
                         <span>Frozen, ready to bake</span><br />
-                        <span>15 Pieces (12.6 OZ)</span>
+                        <span>15 Pieces (12 OZ)</span>
                     </section>
                     <p id="price">$ 5.45</p>
                     <div className="dropdown" id="ingredients">
@@ -48,6 +53,27 @@ const Products = () => {
                             {/* <img src={bread1} className="bread-1" alt="Bread" /> */}
                         </div>
                     </div>
+                </section>
+            </section>
+            <section className="row juices mt-5" id="row-correction">
+                <section className="col"></section>
+                <section className="col text-center">
+                    <span>Strawberry</span>
+                    <img src={strawberry} className="" alt="Strawberry" />
+                </section>
+                <section className="col text-center">
+                    <span>Passion Fruit</span>
+                    <img src={passion} className="" alt="Pasison" />
+                </section>
+                <section className="col text-center">
+                    <span>Soursop</span>
+                    <img src={soursop} className="" alt="Soursop" />
+                </section>
+                <section className="col text-center">
+                    <span>Andean Blackberry</span>
+                    <img src={blackberry} className="" alt="Blackberry" />
+                </section>
+                <section className="col">
                 </section>
             </section>
             <section className="row mt-5" id="row-correction">

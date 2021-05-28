@@ -198,8 +198,8 @@ html, body {
 .hover-title {
   z-index: 2;
   color: #5B5980;
-  font-size: 6vw;
-  margin-top: -26%;
+  font-size: 5vw;
+  margin-top: -22%;
   padding-left: 15vw;
   padding-right: 15vw;
   text-align: center;
@@ -209,7 +209,7 @@ html, body {
 .hover-text {
   z-index: 0;
   color: #5B5980;
-  font-size: 2.5vw;
+  font-size: 2vw;
   margin-top: -24%;
   padding-left: 15vw;
   padding-right: 15vw;
@@ -394,6 +394,14 @@ html, body {
   font-family: Nunito Bold;
 }
 
+.footer-text p {
+  margin-bottom: 0;
+}
+
+.footer-text address p {
+  padding-bottom: 15% !important;
+}
+
 .icon {
   padding-right: 5vw;
   font-size: 3vw;
@@ -454,6 +462,7 @@ html, body {
   }
   .form-input, .form-submit {
     font-size: 2.5vw !important;
+    padding-bottom: 0px;
   }
 }
 
@@ -649,7 +658,7 @@ html, body {
 }
 
 .products img {
-  width: 80%;
+  width: 75%;
   margin-left: 25%;
   margin-right: 10%;
 }
@@ -661,17 +670,20 @@ html, body {
 
 .information h5 {
   font-size: 3.5vw;
-  font-family: Nunito Bold Italic;
+  font-family: Nunito Black;
+  /* color: #e6981b; */
+  color: #e6981b;
 }
 
 .description {
-  font-size: 2vw;
+  font-size: 1.6vw;
   font-family: Nunito Bold;
 }
 
 #price {
+  padding-top: 3%;
   font-size: 3vw;
-  font-family: Nunito Bold Italic;
+  font-family: Nunito Black;
 }
 
 #ingredients, #allergen {
@@ -686,6 +698,10 @@ html, body {
   color: #FEFEFE;
   margin-bottom: 3%;
   font-family: Nunito Bold;
+  color: #FEFEFE;
+}
+#ingredients button:hover, #allergen button:hover {
+  color: #D89731;
 }
 
 .flavor {
@@ -702,7 +718,7 @@ html, body {
 
 .dropdown-text {
   background-color: #EBBD81 !important;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   color: #5D8393;
   padding: 25px;
   border-radius: 15px;
@@ -712,7 +728,7 @@ html, body {
 
 #ingredients .dropdown-menu, #allergen .dropdown-menu {
   background-color: transparent;
-  border: 0 
+  border: 0;
 }
 
 .bread-1 {
@@ -758,7 +774,7 @@ html, body {
 }
 
 .address {
-  margin: 0 17%;
+  margin: 0 12.5%;
 }
 
 .btn-add {
@@ -783,6 +799,12 @@ html, body {
   font-size: 2vw;
   font-weight: bold;
   font-family: Nunito Bold;
+  /* margin-top: -1%; */
+}
+
+.products-body address p {
+  font-size: 1.7vw;
+  margin-bottom: 0;
 }
 
 .products-body address span {
@@ -842,12 +864,23 @@ html, body {
     margin: 0 14%;
   }
   .address p {
-    font-size: 3vw;
+    font-size: 4vw !important;
   }
   .address span {
-    font-size: 3vw;
+    font-size: 5vw;
   }
   .icon-2 {
     font-size: 6vw;
   }
+}
+
+/* BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT */
+
+.juices img {
+  width: 100%;
+}
+
+.juices span {
+  color: #FEFEFE;
+  font-family: Nunito Black;
 }
