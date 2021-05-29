@@ -13,6 +13,7 @@ const Routes = () => {
     <BrowserRouter>
       <Layout>
         <Switch>
+          <Route exact path="/cheesy-client" component={Home} />      
           <Route exact path="/" component={Home} />
           <Route exact path="/family" component={Family} />
           <Route exact path="/products" component={Products} />
