@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cheesy-client/static/css/main.be4cab65.chunk.css",
-    "main.js": "/cheesy-client/static/js/main.57db395b.chunk.js",
-    "main.js.map": "/cheesy-client/static/js/main.57db395b.chunk.js.map",
+    "main.js": "/cheesy-client/static/js/main.7b6d41b3.chunk.js",
+    "main.js.map": "/cheesy-client/static/js/main.7b6d41b3.chunk.js.map",
     "runtime-main.js": "/cheesy-client/static/js/runtime-main.fd9e40de.js",
     "runtime-main.js.map": "/cheesy-client/static/js/runtime-main.fd9e40de.js.map",
     "static/css/2.47971326.chunk.css": "/cheesy-client/static/css/2.47971326.chunk.css",
@@ -58,6 +58,6 @@
     "static/css/2.47971326.chunk.css",
     "static/js/2.bd7fe954.chunk.js",
     "static/css/main.be4cab65.chunk.css",
-    "static/js/main.57db395b.chunk.js"
+    "static/js/main.7b6d41b3.chunk.js"
   ]
 }
