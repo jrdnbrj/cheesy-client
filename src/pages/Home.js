@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import backgroundHover from '../assets/img/background-hover.png'
 import homeHeader1 from '../assets/img/home-header-1.jpg'
 import homeHeader2 from '../assets/img/home-header-2.jpg'
-import homeHeader3 from '../assets/img/home-header-3.jpg'
+import homeHeader3 from '../assets/img/home-header-3.jpeg'
 import background4 from '../assets/img/home-background-4.png'
 import background3 from '../assets/img/home-background-3.png'
 import logo from '../assets/img/logo.png'
@@ -42,7 +42,7 @@ const Home = () => {
         
         let x = 0;
 
-        const carousel = document.getElementById('carousel')
+        const carousel = document.getElementById('home-carousel')
 
         carousel.addEventListener('slide.bs.carousel', () => {
             if (x > 1) x = 0; else x++
@@ -67,10 +67,9 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                {/* <img src={homeHeader1} className="home-header" alt="Home Header" /> */}
                 <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
             </section>
-            <div id="carousel" className="carousel slide" data-bs-ride="carousel">
+            <div id="home-carousel" className="carousel slide" data-bs-ride="home-carousel">
                 <img src={background4} className="background-1" alt="background" />
                 <section className="space-1"></section>
                 <div className="carousel-inner carousel-container">

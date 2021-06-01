@@ -139,6 +139,7 @@ html, body {
 
 .home-header {
   width: 100%;
+  filter: brightness(75%);
 }
 
 .background-1 {
@@ -650,6 +651,9 @@ html, body {
 .products-back1 {
   width: 100%;
   margin-top: -1.55%;
+  /* z-index: 5; */
+  /* opacity: 0.99; */
+  filter: brightness(100%);
 }
 
 .product-img {
@@ -692,7 +696,8 @@ html, body {
 
 .product-back-2 {
   width: 100%;
-  margin-top: -0.2%;
+  margin-top: -0.3%;
+  margin-bottom: 5%;
 }
 
 .green {
@@ -700,7 +705,7 @@ html, body {
   color: #FEFEFE;
   font-size: 1.3vw;
   padding: 5% 5%;
-  margin-top: -0.1%;
+  margin-top: -0.3%;
 }
 
 .green h4 {
@@ -711,16 +716,21 @@ html, body {
 .green h5 {
   font-family: Nunito Black;
   font-size: 1.5vw;
+  padding: 0 12%;
 }
 
 .green img {
   width: 8vw;
+  margin: 7% 0;
 }
 
-/* .green .row ul li::marker {
-  content: '*';
-  color: #E8BD4D;
-} */
+.oven {
+  padding-top: 9%;
+}
+
+.important {
+  padding-top: 13%;
+}
 
 .bullet {
   margin: 20px 0;
@@ -730,11 +740,68 @@ html, body {
   color: #E8BD4D;
 }
 
+@media (max-width: 990px) {
+  .product-list {
+    margin: 5% 0;
+  }
+  .product-img {
+    width: 100%;
+    padding-left: 10%;
+  }
+  .product-text h5 {
+    font-size: 5vw;
+    padding-left: 0%;
+  }
+  .product-text p {
+    font-size: 2vw;
+    padding-left: 0%;
+    margin-bottom: 2%;
+  }
+  .product-text button {
+    font-size: 2vw;
+    margin-left: 0%;
+  }
+  .green {
+    font-size: 3vw;
+    /* padding: 5% 5%; */
+    /* margin-top: -0.3%; */
+  }
+  
+  .green h4 {
+    font-size: 5vw;
+    margin-top: 5%;
+  }
+  
+  .green h5 {
+    font-size: 3vw;
+    /* padding: 0 12%; */
+  }
+  
+  .green img {
+    width: 15vw;
+    /* margin: 7% 0; */
+  }
+  .instructions {
+    padding: 0 15% !important;
+  }
+  .instructions:last-child {
+    margin-bottom: 8%;
+  }
+  .oven {
+    padding-top: 0%;
+  }
+
+  .air-fryer, .important {
+    padding-top: 10%;
+  }
+}
+
 /* MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA */
 
 .products-header {
   width: 100%;
   margin-top: -2%;
+  filter: brightness(100%);
 }
 
 .products-body {
