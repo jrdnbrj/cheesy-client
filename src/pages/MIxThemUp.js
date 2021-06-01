@@ -2,10 +2,10 @@ import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
-import mozarella from '../assets/img/mozzarella.png'
+import products from '../assets/img/products.png'
 
 
-const Mozzarella = () => {
+const MixThemUp = () => {
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
@@ -13,22 +13,27 @@ const Mozzarella = () => {
         <section className="products-body">
             <section className="row pt-5" id="row-correction">
                 <section className="col-lg-5 col-sm-12 products">
-                    <img src={mozarella} className="products-header" alt="Products Background" />
+                    <img src={products} className="products-header" alt="Products Background" />
                 </section>
                 <section className="col-lg-7 col-sm-12 information">
-                    <h5>Mozzarella Cheesy Bittes</h5>
+                    <h5>Mix them up!</h5>
                     <section className="description">
-                        <span>Cheesy, crunchy, and fluffy! Our Cheesy Bittes are perfect for any time of the day. The delicate and fresh mozzarella flavor is melt-in-your-mouth delicious and wholly addictive. Pair them with smoothies, chocolate spread, or pasta. You will love them!</span><br />
+                        <span>Why choose when you can enjoy them all! Give your taste buds a fascinating experience with a combination of mozzarella, cheddar, and pepper jack.</span><br />
                         <span>Frozen, ready to bake</span><br />
-                        <span>15 Pieces (12 OZ)</span>
+                        <span>15 Pieces (12.6 OZ)</span>
                     </section>
                     <p id="price">$ 5.45</p>
                     <div className="dropdown" id="ingredients">
                         <button className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Ingredients
                         </button>
-                        <div className="dropdown-menu dropdown-text">
-                            Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.
+                        <div className="dropdown-menu">
+                            <div className="row" id="row-correction">
+                                <div className="col flavor">Mozzarella</div>
+                                <div className="col flavor">Pepper Jack</div>
+                                <div className="col flavor">Cheddar</div>
+                            </div>
+                            <div className="dropdown-text">Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.</div>
                         </div>
                     </div>
                     <div className="dropdown" id="allergen">
@@ -92,4 +97,4 @@ const Mozzarella = () => {
     </>
 }
 
-export default Mozzarella
+export default MixThemUp

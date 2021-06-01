@@ -1,102 +1,114 @@
+import { Link } from 'react-router-dom'
+
 import background1 from '../assets/img/products-background-1.png'
 import background2 from '../assets/img/products-background-2.png'
+import background3 from '../assets/img/products-background-3.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
+import cheddar from '../assets/img/products-cheddar.png'
+import pepperJack from '../assets/img/products-pepperjack.png'
+import mozzarella from '../assets/img/products-mozzarella.png'
 import products from '../assets/img/products.png'
-// import bread1 from '../assets/img/bread-1.png'
-// import bread2 from '../assets/img/bread-2.png'
+import bittesFruits from '../assets/img/product-bittes-fruits.png'
+
+import oven from '../assets/img/oven.png'
+import airFryer from '../assets/img/air-fryer.png'
+import important from '../assets/img/important.png'
 
 
-const Products = () => {
+const Mozzarella = () => {
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
-        <img src={background1} className="products-header" alt="Products Background" />
-        <section className="products-body">
-            <section className="row pt-5" id="row-correction">
-                <section className="col-lg-5 col-sm-12 products">
-                    <img src={products} className="products-header" alt="Products Background" />
+        <img src={background1} className="products-back1" alt="Products Background" />
+        <section className="">
+            <section className="row" id="row-correction">
+                <section className="col-lg-5 text-center">
+                    <img src={cheddar} className="product-img" alt="Cheddar" />
                 </section>
-                <section className="col-lg-7 col-sm-12 information">
-                    <h5>Mix them up!</h5>
-                    <section className="description">
-                        <span>Description</span><br />
-                        <span>Frozen, ready to bake</span><br />
-                        <span>15 Pieces (12.6 OZ)</span>
-                    </section>
-                    <p id="price">$ 5.45</p>
-                    <div className="dropdown" id="ingredients">
-                        <button className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ingredients
-                        </button>
-                        <div className="dropdown-menu">
-                            <div className="row" id="row-correction">
-                                <div className="col flavor">Mozzarella</div>
-                                <div className="col flavor">Pepper Jack</div>
-                                <div className="col flavor">Cheddar</div>
-                            </div>
-                            <div className="dropdown-text">Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.</div>
-                        </div>
-                    </div>
-                    <div className="dropdown" id="allergen">
-                        <button className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Allergen Information
-                        </button>
-                        <div className="dropdown-menu dropdown-text">
-                            Contains eggs, milk.<br /><br />
-                            Manufactured in a facility that also processes peanuts, soy, almonds, cashews, walnuts, pecans, coconut and wheat. 
-                            {/* <img src={bread1} className="bread-1" alt="Bread" /> */}
-                        </div>
-                    </div>
+                <section className="col-lg-5 product-text">
+                    <h5>CHEDDAR</h5>
+                    <p>Smooth, rich, and buttery! Our Cheesy Bittes are perfect to share with loved ones. The sharp cheddar flavor is delightful. Pair them with coffee, fruit, or nuts. You will be amazed!</p>
+                    <Link to="/mozzarella"><button>Get Some</button></Link>
+                </section>
+                <section className="col"></section>
+            </section>
+            <section className="row" id="row-correction">
+                <section className="col"></section>
+                <section className="col-lg-5 text-center">
+                    <img src={pepperJack} className="product-img" alt="Cheddar" />
+                </section>
+                <section className="col-lg-5 product-text">
+                    <h5>PEPPER JACK</h5>
+                    <p>Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.</p>
+                    <Link to="/mozzarella"><button>Get Some</button></Link>
                 </section>
             </section>
-            <section className="row mt-5" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col col-lg-3 col-sm-12 club-group">
-                    <span className="btn-radio">BUNDLE UP</span>
-                    <div class="form-check mt-4">
-                        <input class="form-check-input" type="radio" name="flexRadio1" id="radio-button" />
-                        <label class="form-check-label radio-text">6 PACK</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadio1" id="radio-button" />
-                        <label class="form-check-label radio-text">9 PACK</label>
-                    </div>
+            <section className="row" id="row-correction">
+                <section className="col-lg-5 text-center">
+                    <img src={mozzarella} className="product-img" alt="Cheddar" />
                 </section>
-                <section className="col col-lg-3 col-sm-12 club-group">
-                    <span className="btn-radio">BUY ONCE</span>
+                <section className="col-lg-5 product-text">
+                    <h5>MOZZARELLA</h5>
+                    <p>Cheesy, crunchy, and fluffy! Our Cheesy Bittes are perfect for any time of the day. The delicate and fresh mozzarella flavor is melt-in-your-mouth delicious and wholly addictive. Pair them with smoothies, chocolate spread, or pasta. You will love them!</p>
+                    <Link to="/mozzarella"><button>Get Some</button></Link>
                 </section>
-                <section className="col col-lg-3 col-sm-12 club-group">
-                    <span className="btn-radio">JOIN THE CLUB!</span><br />
-                    <span className="ship">SHIP EVERY:</span>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadio2" id="radio-button" />
-                        <label class="form-check-label radio-text">MONTH</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadio2" id="radio-button" />
-                        <label class="form-check-label radio-text">2 MONTHS</label>
-                    </div>
-                </section>
-                <section className="col col-hidden"></section>
+                <section className="col"></section>
             </section>
-            <section className="address py-5">
-                <button className="btn-add">ADD TO CART</button>
-                <address>
-                    <p>If you live within 10 miles of Eau Claire (54703) we will deliver to your door for free.</p>
-                    <span>DM us!</span>
-                    <a href="https://www.facebook.com/Cheesybittes/" target="_blank" rel="noreferrer">
-                        <i className="bi-facebook icon-2"></i>
-                    </a>
-                    <a href="https://www.instagram.com/cheesybittes/" target="_blank" rel="noreferrer">
-                        <i className="bi-instagram icon-2"></i>
-                    </a>
-                    <a href="mailto:info@cheesybittes.com"><i className="bi-envelope-fill icon-2"></i></a>
-                </address>
+            <section className="row" id="row-correction">
+                <section className="col"></section>
+                <section className="col-lg-5 text-center">
+                    <img src={products} className="product-img" alt="Cheddar" />
+                </section>
+                <section className="col-lg-5 product-text">
+                    <h5>MIX THEM UP!</h5>
+                    <p>Why choose when you can enjoy them all! Give your taste buds a fascinating experience with a combination of mozzarella, cheddar, and pepper jack.</p>
+                    <Link to="/mix"><button>Get Some</button></Link>
+                </section>
+            </section>
+            <section className="row" id="row-correction">
+                <section className="col-lg-5 text-center">
+                    <img src={bittesFruits} className="product-img" alt="Cheddar" />
+                </section>
+                <section className="col-lg-5 product-text">
+                    <h5>BITTES & FRUIT</h5>
+                    <p>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</p>
+                    <Link to="/fruit"><button>Get Some</button></Link>
+                </section>
+                <section className="col"></section>
             </section>
         </section>
-        <img src={background2} className="products-header-2" alt="Products Background" />
+        <img src={background2} className="product-back" alt="Products Background" />
+        <section className="green text-center">
+            <h4 className="">UNBOX, BAKE, ENJOY!</h4>
+            <section className="row mt-5" id="row-correction">
+                <section className="col px-4">
+                    <img src={oven} className="" alt="Oven" />
+                    <h5>Conventional Oven or Toaster Oven</h5>
+                    <li className="bullet">Pre-heat oven to 400F.</li>
+                    <li className="bullet">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
+                    <li className="bullet">Bake for 20 - 25 minutes or until golden brown.</li>
+                    Enjoy warm!
+                </section>
+                <section className="col px-4">
+                    <img src={airFryer} className="" alt="Air Fryer" />
+                    <h5>Air Fryer</h5>
+                    <li className="bullet">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
+                    <li className="bullet">Set to 375 fro 12 - 15 minutes or until golden brown.</li>
+                    Enjoy warm!
+                </section>
+                <section className="col px-4">
+                    <img src={important} className="" alt="Important" />
+                    <h5>Important</h5>
+                    <li className="bullet">Do not microwave</li>
+                    <li className="bullet">Do not spray or grease</li>
+                    <li className="bullet">Keep frozen until ready to bake</li>
+                    Do not allow to thaw
+                </section>
+            </section>
+        </section>
+        <img src={background3} className="product-back-2" alt="Products Background" />
     </>
 }
 
-export default Products
+export default Mozzarella

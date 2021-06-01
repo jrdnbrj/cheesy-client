@@ -647,6 +647,91 @@ html, body {
 
 /* PRODUCTS PRODUCTS PRODUCTS PRODUCTS PRODUCTS PRODUCTS PRODUCTS */
 
+.products-back1 {
+  width: 100%;
+  margin-top: -1.55%;
+}
+
+.product-img {
+  width: 75%;
+  padding: 3% 3%;
+}
+
+.product-text {
+  margin: auto 0;
+}
+
+.product-text h5 {
+  color: #D59431;
+  font-family: LuckiestGuy Regular;
+  font-size: 3.2vw;
+  padding-left: 10%;
+}
+
+.product-text p {
+  color: #484870;
+  font-family: Nunito Bold;
+  padding: 0% 10%;
+  font-size: 1.3vw;
+}
+
+.product-text button {
+  background-color: #484870;
+  border: 0;
+  border-radius: 25px;
+  padding: 1% 2%;
+  font-size: 1.2vw;
+  color: #FEFEFE;
+  font-family: Nunito Bold;
+  margin-left: 10%;
+}
+
+.product-back {
+  width: 100%;
+}
+
+.product-back-2 {
+  width: 100%;
+  margin-top: -0.2%;
+}
+
+.green {
+  background-color: #849E31;
+  color: #FEFEFE;
+  font-size: 1.3vw;
+  padding: 5% 5%;
+  margin-top: -0.1%;
+}
+
+.green h4 {
+  font-family: LuckiestGuy Regular;
+  font-size: 4.5vw;
+}
+
+.green h5 {
+  font-family: Nunito Black;
+  font-size: 1.5vw;
+}
+
+.green img {
+  width: 8vw;
+}
+
+/* .green .row ul li::marker {
+  content: '*';
+  color: #E8BD4D;
+} */
+
+.bullet {
+  margin: 20px 0;
+}
+
+.bullet::marker {
+  color: #E8BD4D;
+}
+
+/* MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA */
+
 .products-header {
   width: 100%;
   margin-top: -2%;

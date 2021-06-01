@@ -1,5 +1,5 @@
-import background1 from '../assets/img/products-background-1.png'
-import background2 from '../assets/img/products-background-2.png'
+import background1 from '../assets/img/mix-background-1.png'
+import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
 import bittesFruit from '../assets/img/product-bittes-fruits.png'
@@ -25,7 +25,7 @@ const Products = () => {
                 <section className="col-lg-7 col-sm-12 information">
                     <h5>Bittes & Fruit</h5>
                     <section className="description">
-                        <span>Descripción</span><br />
+                        <span>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</span><br />
                         <span>Frozen, ready to bake</span><br />
                         <span>15 Pieces (12 OZ)</span>
                     </section>
