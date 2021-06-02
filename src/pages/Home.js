@@ -69,7 +69,7 @@ const Home = () => {
                 </div>
                 <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
             </section>
-            <div id="home-carousel" className="carousel slide" data-bs-ride="home-carousel">
+            <div id="home-carousel" className="carousel slide" data-bs-ride="carousel">
                 <img src={background4} className="background-1" alt="background" />
                 <section className="space-1"></section>
                 <div className="carousel-inner carousel-container">

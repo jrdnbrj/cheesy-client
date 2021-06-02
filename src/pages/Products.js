@@ -29,7 +29,7 @@ const Mozzarella = () => {
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
                     <h5>CHEDDAR</h5>
                     <p>Smooth, rich, and buttery! Our Cheesy Bittes are perfect to share with loved ones. The sharp cheddar flavor is delightful. Pair them with coffee, fruit, or nuts. You will be amazed!</p>
-                    <Link to="/mozzarella"><button>Get Some</button></Link>
+                    <Link to="/cheddar"><button>Get Some</button></Link>
                 </section>
                 <section className="col col-hidden"></section>
             </section>
@@ -41,7 +41,7 @@ const Mozzarella = () => {
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
                     <h5>PEPPER JACK</h5>
                     <p>Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.</p>
-                    <Link to="/mozzarella"><button>Get Some</button></Link>
+                    <Link to="/pepper-jack"><button>Get Some</button></Link>
                 </section>
             </section>
             <section className="row product-list" id="row-correction">

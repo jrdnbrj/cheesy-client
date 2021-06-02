@@ -809,21 +809,24 @@ html, body {
   margin-top: -1%;
 }
 
+.products {
+  padding: 0;
+  margin: auto 0;
+}
+
 .products img {
-  width: 75%;
-  margin-left: 25%;
-  margin-right: 10%;
+  width: 85%;
 }
 
 .information {
   color: #FEFEFE;
-  padding-left: 15%;
+  padding: 0 5% 0 0;
+  text-align: justify;
 }
 
 .information h5 {
   font-size: 3.5vw;
   font-family: Nunito Black;
-  /* color: #e6981b; */
   color: #e6981b;
 }
 
@@ -836,6 +839,7 @@ html, body {
   padding-top: 3%;
   font-size: 3vw;
   font-family: Nunito Black;
+  margin-bottom: 0;
 }
 
 #ingredients, #allergen {
@@ -848,12 +852,18 @@ html, body {
   background-color: #5D8393;
   border: 0;
   color: #FEFEFE;
-  margin-bottom: 3%;
+  margin-top: 3%;
   font-family: Nunito Bold;
   color: #FEFEFE;
 }
+
 #ingredients button:hover, #allergen button:hover {
   color: #D89731;
+}
+
+#ingredients button:hover ~ .dropdown-menu,
+#allergen button:hover ~ .dropdown-menu {
+  display: block;
 }
 
 .flavor {
@@ -866,6 +876,19 @@ html, body {
   font-size: 1.7vw;
   margin: 2% 3%;
   font-family: Nunito Black;
+}
+
+.ingredients-2, .ingredients-3,
+.flavor-2:hover ~ .ingredients-1,
+.flavor-3:hover ~ .ingredients-1  {
+  display: none;
+}
+
+.ingredients-1,
+.flavor-1:hover ~ .ingredients-1, 
+.flavor-2:hover ~ .ingredients-2,
+.flavor-3:hover ~ .ingredients-3 {
+  display: block;
 }
 
 .dropdown-text {
@@ -897,20 +920,31 @@ html, body {
   font-size: 2.7vw;
   white-space: nowrap;
   border-radius: 10px;
+  border: 0;
   font-family: LuckiestGuy Regular;
-  /* text-align: center !important; */
+}
+
+.club-group .dropdown-menu {
+  background-color: #5D8393;
+  border: 0;
+  font-family: LuckiestGuy Regular;
+  color: #FEFEFE;
+}
+
+.club-group .dropdown-menu span {
+  font-size: 1.2vw;
 }
 
 .radio-text {
-  font-size: 1.8vw;
-  color: #FEFEFE;
-  font-family: LuckiestGuy Regular;
+  font-size: 2.5vw;
   text-align: left;
 }
 
 #radio-button {
-  float: none;
-  margin-right: 5%;
+  background-image: none;
+  margin-top: 9%;
+  border: 0;
+  vertical-align: middle;
 }
 
 #radio-button:checked {
@@ -926,7 +960,7 @@ html, body {
 }
 
 .address {
-  margin: 0 12.5%;
+  margin: 8% 12.5% 0 12.5%;
 }
 
 .btn-add {
@@ -970,15 +1004,17 @@ html, body {
 
 @media (max-width: 990px) {
   .products img {
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 75%;
+  }
+  .information {
+    padding: 0 12.5%;
   }
   .information h5 {
-    font-size: 8vw;
-    margin-top: 5%;
+    font-size: 7vw;
+    margin-top: 10%;
   }
   .description {
-    font-size: 4vw;
+    font-size: 3vw;
   }
   #price {
     font-size: 6vw;
@@ -996,7 +1032,7 @@ html, body {
     display: none;
   }
   .club-group {
-    padding: 3% 0% 3% 15%;
+    padding: 3% 0% 9% 15%;
   }
   .btn-radio {
     width: 50%;
@@ -1024,6 +1060,12 @@ html, body {
   .icon-2 {
     font-size: 6vw;
   }
+}
+
+/* MIX THEM UP MIX THEM UP MIX THEM UP MIX THEM UP MIX THEM UP */
+
+#mix-carousel img {
+
 }
 
 /* BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT */

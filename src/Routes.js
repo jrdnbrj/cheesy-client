@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Family from "./pages/Family";
 import Products from "./pages/Products";
 import Mozzarella from "./pages/Mozzarella";
+import Cheddar from "./pages/Cheddar";
+import PepperJack from "./pages/PepperJack";
 import MixThemUp from "./pages/MIxThemUp";
 import BittesFruit from "./pages/BittesFruit";
 // import ProtectedRoute from "./components/ProtectedRoute";
@@ -19,6 +21,8 @@ const Routes = () => {
           <Route exact path="/family" component={Family} />
           <Route exact path="/products" component={Products} />
           <Route exact path="/mozzarella" component={Mozzarella} />
+          <Route exact path="/cheddar" component={Cheddar} />
+          <Route exact path="/pepper-jack" component={PepperJack} />
           <Route exact path="/mix" component={MixThemUp} />
           <Route exact path="/fruit" component={BittesFruit} />
         </Switch>

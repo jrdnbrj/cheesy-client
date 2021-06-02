@@ -2,11 +2,11 @@ import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
-import products from '../assets/img/products.png'
+import cheddar from '../assets/img/products-cheddar.png'
 import nutritionFacts from '../assets/img/nutrition-facts.png'
 
 
-const MixThemUp = () => {
+const Cheddar = () => {
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
@@ -17,7 +17,7 @@ const MixThemUp = () => {
                     <div id="mix-carousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src={products} className="" alt="Mix Them Up 1" />
+                                <img src={cheddar} className="" alt="Mix Them Up 1" />
                             </div>
                             <div class="carousel-item">
                                 <img src={nutritionFacts} className="" alt="Mix Them Up 2" />
@@ -27,9 +27,9 @@ const MixThemUp = () => {
                     
                 </section>
                 <section className="col-lg-6 col-sm-12 information">
-                    <h5>Mix them up! Cheesy Bittes</h5>
+                    <h5>Cheddar Cheesy Bittes</h5>
                     <section className="description">
-                        <p>Why choose when you can enjoy them all! Give your taste buds a fascinating experience with a combination of mozzarella, cheddar, and pepper jack.</p>
+                        <p>Smooth, rich, and buttery! Our Cheesy Bittes are perfect to share with loved ones. The sharp cheddar flavor is delightful. Pair them with coffee, fruit, or nuts. You will be amazed!</p>
                         <p>Frozen, ready to bake</p>
                         <span>15 Pieces (12.6 OZ)</span>
                     </section>
@@ -113,4 +113,4 @@ const MixThemUp = () => {
     </>
 }
 
-export default MixThemUp
+export default Cheddar
