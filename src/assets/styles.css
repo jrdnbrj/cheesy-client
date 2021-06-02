@@ -651,8 +651,6 @@ html, body {
 .products-back1 {
   width: 100%;
   margin-top: -1.55%;
-  /* z-index: 5; */
-  /* opacity: 0.99; */
   filter: brightness(100%);
 }
 
@@ -763,23 +761,16 @@ html, body {
   }
   .green {
     font-size: 3vw;
-    /* padding: 5% 5%; */
-    /* margin-top: -0.3%; */
   }
-  
   .green h4 {
     font-size: 5vw;
     margin-top: 5%;
   }
-  
   .green h5 {
     font-size: 3vw;
-    /* padding: 0 12%; */
   }
-  
   .green img {
     width: 15vw;
-    /* margin: 7% 0; */
   }
   .instructions {
     padding: 0 15% !important;
@@ -790,7 +781,6 @@ html, body {
   .oven {
     padding-top: 0%;
   }
-
   .air-fryer, .important {
     padding-top: 10%;
   }
@@ -825,7 +815,7 @@ html, body {
 }
 
 .information h5 {
-  font-size: 3.5vw;
+  font-size: 3.4vw;
   font-family: Nunito Black;
   color: #e6981b;
 }
@@ -913,10 +903,14 @@ html, body {
   width: 25%;
 }
 
+.drops {
+  margin-top: 10%;
+}
+
 .btn-radio {
   background-color: #FEFEFE;
   color: #5D8393;
-  padding: 7px 40px;
+  padding: 7px 5%;
   font-size: 2.7vw;
   white-space: nowrap;
   border-radius: 10px;
@@ -927,12 +921,10 @@ html, body {
 .club-group .dropdown-menu {
   background-color: #5D8393;
   border: 0;
+  border-radius: 10px;
   font-family: LuckiestGuy Regular;
   color: #FEFEFE;
-}
-
-.club-group .dropdown-menu span {
-  font-size: 1.2vw;
+  padding: 0 2.5% 0 0;
 }
 
 .radio-text {
@@ -940,14 +932,23 @@ html, body {
   text-align: left;
 }
 
-#radio-button {
-  background-image: none;
-  margin-top: 9%;
-  border: 0;
-  vertical-align: middle;
+.form-check {
+  padding-left: 2.5vw;
 }
 
-#radio-button:checked {
+#radio-button1, #radio-button2, 
+#radio-button3, #radio-button4 {
+  background-image: none;
+  margin-top: 1.3ch;
+  border: 0;
+  vertical-align: middle;
+  width: 1.2vw;
+  height: 1.2vw;
+  margin-left: -2.5vw;
+}
+
+#radio-button1:checked, #radio-button2:checked,
+#radio-button3:checked, #radio-button4:checked {
   background-color: #D59431;
   border-color: #D59431;
 }
@@ -960,7 +961,7 @@ html, body {
 }
 
 .address {
-  margin: 8% 12.5% 0 12.5%;
+  margin: 6.5% 12.5% 0 12.5%;
 }
 
 .btn-add {
@@ -1060,12 +1061,6 @@ html, body {
   .icon-2 {
     font-size: 6vw;
   }
-}
-
-/* MIX THEM UP MIX THEM UP MIX THEM UP MIX THEM UP MIX THEM UP */
-
-#mix-carousel img {
-
 }
 
 /* BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT */

@@ -5,10 +5,11 @@ import background2 from '../assets/img/products-background-2.png'
 import background3 from '../assets/img/products-background-3.png'
 import header from '../assets/img/products-header.jpg'
 import logo from '../assets/img/logo.png'
+
+import mozzarella from '../assets/img/products-mozzarella.png'
 import cheddar from '../assets/img/products-cheddar.png'
 import pepperJack from '../assets/img/products-pepperjack.png'
-import mozzarella from '../assets/img/products-mozzarella.png'
-import products from '../assets/img/products.png'
+import mix from '../assets/img/products-mix.png'
 import bittesFruits from '../assets/img/product-bittes-fruits.png'
 
 import oven from '../assets/img/oven.png'
@@ -24,32 +25,10 @@ const Mozzarella = () => {
         <section className="">
             <section className="row product-list" id="row-correction">
                 <section className="col-lg-5 col-sm-5 col-5 text-center">
-                    <img src={cheddar} className="product-img" alt="Cheddar" />
-                </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <h5>CHEDDAR</h5>
-                    <p>Smooth, rich, and buttery! Our Cheesy Bittes are perfect to share with loved ones. The sharp cheddar flavor is delightful. Pair them with coffee, fruit, or nuts. You will be amazed!</p>
-                    <Link to="/cheddar"><button>Get Some</button></Link>
-                </section>
-                <section className="col col-hidden"></section>
-            </section>
-            <section className="row product-list" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
-                    <img src={pepperJack} className="product-img" alt="Cheddar" />
-                </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <h5>PEPPER JACK</h5>
-                    <p>Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.</p>
-                    <Link to="/pepper-jack"><button>Get Some</button></Link>
-                </section>
-            </section>
-            <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
                     <img src={mozzarella} className="product-img" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <h5>MOZZARELLA</h5>
+                    <Link to="/mozzarella" style={{ textDecoration: 'none' }}><h5>MOZZARELLA</h5></Link>
                     <p>Cheesy, crunchy, and fluffy! Our Cheesy Bittes are perfect for any time of the day. The delicate and fresh mozzarella flavor is melt-in-your-mouth delicious and wholly addictive. Pair them with smoothies, chocolate spread, or pasta. You will love them!</p>
                     <Link to="/mozzarella"><button>Get Some</button></Link>
                 </section>
@@ -58,10 +37,32 @@ const Mozzarella = () => {
             <section className="row product-list" id="row-correction">
                 <section className="col col-hidden"></section>
                 <section className="col-lg-5 col-sm-5 col-5 text-center">
-                    <img src={products} className="product-img" alt="Cheddar" />
+                    <img src={cheddar} className="product-img" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <h5>MIX THEM UP!</h5>
+                    <Link to="/cheddar" style={{ textDecoration: 'none' }}><h5>CHEDDAR</h5></Link>
+                    <p>Smooth, rich, and buttery! Our Cheesy Bittes are perfect to share with loved ones. The sharp cheddar flavor is delightful. Pair them with coffee, fruit, or nuts. You will be amazed!</p>
+                    <Link to="/cheddar"><button>Get Some</button></Link>
+                </section>
+            </section>
+            <section className="row product-list" id="row-correction">
+                <section className="col-lg-5 col-sm-5 col-5 text-center">
+                    <img src={pepperJack} className="product-img" alt="Cheddar" />
+                </section>
+                <section className="col-lg-5 col-sm-7 col-7 product-text">
+                    <Link to="/pepper-jack" style={{ textDecoration: 'none' }}><h5>PEPPER JACK</h5></Link>
+                    <p>Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.</p>
+                    <Link to="/pepper-jack"><button>Get Some</button></Link>
+                </section>
+                <section className="col col-hidden"></section>
+            </section>
+            <section className="row product-list" id="row-correction">
+                <section className="col col-hidden"></section>
+                <section className="col-lg-5 col-sm-5 col-5 text-center">
+                    <img src={mix} className="product-img" alt="Cheddar" />
+                </section>
+                <section className="col-lg-5 col-sm-7 col-7 product-text">
+                    <Link to="/mix" style={{ textDecoration: 'none' }}><h5>MIX THEM UP!</h5></Link>
                     <p>Why choose when you can enjoy them all! Give your taste buds a fascinating experience with a combination of mozzarella, cheddar, and pepper jack.</p>
                     <Link to="/mix"><button>Get Some</button></Link>
                 </section>
@@ -71,7 +72,7 @@ const Mozzarella = () => {
                     <img src={bittesFruits} className="product-img" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <h5>BITTES & FRUIT</h5>
+                    <Link to="/fruit" style={{ textDecoration: 'none' }}><h5>BITTES & FRUIT</h5></Link>
                     <p>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</p>
                     <Link to="/fruit"><button>Get Some</button></Link>
                 </section>

@@ -31,10 +31,10 @@ const Header = () => {
                         </Link>
                     </li>
                     <li className="nav-item my-auto">
-                        <Link className="nav-link" id="item-nav" to="/mozzarella">Contact us</Link>
+                        <Link className="nav-link" id="item-nav" to="/">Contact us</Link>
                     </li>
                     <li className="nav-item my-auto">
-                        <Link className="" id="" to="/fruit">
+                        <Link className="" id="" to="/">
                             <img src={cart} className="cart-logo" id="item-nav" alt="Cart Logo" />
                         </Link>
                     </li>
