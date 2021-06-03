@@ -442,31 +442,6 @@ html, body {
   height: 150px;
 }
 
-@media (max-width: 990px) {
-  .footer-text {
-    font-size: 3.7vw;
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-bottom: 10%;
-    padding-top: 11%;
-  }
-  .footer-form {
-    padding-left: 14%;
-    padding-right: 14%;
-    font-size: 3vw;
-  }
-  .form-logo-orange {
-    height: 9vw;
-  }
-  .icon {
-    font-size: 5vw;
-  }
-  .form-input, .form-submit {
-    font-size: 2.5vw !important;
-    padding-bottom: 0px;
-  }
-}
-
 .form-submit {
   color: #FFF;
   background-color: #D89731;
@@ -478,6 +453,31 @@ html, body {
   padding-bottom: 5px;
   font-size: 1vw;
   font-family: Nunito Bold;
+}
+
+@media (max-width: 990px) {
+  .footer-text {
+    font-size: 3.7vw;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 10%;
+    padding-top: 15%;
+  }
+  .footer-form {
+    padding-left: 14%;
+    padding-right: 14%;
+    font-size: 3vw;
+  }
+  .form-logo-orange {
+    height: 9vw !important;
+  }
+  .icon {
+    font-size: 5vw;
+  }
+  .form-input, .form-submit {
+    font-size: 2.5vw !important;
+    padding-bottom: 0px;
+  }
 }
 
 /* OUR FAMILY OUR FAMILY OUR FAMILY OUR FAMILY OUR FAMILY */
@@ -786,7 +786,7 @@ html, body {
   }
 }
 
-/* MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA MOZZARELLA */
+/* PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT PRODUCT */
 
 .products-header {
   width: 100%;
@@ -1072,4 +1072,101 @@ html, body {
 .juices span {
   color: #FEFEFE;
   font-family: Nunito Black;
+}
+
+/* CONTACT CONTACT CONTACT CONTACT CONTACT CONTACT CONTACT CONTACT */
+
+.contact-header {
+  width: 100%;
+  margin-top: -7%;
+  filter: brightness(100%);
+}
+
+.contact-background {
+  background-color: #D58830;
+  height: 500px;
+  padding-bottom: 30%;
+  padding-top: 5%;
+}
+
+.contact-text {
+  background-color: #D58830;
+  color: #FEFEFE;
+  padding-left: 10%;
+  padding-right: 14%;
+  font-size: 1.5vw;
+  text-align: justify;
+  font-family: Nunito Bold;
+}
+
+.contact-text p {
+  margin-bottom: 0;
+}
+
+.contact-text address p {
+  padding-bottom: 15% !important;
+}
+
+.contact-icon {
+  padding-right: 5vw;
+  font-size: 3vw;
+  color: #FEFEFE;
+}
+
+.form-logo-orange {
+  height: 4vw;
+  margin-bottom: 5%;
+}
+
+.contact-form {
+  background-color: #D58830;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.contact-form-input {
+  background-color: #FEFEFE;
+  border-radius: 15px;
+  border: 0;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  margin-top: 1% !important;
+  color: #D58830;
+  font-size: 1vw;
+  font-family: Nunito Bold;
+}
+
+.contact-form-input::placeholder {
+  color: #D58830;
+}
+
+.contact-form-submit {
+  color: #D58830;
+  background-color: #FEFEFE;
+  border: 0;
+  border-radius: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1vw;
+  font-family: Nunito Bold;
+}
+
+@media (max-width: 990px) {
+  .contact-text {
+    font-size: 3.7vw;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 10%;
+    padding-top: 15%;
+  }
+  .contact-form-input, 
+  .contact-form-submit {
+    font-size: 2.5vw !important;
+    padding-bottom: 0px;
+  }
 }
