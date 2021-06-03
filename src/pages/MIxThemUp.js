@@ -2,7 +2,7 @@ import Product from '../components/Product'
 import products from '../assets/img/products-mix.png'
 import nutritionFacts from '../assets/img/nutrition-facts.png'
 
-const Cheddar = () => {
+const MixThemUp = () => {
 
     const props = {
         carousel: [products, nutritionFacts],
@@ -18,4 +18,4 @@ const Cheddar = () => {
     return <Product {...props} />
 }
 
-export default Cheddar
+export default MixThemUp
