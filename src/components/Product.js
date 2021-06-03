@@ -15,9 +15,15 @@ const Product = ({ carousel, name, description, ingredients }) => {
                     <div id="mix-carousel" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {carousel.map((img, index) => {
-                                return <div className={`carousel-item ${!index ? 'active' : ''}`}>
-                                    <img src={img} className="" alt={`Mix Them Up ${index}`} />
+                                return <div className={`carousel-item ${!index ? 'active' : ''}`} key={index}>
+                                    <img src={img} className="" alt={`Mix Them Up ${index+1}`} />
                                 </div>
+                            })}
+                        </div>
+                        <div className="carousel-indicators">
+                            {carousel.map((img, index) => {
+                                return <button type="button" data-bs-target="#mix-carousel" data-bs-slide-to={index} aria-current="true" 
+                                    className={`${!index ? 'active' : ''}`} id="carousel-indicator" key={index}></button>
                             })}
                         </div>
                     </div>
@@ -26,7 +32,6 @@ const Product = ({ carousel, name, description, ingredients }) => {
                     <h5>{name} Cheesy Bittes</h5>
                     <section className="description">
                         <p>{description}</p>
-                        <p>Frozen, ready to bake</p>
                         <span>15 Pieces (12.6 OZ)</span>
                     </section>
                     <p id="price">$ 5.45</p>
@@ -42,7 +47,7 @@ const Product = ({ carousel, name, description, ingredients }) => {
                                         <div className="col flavor flavor-2">Cheddar</div>
                                         <div className="col flavor flavor-3">Pepper Jack</div>
                                         {ingredients.map((ingredient, index) => {
-                                            return <div className={`dropdown-text ingredients-${index+1}`}>
+                                            return <div className={`dropdown-text ingredients-${index+1}`} key={index}>
                                                 {ingredient}
                                             </div>
                                         })}
@@ -69,11 +74,11 @@ const Product = ({ carousel, name, description, ingredients }) => {
                     <div className="dropdown-menu">
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="bundle-up" id="radio-button1" />
-                            <label className="form-check-label radio-text" for="radio-button1">6 PACK</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button1">6 PACK</label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="bundle-up" id="radio-button2" />
-                            <label className="form-check-label radio-text" for="radio-button2">9 PACK</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button2">9 PACK</label>
                         </div>
                     </div>
                 </section>
@@ -86,11 +91,11 @@ const Product = ({ carousel, name, description, ingredients }) => {
                         <span className="ship">SHIP EVERY:</span>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="club" id="radio-button3" />
-                            <label className="form-check-label radio-text" for="radio-button3">MONTH</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button3">MONTH</label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="club" id="radio-button4" />
-                            <label className="form-check-label radio-text" for="radio-button4">2 MONTHS</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button4">2 MONTHS</label>
                         </div>
                     </div>
                 </section>

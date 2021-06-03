@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import backgroundHover from '../assets/img/background-hover.png'
 import homeHeader1 from '../assets/img/home-header-1.jpg'
@@ -98,17 +99,17 @@ const Home = () => {
                         <h5 className="hover-title">PEPPER JACK</h5>
                     </section>
                 </section>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
                     <img src={leftArrow} className="arrow arrow-right" aria-hidden="true" alt="Previous Arrow" />
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
                     <img src={rightArrow} className="arrow arrow-left" aria-hidden="true" alt="Next Arrow" />
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
             <section className="d-flex">
-                <span className="shop-now mx-auto">Shop Now</span>
+                <Link className="shop-now mx-auto" to="/products">Shop Now</Link>
             </section>
             <section className="d-flex">
                 <img src={shopNowShadow} className="shop-now-shadow mx-auto" alt="Shop Now Shadow" />

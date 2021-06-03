@@ -80,15 +80,15 @@ html, body {
   src: url('../assets/fonts/LuckiestGuy-Regular.ttf') format('truetype')
 }
 
-/* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
+/* NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR NAVBAR */
 
 .navbar-bg {
-  background-color: #e6981b;
+  background-color: #D58830;
 }
 
 #hamburguer-btn {
   border: 0;
-  color: #e6981b;
+  color: #D58830;
   padding: 0;
   padding-left: 1%;
 }
@@ -108,6 +108,9 @@ html, body {
   }
   .cart-logo-2 {
     height: 40px;
+  }
+  #item-nav {
+    font-size: 3vw !important;
   }
 }
 
@@ -229,15 +232,16 @@ html, body {
 
 .arrow {
   height: 10%;
-  margin-top: 150%;
-
+  margin-top: 50%;
 }
+
 .shop-now {
   z-index: 3;
   color: #FFF;
   font-size: 5vw;
   margin-top: -6%;
   font-family: Nunito Black;
+  text-decoration: none;
 }
 
 .shop-now-shadow {
@@ -357,6 +361,7 @@ html, body {
   }
   .carousel-text {
     display: inline;
+    /* padding-bottom: 50%; */
   }
   .text-1, .text-2, .text-3 {
     display: grid;
@@ -367,7 +372,7 @@ html, body {
     margin-bottom: 5%;
   }
   .text-3 {
-    margin-bottom: 0;
+    margin-bottom: 1%;
   }
   .text-4 {
     display: none;
@@ -681,7 +686,7 @@ html, body {
   background-color: #484870;
   border: 0;
   border-radius: 25px;
-  padding: 1% 2%;
+  padding: 1% 3%;
   font-size: 1.2vw;
   color: #FEFEFE;
   font-family: Nunito Bold;
@@ -805,7 +810,18 @@ html, body {
 }
 
 .products img {
-  width: 85%;
+  width: 70%;
+}
+
+.carousel-indicators {
+  margin-bottom: 0;
+}
+
+#carousel-indicator {
+  width: 1.5vw;
+  height: 1.5vw;
+  border-radius: 50%;
+  margin-top: 20%;
 }
 
 .information {
@@ -823,6 +839,10 @@ html, body {
 .description {
   font-size: 1.6vw;
   font-family: Nunito Bold;
+}
+
+.description p {
+  margin-bottom: 4%;
 }
 
 #price {
@@ -904,7 +924,7 @@ html, body {
 }
 
 .drops {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .btn-radio {
@@ -1006,6 +1026,10 @@ html, body {
 @media (max-width: 990px) {
   .products img {
     width: 75%;
+  }
+  #carousel-indicator {
+    width: 3vw;
+    height: 3vw;
   }
   .information {
     padding: 0 12.5%;
@@ -1163,6 +1187,12 @@ html, body {
     padding-right: 20%;
     padding-bottom: 10%;
     padding-top: 15%;
+  }
+  .contact-form {
+    padding-top: 7%;
+    padding-left: 14%;
+    padding-right: 14%;
+    font-size: 3vw;
   }
   .contact-form-input, 
   .contact-form-submit {
