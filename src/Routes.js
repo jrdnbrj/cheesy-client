@@ -1,16 +1,18 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom"
 
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import Family from "./pages/Family";
-import Products from "./pages/Products";
-import Contact from "./pages/Contact";
+import Layout from "./pages/Layout"
+import Home from "./pages/Home"
+import Family from "./pages/Family"
+import Products from "./pages/Products"
+import Contact from "./pages/Contact"
 
-import Mozzarella from "./pages/Mozzarella";
-import Cheddar from "./pages/Cheddar";
-import PepperJack from "./pages/PepperJack";
-import MixThemUp from "./pages/MIxThemUp";
-import BittesFruit from "./pages/BittesFruit";
+import Mozzarella from "./pages/Mozzarella"
+import Cheddar from "./pages/Cheddar"
+import PepperJack from "./pages/PepperJack"
+import MixThemUp from "./pages/MIxThemUp"
+import BittesFruit from "./pages/BittesFruit"
+
+import Checkout from "./pages/Checkout"
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 const Routes = () => {
@@ -29,6 +31,8 @@ const Routes = () => {
           <Route exact path="/pepper-jack" component={PepperJack} />
           <Route exact path="/mix" component={MixThemUp} />
           <Route exact path="/fruit" component={BittesFruit} />
+
+          <Route exact path="/checkout" component={Checkout} />
         </Switch>
       </Layout>
     </BrowserRouter>
