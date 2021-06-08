@@ -453,6 +453,10 @@ html, body {
   text-decoration: none;
 }
 
+.shop-now:hover {
+  color: #ebebeb;
+}
+
 .shop-now-shadow {
   z-index: 1;
   width: 30%;
@@ -605,7 +609,7 @@ html, body {
   padding-left: 10%;
   padding-right: 14%;
   font-size: 1.5vw;
-  text-align: justify;
+  /* text-align: justify; */
   font-family: Nunito Bold;
 }
 
@@ -741,6 +745,7 @@ html, body {
 
 .proud {
   margin-right: 5%;
+  width: 61% !important;
 }
 
 .family-title {
@@ -758,9 +763,13 @@ html, body {
 
 .paragraph {
   font-size: 1.5vw;
-  text-align: justify;
+  /* text-align: justify; */
   color: #5B5980;
   font-family: Nunito Bold;
+}
+
+#our-family-video {
+  width: 100%;
 }
 
 .background2 {
@@ -770,6 +779,10 @@ html, body {
 
 .background3, .background4 {
   background-color: #5D8494;
+}
+
+.background3 {
+  margin-top: -1%;
 }
 
 .america {
@@ -787,7 +800,7 @@ html, body {
 
 .giving-back p {
   font-size: 1.6vw;
-  text-align: justify;
+  /* text-align: justify; */
   font-family: Nunito Bold;
 }
 
@@ -900,6 +913,10 @@ html, body {
   color: #FEFEFE;
   font-family: Nunito Bold;
   margin-left: 10%;
+}
+
+.product-text button:hover {
+  color: #E8BD4D;
 }
 
 .product-back {
@@ -1036,7 +1053,7 @@ html, body {
 .information {
   color: #FEFEFE;
   padding: 0 5% 0 0;
-  text-align: justify;
+  /* text-align: justify; */
 }
 
 .information h5 {
@@ -1059,6 +1076,7 @@ html, body {
   font-size: 3vw;
   font-family: Nunito Black;
   margin-bottom: 0;
+  color: #e6981b;
 }
 
 #ingredients, #allergen {
@@ -1116,7 +1134,7 @@ html, body {
   color: #5D8393;
   padding: 25px;
   border-radius: 15px;
-  text-align: justify;
+  /* text-align: justify; */
   font-family: Nunito Bold;
 }
 
@@ -1328,7 +1346,7 @@ html, body {
   padding-left: 10%;
   padding-right: 14%;
   font-size: 1.5vw;
-  text-align: justify;
+  /* text-align: justify; */
   font-family: Nunito Bold;
 }
 

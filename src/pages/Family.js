@@ -1,4 +1,5 @@
-import background2 from '../assets/img/family-background-2.png'
+import { useEffect } from 'react'
+
 import background3 from '../assets/img/family-background-3.png'
 import logo from '../assets/img/logo.png'
 import america from '../assets/img/america.png'
@@ -11,6 +12,8 @@ import iconPerson from '../assets/img/icon-person.png'
 import iconBread from '../assets/img/icon-bread.png'
 import iconHouse from '../assets/img/icon-house.png'
 
+import video from '../assets/img/our-family-video.mp4'
+
 import carousel1 from '../assets/img/family-carousel-1.png'
 import carousel2 from '../assets/img/family-carousel-2.png'
 import carousel3 from '../assets/img/family-carousel-3.png'
@@ -21,12 +24,16 @@ import Flickity from 'react-flickity-component'
 
 
 const Family = () => {
+
+    useEffect(() => {
+        document.getElementById('our-family-video').play()
+    })
+
     return <>
         <section className="background1">
             <img src={logo} className="family-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
         </section>
         <section className="family-2">
-
             <section className="row" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
@@ -39,7 +46,6 @@ const Family = () => {
                     <img src={aboutFamily} className="about-family" alt="All about the family" />
                 </section>
             </section>
-
             <section className="row my-3" id="row-correction">
                 <section className="col-lg-4 col-sm-12 order-sm-2 col-12 order-2 order-lg-1 text-center">
                     <img src={howStarted} className="how-started" alt="How we started" />
@@ -52,7 +58,6 @@ const Family = () => {
                     <p className="paragraph">After being diagnosed with celiac disease one of the only treats I could enjoy was pan de yuca.  When we moved to the United States, I was excited to find so many gluten-free options but missed the flavors of home that reminded me of family, friends, and time together. We decided to recreate our traditional pan de yuca recipe and pack it with exquisite Wisconsin cheese! The business was born in 2021 with our Cheesy Bittes.</p>
                 </section>
             </section>
-
             <section className="row" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
@@ -65,9 +70,11 @@ const Family = () => {
                     <img src={wisconsin} className="proud mt-2" alt="All about the family" />
                 </section>
             </section>
-
         </section>
-        <img src={background2} className="background2 mt-5" alt="Family Background" />
+        <video id="our-family-video" autoplay loop muted>
+            <source src={video} type="video/mp4" />
+        </video>
+        {/* <img src={background2} className="background2 mt-5" alt="Family Background" /> */}
         <section className="row background3" id="row-correction">
             <img src={america} className="america col-lg-5 order-lg-1 col-sm-12 order-sm-2 order-2 mx-auto" alt="America" />
             <section className="col-lg-7 col-lg-2 col-sm-12 order-sm-1 order-1 my-auto giving-back">

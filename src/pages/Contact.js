@@ -12,7 +12,9 @@ const Contact = () => {
         <section className="row contact-background mx-auto" id="row-correction">
             <section className="col-xs-12 col-sm-12 col-lg-6 contact-text order-2 order-sm-2 order-lg-1">
                 <address>
-                    <p className="pb-5">We are so glad you are here! Thank you for supporting our small business and helping us spread some love.</p>
+                    <p className="pb-5">We make our cheesy bittes with love and hope they make you smile! 
+                    <br />If you have any questions or just want to chat, let us know
+                    </p>
                     <a href="https://www.facebook.com/Cheesybittes/" target="_blank" rel="noreferrer">
                         <i className="bi-facebook contact-icon"></i>
                     </a>
