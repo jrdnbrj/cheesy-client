@@ -24,7 +24,7 @@ const Mozzarella = () => {
         <img src={background1} className="products-back1" alt="Products Background" />
         <section className="">
             <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
+                <section className="col-lg-5 col-sm-5 col-5 text-end">
                     <img src={mozzarella} className="product-img" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
@@ -36,7 +36,7 @@ const Mozzarella = () => {
             </section>
             <section className="row product-list" id="row-correction">
                 <section className="col col-hidden"></section>
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
+                <section className="col-lg-5 col-sm-5 col-5 text-end">
                     <img src={cheddar} className="product-img" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
@@ -46,7 +46,7 @@ const Mozzarella = () => {
                 </section>
             </section>
             <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
+                <section className="col-lg-5 col-sm-5 col-5 text-end">
                     <img src={pepperJack} className="product-img" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
@@ -56,10 +56,10 @@ const Mozzarella = () => {
                 </section>
                 <section className="col col-hidden"></section>
             </section>
-            <section className="row product-list" id="row-correction">
+            <section className="row product-list pb-5" id="row-correction">
                 <section className="col col-hidden"></section>
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
-                    <img src={mix} className="product-img" alt="Cheddar" />
+                <section className="col-lg-5 col-sm-5 col-5 text-end">
+                    <img src={mix} className="product-img-2" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
                     <Link to="/mix" style={{ textDecoration: 'none' }}><h5>MIX THEM UP!</h5></Link>
@@ -68,8 +68,8 @@ const Mozzarella = () => {
                 </section>
             </section>
             <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-center">
-                    <img src={bittesFruits} className="product-img" alt="Cheddar" />
+                <section className="col-lg-5 col-sm-5 col-5 text-end">
+                    <img src={bittesFruits} className="product-img-2" alt="Cheddar" />
                 </section>
                 <section className="col-lg-5 col-sm-7 col-7 product-text">
                     <Link to="/fruit" style={{ textDecoration: 'none' }}><h5>BITTES & FRUIT</h5></Link>
@@ -94,14 +94,14 @@ const Mozzarella = () => {
                 <section className="col-lg-4 px-4 instructions">
                     <img src={airFryer} className="air-fryer" alt="Air Fryer" />
                     <h5>Air Fryer</h5>
-                    <li className="bullet">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
+                    <li className="bullet green-padding">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
                     <li className="bullet">Set to 375°F fro 12 - 15 minutes or until golden brown.</li>
                     Enjoy warm!
                 </section>
                 <section className="col-lg-4 px-4 instructions">
                     <img src={important} className="important" alt="Important" />
                     <h5>Important</h5>
-                    <li className="bullet">Do not microwave</li>
+                    <li className="bullet green-padding">Do not microwave</li>
                     <li className="bullet">Do not spray or grease</li>
                     <li className="bullet">Keep frozen until ready to bake</li>
                     Do not allow to thaw

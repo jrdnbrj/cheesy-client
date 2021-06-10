@@ -139,7 +139,7 @@ const Cart = () => {
 
                 <section className="sticky">
                     <section className="subtotal-cart-container">
-                        <span className="subtotal-cart"><stron>Subtotal:</stron> $1.000</span>
+                        <span className="subtotal-cart"><strong>Subtotal:</strong> $1.000</span>
                     </section>
                     <section className="checkout-cart">
                         <Link to="/checkout" className="checkout-button">Checkout</Link>

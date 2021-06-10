@@ -883,7 +883,11 @@ html, body {
 
 .product-img {
   width: 75%;
-  padding: 3% 3%;
+  /* padding: 3% 3%; */
+}
+
+.product-img-2 {
+  width: 65%;
 }
 
 .product-text {
@@ -894,13 +898,13 @@ html, body {
   color: #D59431;
   font-family: LuckiestGuy Regular;
   font-size: 3.2vw;
-  padding-left: 10%;
+  /* padding-left: 10%; */
 }
 
 .product-text p {
   color: #484870;
   font-family: Nunito Bold;
-  padding: 0% 10%;
+  padding: 0% 10% 0% 0%;
   font-size: 1.3vw;
 }
 
@@ -912,7 +916,7 @@ html, body {
   font-size: 1.2vw;
   color: #FEFEFE;
   font-family: Nunito Bold;
-  margin-left: 10%;
+  /* margin-left: 10%; */
 }
 
 .product-text button:hover {
@@ -969,11 +973,15 @@ html, body {
   color: #E8BD4D;
 }
 
+.green-padding {
+  padding-top: 6%;
+}
+
 @media (max-width: 990px) {
   .product-list {
     margin: 5% 0;
   }
-  .product-img {
+  .product-img, .product-img-2 {
     width: 100%;
     padding-left: 10%;
   }
@@ -1163,6 +1171,24 @@ html, body {
   border-radius: 10px;
   border: 0;
   font-family: LuckiestGuy Regular;
+}
+
+.checked {
+  /* background-color: #D59431; */
+  color: #D59431 !important;
+}
+
+/* #radio-button1:checked ~ #pack-6 {
+  color: #D59431 !important;
+} */
+
+#buy-once-radio {
+  display: none;
+}
+
+#buy-once-radio:checked ~ #buy-once-label {
+  /* background-color: #D59431; */
+  color: #D59431;
 }
 
 .club-group .dropdown-menu {

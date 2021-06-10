@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
@@ -5,6 +7,23 @@ import logo from '../assets/img/logo.png'
 
 
 const Product = ({ carousel, name, description, ingredients }) => {
+
+    useEffect(() => {
+        const toDo = () => {
+            if(radio1.checked || radio2.checked) button.className += ' checked'
+            else button.classList.remove('checked')
+        }
+
+        const radio1 = document.getElementById('radio-button1')
+        const radio2 = document.getElementById('radio-button2')
+        const radio3 = document.getElementById('buy-once-radio')
+        const button = document.getElementById('bundle-up')
+
+        radio1.addEventListener('change', toDo)
+        radio2.addEventListener('change', toDo)
+        radio3.addEventListener('change', toDo)
+    })
+
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
@@ -69,24 +88,27 @@ const Product = ({ carousel, name, description, ingredients }) => {
             </section>
             <section className="row drops" id="row-correction">
                 <section className="col col-hidden"></section>
-                <section className="col-12 col-lg-3 col-sm-12 club-group">
-                    <button className="btn-radio" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">BUNDLE UP</button>
+                <section className="col-12 col-lg-3 col-sm-12 club-group btn-group" id="bundleUpDropdown">
+                    <button className="btn-radio" type="button" id="bundle-up" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">BUNDLE UP</button>
                     <div className="dropdown-menu">
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="bundle-up" id="radio-button1" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button1">6 PACK</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button1" id="pack-6">6 PACK</label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="bundle-up" id="radio-button2" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button2">9 PACK</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button2" id="pack-9">9 PACK</label>
                         </div>
                     </div>
                 </section>
                 <section className="col-12 col-lg-3 col-sm-12 club-group">
-                    <button className="btn-radio">BUY ONCE</button>
+                    <div className="buy-once">
+                        <input type="radio" name="bundle-up" id="buy-once-radio" />
+                        <label className="btn-radio" id="buy-once-label" htmlFor="buy-once-radio">BUY ONCE</label>
+                    </div>
                 </section>
                 <section className="col-12 col-lg-3 col-sm-12 club-group">
-                    <button className="btn-radio" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">JOIN THE CLUB!</button>
+                    <button className="btn-radio" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">JOIN THE CLUB!</button>
                     <div className="dropdown-menu">
                         <span className="ship">SHIP EVERY:</span>
                         <div className="form-check">
