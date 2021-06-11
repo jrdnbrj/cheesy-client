@@ -1,8 +1,12 @@
 import { useEffect } from 'react'
 
+import background2 from '../assets/img/family-background-2.png'
 import background3 from '../assets/img/family-background-3.png'
 import logo from '../assets/img/logo.png'
 import america from '../assets/img/america.png'
+import dot1 from '../assets/img/familt-dot1.png'
+import dot2 from '../assets/img/familt-dot2.png'
+import dot3 from '../assets/img/familt-dot3.png'
 
 import aboutFamily from '../assets/img/about-family.png'
 import howStarted from '../assets/img/how-started.png'
@@ -33,8 +37,12 @@ const Family = () => {
         <section className="background1">
             <img src={logo} className="family-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
         </section>
+        <img src={dot1} className="family-dot" id="family-dot-1" alt="Dot 1" />
+        <img src={dot2} className="family-dot" id="family-dot-2" alt="Dot 2" />
+        <img src={dot3} className="family-dot" id="family-dot-3" alt="Dot 3" />
+        <img src={background2} className="background2" alt="Family Background" />
         <section className="family-2">
-            <section className="row" id="row-correction">
+            <section className="row py-5" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
                         <h5 className="col-9 family-title">All about the family</h5>
@@ -46,7 +54,7 @@ const Family = () => {
                     <img src={aboutFamily} className="about-family" alt="All about the family" />
                 </section>
             </section>
-            <section className="row my-3" id="row-correction">
+            <section className="row my-4" id="row-correction">
                 <section className="col-lg-4 col-sm-12 order-sm-2 col-12 order-2 order-lg-1 text-center">
                     <img src={howStarted} className="how-started" alt="How we started" />
                 </section>
@@ -58,7 +66,7 @@ const Family = () => {
                     <p className="paragraph">After being diagnosed with celiac disease one of the only treats I could enjoy was pan de yuca.  When we moved to the United States, I was excited to find so many gluten-free options but missed the flavors of home that reminded me of family, friends, and time together. We decided to recreate our traditional pan de yuca recipe and pack it with exquisite Wisconsin cheese! The business was born in 2021 with our Cheesy Bittes.</p>
                 </section>
             </section>
-            <section className="row" id="row-correction">
+            <section className="row py-5" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
                         <h5 className="col-9 family-title pt-2">Wisconsin proud!</h5>
@@ -71,10 +79,9 @@ const Family = () => {
                 </section>
             </section>
         </section>
-        <video id="our-family-video" autoplay loop muted>
+        <video className="pt-5" id="our-family-video" autoplay loop muted>
             <source src={video} type="video/mp4" />
         </video>
-        {/* <img src={background2} className="background2 mt-5" alt="Family Background" /> */}
         <section className="row background3" id="row-correction">
             <img src={america} className="america col-lg-5 order-lg-1 col-sm-12 order-sm-2 order-2 mx-auto" alt="America" />
             <section className="col-lg-7 col-lg-2 col-sm-12 order-sm-1 order-1 my-auto giving-back">
@@ -100,7 +107,7 @@ const Family = () => {
                 <img src={carousel5} className="" alt="Bread on a Plate" />
             </Flickity>
         </section>
-        <img src={background3} className="background2" alt="Family Background" />
+        <img src={background3} className="background5" alt="Family Background" />
     </>
 }
 

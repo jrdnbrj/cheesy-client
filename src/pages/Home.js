@@ -5,6 +5,9 @@ import backgroundHover from '../assets/img/background-hover.png'
 import homeHeader1 from '../assets/img/home-header-1.jpg'
 import homeHeader2 from '../assets/img/home-header-2.jpg'
 import homeHeader3 from '../assets/img/home-header-3.jpg'
+import dot1 from '../assets/img/home-dot1.png'
+import dot2 from '../assets/img/home-dot2.png'
+import dot3 from '../assets/img/home-dot3.png'
 import background4 from '../assets/img/home-background-4.png'
 import background3 from '../assets/img/home-background-3.png'
 import logo from '../assets/img/logo.png'
@@ -31,7 +34,6 @@ import breadPlate from '../assets/img/bread-plate.png'
 import breadSandwich from '../assets/img/bread-sandwich.png'
 
 import Flickity from 'react-flickity-component'
-
 
 const Home = () => {
 
@@ -69,6 +71,9 @@ const Home = () => {
                     </div>
                 </div>
                 <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
+                <img src={dot1} className="home-dot" id="home-dot-1" alt="Dot 1" />
+                <img src={dot2} className="home-dot" id="home-dot-2" alt="Dot 2" />
+                <img src={dot3} className="home-dot" id="home-dot-3" alt="Dot 3" />
             </section>
             <div id="home-carousel" className="carousel slide" data-bs-ride="carousel">
                 <img src={background4} className="background-1" alt="background" />
@@ -118,20 +123,20 @@ const Home = () => {
         <img src={background3} className="background-3" alt="background Hover" />
         <section className="home-background-2">
             <section className="d-flex mt-3 justify-content-around" id="icons-container">
-                <section className="text-end">
+                <section className="text-end icon-img-an">
                     <img src={simpleIngredients} className="icon-img" alt="Simple Ingredients" />
                     <p className="icon-text ms-auto">Simple Ingredients</p>
                 </section>
-                <section className="text-center mt-2">
+                <section className="text-center mt-2 icon-img-an">
                     <img src={vegetarianFriendly} className="icon-img" alt="Vegetarian Friendly" />
                     <p className="icon-text mx-auto">Vegetarian Friendly</p>
                 </section>
                 <img src={wisconsin} className="wisconsin-img" alt="Proudly Cheese Wisconsin" />
-                <section className="text-center mt-1">
+                <section className="text-center mt-1 icon-img-an-2">
                     <img src={fifteenPieces} className="icon-img" alt="15 Pieces" />
                     <p className="icon-text mx-auto">Pieces</p>
                 </section>
-                <section className="text-start mt-1">
+                <section className="text-start mt-1 icon-img-an-2">
                     <img src={glutenFree} className="icon-img" alt="Gluten Free" />
                     <p className="icon-text me-auto">GF</p>
                 </section>

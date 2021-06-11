@@ -1,7 +1,7 @@
 import background1 from '../assets/img/contact-background-1.png'
 import header from '../assets/img/contact-header.jpeg'
 import logo from '../assets/img/logo.png'
-import logoOrange from '../assets/img/medium-logo-white.png'
+import logoOrange from '../assets/img/medium-logo.png'
 
 
 const Contact = () => {
