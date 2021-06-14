@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 
-import background1 from '../assets/img/products-background-1.png'
+import background1 from '../assets/img/family-background-2.png'
 import background2 from '../assets/img/products-background-2.png'
 import background3 from '../assets/img/products-background-3.png'
 import header from '../assets/img/products-header.jpg'
 import logo from '../assets/img/logo.png'
+import dot1 from '../assets/img/white-dot1.png'
+import dot2 from '../assets/img/white-dot2.png'
+import dot3 from '../assets/img/white-dot3.png'
 
 import mozzarella from '../assets/img/products-mozzarella.png'
 import cheddar from '../assets/img/products-cheddar.png'
@@ -21,6 +24,9 @@ const Mozzarella = () => {
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
+        <img src={dot1} className="products-dot" id="products-dot-1" alt="Dot 1" />
+        <img src={dot2} className="products-dot" id="products-dot-2" alt="Dot 2" />
+        <img src={dot3} className="products-dot" id="products-dot-3" alt="Dot 3" />
         <img src={background1} className="products-back1" alt="Products Background" />
         <section className="">
             <section className="row product-list" id="row-correction">

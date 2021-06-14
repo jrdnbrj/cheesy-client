@@ -7,8 +7,8 @@ const PepperJack = () => {
     const props = {
         carousel: [pepperJack, nutrition],
         name: 'Pepper Jack',
-        description: 'Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.',
-        ingredients: 'Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.',
+        description: 'Tasty, soft, and chewy! Packed with creamy notes and heat.',
+        ingredients: 'Pepper jack cheese (pasteurized milk, cultures, jalapeno peppers, salt, enzymes), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.',
     }
 
     return <Product {...props} />

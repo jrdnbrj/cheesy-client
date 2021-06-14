@@ -33,9 +33,9 @@ const Products = () => {
                     </div>
                 </section>
                 <section className="col-lg-6 col-sm-12 information">
-                    <h5>Biites & Fruit Cheesy Bittes</h5>
+                    <h5>Bittes & Fruit Pulp Cheesy Bittes</h5>
                     <section className="description">
-                        <p>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</p>
+                        <p>Our Cheesy Bittes and natural fruit pulp are made for each other.</p>
                         <span>15 Pieces (12.6 OZ)</span>
                     </section>
                     <p id="price">$ 5.45</p>

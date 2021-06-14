@@ -143,24 +143,24 @@ const Home = () => {
             </section>
             <section className="" id="icons-container-2">
                 <section className="mt-3 row" id="row-correction">
-                    <section className="text-center col simple">
+                    <section className="text-center col simple icon-img-an">
                         <img src={simpleIngredients} className="icon-img-2" alt="Simple Ingredients" />
                         <p className="icon-text-2 mx-auto">Simple Ingredients</p>
                     </section>
                     <section className="col">
                         <img src={wisconsin} className="wisconsin-img-2 d-flex mx-auto" alt="Proudly Cheese Wisconsin" />
                     </section>
-                    <section className="text-center col vegetarian">
+                    <section className="text-center col vegetarian icon-img-an-2">
                         <img src={vegetarianFriendly} className="icon-img-2" alt="Vegetarian Friendly" />
                         <p className="icon-text-2 mx-auto">Vegetarian Friendly</p>
                     </section>
                 </section>
                 <section className="row" id="row-correction">
-                    <section className="text-center col pieces">
+                    <section className="text-center col pieces icon-img-an">
                         <img src={fifteenPieces} className="icon-img-2" alt="15 Pieces" />
                         <p className="icon-text-2 mx-auto">Pieces</p>
                     </section>
-                    <section className="text-center col gluten">
+                    <section className="text-center col gluten icon-img-an-2">
                         <img src={glutenFree} className="icon-img-2" alt="Gluten Free" />
                         <p className="icon-text-2 mx-auto">GF</p>
                     </section>

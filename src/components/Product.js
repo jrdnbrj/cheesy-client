@@ -4,6 +4,8 @@ import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
+import dot1 from '../assets/img/product-dot1.png'
+import dot2 from '../assets/img/product-dot2.png'
 
 
 const Product = ({ carousel, name, description, ingredients }) => {
@@ -27,6 +29,8 @@ const Product = ({ carousel, name, description, ingredients }) => {
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
+        <img src={dot1} className="product-dot" id="product-dot-1" alt="Dot 1" />
+        <img src={dot2} className="product-dot" id="product-dot-2" alt="Dot 2" />
         <img src={background1} className="products-header" alt="Products Background" />
         <section className="products-body">
             <section className="row pt-5" id="row-correction">
@@ -70,7 +74,7 @@ const Product = ({ carousel, name, description, ingredients }) => {
                                                 {ingredient}
                                             </div>
                                         })}
-                                    </> : <div className="dropdown-text  ingredients-1">{ingredients}</div>
+                                    </> : <div className="dropdown-text ingredients-1">{ingredients}</div>
                                 }
                             </div>
                         </div> 
