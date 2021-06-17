@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useQuery, gql } from "@apollo/client"
 
 import background1 from '../assets/img/family-background-2.png'
 import background2 from '../assets/img/products-background-2.png'
@@ -20,7 +21,24 @@ import airFryer from '../assets/img/air-fryer.png'
 import important from '../assets/img/important.png'
 
 
+const GET_PRODUCTS = gql`
+    query getProducts {
+        getProducts {
+            id
+            name
+            description
+            shortDescription
+            ingredients
+            price
+        }
+    }
+`
+
 const Mozzarella = () => {
+
+    const { data } = useQuery(GET_PRODUCTS)
+    data && console.log(data)
+
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />

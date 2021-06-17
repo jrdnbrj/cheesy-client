@@ -79,7 +79,7 @@ const Family = () => {
                 </section>
             </section>
         </section>
-        <video className="pt-5" id="our-family-video" autoplay loop muted>
+        <video className="pt-5" id="our-family-video" autoPlay loop muted>
             <source src={video} type="video/mp4" />
         </video>
         <section className="row background3" id="row-correction">

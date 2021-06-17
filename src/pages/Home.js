@@ -35,6 +35,7 @@ import breadSandwich from '../assets/img/bread-sandwich.png'
 
 import Flickity from 'react-flickity-component'
 
+
 const Home = () => {
 
     useEffect(() => {
