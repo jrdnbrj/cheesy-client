@@ -1,11 +1,34 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useQuery, gql } from "@apollo/client"
 
 import background from '../assets/img/cart-background.png'
-import mozzarella from '../assets/img/products-mozzarella.png'
-import cheddar from '../assets/img/products-cheddar.png'
-import pepperJack from '../assets/img/products-pepperjack.png'
+
+
+const GET_PRODUCTS = gql`
+    query getProducts {
+        getProducts {
+            name
+            images
+            description
+            ingredients
+            price
+        }
+    }
+`
 
 const Cart = () => {
+
+    let { data } = useQuery(GET_PRODUCTS)
+    data && console.log('Products:', data.getProducts)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch({ type: 'SET_PRODUCTS', payload: data && data.getProducts })
+    }, [data, dispatch])
+
     return <>
         <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <img src={background} className="cart-background" alt="Cart" />
@@ -19,7 +42,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={mozzarella} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`data:image/png;base64,${data && data.getProducts[0].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Mozzarella</p>
@@ -39,7 +62,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={cheddar} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`data:image/png;base64,${data && data.getProducts[1].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Cheddar</p>
@@ -59,7 +82,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={pepperJack} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
@@ -79,7 +102,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={pepperJack} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
@@ -99,7 +122,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={pepperJack} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
@@ -119,7 +142,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={pepperJack} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>

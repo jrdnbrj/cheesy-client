@@ -11,7 +11,7 @@ import dot2 from '../assets/img/product-dot2.png'
 
 
 const GET_PRODUCT = gql`
-    query getProduct($path: String!) {
+    query getProductByPath($path: String!) {
         getProductByPath(path: $path) {
             name
             images
