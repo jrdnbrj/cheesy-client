@@ -4,10 +4,14 @@ import client from './adapters/apolloClient';
 
 import Routes from "./Routes";
 
+import { Provider } from 'react-redux';
+import store from './adapters/store'
 
 const App = () => {
   return <ApolloProvider client={client}>
-    <Routes />
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   </ApolloProvider>
 }
 

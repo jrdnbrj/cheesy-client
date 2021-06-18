@@ -1,5 +1,7 @@
+// import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery, gql } from "@apollo/client"
+// import { useDispatch } from 'react-redux'
 
 import background1 from '../assets/img/family-background-2.png'
 import background2 from '../assets/img/products-background-2.png'
@@ -24,10 +26,8 @@ import important from '../assets/img/important.png'
 const GET_PRODUCTS = gql`
     query getProducts {
         getProducts {
-            id
             name
             description
-            shortDescription
             ingredients
             price
         }
@@ -36,8 +36,15 @@ const GET_PRODUCTS = gql`
 
 const Mozzarella = () => {
 
-    const { data } = useQuery(GET_PRODUCTS)
-    data && console.log(data)
+    // const dispatch = useDispatch()
+    let { loading, data } = useQuery(GET_PRODUCTS)
+
+    if (data) data = data.getProducts
+
+    // useEffect(() => {
+    //     console.log('products:', data)
+    //     dispatch({ type: 'SET_PRODUCTS', payload: data })
+    // }, [data, dispatch])
 
     return <>
         <img src={header} className="home-header" alt="Products Header" />
@@ -46,63 +53,65 @@ const Mozzarella = () => {
         <img src={dot2} className="products-dot" id="products-dot-2" alt="Dot 2" />
         <img src={dot3} className="products-dot" id="products-dot-3" alt="Dot 3" />
         <img src={background1} className="products-back1" alt="Products Background" />
-        <section className="">
-            <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-end">
-                    <img src={mozzarella} className="product-img" alt="Cheddar" />
+        { loading ? <p>Cargando Información de Productos</p> : 
+            <section>
+                <section className="row product-list" id="row-correction">
+                    <section className="col-lg-5 col-sm-5 col-5 text-end">
+                        <img src={mozzarella} className="product-img" alt="Cheddar" />
+                    </section>
+                    <section className="col-lg-5 col-sm-7 col-7 product-text">
+                        <Link to="/mozzarella" style={{ textDecoration: 'none' }}><h5>{data[0].name}</h5></Link>
+                        <p>{data[0].description}</p>
+                        <Link to="/mozzarella"><button>Get Some</button></Link>
+                    </section>
+                    <section className="col col-hidden"></section>
                 </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <Link to="/mozzarella" style={{ textDecoration: 'none' }}><h5>MOZZARELLA</h5></Link>
-                    <p>Cheesy, crunchy, and fluffy! Our Cheesy Bittes are perfect for any time of the day. The delicate and fresh mozzarella flavor is melt-in-your-mouth delicious and wholly addictive. Pair them with smoothies, chocolate spread, or pasta. You will love them!</p>
-                    <Link to="/mozzarella"><button>Get Some</button></Link>
+                <section className="row product-list" id="row-correction">
+                    <section className="col col-hidden"></section>
+                    <section className="col-lg-5 col-sm-5 col-5 text-end">
+                        <img src={cheddar} className="product-img" alt="Cheddar" />
+                    </section>
+                    <section className="col-lg-5 col-sm-7 col-7 product-text">
+                        <Link to="/cheddar" style={{ textDecoration: 'none' }}><h5>{data[1].name}</h5></Link>
+                        <p>{data[1].description}</p>
+                        <Link to="/cheddar"><button>Get Some</button></Link>
+                    </section>
                 </section>
-                <section className="col col-hidden"></section>
+                <section className="row product-list" id="row-correction">
+                    <section className="col-lg-5 col-sm-5 col-5 text-end">
+                        <img src={pepperJack} className="product-img" alt="Cheddar" />
+                    </section>
+                    <section className="col-lg-5 col-sm-7 col-7 product-text">
+                        <Link to="/pepperjack" style={{ textDecoration: 'none' }}><h5>{data[2].name}</h5></Link>
+                        <p>{data[2].description}</p>
+                        <Link to="/pepperjack"><button>Get Some</button></Link>
+                    </section>
+                    <section className="col col-hidden"></section>
+                </section>
+                <section className="row product-list pb-5" id="row-correction">
+                    <section className="col col-hidden"></section>
+                    <section className="col-lg-5 col-sm-5 col-5 text-end">
+                        <img src={mix} className="product-img-2" alt="Cheddar" />
+                    </section>
+                    <section className="col-lg-5 col-sm-7 col-7 product-text">
+                        <Link to="/mix" style={{ textDecoration: 'none' }}><h5>{data[3].name}</h5></Link>
+                        <p>{data[3].description}</p>
+                        <Link to="/mix"><button>Get Some</button></Link>
+                    </section>
+                </section>
+                <section className="row product-list" id="row-correction">
+                    <section className="col-lg-5 col-sm-5 col-5 text-end">
+                        <img src={bittesFruits} className="product-img-2" alt="Cheddar" />
+                    </section>
+                    <section className="col-lg-5 col-sm-7 col-7 product-text">
+                        <Link to="/fruits" style={{ textDecoration: 'none' }}><h5>BITTES & FRUIT</h5></Link>
+                        <p>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</p>
+                        <Link to="/fruits"><button>Get Some</button></Link>
+                    </section>
+                    <section className="col col-hidden"></section>
+                </section>
             </section>
-            <section className="row product-list" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col-lg-5 col-sm-5 col-5 text-end">
-                    <img src={cheddar} className="product-img" alt="Cheddar" />
-                </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <Link to="/cheddar" style={{ textDecoration: 'none' }}><h5>CHEDDAR</h5></Link>
-                    <p>Smooth, rich, and buttery! Our Cheesy Bittes are perfect to share with loved ones. The sharp cheddar flavor is delightful. Pair them with coffee, fruit, or nuts. You will be amazed!</p>
-                    <Link to="/cheddar"><button>Get Some</button></Link>
-                </section>
-            </section>
-            <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-end">
-                    <img src={pepperJack} className="product-img" alt="Cheddar" />
-                </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <Link to="/pepper-jack" style={{ textDecoration: 'none' }}><h5>PEPPER JACK</h5></Link>
-                    <p>Tasty, soft, and chewy! Our Cheesy Bittes are bundles of goodness. Packed with creamy notes and heat, pepper jack offers the ideal kick. Pair it with your favorite bowl of chili, a salad, or hot chocolate. Yum.</p>
-                    <Link to="/pepper-jack"><button>Get Some</button></Link>
-                </section>
-                <section className="col col-hidden"></section>
-            </section>
-            <section className="row product-list pb-5" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col-lg-5 col-sm-5 col-5 text-end">
-                    <img src={mix} className="product-img-2" alt="Cheddar" />
-                </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <Link to="/mix" style={{ textDecoration: 'none' }}><h5>MIX THEM UP!</h5></Link>
-                    <p>Why choose when you can enjoy them all! Give your taste buds a fascinating experience with a combination of mozzarella, cheddar, and pepper jack.</p>
-                    <Link to="/mix"><button>Get Some</button></Link>
-                </section>
-            </section>
-            <section className="row product-list" id="row-correction">
-                <section className="col-lg-5 col-sm-5 col-5 text-end">
-                    <img src={bittesFruits} className="product-img-2" alt="Cheddar" />
-                </section>
-                <section className="col-lg-5 col-sm-7 col-7 product-text">
-                    <Link to="/fruit" style={{ textDecoration: 'none' }}><h5>BITTES & FRUIT</h5></Link>
-                    <p>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</p>
-                    <Link to="/fruit"><button>Get Some</button></Link>
-                </section>
-                <section className="col col-hidden"></section>
-            </section>
-        </section>
+        }
         <img src={background2} className="product-back" alt="Products Background" />
         <section className="green text-center">
             <h4>UNBOX, BAKE, ENJOY!</h4>
