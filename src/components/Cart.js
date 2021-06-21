@@ -7,7 +7,7 @@ import background from '../assets/img/cart-background.png'
 
 
 const GET_PRODUCTS = gql`
-    query getProducts {
+    query {
         getProducts {
             name
             images
@@ -20,7 +20,7 @@ const GET_PRODUCTS = gql`
 
 const Cart = () => {
 
-    let { data } = useQuery(GET_PRODUCTS)
+    const { data } = useQuery(GET_PRODUCTS)
     data && console.log('Products:', data.getProducts)
 
     const dispatch = useDispatch()
