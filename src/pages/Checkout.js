@@ -18,6 +18,7 @@ const CAPTURE_ORDER = gql`
 
 const Checkout = () => {
 
+    // PayPal
     useEffect(() => {
         window.paypal.Buttons({
             style: {
@@ -49,7 +50,37 @@ const Checkout = () => {
         }).render("#paypal-button");
     })
 
+    // Square
+    useEffect(() => {
+        const main = async () => {
+            const payments = window.Square.payments('sandbox-sq0idb-QrUq90laeC8jv6V6en0VyA', 'LWB5K8RGJYJSY');
+            const card = await payments.card();
+            await card.attach('#card-container');
+
+            const eventHandler = async event => {
+                event.preventDefault();
+                try {
+                    const result = await card.tokenize();
+                    if (result.status === 'OK') {
+                        console.log(`Payment token is: ${result.token}`);
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            };
+
+            const cardButton = document.getElementById('card-button');
+            cardButton.addEventListener('click', eventHandler);
+        }
+        main()
+    })
+
     return <>
+        <form id="payment-form">
+            <div id="card-container"></div>
+            <button id="card-button" type="button">Pay</button>
+        </form>
+
         <div id="paypal-button"></div>
     </>
 }
