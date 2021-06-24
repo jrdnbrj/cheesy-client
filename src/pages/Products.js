@@ -34,7 +34,9 @@ const Product = () => {
                 <img src={`${products && products[0] && products[0].images[0]}`} className="product-img" alt="Mozzarella" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/mozzarella" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[0].name}</h5></Link>
+                <Link to="/mozzarella" style={{ textDecoration: 'none' }}>
+                    <h5>{products && products[0] && products[0].name}</h5>
+                </Link>
                 <p>{products && products[0] && products[0].description}</p>
                 <Link to="/mozzarella"><button>Get Some</button></Link>
             </section>
@@ -47,7 +49,9 @@ const Product = () => {
                 <img src={`${products && products[0] && products[1].images[0]}`} className="product-img" alt="Cheddar" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/cheddar" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[1].name}</h5></Link>
+                <Link to="/cheddar" style={{ textDecoration: 'none' }}>
+                    <h5>{products && products[0] && products[1].name}</h5>
+                </Link>
                 <p>{products && products[0] && products[1].description}</p>
                 <Link to="/cheddar"><button>Get Some</button></Link>
             </section>
@@ -58,7 +62,9 @@ const Product = () => {
                 <img src={`${products && products[0] && products[2].images[0]}`} className="product-img" alt="Pepper Jack" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/pepperjack" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[2].name}</h5></Link>
+                <Link to="/pepperjack" style={{ textDecoration: 'none' }}>
+                    <h5>{products && products[0] && products[2].name}</h5>
+                </Link>
                 <p>{products && products[0] && products[2].description}</p>
                 <Link to="/pepperjack"><button>Get Some</button></Link>
             </section>
@@ -71,7 +77,9 @@ const Product = () => {
                 <img src={`${products && products[0] && products[3].images[0]}`} className="product-img-2" alt="Mix Them Up!" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/mix" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[3].name}</h5></Link>
+                <Link to="/mix" style={{ textDecoration: 'none' }}>
+                    <h5>{products && products[0] && products[3].name}</h5>
+                </Link>
                 <p>{products && products[0] && products[3].description}</p>
                 <Link to="/mix"><button>Get Some</button></Link>
             </section>

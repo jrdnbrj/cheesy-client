@@ -107,9 +107,11 @@ const Product = () => {
                     </div>
                 </section>
             </section>
+
+
             <section className="row drops" id="row-correction">
                 <section className="col col-hidden"></section>
-                <section className="col-12 col-lg-3 col-sm-12 club-group btn-group" id="bundleUpDropdown">
+                <section className="col-12 col-lg-4 col-sm-12 club-group btn-group" id="bundleUpDropdown">
                     <button className="btn-radio" type="button" id="bundle-up" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">BUNDLE UP</button>
                     <div className="dropdown-menu">
                         <div className="form-check">
@@ -122,13 +124,18 @@ const Product = () => {
                         </div>
                     </div>
                 </section>
-                <section className="col-12 col-lg-3 col-sm-12 club-group">
-                    <div className="buy-once">
+                <section className="col-12 col-lg-4 col-sm-12 club-group" id="buy-once">
+                    <div>
                         <input type="radio" name="club" id="buy-once-radio" />
                         <label className="btn-radio" id="buy-once-label" htmlFor="buy-once-radio">BUY ONCE</label>
                     </div>
                 </section>
-                <section className="col-12 col-lg-3 col-sm-12 club-group">
+                <section className="col col-hidden"></section>
+            </section>
+            <section className="row join-club" id="row-correction">
+                <section className="col col-hidden"></section>
+                <section className="col-lg-4"></section>
+                <section className="col-12 col-lg-4 col-sm-12 club-group">
                     <button className="btn-radio" type="button" id="club" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">JOIN THE CLUB!</button>
                     <div className="dropdown-menu">
                         <span className="ship">SHIP EVERY:</span>
@@ -144,6 +151,7 @@ const Product = () => {
                 </section>
                 <section className="col col-hidden"></section>
             </section>
+
             <section className="address py-5">
                 <button className="btn-add">ADD TO CART</button>
                 <address>

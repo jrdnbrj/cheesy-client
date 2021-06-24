@@ -1480,6 +1480,10 @@ and (max-width: 580px) {
   border-color: #D59431;
 }
 
+.join-club {
+  margin-top: 2%;
+}
+
 .ship {
   font-size: 1.5vw;
   color: #FEFEFE;
@@ -1488,7 +1492,7 @@ and (max-width: 580px) {
 }
 
 .address {
-  margin: 6.5% 12.5% 0 12.5%;
+  margin: 3.5% 12.5% 0 17%;
 }
 
 .btn-add {
@@ -1564,7 +1568,13 @@ and (max-width: 580px) {
     display: none;
   }
   .club-group {
-    padding: 3% 0% 9% 15%;
+    padding: 3% 0% 10% 15%;
+  }
+  #buy-once {
+    padding-bottom: 3% !important;
+  }
+  .join-club {
+    margin-top: 0;
   }
   .btn-radio {
     width: 50%;
