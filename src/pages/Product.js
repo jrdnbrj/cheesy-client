@@ -136,7 +136,9 @@ const Product = () => {
                 <section className="col col-hidden"></section>
                 <section className="col-lg-4"></section>
                 <section className="col-12 col-lg-4 col-sm-12 club-group">
-                    <button className="btn-radio" type="button" id="club" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">JOIN THE CLUB!</button>
+                    <button className="btn-radio" type="button" id="club" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        JOIN THE CLUB!
+                    </button>
                     <div className="dropdown-menu">
                         <span className="ship">SHIP EVERY:</span>
                         <div className="form-check">

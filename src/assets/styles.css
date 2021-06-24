@@ -1464,7 +1464,8 @@ and (max-width: 580px) {
 }
 
 #radio-button1, #radio-button2, 
-#radio-button3, #radio-button4 {
+#radio-button3, #radio-button4,
+#radio-button5, #radio-button6 {
   background-image: none;
   margin-top: 1.3ch;
   border: 0;
@@ -1475,7 +1476,8 @@ and (max-width: 580px) {
 }
 
 #radio-button1:checked, #radio-button2:checked,
-#radio-button3:checked, #radio-button4:checked {
+#radio-button3:checked, #radio-button4:checked,
+#radio-button5:checked, #radio-button6:checked {
   background-color: #D59431;
   border-color: #D59431;
 }
@@ -1606,13 +1608,85 @@ and (max-width: 580px) {
 
 /* BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT BITTES&FRUIT */
 
-.juices img {
-  width: 100%;
+.smoothies img {
+  width: 120%;
+  margin-top: 5%;
 }
 
-.juices span {
+.smoothies span {
   color: #FEFEFE;
   font-family: Nunito Black;
+  font-size: 1.5vw;
+}
+
+.strawberry {
+  margin-right: 10%;
+}
+
+.passion {
+  margin-right: 6%;
+}
+
+.mango {
+  margin-right: 24%;
+}
+
+.bundle-up {
+  text-align: center;
+}
+
+.smoothie-col {
+  padding: 0;
+  margin: 0;
+}
+
+.btn-bundle {
+  background-color: #FEFEFE;
+  color: #5D8393;
+  padding: 7px 0;
+  width: 80%;
+  font-size: 2.7vw;
+  white-space: nowrap;
+  border-radius: 10px;
+  border: 0;
+  font-family: LuckiestGuy Regular;
+}
+
+.drop-group .dropdown-menu {
+  background-color: #5D8393;
+  border: 0;
+  border-radius: 10px;
+  font-family: LuckiestGuy Regular;
+  color: #FEFEFE;
+  padding: 0 2.5% 0 0;
+}
+
+.address-fruit {
+  margin: 8% 12.5% 0 17%;
+}
+
+.address-fruit {
+  color: #FEFEFE;
+  font-size: 2vw;
+  font-weight: bold;
+  font-family: Nunito Bold;
+}
+
+.address-fruit p {
+  font-size: 1.7vw;
+  margin-bottom: 0;
+}
+
+.address-fruit span {
+  font-family: Nunito Black;
+}
+
+.choose {
+  margin-top: 2%;
+}
+
+.buy {
+  margin-top: 18%;
 }
 
 /* CONTACT CONTACT CONTACT CONTACT CONTACT CONTACT CONTACT CONTACT */
