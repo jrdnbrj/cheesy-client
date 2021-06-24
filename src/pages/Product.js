@@ -33,10 +33,10 @@ const Product = () => {
             else button.classList.remove('checked')
         }
 
-        const radio1 = document.getElementById('radio-button1')
-        const radio2 = document.getElementById('radio-button2')
+        const radio1 = document.getElementById('radio-button3')
+        const radio2 = document.getElementById('radio-button4')
         const radio3 = document.getElementById('buy-once-radio')
-        const button = document.getElementById('bundle-up')
+        const button = document.getElementById('club')
 
         radio1.addEventListener('change', toDo)
         radio2.addEventListener('change', toDo)
@@ -56,7 +56,7 @@ const Product = () => {
                         <div className="carousel-inner">
                             {data && data.getProductByPath.images.map((img, index) => {
                                 return <div className={`carousel-item ${!index ? 'active' : ''}`} key={index}>
-                                    <img src={`data:image/png;base64,${img}`} className="" alt={`Mix Them Up ${index+1}`} />
+                                    <img src={`${img}`} className="" alt={`Mix Them Up ${index+1}`} />
                                 </div>
                             })}
                         </div>
@@ -124,12 +124,12 @@ const Product = () => {
                 </section>
                 <section className="col-12 col-lg-3 col-sm-12 club-group">
                     <div className="buy-once">
-                        <input type="radio" name="bundle-up" id="buy-once-radio" />
+                        <input type="radio" name="club" id="buy-once-radio" />
                         <label className="btn-radio" id="buy-once-label" htmlFor="buy-once-radio">BUY ONCE</label>
                     </div>
                 </section>
                 <section className="col-12 col-lg-3 col-sm-12 club-group">
-                    <button className="btn-radio" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">JOIN THE CLUB!</button>
+                    <button className="btn-radio" type="button" id="club" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">JOIN THE CLUB!</button>
                     <div className="dropdown-menu">
                         <span className="ship">SHIP EVERY:</span>
                         <div className="form-check">

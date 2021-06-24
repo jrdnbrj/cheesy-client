@@ -1,5 +1,6 @@
 const _state = {
     products: [],
+    cart: []
 }
 
 const reducers = (state = _state, action) => {

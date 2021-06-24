@@ -31,11 +31,11 @@ const Product = () => {
         
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`data:image/png;base64,${products[0].images[0]}`} className="product-img" alt="Cheddar" />
+                <img src={`${products && products[0] && products[0].images[0]}`} className="product-img" alt="Mozzarella" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/mozzarella" style={{ textDecoration: 'none' }}><h5>{products[0].name}</h5></Link>
-                <p>{products[0].description}</p>
+                <Link to="/mozzarella" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[0].name}</h5></Link>
+                <p>{products && products[0] && products[0].description}</p>
                 <Link to="/mozzarella"><button>Get Some</button></Link>
             </section>
             <section className="col col-hidden"></section>
@@ -44,22 +44,22 @@ const Product = () => {
         <section className="row product-list" id="row-correction">
             <section className="col col-hidden"></section>
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`data:image/png;base64,${products[1].images[0]}`} className="product-img" alt="Cheddar" />
+                <img src={`${products && products[0] && products[1].images[0]}`} className="product-img" alt="Cheddar" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/cheddar" style={{ textDecoration: 'none' }}><h5>{products[1].name}</h5></Link>
-                <p>{products[1].description}</p>
+                <Link to="/cheddar" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[1].name}</h5></Link>
+                <p>{products && products[0] && products[1].description}</p>
                 <Link to="/cheddar"><button>Get Some</button></Link>
             </section>
         </section>
 
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`data:image/png;base64,${products[2].images[0]}`} className="product-img" alt="Cheddar" />
+                <img src={`${products && products[0] && products[2].images[0]}`} className="product-img" alt="Pepper Jack" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/pepperjack" style={{ textDecoration: 'none' }}><h5>{products[2].name}</h5></Link>
-                <p>{products[2].description}</p>
+                <Link to="/pepperjack" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[2].name}</h5></Link>
+                <p>{products && products[0] && products[2].description}</p>
                 <Link to="/pepperjack"><button>Get Some</button></Link>
             </section>
             <section className="col col-hidden"></section>
@@ -68,18 +68,18 @@ const Product = () => {
         <section className="row product-list pb-5" id="row-correction">
             <section className="col col-hidden"></section>
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`data:image/png;base64,${products[3].images[0]}`} className="product-img-2" alt="Cheddar" />
+                <img src={`${products && products[0] && products[3].images[0]}`} className="product-img-2" alt="Mix Them Up!" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/mix" style={{ textDecoration: 'none' }}><h5>{products[3].name}</h5></Link>
-                <p>{products[3].description}</p>
+                <Link to="/mix" style={{ textDecoration: 'none' }}><h5>{products && products[0] && products[3].name}</h5></Link>
+                <p>{products && products[0] && products[3].description}</p>
                 <Link to="/mix"><button>Get Some</button></Link>
             </section>
         </section>
 
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={bittesFruits} className="product-img-2" alt="Cheddar" />
+                <img src={bittesFruits} className="product-img-2" alt="Bittes & Fruits" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
                 <Link to="/fruits" style={{ textDecoration: 'none' }}><h5>BITTES & FRUIT</h5></Link>

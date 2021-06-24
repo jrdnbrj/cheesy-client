@@ -42,7 +42,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={`data:image/png;base64,${data && data.getProducts[0].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Mozzarella</p>
@@ -62,7 +62,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={`data:image/png;base64,${data && data.getProducts[1].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`${data && data.getProducts[1].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Cheddar</p>
@@ -82,7 +82,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
@@ -102,7 +102,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
@@ -122,7 +122,7 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
@@ -142,7 +142,27 @@ const Cart = () => {
                         <div className="cart-divider"></div>
                         <section className="row">
                             <section className="col-lg-4">
-                                <img src={`data:image/png;base64,${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                            </section>
+                            <section className="col-lg-6 cart-description">
+                                <p>Pepper Jack</p>
+                                <section>
+                                    <button className="decrease">-</button>
+                                    <input type="number" className="cart-input-amount" />
+                                    <button className="increase">+</button>
+                                    <input type="number" className="cart-input-price" />
+                                </section>
+                            </section>
+                            <section className="col-lg-2 pe-2">
+                                <button className="remove-item">x</button>
+                            </section>
+                        </section>
+                    </section>
+                    <section>
+                        <div className="cart-divider"></div>
+                        <section className="row">
+                            <section className="col-lg-4">
+                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
                             </section>
                             <section className="col-lg-6 cart-description">
                                 <p>Pepper Jack</p>
