@@ -81,12 +81,12 @@ const Product = () => {
                         </button>
                         <div className="dropdown-menu">
                             <div className="row" id="row-correction">
-                                { data && location.pathname === '/mix' ? 
+                                { location.pathname === '/mix' ? 
                                     <>
                                         <div className="col flavor flavor-1">Mozzarella</div>
                                         <div className="col flavor flavor-2">Cheddar</div>
                                         <div className="col flavor flavor-3">Pepper Jack</div>
-                                        {data.getProductByPath.ingredients.map((ingredient, index) => {
+                                        {data && data.getProductByPath.ingredients.map((ingredient, index) => {
                                             return <div className={`dropdown-text ingredients-${index+1}`} key={index}>
                                                 {ingredient}
                                             </div>

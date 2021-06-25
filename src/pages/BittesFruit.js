@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useQuery, gql } from "@apollo/client"
 
 import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
@@ -17,7 +19,24 @@ import blackberry from '../assets/img/smoothie-blackberry.png'
 // import bread2 from '../assets/img/bread-2.png'
 
 
+const GET_PRODUCT = gql`
+    query($path: String!) {
+        getProductByPath(path: $path) {
+            name
+            images
+            shortDescription
+            ingredients
+            price
+        }
+    }
+`
+
 const Products = () => {
+
+    const location = useLocation()
+    const { data } = useQuery(GET_PRODUCT, { variables: { path: location.pathname }})
+
+    data && console.log('Fruits:', data.getProductByPath)
 
     const [sb, setSb] = useState(0)
     const [pf, setPf] = useState(0)
@@ -78,23 +97,27 @@ const Products = () => {
                 <section className="col-lg-6 col-sm-12 products text-center">
                     <div id="mix-carousel" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
-                            <div className="carousel-item active">
-                                <img src={bittesFruit} className="" alt="Bittes & Fruit" />
-                            </div>
+                            {data && data.getProductByPath.images.map((img, index) => {
+                                return <div className={`carousel-item ${!index ? 'active' : ''}`} key={index}>
+                                    <img src={`${img}`} className="" alt={`Mix Them Up ${index+1}`} />
+                                </div>
+                            })}
                         </div>
                         <div className="carousel-indicators">
-                            <button type="button" data-bs-target="#mix-carousel" data-bs-slide-to="0" aria-current="true" className="active" id="carousel-indicator"></button>
-                            {/* <button type="button" data-bs-target="#mix-carousel" data-bs-slide-to="1" aria-current="true" className="active" id="carousel-indicator"></button> */}
+                            {data && data.getProductByPath.images.map((img, index) => {
+                                return <button type="button" data-bs-target="#mix-carousel" data-bs-slide-to={index} aria-current="true" 
+                                    className={`${!index ? 'active' : ''}`} id="carousel-indicator" key={index}></button>
+                            })}
                         </div>
                     </div>
                 </section>
                 <section className="col-lg-6 col-sm-12 information">
-                    <h5>Bittes & Fruit Pulp Cheesy Bittes</h5>
+                    <h5>{data && data.getProductByPath.name} Cheesy Bittes</h5>
                     <section className="description">
-                        <p>Our Cheesy Bittes and natural fruit pulp are made for each other.</p>
+                        <p>{data && data.getProductByPath.shortDescription}</p>
                         <span>15 Pieces (12.6 OZ)</span>
                     </section>
-                    <p id="price">$ 5.45</p>
+                    <p id="price">$ {data && data.getProductByPath.price}</p>
                     <div className="dropdown" id="ingredients">
                         <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Ingredients
@@ -104,15 +127,11 @@ const Products = () => {
                                 <div className="col flavor flavor-1">Mozzarella</div>
                                 <div className="col flavor flavor-2">Cheddar</div>
                                 <div className="col flavor flavor-3">Pepper Jack</div>
-                                <div className="dropdown-text ingredients-1">
-                                    Low moisture part skim mozzarella (pasteurized milk, cheese cultures, salt, enzymes, cellulose), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.
-                                </div>
-                                <div className="dropdown-text ingredients-2">
-                                    Cheddar cheese (cultured pasteurized milk, salt, enzymes, annatto (color), cellulose, dextrose, natamycin (a natural mold inhibitor), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.
-                                </div>
-                                <div className="dropdown-text ingredients-3">
-                                    Pepper jack cheese (pasteurized milk, cultures, jalapeno peppers, salt, enzymes), tapioca flour, butter (pasteurized cream, lactic acid), water, eggs, baking powder (corn starch, sodium bicarbonate, sodium aluminum sulfate, monocalcium phosphate), sea salt.
-                                </div>
+                                {data && data.getProductByPath.ingredients.map((ingredient, index) => {
+                                    return <div className={`dropdown-text ingredients-${index+1}`} key={index}>
+                                        {ingredient}
+                                    </div>
+                                })}
                             </div>
                         </div> 
                     </div>
