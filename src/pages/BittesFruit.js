@@ -1,10 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
 import bittesFruit from '../assets/img/product-bittes-fruits.png'
+
+import dot1 from '../assets/img/product-dot1.png'
+import dot2 from '../assets/img/product-dot2.png'
 
 import strawberry from '../assets/img/smoothie-strawberry.png'
 import passion from '../assets/img/smoothie-passionfruit.png'
@@ -15,6 +18,19 @@ import blackberry from '../assets/img/smoothie-blackberry.png'
 
 
 const Products = () => {
+
+    const [sb, setSb] = useState(0)
+    const [pf, setPf] = useState(0)
+    const [mg, setMg] = useState(0)
+    const [ab, setAb] = useState(0)
+
+    const up = (state, set) => {
+        if (state < 3) set(state + 1)
+    }
+
+    const down = (state, set) => {
+        if (state > 0) set(state - 1)
+    }
 
     useEffect(() => {
         const toDo = () => {
@@ -54,6 +70,8 @@ const Products = () => {
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
+        <img src={dot1} className="product-dot" id="product-dot-1" alt="Dot 1" />
+        <img src={dot2} className="product-dot" id="product-dot-2" alt="Dot 2" />
         <img src={background1} className="products-header" alt="Products Background" />
         <section className="products-body">
             <section className="row pt-5" id="row-correction">
@@ -111,106 +129,156 @@ const Products = () => {
             </section>
             <section className="row smoothies mt-5" id="row-correction">
                 <section className="col smoothie-col"></section>
-                <section className="col-lg-2 text-end">
+                <section className="col-lg-2 col-sm-6 text-center">
                     <span className="strawberry">Strawberry</span>
                     <img src={strawberry} className="smoothie" alt="Strawberry" />
+                    <div className="ingredients-strawberry">
+                        Ingredients: Strawberry, Antioxidant (Ascorbic acid). May contain sulfite parts.
+                    </div>
                 </section>
-                <section className="col-lg-2 text-end">
+                <section className="col-lg-2 col-sm-6 text-center">
                     <span className="passion">Passion Fruit</span>
                     <img src={passion} className="smoothie" alt="Pasison" />
+                    <div className="passion-strawberry">
+                        Ingredients: Passion Fruit, Antioxidant (Ascorbic Acid). May Contain Sulfite Parts.
+                    </div>
                 </section>
-                <section className="col-lg-2 text-end">
+                <section className="col-lg-2 col-sm-6 text-center">
                     <span className="mango">Mango</span>
                     <img src={mango} className="smoothie" alt="Mango" />
+                    <div className="mango-strawberry">
+                        Ingredients: empty empty empty empty empty empty empty empty empty empty.
+                    </div>
                 </section>
-                <section className="col-lg-2 text-end">
+                <section className="col-lg-2 col-sm-6 text-center">
                     <span className="blackberry">Andean Blackberry</span>
                     <img src={blackberry} className="smoothie" alt="Blackberry" />
+                    <div className="blackberry-strawberry">
+                        Ingredients: Strawberry, Antioxidant (Ascorbic acid). May contain sulfite parts.
+                    </div>
                 </section>
                 <section className="col smoothie-col"></section>
             </section>
-            <section className="row drops" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col-12 col-lg-10 col-sm-12 bundle-up">
-                    <button className="btn-bundle" type="button">
-                        BUNDLE UP
-                    </button>
+            <section>
+                <section className="row drops" id="row-correction">
+                    <section className="col col-hidden"></section>
+                    <section className="col-12 col-lg-10 col-sm-12 bundle-up">
+                        <button className="btn-bundle" type="button">
+                            BUNDLE UP
+                        </button>
+                    </section>
+                    <section className="col col-hidden"></section>
                 </section>
-                <section className="col col-hidden"></section>
-            </section>
-            <section className="row choose" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col-lg-4 drop-group">
-                    <button className="btn-bundle" id="choose-1" type="button">
-                        CHOOSE 1
-                    </button>
-                    <div className="dropdown-menu show">
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="choose" id="radio-button1" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button1">MOZZARELLA</label>
+                <section className="row choose" id="row-correction">
+                    <section className="col col-hidden"></section>
+                    <section className="col-1 choose-1-col"></section>
+                    <section className="col-lg-4 col-sm-10 drop-group choose-1">
+                        <button className="btn-bundle" id="choose-1" type="button">
+                            CHOOSE 1
+                        </button>
+                        <div className="dropdown-menu show">
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="choose" id="radio-button1" />
+                                <label className="form-check-label radio-bundle" htmlFor="radio-button1">MOZZARELLA</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="choose" id="radio-button2" />
+                                <label className="form-check-label radio-bundle" htmlFor="radio-button2">CHEDDAR</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="choose" id="radio-button3" />
+                                <label className="form-check-label radio-bundle" htmlFor="radio-button3">PEPPER JACK</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="choose" id="radio-button4" />
+                                <label className="form-check-label radio-bundle" htmlFor="radio-button4">MIX THEM UP!</label>
+                            </div>
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="choose" id="radio-button2" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button2">CHEDDAR</label>
+                    </section>
+                    <section className="col-1 choose-1-col"></section>
+                    <section className="col-1 choose-3-col"></section>
+                    <section className="col-lg-4 col-sm-10 drop-group choose-3">
+                        <button className="btn-bundle" id="choose-3" type="button">
+                            CHOOSE UP TO 3
+                        </button>
+                        <div className="dropdown-menu show">
+                            <div className="choose-input row" id="row-correction">
+                                <div className="col-10">
+                                    <span className="radio-bundle">STRAWBERRY</span>
+                                </div>
+                                <section className="col-2">
+                                    <button onClick={() => down(sb, setSb)}>-</button>
+                                    <input disabled value={sb} />
+                                    <button onClick={() => up(sb, setSb)}>+</button>
+                                </section>
+                            </div>
+                            <div className="choose-input row" id="row-correction">
+                                <div className="col-10">
+                                    <span className="radio-bundle">PASSION FRUIT</span>
+                                </div>
+                                <section className="col-2">
+                                    <button onClick={() => down(pf, setPf)}>-</button>
+                                    <input disabled value={pf} />
+                                    <button onClick={() => up(pf, setPf)}>+</button>
+                                </section>
+                            </div>
+                            <div className="choose-input row" id="row-correction">
+                                <div className="col-10">
+                                    <span className="radio-bundle">MANGO</span>
+                                </div>
+                                <section className="col-2">
+                                    <button onClick={() => down(mg, setMg)}>-</button>
+                                    <input disabled value={mg} />
+                                    <button onClick={() => up(mg, setMg)}>+</button>
+                                </section>
+                            </div>
+                            <div className="choose-input row" id="row-correction">
+                                <div className="col-10">
+                                    <span className="radio-bundle">ANDEAN BLACKBERRY</span>
+                                </div>
+                                <section className="col-2">
+                                    <button onClick={() => down(ab, setAb)}>-</button>
+                                    <input disabled value={ab} />
+                                    <button onClick={() => up(ab, setAb)}>+</button>
+                                </section>
+                            </div>
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="choose" id="radio-button3" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button3">PEPPER JACK</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="choose" id="radio-button4" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button4">MIX THEM UP!</label>
-                        </div>
-                    </div>
+                    </section>
+                    <section className="col-1 choose-3-col"></section>
+                    <section className="col col-hidden"></section>
                 </section>
-                <section className="col-lg-4 drop-group">
-                    <button className="btn-bundle" id="choose-3" type="button">
-                        CHOOSE UP TO 3
-                    </button>
-                    <div className="dropdown-menu show">
-                        <div className="choose-input">
-                            <label className="form-check-label radio-text">STRAWBERRY</label>
+                <section className="row buy" id="row-correction">
+                    <section className="col col-hidden"></section>
+                    <section className="col-1 once-col"></section>
+                    <section className="col-lg-4 col-sm-10 drop-group buy-once">
+                        <div>
+                            <input type="radio" name="club" id="buy-once-radio" />
+                            <label className="btn-bundle text-center" id="buy-once-label" htmlFor="buy-once-radio">
+                                BUY ONCE
+                            </label>
                         </div>
-                        <div className="choose-input">
-                            <label className="form-check-label radio-text">PASSION FRUIT</label>
+                    </section>
+                    <section className="col-1 once-col"></section>
+                    <section className="col-1 join-col"></section>
+                    <section className="col-lg-4 col-sm-10 drop-group join-the-club">
+                        <button className="btn-bundle" id="club" type="button">
+                            JOIN THE CLUB!
+                        </button>
+                        <div className="dropdown-menu show">
+                            <span className="ship">SHIP EVERY:</span>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="club" id="radio-button5" />
+                                <label className="form-check-label radio-bundle" htmlFor="radio-button5">MONTH</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="club" id="radio-button6" />
+                                <label className="form-check-label radio-bundle" htmlFor="radio-button6">2 MONTHS</label>
+                            </div>
                         </div>
-                        <div className="choose-input">
-                            <label className="form-check-label radio-text">MANGO</label>
-                        </div>
-                        <div className="choose-input">
-                            <label className="form-check-label radio-text">ANDEAN BLACKBERRY</label>
-                        </div>
-                    </div>
+                    </section>
+                    <section className="col-1 join-col"></section>
+                    <section className="col col-hidden"></section>
                 </section>
-                <section className="col col-hidden"></section>
-            </section>
-            <section className="row buy" id="row-correction">
-                <section className="col col-hidden"></section>
-                <section className="col-lg-4 drop-group">
-                    <div>
-                        <input type="radio" name="club" id="buy-once-radio" />
-                        <label className="btn-bundle text-center" id="buy-once-label" htmlFor="buy-once-radio">
-                            BUY ONCE
-                        </label>
-                    </div>
-                </section>
-                <section className="col-lg-4 drop-group">
-                    <button className="btn-bundle" id="club" type="button">
-                        JOIN THE CLUB!
-                    </button>
-                    <div className="dropdown-menu show">
-                        <span className="ship">SHIP EVERY:</span>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="club" id="radio-button5" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button5">MONTH</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="club" id="radio-button6" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button6">2 MONTHS</label>
-                        </div>
-                    </div>
-                </section>
-                <section className="col col-hidden"></section>
             </section>
             <section className="address-fruit py-5">
                 <button className="btn-add">ADD TO CART</button>

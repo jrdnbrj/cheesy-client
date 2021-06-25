@@ -29,9 +29,7 @@ import Flickity from 'react-flickity-component'
 
 const Family = () => {
 
-    useEffect(() => {
-        document.getElementById('our-family-video').play()
-    })
+    useEffect(() => document.getElementById('our-family-video').play())
 
     return <>
         <section className="background1">
@@ -90,7 +88,7 @@ const Family = () => {
             </section>
         </section>
         <section className="background4">
-            <Flickity className={'carousel family-carousel'} options={{
+            <Flickity className="carousel family-carousel" options={{
                     accessibility: false,
                     initialIndex: 2,
                     autoPlay: 7000,
@@ -100,11 +98,11 @@ const Family = () => {
                     wrapAround: 'fill'
                 }
             }>
-                <img src={carousel1} className="" alt="Bread as a Sandwich" />
-                <img src={carousel2} className="" alt="Bread with Chocolate" />
-                <img src={carousel3} className="" alt="Bread with Coffee" />
-                <img src={carousel4} className="" alt="Bread Pizza" />
-                <img src={carousel5} className="" alt="Bread on a Plate" />
+                <img src={carousel1} alt="Bread as a Sandwich" />
+                <img src={carousel2} alt="Bread with Chocolate" />
+                <img src={carousel3} alt="Bread with Coffee" />
+                <img src={carousel4} alt="Bread Pizza" />
+                <img src={carousel5} alt="Bread on a Plate" />
             </Flickity>
         </section>
         <img src={background3} className="background5" alt="Family Background" />
