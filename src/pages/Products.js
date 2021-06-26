@@ -10,8 +10,6 @@ import dot1 from '../assets/img/white-dot1.png'
 import dot2 from '../assets/img/white-dot2.png'
 import dot3 from '../assets/img/white-dot3.png'
 
-import bittesFruits from '../assets/img/product-bittes-fruits.png'
-
 import oven from '../assets/img/oven.png'
 import airFryer from '../assets/img/air-fryer.png'
 import important from '../assets/img/important.png'
@@ -87,11 +85,13 @@ const Product = () => {
 
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={bittesFruits} className="product-img-2" alt="Bittes & Fruits" />
+                <img src={`${products && products[0] && products[4].images[0]}`} className="product-img-2" alt="Bittes & Fruits" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
-                <Link to="/fruits" style={{ textDecoration: 'none' }}><h5>BITTES & FRUIT</h5></Link>
-                <p>Let’s get the party started! Our Cheesy Bittes and natural fruit pulp are made for each other. Compliment your favorite snack with fresh juice, smoothies, cocktails, or desserts.</p>
+                <Link to="/fruits" style={{ textDecoration: 'none' }}>
+                    <h5>{products && products[0] && products[4].name}</h5>
+                </Link>
+                <p>{products && products[0] && products[4].description}</p>
                 <Link to="/fruits"><button>Get Some</button></Link>
             </section>
             <section className="col col-hidden"></section>

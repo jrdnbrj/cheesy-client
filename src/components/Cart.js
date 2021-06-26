@@ -40,155 +40,135 @@ const Cart = () => {
                 <section className="cart-products">
                     <section>
                         <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[0].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                        <section className="row" id="row-correction">
+                            <section className="col-lg-4 col-sm-4 col-4">
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="image-cart" alt="Mozarella in Shoping Cart" />
                             </section>
-                            <section className="col-lg-6 cart-description">
-                                <p>Mozzarella</p>
-                                <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
-                                </section>
-                            </section>
-                            <section className="col-lg-2">
-                                <button className="remove-item">x</button>
-                            </section>
-                        </section>
-                    </section>
-                    <section>
-                        <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[1].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
-                            </section>
-                            <section className="col-lg-6 cart-description">
-                                <p>Cheddar</p>
-                                <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
-                                </section>
-                            </section>
-                            <section className="col-lg-2">
-                                <button className="remove-item">x</button>
-                            </section>
-                        </section>
-                    </section>
-                    <section>
-                        <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
-                            </section>
-                            <section className="col-lg-6 cart-description">
+                            <section className="col-lg-6 col-sm-6 col-6 cart-description">
                                 <p>Pepper Jack</p>
                                 <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
+                                    <button>-</button>
+                                    <input type="number" className="cart-input-amount" disabled />
+                                    <button>+</button>
+                                    <input type="number" className="cart-input-price" disabled />
                                 </section>
                             </section>
-                            <section className="col-lg-2">
+                            <section className="col-lg-2 col-sm-2 col-2">
                                 <button className="remove-item">x</button>
                             </section>
                         </section>
                     </section>
                     <section>
                         <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                        <section className="row" id="row-correction">
+                            <section className="col-lg-4 col-sm-4 col-4">
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="image-cart" alt="Mozarella in Shoping Cart" />
                             </section>
-                            <section className="col-lg-6 cart-description">
+                            <section className="col-lg-6 col-sm-6 col-6 cart-description">
                                 <p>Pepper Jack</p>
                                 <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
+                                    <button>-</button>
+                                    <input type="number" className="cart-input-amount" disabled />
+                                    <button>+</button>
+                                    <input type="number" className="cart-input-price" disabled />
                                 </section>
                             </section>
-                            <section className="col-lg-2">
+                            <section className="col-lg-2 col-sm-2 col-2">
                                 <button className="remove-item">x</button>
                             </section>
                         </section>
                     </section>
                     <section>
                         <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                        <section className="row" id="row-correction">
+                            <section className="col-lg-4 col-sm-4 col-4">
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="image-cart" alt="Mozarella in Shoping Cart" />
                             </section>
-                            <section className="col-lg-6 cart-description">
+                            <section className="col-lg-6 col-sm-6 col-6 cart-description">
                                 <p>Pepper Jack</p>
                                 <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
+                                    <button>-</button>
+                                    <input type="number" className="cart-input-amount" disabled />
+                                    <button>+</button>
+                                    <input type="number" className="cart-input-price" disabled />
                                 </section>
                             </section>
-                            <section className="col-lg-2">
+                            <section className="col-lg-2 col-sm-2 col-2">
                                 <button className="remove-item">x</button>
                             </section>
                         </section>
                     </section>
                     <section>
                         <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                        <section className="row" id="row-correction">
+                            <section className="col-lg-4 col-sm-4 col-4">
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="image-cart" alt="Mozarella in Shoping Cart" />
                             </section>
-                            <section className="col-lg-6 cart-description">
+                            <section className="col-lg-6 col-sm-6 col-6 cart-description">
                                 <p>Pepper Jack</p>
                                 <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
+                                    <button>-</button>
+                                    <input type="number" className="cart-input-amount" disabled />
+                                    <button>+</button>
+                                    <input type="number" className="cart-input-price" disabled />
                                 </section>
                             </section>
-                            <section className="col-lg-2 pe-2">
+                            <section className="col-lg-2 col-sm-2 col-2">
                                 <button className="remove-item">x</button>
                             </section>
                         </section>
                     </section>
                     <section>
                         <div className="cart-divider"></div>
-                        <section className="row">
-                            <section className="col-lg-4">
-                                <img src={`${data && data.getProducts[2].images[0]}`} className="mozzarella-cart" alt="Mozarella in Shoping Cart" />
+                        <section className="row" id="row-correction">
+                            <section className="col-lg-4 col-sm-4 col-4">
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="image-cart" alt="Mozarella in Shoping Cart" />
                             </section>
-                            <section className="col-lg-6 cart-description">
+                            <section className="col-lg-6 col-sm-6 col-6 cart-description">
                                 <p>Pepper Jack</p>
                                 <section>
-                                    <button className="decrease">-</button>
-                                    <input type="number" className="cart-input-amount" />
-                                    <button className="increase">+</button>
-                                    <input type="number" className="cart-input-price" />
+                                    <button>-</button>
+                                    <input type="number" className="cart-input-amount" disabled />
+                                    <button>+</button>
+                                    <input type="number" className="cart-input-price" disabled />
                                 </section>
                             </section>
-                            <section className="col-lg-2 pe-2">
+                            <section className="col-lg-2 col-sm-2 col-2">
+                                <button className="remove-item">x</button>
+                            </section>
+                        </section>
+                    </section>
+                    <section>
+                        <div className="cart-divider"></div>
+                        <section className="row" id="row-correction">
+                            <section className="col-lg-4 col-sm-4 col-4">
+                                <img src={`${data && data.getProducts[0].images[0]}`} className="image-cart" alt="Mozarella in Shoping Cart" />
+                            </section>
+                            <section className="col-lg-6 col-sm-6 col-6 cart-description">
+                                <p>Pepper Jack</p>
+                                <section>
+                                    <button>-</button>
+                                    <input type="number" className="cart-input-amount" disabled />
+                                    <button>+</button>
+                                    <input type="number" className="cart-input-price" disabled />
+                                </section>
+                            </section>
+                            <section className="col-lg-2 col-sm-2 col-2">
                                 <button className="remove-item">x</button>
                             </section>
                         </section>
                     </section>
                 </section>
 
-                <section className="sticky">
-                    <section className="subtotal-cart-container">
-                        <span className="subtotal-cart"><strong>Subtotal:</strong> $1.000</span>
-                    </section>
-                    <section className="checkout-cart">
-                        <Link to="/checkout" className="checkout-button">Checkout</Link>
-                    </section>
-                </section>
             </div>
+            <section className="sticky">
+                <section className="subtotal-cart-container">
+                    <span className="subtotal-cart"><strong>Subtotal:</strong> $24.20</span>
+                </section>
+                <section className="checkout-cart">
+                    <Link to="/checkout" className="checkout-button">Checkout</Link>
+                </section>
+            </section>
         </div>
     </>
 }

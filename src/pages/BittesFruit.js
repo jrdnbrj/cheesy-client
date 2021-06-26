@@ -6,7 +6,6 @@ import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
 import header from '../assets/img/product-header.png'
 import logo from '../assets/img/logo.png'
-import bittesFruit from '../assets/img/product-bittes-fruits.png'
 
 import dot1 from '../assets/img/product-dot1.png'
 import dot2 from '../assets/img/product-dot2.png'
