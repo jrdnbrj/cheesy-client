@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { gql } from "@apollo/client"
+import { useSelector } from 'react-redux'
 import client from '../adapters/apolloClient'
 
 
@@ -18,15 +19,20 @@ const CAPTURE_ORDER = gql`
 
 const Checkout = () => {
 
+    const cart = useSelector(state => state.cart)
+    const subtotal = useSelector(state => state.subtotal)
+
+
     // PayPal
     useEffect(() => {
         window.paypal.Buttons({
             style: {
-                // layout: 'horizontal',
-                color:  'blue',
-                shape:  'pill',
-                label:  'pay',
-                height: 40
+                color: 'gold',
+                shape: 'pill',
+                size: 'responsive',
+                layout: 'horizontal',
+                label: 'checkout',
+                tagline: false
             },
             createOrder: function(data, actions) {
                 console.log('Creando Orden')
@@ -48,7 +54,7 @@ const Checkout = () => {
                 // alert('You have canceled the transaction. Not sure what you are doing? Get in touch with us on the Customer Support.')
             },
         }).render("#paypal-button");
-    })
+    }, [])
 
     // Square
     useEffect(() => {
@@ -73,16 +79,65 @@ const Checkout = () => {
             cardButton.addEventListener('click', eventHandler);
         }
         main()
-    })
+    }, [])
 
-    return <>
-        <form id="payment-form">
-            <div id="card-container"></div>
-            <button id="card-button" type="button">Pay</button>
-        </form>
+    return <section className="row" id="row-correction">
+        <section className="col-lg-7 payment">
+            <span>Contact Information</span>
+            <section className="contact-info">
+                <input placeholder="Name" type="text" />
+                <input placeholder="Last Name" type="text" />
+                <input placeholder="Phone" type="text" />
+                <input placeholder="Email" type="email" />
+                <input placeholder="Address" type="text" />
+                <input placeholder="Apt, suite" type="text" />
+                <input placeholder="City" type="text" />
+            </section>
+            <span>Payment</span>
+            <section className="square">
+                <div id="card-container"></div>
+                <button className="square-pay" id="card-button" type="button">Pay</button>
+            </section>
 
-        <div id="paypal-button"></div>
-    </>
+            <div id="paypal-button"></div>
+        </section>
+        <section className="col-lg-5 cart">
+            <span className="my-cart">My Cart</span>
+            { cart.map((item, i) => {
+                return <section className="row cart-item" id="row-correction" key={i}>
+                    <section className="col-lg-5">
+                        <img src={item.image} alt="Cart Item" />
+                    </section>
+                    <section className="col-lg-7">
+                        <span>{item.name}</span>
+                        <p>amount: {item.amount}</p>
+                        <p>price: {item.price}</p>
+                        <p>buy once: {item.buyOnce.toString()}</p>
+                        <p>join the club: {item.joinClub.toString()}</p>
+                        <p>bundle up: {item.bundleUp}</p>
+                    </section>
+                </section>
+            })}
+            <section className="receipt">
+                <div>
+                    <span>Subtotal</span>
+                    <span>${subtotal}</span>
+                </div>
+                <div>
+                    <span>Estimated Shipping</span>
+                    <span></span>
+                </div>
+                <div>
+                    <span>Estimated Tax</span>
+                    <span></span>
+                </div>
+                <div>
+                    <span>Total</span>
+                    <span>${subtotal}</span>
+                </div>
+            </section>
+        </section>
+    </section>
 }
 
 export default Checkout

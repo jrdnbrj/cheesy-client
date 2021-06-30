@@ -50,7 +50,10 @@ const Product = () => {
         const payload = { 
             path,
             amount: 1,
-            price: parseFloat(data.getProductByPath.price)
+            price: parseFloat(data.getProductByPath.price),
+            image: data.getProductByPath.images[0],
+            name: data.getProductByPath.name,
+            total: parseFloat(data.getProductByPath.price)
         }
 
         const radio1 = document.getElementById('radio-button1')
@@ -60,14 +63,14 @@ const Product = () => {
         const buyOnce = document.getElementById('buy-once-radio')
 
         if (radio1.checked || radio2.checked)
-            payload['bundle-up'] = radio1.checked ? 6 : radio2.checked ? 9 : 0
+            payload['bundleUp'] = radio1.checked ? 6 : radio2.checked ? 9 : 0
         else  {
             return alert('You must choose a BUNDLE UP option')
         }
 
         if (radio3.checked || radio4.checked || buyOnce.checked) {
-            payload['buy-once'] = buyOnce.checked
-            payload['join-club'] = radio3.checked ? 1 : radio4.checked ? 2 : false
+            payload['buyOnce'] = buyOnce.checked
+            payload['joinClub'] = radio3.checked ? 1 : radio4.checked ? 2 : false
         } else { 
             return alert('You must choose if you want to BUY ONCE or if you want to JOIN THE CLUB!')
         }
