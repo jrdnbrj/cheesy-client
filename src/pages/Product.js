@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery, gql } from "@apollo/client"
+import { useDispatch } from 'react-redux'
 
 import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
@@ -11,7 +12,7 @@ import dot2 from '../assets/img/product-dot2.png'
 
 
 const GET_PRODUCT = gql`
-    query getProductByPath($path: String!) {
+    query ($path: String!) {
         getProductByPath(path: $path) {
             name
             images
@@ -24,8 +25,10 @@ const GET_PRODUCT = gql`
 
 const Product = () => {
 
+    const dispatch = useDispatch()
     const location = useLocation()
-    const { data } = useQuery(GET_PRODUCT, { variables: { path: location.pathname }})
+    const path = location.pathname
+    const { data } = useQuery(GET_PRODUCT, { variables: { path }})
 
     useEffect(() => {
         const toDo = () => {
@@ -42,6 +45,36 @@ const Product = () => {
         radio2.addEventListener('change', toDo)
         radio3.addEventListener('change', toDo)
     })
+
+    const addToCart = () => {
+        const payload = { 
+            path,
+            amount: 1,
+            price: parseFloat(data.getProductByPath.price)
+        }
+
+        const radio1 = document.getElementById('radio-button1')
+        const radio2 = document.getElementById('radio-button2')
+        const radio3 = document.getElementById('radio-button3')
+        const radio4 = document.getElementById('radio-button4')
+        const buyOnce = document.getElementById('buy-once-radio')
+
+        if (radio1.checked || radio2.checked)
+            payload['bundle-up'] = radio1.checked ? 6 : radio2.checked ? 9 : 0
+        else  {
+            return alert('You must choose a BUNDLE UP option')
+        }
+
+        if (radio3.checked || radio4.checked || buyOnce.checked) {
+            payload['buy-once'] = buyOnce.checked
+            payload['join-club'] = radio3.checked ? 1 : radio4.checked ? 2 : false
+        } else { 
+            return alert('You must choose if you want to BUY ONCE or if you want to JOIN THE CLUB!')
+        }
+
+        console.log('Payload:', payload)
+        dispatch({ type: 'APPEND_TO_CART', payload })
+    }
 
     return <>
         <img src={header} className="home-header" alt="Products Header" />
@@ -112,15 +145,21 @@ const Product = () => {
             <section className="row drops" id="row-correction">
                 <section className="col col-hidden"></section>
                 <section className="col-12 col-lg-4 col-sm-12 club-group btn-group" id="bundleUpDropdown">
-                    <button className="btn-radio" type="button" id="bundle-up" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">BUNDLE UP</button>
+                    <button className="btn-radio" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        BUNDLE UP
+                    </button>
                     <div className="dropdown-menu">
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="bundle-up" id="radio-button1" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button1" id="pack-6">6 PACK</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button1" id="pack-6">
+                                6 PACK
+                            </label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="bundle-up" id="radio-button2" />
-                            <label className="form-check-label radio-text" htmlFor="radio-button2" id="pack-9">9 PACK</label>
+                            <label className="form-check-label radio-text" htmlFor="radio-button2" id="pack-9">
+                                9 PACK
+                            </label>
                         </div>
                     </div>
                 </section>
@@ -155,7 +194,7 @@ const Product = () => {
             </section>
 
             <section className="address py-5">
-                <button className="btn-add">ADD TO CART</button>
+                <button className="btn-add" onClick={addToCart}>ADD TO CART</button>
                 <address>
                     <p>If you live within 10 miles of Eau Claire (54703) we will deliver to your door for free.</p>
                     <span>DM us!</span>

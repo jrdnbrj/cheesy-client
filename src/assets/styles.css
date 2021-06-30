@@ -208,7 +208,7 @@ html, body {
 
 .cart-description p {
   color: #FEFEFE;
-  font-size: 2vw;
+  font-size: 1.9vw;
   font-family: Nunito Black;
   text-align: center;
 }
@@ -339,6 +339,16 @@ html, body {
   font-size: 2vw;
   font-family: Nunito Black;
   text-decoration: None;
+}
+
+.checkout-button:hover {
+  color: #eeeeee;
+
+}
+
+.checkout-disabled {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 @media (max-width: 990px) {
