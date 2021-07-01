@@ -2083,3 +2083,71 @@ and (max-width: 580px) {
   margin: 2%;
   font-size: 1.4vw;
 }
+
+/* ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN */
+
+.admin-product {
+  margin: 5%;
+}
+
+.admin-product label {
+  margin-top: 2%;
+}
+
+.loading {
+  text-align: center;
+  display: block;
+  margin-top: 15%;
+  font-size: 2.5vw;
+  font-family: Nunito Black;
+}
+
+.loading .spinner-border {
+  font-size: 1.5vw;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container button {
+  position: absolute;
+  top: 0;
+  /* right: 10%; */
+  /* background-color: Transparent; */
+  border: 0;
+  padding: 3px 8px;
+  border-radius: 15px;
+}
+
+.image-container button i {
+  font-size: 1.2vw;
+}
+
+.download-image {
+  right: 55%;
+}
+.edit-image {
+  right: 40%;
+}
+.view-image {
+  right: 25%;
+}
+.remove-image {
+  right: 10%;
+}
+
+.admin-images {
+  text-align: center;
+}
+
+.admin-product-image {
+  width: 100%;
+}
+
+.bi-plus-circle-dotted::before {
+  font-size: 4vw;
+  background-color: #E9ECEF;
+  padding: 40%;
+  border-radius: 20px;
+}

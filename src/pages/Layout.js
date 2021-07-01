@@ -6,11 +6,19 @@ import Cart from '../components/Cart'
 
 
 const Layout = ({ children }) => {
+    
+    const location = useLocation()
+    
     return <>
         <NavBar />
         <Cart />
         {children}
-        {useLocation().pathname !== '/contact' ? <Footer /> : null}
+        {   
+            location.pathname === '/contact' &&
+            location.pathname === '/checkout' &&
+            location.pathname === '/admin' &&
+            <Footer />
+        }
     </>
 }
 

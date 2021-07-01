@@ -19,9 +19,9 @@ const Footer = () => {
         <section className="col-sx-12 col-sm-12 col-lg-6 footer-form order-1 order-sm-1 order-lg-2">
             <img src={logoOrange} className="form-logo-orange" alt="Cheesy Bittes Medium Logo Orange" />
             <form>
-                <input className="form-input" placeholder="Full Name"/><br />
-                <input className="form-input" placeholder="Email"/><br />
-                <input className="form-input" placeholder="Phone"/><br />
+                <input className="form-input" type="text" placeholder="Full Name"/><br />
+                <input className="form-input" type="email" placeholder="Email"/><br />
+                <input className="form-input" type="text" placeholder="Phone"/><br />
                 <textarea className="form-input form-textarea" placeholder="Your Message"></textarea><br />
                 <button className="form-submit" type="submit"><strong>Let's Connect!</strong></button>
             </form>

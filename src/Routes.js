@@ -10,6 +10,7 @@ import Product from "./pages/Product"
 import BittesFruit from "./pages/BittesFruit"
 
 import Checkout from "./pages/Checkout"
+import Admin from "./pages/Admin"
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 const Routes = () => {
@@ -30,6 +31,8 @@ const Routes = () => {
           <Route exact path="/fruits" component={BittesFruit} />
 
           <Route exact path="/checkout" component={Checkout} />
+
+          <Route exact path="/admin" component={Admin} />
         </Switch>
       </Layout>
     </BrowserRouter>
