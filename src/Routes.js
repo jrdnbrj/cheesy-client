@@ -11,14 +11,12 @@ import BittesFruit from "./pages/BittesFruit"
 
 import Checkout from "./pages/Checkout"
 import Admin from "./pages/Admin"
-// import ProtectedRoute from "./components/ProtectedRoute";
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="/cheesy-client" component={Home} />
           <Route exact path="/" component={Home} />
           <Route exact path="/family" component={Family} />
           <Route exact path="/products" component={Products} />

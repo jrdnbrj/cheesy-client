@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import { useQuery, useMutation, gql } from "@apollo/client"
 import { useDispatch, useSelector } from 'react-redux'
 
-import imageToBase64 from 'image-to-base64'
-
 
 const GET_PRODUCTS = gql`
     query {
@@ -107,9 +105,6 @@ const Admin = () => {
         reader.onloadend = () => {
             var base64data = reader.result
             console.log('base64data:', base64data)
-            // imgs.push(base64data)
-            // console.log(imgs)
-            // return base64data
             setNewImages([...newImages, [i, url, base64data]])
         }
     }
@@ -121,8 +116,6 @@ const Admin = () => {
 
     const saveProduct = async (e, product, i) => {
         e.preventDefault()
-
-        var reader = new FileReader()
 
         const images = product.images.filter((image, j) => !imagesRemoved.includes(`${i}${j}`))
         const imagesNew = newImages.filter(image => image[0] === i).map(image => image[2])
