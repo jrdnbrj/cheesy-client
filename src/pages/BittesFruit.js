@@ -217,7 +217,7 @@ const Products = () => {
                     <section className="col-1 choose-3-col"></section>
                     <section className="col-lg-4 col-sm-10 drop-group choose-3">
                         <button className="btn-bundle" id="choose-3" type="button">
-                            CHOOSE UP TO 3
+                            CHOOSE 3
                         </button>
                         <div className="dropdown-menu show">
                             <div className="choose-input row" id="row-correction">

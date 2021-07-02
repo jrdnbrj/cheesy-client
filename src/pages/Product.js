@@ -110,7 +110,7 @@ const Product = () => {
                         <p>{data && data.getProductByPath.shortDescription}</p>
                         <span>15 Pieces (12.6 OZ)</span>
                     </section>
-                    <p id="price">{data && data.getProductByPath.price}</p>
+                    <p id="price">$ {data && data.getProductByPath.price}</p>
                     <div className="dropdown" id="ingredients">
                         <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Ingredients

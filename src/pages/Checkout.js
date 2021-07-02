@@ -32,7 +32,7 @@ const Checkout = () => {
                 size: 'responsive',
                 layout: 'horizontal',
                 label: 'checkout',
-                tagline: false
+                // tagline: false
             },
             createOrder: function(data, actions) {
                 console.log('Creando Orden')

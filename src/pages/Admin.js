@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { useQuery, useMutation, gql } from "@apollo/client"
 import { useDispatch, useSelector } from 'react-redux'
 
+import imageToBase64 from 'image-to-base64'
+
+
 const GET_PRODUCTS = gql`
     query {
         getProducts {
@@ -16,26 +19,64 @@ const GET_PRODUCTS = gql`
     }
 `
 
+const GET_CONTACTS = gql`
+    query  {
+        getContacts {
+            fullName
+            email
+            phone
+            message
+        }
+    }
+`
+
+const UPDATE_PRODUCT = gql`
+    mutation editProduct(
+        $name: String!, $price: Decimal!, $path: String!, $images: [String]!, $description: String!, 
+        $shortDescription: String!, $ingredients: [String]!
+    ) {
+        editProduct(
+            name: $name, price: $price, path: $path, description: $description, 
+            images: $images, ingredients: $ingredients, shortDescription: $shortDescription
+        ) {
+            result
+        }
+    }
+`
+
 const Admin = () => {
 
     const dispatch = useDispatch()
     const { data, loading: productLoading } = useQuery(GET_PRODUCTS)
-
+    const { data: contacts, loading: contactsLoading } = useQuery(GET_CONTACTS)
+    const [updateProduct, { loading: updateLoading, error: updateError, data: updateData }] = useMutation(UPDATE_PRODUCT)
+    contacts && console.log('Contacts:', contacts)
     const [imagesRemoved, setImagesRemoved] = useState([])
     const [newImages, setNewImages] = useState([])
     const [newProducts, setNewProducts] = useState([])
     const products = useSelector(state => state.products)
 
     useEffect(() => {
+        if (updateError)
+            return alert('Error en Mutation')
+        
+        if (updateData)
+            if (updateData.editProduct.result === true)
+                return alert('Todo belen mijo rey')
+            else
+                return alert('False desde el back')
+    }, [updateError, updateData])
+
+    useEffect(() => {
         products && setNewProducts(products)
     }, [products])
 
-    const Loading = () => {
+    const Loading = ({ document }) => {
         return <section className="loading">
             <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
-            <p>Loading Products...</p>
+            <p>Loading {document}...</p>
         </section>
     }
 
@@ -44,13 +85,13 @@ const Admin = () => {
         // eslint-disable-next-line
     }, [data])
 
-    const setProducts = payload => {
-        dispatch({ type: 'SET_PRODUCTS', payload })
-    }
+    const setProducts = payload => dispatch({ type: 'SET_PRODUCTS', payload })
 
-    const editImage = image => {
-        document.getElementById(image).click()
-    }
+    const editImage = image => document.getElementById(image).click()
+
+    const viewImage = image => window.open(image, "_blank");
+
+    const removeImage = (i, j) => setImagesRemoved([...imagesRemoved, `${i}${j}`])
 
     const uploadImage = (event, i, j) => {
         const url = URL.createObjectURL(event.target.files[0])
@@ -59,20 +100,93 @@ const Admin = () => {
 
     const newImage = (event, i) => {
         const url = URL.createObjectURL(event.target.files[0])
-        setNewImages([...newImages, [i, url]])
-    }
+        console.log('asdasd:', event.target.files[0])
 
-    const viewImage = image => {
-        window.open(image, "_blank");
-    }
-
-    const removeImage = (i, j) => {
-        setImagesRemoved([...imagesRemoved, `${i}${j}`])
+        var reader = new FileReader()
+        reader.readAsDataURL(event.target.files[0])
+        reader.onloadend = () => {
+            var base64data = reader.result
+            console.log('base64data:', base64data)
+            // imgs.push(base64data)
+            // console.log(imgs)
+            // return base64data
+            setNewImages([...newImages, [i, url, base64data]])
+        }
     }
 
     const removeNewImage = image => {
         newImages.splice(newImages.indexOf(image), 1)
         setNewImages([...newImages])
+    }
+
+    const saveProduct = async (e, product, i) => {
+        e.preventDefault()
+
+        var reader = new FileReader()
+
+        const images = product.images.filter((image, j) => !imagesRemoved.includes(`${i}${j}`))
+        const imagesNew = newImages.filter(image => image[0] === i).map(image => image[2])
+        const newImagesArray = images.concat(imagesNew)
+
+        // console.log('imagesNew:', imagesNew)
+        // const imgs = []
+
+        // const imagesPromise = new Promise(async () => {
+        //     await imagesNew.forEach(async image => {
+        //         console.log('Image:', image)
+        //         reader.onload = () => {
+        //             var base64data = reader.result
+        //             console.log('base64data:', base64data)
+        //             imgs.push(base64data)
+        //             console.log(imgs)
+        //             // return base64data
+        //         }
+        //         await reader.readAsDataURL(image)
+        //     })
+        // })
+
+        // imagesNew.forEach(image => {
+        //     console.log('Image:', image)
+        //     reader.readAsDataURL(image)
+        //     reader.onloadend = () => {
+        //         var base64data = reader.result
+        //         console.log('base64data:', base64data)
+        //         imgs.push(base64data)
+        //         console.log(imgs)
+        //         // return base64data
+        //     }
+        // })
+
+        // Promise.all([imagesPromise]).then(imgg => console.log('imgs:', imgs))
+
+        // console.log('imgs:', imgs)
+
+        const name = document.getElementById(`name-${i}`).value
+        const price = document.getElementById(`price-${i}`).value
+        const description = document.getElementById(`description-${i}`).value
+        const shortDescription = document.getElementById(`shortDescription-${i}`).value
+        const ingredients = document.getElementsByClassName(`ingredient-${i}`)
+        const newIngredients = []
+
+        for (let ingredient of ingredients) 
+            newIngredients.push(ingredient.value)
+
+        // console.log('name:', name)
+        // console.log('price:', price)
+        console.log('newImagesArray:', newImagesArray)
+        // console.log('description:', description)
+        // console.log('shortDescription:', shortDescription)
+        // console.log('ingredients:', newIngredients)
+
+        updateProduct({ variables: {
+            name,
+            price,
+            path: product.path,
+            description,
+            images: newImagesArray,
+            ingredients: newIngredients,
+            shortDescription,
+        }})
     }
 
     return <div className="container pt-4">
@@ -83,32 +197,9 @@ const Admin = () => {
         </nav>
         <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-products" role="tabpanel" aria-labelledby="nav-home-tab">
-                {productLoading ? <Loading /> : 
+                {productLoading ? <Loading document="Products" /> : 
                     newProducts.map((product, i) => {
-                        return <form className="admin-product" key={i} onSubmit={e => {
-                            e.preventDefault()
-                            const images = product.images.filter((image, j) => !imagesRemoved.includes(`${i}${j}`))
-                            const imagesNew = newImages.filter(image => image[0] === i).map(image => image[1])
-                            const newImagesArray = images.concat(imagesNew)
-                            // console.log(e)
-
-                            const name = document.getElementById(`name-${i}`).value
-                            const price = document.getElementById(`price-${i}`).value
-                            const description = document.getElementById(`description-${i}`).value
-                            const shortDescription = document.getElementById(`shortDescription-${i}`).value
-                            const ingredients = document.getElementsByClassName(`ingredient-${i}`)
-                            const newIngredients = []
-
-                            for (let ingredient of ingredients) 
-                                newIngredients.push(ingredient.value)
-
-                            console.log('name:', name)
-                            console.log('price:', price)
-                            console.log('images:', newImagesArray)
-                            console.log('description:', description)
-                            console.log('shortDescription:', shortDescription)
-                            console.log('ingredients:', newIngredients)
-                        }}>
+                        return <form className="admin-product" key={i} onSubmit={e => saveProduct(e, product, i)}>
                             <div className="row">
                                 <div className="col-6">
                                     <label className="form-label">Name</label>
@@ -180,13 +271,32 @@ const Admin = () => {
                             {product.ingredients.map((ingredient, j) => {
                                 return <textarea className={`form-control mb-1 ingredient-${i}`} defaultValue={ingredient} rows="3" key={ingredient} />
                             })}
-
-                            <button type="submit" className="btn btn-primary mb-5 mt-2">Save Changes</button>
+                            {updateLoading ? <>
+                                <button type="submit" className="btn btn-success mb-5 mt-2" disabled>
+                                    <span class="spinner-border spinner-border-sm text-light me-2" role="status"></span>
+                                    <span>Saving...</span>
+                                </button>
+                            </> : <>
+                                <button type="submit" className="btn btn-success mb-5 mt-2">
+                                    <span>Save Changes</span>
+                                </button>
+                            </>}
                         </form>
                     })
                 }
             </div>
-            <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">..</div>
+            <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
+                {contactsLoading ? <Loading document="Contacts" /> : <>
+                    {contacts && contacts.getContacts.map(contact => {
+                        return <>
+                            {contact.fullName}
+                            {contact.email}
+                            {contact.phone}
+                            {contact.message}
+                        </>
+                    })}
+                </>}
+            </div>
             <div className="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
         </div>
     </div>

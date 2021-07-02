@@ -12,6 +12,7 @@
     "braintree-web": "^2.32.1",
     "flickity": "^2.2.2",
     "graphql": "^15.5.0",
+    "image-to-base64": "^2.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-flickity-component": "^3.6.1",
