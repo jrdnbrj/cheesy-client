@@ -56,13 +56,13 @@ const Admin = () => {
 
     useEffect(() => {
         if (updateError)
-            return alert('Error en Mutation')
+            return alert('There was an error saving changes, please try again.')
         
         if (updateData)
             if (updateData.editProduct.result === true)
-                return alert('Todo belen mijo rey')
+                return alert('Changes Saved Successfully.')
             else
-                return alert('False desde el back')
+                return alert('There was an error saving changes, please try again.')
     }, [updateError, updateData])
 
     useEffect(() => {
@@ -121,39 +121,6 @@ const Admin = () => {
         const imagesNew = newImages.filter(image => image[0] === i).map(image => image[2])
         const newImagesArray = images.concat(imagesNew)
 
-        // console.log('imagesNew:', imagesNew)
-        // const imgs = []
-
-        // const imagesPromise = new Promise(async () => {
-        //     await imagesNew.forEach(async image => {
-        //         console.log('Image:', image)
-        //         reader.onload = () => {
-        //             var base64data = reader.result
-        //             console.log('base64data:', base64data)
-        //             imgs.push(base64data)
-        //             console.log(imgs)
-        //             // return base64data
-        //         }
-        //         await reader.readAsDataURL(image)
-        //     })
-        // })
-
-        // imagesNew.forEach(image => {
-        //     console.log('Image:', image)
-        //     reader.readAsDataURL(image)
-        //     reader.onloadend = () => {
-        //         var base64data = reader.result
-        //         console.log('base64data:', base64data)
-        //         imgs.push(base64data)
-        //         console.log(imgs)
-        //         // return base64data
-        //     }
-        // })
-
-        // Promise.all([imagesPromise]).then(imgg => console.log('imgs:', imgs))
-
-        // console.log('imgs:', imgs)
-
         const name = document.getElementById(`name-${i}`).value
         const price = document.getElementById(`price-${i}`).value
         const description = document.getElementById(`description-${i}`).value
@@ -164,12 +131,7 @@ const Admin = () => {
         for (let ingredient of ingredients) 
             newIngredients.push(ingredient.value)
 
-        // console.log('name:', name)
-        // console.log('price:', price)
-        console.log('newImagesArray:', newImagesArray)
-        // console.log('description:', description)
-        // console.log('shortDescription:', shortDescription)
-        // console.log('ingredients:', newIngredients)
+        // console.log('newImagesArray:', newImagesArray)
 
         updateProduct({ variables: {
             name,
@@ -214,15 +176,15 @@ const Admin = () => {
                                     const exists = imagesRemoved.includes(`${i}${j}`)
                                     if (exists) return null
                                     return <div className="image-container col" key={j}>
-                                        <img src={image} className="admin-product-image" id={`image${i}${j}`} alt="Product" />
-                                        <button className="edit-image" onClick={() => editImage(image)}>
+                                        <img src={image} className="admin-product-image" id={`image${i}${j}`} alt={`${image.split('/')[1]}`} />
+                                        <button className="edit-image" type="button" onClick={() => editImage(image)}>
                                             <i className="bi-arrow-left-right"></i>
                                             <input type="file" hidden id={`${image}`} className="admin-image-input" onChange={event => uploadImage(event, i, j)} />
                                         </button>
-                                        <button className="view-image" onClick={() => viewImage(image)}>
+                                        <button className="view-image" type="button" onClick={() => viewImage(image)}>
                                             <i className="bi-arrows-fullscreen"></i>
                                         </button>
-                                        <button className="remove-image" onClick={() => removeImage(i, j)}>
+                                        <button className="remove-image" type="button" onClick={() => removeImage(i, j)}>
                                             <i className="bi-x-lg"></i>
                                         </button>
                                     </div>
@@ -280,14 +242,28 @@ const Admin = () => {
             </div>
             <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
                 {contactsLoading ? <Loading document="Contacts" /> : <>
-                    {contacts && contacts.getContacts.map(contact => {
-                        return <>
-                            {contact.fullName}
-                            {contact.email}
-                            {contact.phone}
-                            {contact.message}
-                        </>
-                    })}
+                    <table class="table table-striped table-hover my-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" className="col-1">Full Name</th>
+                                <th scope="col" className="col-2">Email</th>
+                                <th scope="col" className="col-2">Phone</th>
+                                <th scope="col">Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {contacts && contacts.getContacts.map((contact, index) => {
+                                return <tr>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{contact.fullName}</td>
+                                    <td>{contact.email}</td>
+                                    <td>{contact.phone}</td>
+                                    <td>{contact.message}</td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </table>
                 </>}
             </div>
             <div className="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>

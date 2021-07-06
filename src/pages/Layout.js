@@ -9,16 +9,17 @@ const Layout = ({ children }) => {
     
     const location = useLocation()
     
+    const pathsWithoutFooter = [
+        '/contact',
+        '/checkout',
+        '/admin'
+    ]
+
     return <>
         <NavBar />
         <Cart />
         {children}
-        {   
-            location.pathname === '/contact' &&
-            location.pathname === '/checkout' &&
-            location.pathname === '/admin' &&
-            <Footer />
-        }
+        { !pathsWithoutFooter.includes(location.pathname) && <Footer /> }
     </>
 }
 
