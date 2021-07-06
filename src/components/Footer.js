@@ -21,14 +21,13 @@ const Footer = () => {
     const phone = createRef()
     const message = createRef()
 
-    const [createContact, { loading, error }] = useMutation(CREATE_CONTACT)
+    const [createContact, { error }] = useMutation(CREATE_CONTACT)
 
-    loading && console.log('Loading...')
-    error && console.log('Error Create Contact:', error)
+    error && alert('An unexpected error occurred, please try again.')
 
     const saveContact = e => {
         e.preventDefault()
-        console.log(fullName.current.value, email.current.value, phone.current.value, message.current.value)
+        // console.log(fullName.current.value, email.current.value, phone.current.value, message.current.value)
 
         createContact({
             variables: {
@@ -39,7 +38,7 @@ const Footer = () => {
             }
         })
 
-        alert("We will contact you as soon as possible")
+        alert("Thank you for your interest in Cheesy Bittes. We will contact you as soon as possible.")
 
         document.getElementById("footer-form").reset();
     }

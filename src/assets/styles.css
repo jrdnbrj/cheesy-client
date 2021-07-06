@@ -228,10 +228,14 @@ html, body {
 
 .cart-description input::-webkit-outer-spin-button,
 .cart-description input::-webkit-inner-spin-button {
-  display: none;
   -webkit-appearance: none;
   margin: 0;
 }
+
+.cart-description input[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 .cart-description input:active {
   border: 0;

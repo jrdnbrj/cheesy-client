@@ -12,6 +12,7 @@ const GET_PRODUCTS = gql`
             name
             images
             description
+            shortDescription
             ingredients
             price
             path
