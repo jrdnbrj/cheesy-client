@@ -196,21 +196,28 @@ html, body {
 .cart-description {
   color: #FEFEFE;
   margin: auto 0;
+  padding-right: 0;
 }
 
 .remove-item {
   color: #FEFEFE;
   font-size: 2vw;
   font-family: Nunito Black;
-  background-color: #5B5980;
+  background-color: transparent;
   border: 0;
 }
 
 .cart-description p {
   color: #FEFEFE;
-  font-size: 1.9vw;
+  font-size: 1.8vw;
   font-family: Nunito Black;
   text-align: center;
+  margin-bottom: 0;
+}
+
+.item-description {
+  font-size: 1.4vw !important;
+  font-family: Nunito Bold !important;
 }
 
 .cart-description section {
@@ -223,7 +230,7 @@ html, body {
   padding: 1% 5%;
   border-radius: 10px;
   font-family: Nunito Bold;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
 }
 
 .cart-description input::-webkit-outer-spin-button,
@@ -243,7 +250,7 @@ html, body {
 
 .cart-description button {
   border: 0;
-  background-color: #5B5980;
+  background-color: transparent;
   color: #FEFEFE;
   font-family: Nunito Black;
   font-size: 2vw;
@@ -256,18 +263,14 @@ html, body {
 }
 
 .cart-input-amount {
-  width: 26%;
+  width: 25%;
 }
 
 .cart-input-price {
-  width: 43%;
+  width: 46%;
 }
 
 .offcanvas-body {
-  /* overflow: scroll; */
-  /* overflow: hidden; */
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
   padding-bottom: 0;
   padding-right: 1%;
 }
@@ -279,38 +282,24 @@ html, body {
   overflow: auto !important;
   width: 100%;
   height: 100%;
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
-  /* margin-bottom: 1800%; */
 }
 
 .cart-products::-webkit-scrollbar {
-  /* display: none; */
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
-  /* width: 2px; */
-  /* height: 8px; */
-  /* margin-left: 20px; */
   width: 5px;
 }
 
 .cart-products::-webkit-scrollbar-thumb {
   background: #D59431 !important;
   border-radius: 10px !important;
-  /* box-shadow: inset 0 0 5px grey;  */
 }
 
 .cart-products::-webkit-scrollbar-track {
-  /* background: #5B5980 !important; */
   border-radius: 10px !important;
-  /* box-shadow: inset 0 0 5px grey;  */
 }
 
 .sticky {
-  /* position: -webkit-sticky; */
   position: sticky;
   bottom: 0 !important;
-  background-color: #5B5980;
   padding-top: 1%;
   padding-bottom: 5%;
 }
@@ -369,9 +358,6 @@ html, body {
   .btn-close {
     font-size: 6.5vw;
   }
-  .image-cart {
-    /* width: 140%; */
-  }
   .cart-input-amount {
     width: 30%;
   }
@@ -384,6 +370,9 @@ html, body {
   .cart-description p {
     font-size: 3vw;
   }
+  .item-description {
+    font-size: 2.2vw !important;
+  }
   .cart-description section {
     display: flex;
     align-items: center;
@@ -391,7 +380,7 @@ html, body {
   .cart-description input {
     padding: 3% 5%;
     border-radius: 15px;
-    font-size: 2.5vw;
+    font-size: 2.3vw;
   }
   .cart-description button {
     font-size: 5vw;
@@ -1676,15 +1665,19 @@ and (max-width: 580px) {
 .smoothies span {
   color: #FEFEFE;
   font-family: Nunito Black;
-  font-size: 1.5vw;
+  font-size: 1.48vw;
 }
 
-.strawberry, .passion, .mango {
+.passion, .mango {
   margin-left: 20%;
 }
 
 .blackberry {
   margin-left: 5%;
+}
+
+.soursop {
+  margin-left: 35%;
 }
 
 .ingredients-strawberry,
@@ -1719,7 +1712,7 @@ and (max-width: 580px) {
 }
 
 .radio-bundle {
-  font-size: 2.4vw;
+  font-size: 2.36vw;
   text-align: left;
 }
 
@@ -1823,7 +1816,7 @@ and (max-width: 580px) {
   .smoothies span {
     font-size: 3.5vw;
   }
-  .strawberry, .passion, 
+  .soursop, .passion, 
   .mango, .blackberry {
     margin-left: 0%;
   }
@@ -2094,7 +2087,7 @@ and (max-width: 580px) {
 .modal-container {
   display: none;
   position: fixed;
-  z-index: 10; 
+  z-index: 10000; 
   padding-top: 10%;
   left: 0;
   top: 0;

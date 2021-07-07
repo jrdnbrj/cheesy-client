@@ -12,7 +12,7 @@ const CREATE_ORDER = gql`
 `
 
 const CAPTURE_ORDER = gql`
-    query($order_id: String!) {
+    query ($order_id: String!) {
         captureOrder(orderId: $order_id)
     }
 `
@@ -109,12 +109,26 @@ const Checkout = () => {
                         <img src={item.image} alt="Cart Item" />
                     </section>
                     <section className="col-lg-7">
-                        <span>{item.name}</span>
-                        <p>amount: {item.amount}</p>
-                        <p>price: {item.price}</p>
-                        <p>buy once: {item.buyOnce.toString()}</p>
-                        <p>join the club: {item.joinClub.toString()}</p>
-                        <p>bundle up: {item.bundleUp}</p>
+                        { item.path !== '/fruits' ?
+                            <>
+                                <span>{item.name}</span>
+                                <p>{item.bundleUp}-pack.</p>
+                                <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                <p>amount: {item.amount}</p>
+                                <p>price: {item.price.toFixed(2)}</p>
+                            </> :
+                            <>
+                                <span>{item.name}</span>
+                                {item.choose3.map(smoothie => {
+                                    return <p key={smoothie}>
+                                        {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}
+                                    </p>
+                                })}
+                                <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                <p>amount: {item.amount}</p>
+                                <p>price: {item.price.toFixed(2)}</p>
+                            </>
+                        }
                     </section>
                 </section>
             })}

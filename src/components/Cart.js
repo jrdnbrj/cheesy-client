@@ -27,6 +27,7 @@ const Cart = () => {
     const cart = useSelector(state => state.cart)
     const subtotal = useSelector(state => state.subtotal)
 
+    console.log('subtotal:', typeof subtotal)
     console.log('CART:', cart)
 
     const updateItem = (i, amount, price) => {
@@ -70,11 +71,30 @@ const Cart = () => {
                         return <section key={i}>
                             <div className="cart-divider"></div>
                             <section className="row" id="row-correction">
-                                <section className="col-lg-4 col-sm-4 col-4">
+                                <section className="col-lg-4 col-sm-4 col-4 my-auto">
                                     <img src={item.image} className="image-cart" alt="Mozarella in Shoping Cart" />
                                 </section>
                                 <section className="col-lg-6 col-sm-6 col-6 cart-description">
                                     <p>{item.name}</p>
+                                    { item.path !== '/fruits' ?
+                                        <p className="item-description">
+                                            {item.bundleUp}-pk.
+                                            {item.buyOnce ? ' Once' : ` Club${item.joinClub}mo`}
+                                        </p> :
+                                        <>
+                                            <p className="item-description">
+                                                {item.choose1}
+                                            </p>
+                                            {item.choose3.map(smoothie => {
+                                                return <p className="item-description" key={smoothie}>
+                                                    {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}
+                                                </p>
+                                            })}
+                                            <p className="item-description">
+                                                {item.buyOnce ? ' Once' : ` Club${item.joinClub}mo`}
+                                            </p>
+                                        </>
+                                    }
                                     <section>
                                         <button onClick={() => updateItem(i, -1, -item.price)}>-</button>
                                         <input value={item.amount} type="number" className="cart-input-amount" disabled />
@@ -92,7 +112,7 @@ const Cart = () => {
             </div>
             <section className="sticky">
                 <section className="subtotal-cart-container">
-                    <span className="subtotal-cart"><strong>Subtotal:</strong> ${subtotal}</span>
+                    <span className="subtotal-cart"><strong>Subtotal:</strong> ${parseFloat(subtotal).toFixed(2)}</span>
                 </section>
                 <section className="checkout-cart">
                     <Link to="/checkout" className={`checkout-button ${subtotal <= 0 ? 'checkout-disabled' : '' }`}>Checkout</Link>

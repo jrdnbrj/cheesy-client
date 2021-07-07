@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery, gql } from "@apollo/client"
 import { useDispatch } from 'react-redux'
+
+import Modal from '../components/Modal'
 
 import background1 from '../assets/img/mix-background-1.png'
 import background2 from '../assets/img/mix-background-2.png'
@@ -25,35 +27,64 @@ const GET_PRODUCT = gql`
 
 const Product = () => {
 
+    const modal = document.getElementById('modal-product')
+    const [modalOptions, setModalOptions] = useState({})
+
     const dispatch = useDispatch()
     const location = useLocation()
     const path = location.pathname
     const { data } = useQuery(GET_PRODUCT, { variables: { path }})
 
+    const [price, setPrice] = useState(0)
+    const [total, setTotal] = useState(0)
+
+    useEffect(() => {
+        data && setPrice(data.getProductByPath.price)
+    }, [data])
+
     useEffect(() => {
         const toDo = () => {
-            if(radio1.checked || radio2.checked) button.className += ' checked'
-            else button.classList.remove('checked')
+            if(radio1.checked || radio2.checked) bundleUp.className += ' checked'
+            else bundleUp.classList.remove('checked')
+
+            if (radio1.checked) setTotal(price * 6)
+            if (radio2.checked) setTotal(price * 9)
         }
 
-        const radio1 = document.getElementById('radio-button3')
-        const radio2 = document.getElementById('radio-button4')
-        const radio3 = document.getElementById('buy-once-radio')
-        const button = document.getElementById('club')
+        const radio1 = document.getElementById('radio-button1')
+        const radio2 = document.getElementById('radio-button2')
+        const bundleUp = document.getElementById('bundle-up')
 
         radio1.addEventListener('change', toDo)
         radio2.addEventListener('change', toDo)
+        bundleUp.addEventListener('change', toDo)
+
+    })
+
+    useEffect(() => {
+        const toDo = () => {
+            if(radio3.checked || radio4.checked) button.className += ' checked'
+            else button.classList.remove('checked')
+        }
+
+        const radio3 = document.getElementById('radio-button3')
+        const radio4 = document.getElementById('radio-button4')
+        const buyOnce = document.getElementById('buy-once-radio')
+        const button = document.getElementById('club')
+
         radio3.addEventListener('change', toDo)
+        radio4.addEventListener('change', toDo)
+        buyOnce.addEventListener('change', toDo)
     })
 
     const addToCart = () => {
         const payload = { 
             path,
             amount: 1,
-            price: parseFloat(data.getProductByPath.price),
+            price: parseFloat(total),
             image: data.getProductByPath.images[0],
             name: data.getProductByPath.name,
-            total: parseFloat(data.getProductByPath.price)
+            total: parseFloat(total)
         }
 
         const radio1 = document.getElementById('radio-button1')
@@ -65,21 +96,36 @@ const Product = () => {
         if (radio1.checked || radio2.checked)
             payload['bundleUp'] = radio1.checked ? 6 : radio2.checked ? 9 : 0
         else  {
-            return alert('You must choose a BUNDLE UP option')
+            modal.style.display = 'block'
+            return setModalOptions({
+                header: 'Add to Cart',
+                body: 'You must choose a BUNDLE UP option.',
+            })
         }
 
         if (radio3.checked || radio4.checked || buyOnce.checked) {
             payload['buyOnce'] = buyOnce.checked
             payload['joinClub'] = radio3.checked ? 1 : radio4.checked ? 2 : false
         } else { 
-            return alert('You must choose if you want to BUY ONCE or if you want to JOIN THE CLUB!')
+            modal.style.display = 'block'
+            return setModalOptions({
+                header: 'Add to Cart',
+                body: 'You must choose if you want to BUY ONCE or if you want to JOIN THE CLUB!',
+            })
         }
+
+        setModalOptions({
+            header: 'Add to Cart',
+            body: 'Item added to cart',
+        })
+        modal.style.display = 'block'
 
         console.log('Payload:', payload)
         dispatch({ type: 'APPEND_TO_CART', payload })
     }
 
     return <>
+        <Modal id="modal-product" {...modalOptions} />
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
         <img src={dot1} className="product-dot" id="product-dot-1" alt="Dot 1" />
@@ -110,7 +156,7 @@ const Product = () => {
                         <p>{data && data.getProductByPath.shortDescription}</p>
                         <span>15 Pieces (12.6 OZ)</span>
                     </section>
-                    <p id="price">$ {data && data.getProductByPath.price}</p>
+                    <p id="price">$ {parseFloat(total).toFixed(2)}</p>
                     <div className="dropdown" id="ingredients">
                         <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Ingredients
@@ -148,7 +194,7 @@ const Product = () => {
             <section className="row drops" id="row-correction">
                 <section className="col col-hidden"></section>
                 <section className="col-12 col-lg-4 col-sm-12 club-group btn-group" id="bundleUpDropdown">
-                    <button className="btn-radio" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                    <button className="btn-radio" id="bundle-up" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                         BUNDLE UP
                     </button>
                     <div className="dropdown-menu">
