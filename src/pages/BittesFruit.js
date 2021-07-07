@@ -344,12 +344,26 @@ const Products = () => {
                     <section className="col col-hidden"></section>
                     <section className="col-1 once-col"></section>
                     <section className="col-lg-4 col-sm-10 drop-group buy-once">
+                    </section>
+                    <section className="col-1 once-col"></section>
+                    <section className="col-1 join-col"></section>
+                    <section className="col-lg-4 col-sm-10 drop-group join-the-club">
                         <div>
                             <input type="radio" name="club" id="buy-once-radio" />
                             <label className="btn-bundle text-center" id="buy-once-label" htmlFor="buy-once-radio">
                                 BUY ONCE
                             </label>
                         </div>
+                        
+                    </section>
+                    <section className="col-1 join-col"></section>
+                    <section className="col col-hidden"></section>
+                </section>
+                <section className="row join mt-4" id="row-correction">
+                    <section className="col col-hidden"></section>
+                    <section className="col-1 once-col"></section>
+                    <section className="col-lg-4 col-sm-10 drop-group buy-once">
+                        
                     </section>
                     <section className="col-1 once-col"></section>
                     <section className="col-1 join-col"></section>

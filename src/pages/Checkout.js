@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { gql } from "@apollo/client"
 import { useSelector } from 'react-redux'
 import client from '../adapters/apolloClient'
+
+import Modal from '../components/Modal'
 
 
 const CREATE_ORDER = gql`
@@ -19,12 +21,16 @@ const CAPTURE_ORDER = gql`
 
 const Checkout = () => {
 
+    // const modal = document.getElementById('modal-checkout')
+    const [modalOptions, setModalOptions] = useState({})
+
     const cart = useSelector(state => state.cart)
     const subtotal = useSelector(state => state.subtotal)
 
 
     // PayPal
     useEffect(() => {
+        const modal = document.getElementById('modal-checkout')
         window.paypal.Buttons({
             style: {
                 color: 'gold',
@@ -47,11 +53,19 @@ const Checkout = () => {
             },
             onError: function(error) {
                 console.log('Error:', error)
-                // alert('It seems that there was an error with the transaction, please try again or contact us on the Customer Support.')
+                setModalOptions({
+                    header: 'Checkout',
+                    body: 'It seems that there was an error with the transaction, please try again.',
+                })
+                modal.style.display = 'block'
             },
             onCancel: function () {
                 console.log('Cancelled')
-                // alert('You have canceled the transaction. Not sure what you are doing? Get in touch with us on the Customer Support.')
+                setModalOptions({
+                    header: 'Checkout',
+                    body: 'You have canceled the transaction. Not sure what you are doing? Get in touch with us.',
+                })
+                modal.style.display = 'block'
             },
         }).render("#paypal-button");
     }, [])
@@ -81,77 +95,118 @@ const Checkout = () => {
         main()
     }, [])
 
-    return <section className="row" id="row-correction">
-        <section className="col-lg-7 payment">
-            <span>Contact Information</span>
-            <section className="contact-info">
-                <input placeholder="Name" type="text" />
-                <input placeholder="Last Name" type="text" />
-                <input placeholder="Phone" type="text" />
-                <input placeholder="Email" type="email" />
-                <input placeholder="Address" type="text" />
-                <input placeholder="Apt, suite" type="text" />
-                <input placeholder="City" type="text" />
-            </section>
-            <span>Payment</span>
-            <section className="square">
-                <div id="card-container"></div>
-                <button className="square-pay" id="card-button" type="button">Pay</button>
-            </section>
-
-            <div id="paypal-button"></div>
-        </section>
-        <section className="col-lg-5 cart">
-            <span className="my-cart">My Cart</span>
-            { cart.map((item, i) => {
-                return <section className="row cart-item" id="row-correction" key={i}>
-                    <section className="col-lg-5">
-                        <img src={item.image} alt="Cart Item" />
+    return <>
+        <Modal id="modal-checkout" {...modalOptions} />
+        <section className="row" id="row-correction">
+            <section className="col-lg-7 payment">
+                <section className="row" id="row-correction">
+                    <section className="col-6">
+                        <span>Shipping Information</span>
+                        <section className="contact-info">
+                            <input placeholder="Name" type="text" />
+                            <input placeholder="Last Name" type="text" />
+                            <input placeholder="Phone" type="text" />
+                            <input placeholder="Email" type="email" />
+                            <input placeholder="Address" type="text" />
+                            <input placeholder="Apt, suite" type="text" />
+                            <input placeholder="City" type="text" />
+                            <div className="row" id="row-correction">
+                                <div className="col-7 state">
+                                    <input placeholder="State" type="text" />
+                                </div>
+                                <div className="col-5 zip-code">
+                                    <input placeholder="Zip Code" type="text" />
+                                </div>
+                            </div>
+                        </section>
                     </section>
-                    <section className="col-lg-7">
-                        { item.path !== '/fruits' ?
-                            <>
-                                <span>{item.name}</span>
-                                <p>{item.bundleUp}-pack.</p>
-                                <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
-                                <p>amount: {item.amount}</p>
-                                <p>price: {item.price.toFixed(2)}</p>
-                            </> :
-                            <>
-                                <span>{item.name}</span>
-                                {item.choose3.map(smoothie => {
-                                    return <p key={smoothie}>
-                                        {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}
-                                    </p>
-                                })}
-                                <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
-                                <p>amount: {item.amount}</p>
-                                <p>price: {item.price.toFixed(2)}</p>
-                            </>
-                        }
+                    <section className="col-6">
+                        <span>Billing Information</span>
+                        <section className="contact-info">
+                            <input placeholder="Name" type="text" />
+                            <input placeholder="Last Name" type="text" />
+                            <input placeholder="Phone" type="text" />
+                            <input placeholder="Email" type="email" />
+                            <input placeholder="Address" type="text" />
+                            <input placeholder="Apt, suite" type="text" />
+                            <input placeholder="City" type="text" />
+                            <div className="row" id="row-correction">
+                                <div className="col-7 state">
+                                    <input placeholder="State" type="text" />
+                                </div>
+                                <div className="col-5 zip-code">
+                                    <input placeholder="Zip Code" type="text" />
+                                </div>
+                            </div>
+                        </section>
                     </section>
                 </section>
-            })}
-            <section className="receipt">
-                <div>
-                    <span>Subtotal</span>
-                    <span>${subtotal}</span>
+                <div className="form-check same-as">
+                    <input className="form-check-input" type="checkbox" id="check" />
+                    <label className="form-check-label" htmlFor="check">
+                        Billing Addres same as Shipping Address
+                    </label>
                 </div>
-                <div>
-                    <span>Estimated Shipping</span>
-                    <span></span>
-                </div>
-                <div>
-                    <span>Estimated Tax</span>
-                    <span></span>
-                </div>
-                <div>
-                    <span>Total</span>
-                    <span>${subtotal}</span>
-                </div>
+                <span>Payment</span>
+                <section className="square">
+                    <div id="card-container"></div>
+                    <button className="square-pay" id="card-button" type="button">Pay</button>
+                </section>
+
+                <div id="paypal-button"></div>
+            </section>
+            <section className="col-lg-5 cart">
+                <span className="my-cart">My Cart</span>
+                { cart.map((item, i) => {
+                    return <section className="row cart-item" id="row-correction" key={i}>
+                        <section className="col-lg-5">
+                            <img src={item.image} alt="Cart Item" />
+                        </section>
+                        <section className="col-lg-7">
+                            { item.path !== '/fruits' ?
+                                <>
+                                    <span>{item.name}</span>
+                                    <p>{item.bundleUp}-pack.</p>
+                                    <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                    <p>amount: {item.amount}</p>
+                                    <p>price: {item.price.toFixed(2)}</p>
+                                </> :
+                                <>
+                                    <span>{item.name}</span>
+                                    {item.choose3.map(smoothie => {
+                                        return <p key={smoothie}>
+                                            {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}
+                                        </p>
+                                    })}
+                                    <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                    <p>amount: {item.amount}</p>
+                                    <p>price: {item.price.toFixed(2)}</p>
+                                </>
+                            }
+                        </section>
+                    </section>
+                })}
+                <section className="receipt">
+                    <div>
+                        <span>Subtotal</span>
+                        <span>${subtotal}</span>
+                    </div>
+                    <div>
+                        <span>Estimated Shipping</span>
+                        <span></span>
+                    </div>
+                    <div>
+                        <span>Estimated Tax</span>
+                        <span></span>
+                    </div>
+                    <div>
+                        <span>Total</span>
+                        <span>${subtotal}</span>
+                    </div>
+                </section>
             </section>
         </section>
-    </section>
+    </>
 }
 
 export default Checkout

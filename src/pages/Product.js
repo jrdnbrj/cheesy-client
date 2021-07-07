@@ -215,7 +215,7 @@ const Product = () => {
                 <section className="col-12 col-lg-4 col-sm-12 club-group" id="buy-once">
                     <div>
                         <input type="radio" name="club" id="buy-once-radio" />
-                        <label className="btn-radio" id="buy-once-label" htmlFor="buy-once-radio">BUY ONCE</label>
+                        <label className="btn-radio text-center" id="buy-once-label" htmlFor="buy-once-radio">BUY ONCE</label>
                     </div>
                 </section>
                 <section className="col col-hidden"></section>
