@@ -106,14 +106,14 @@ const Product = () => {
                     <h5>Conventional Oven or Toaster Oven</h5>
                     <li className="bullet">Pre-heat oven to 400°F.</li>
                     <li className="bullet">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
-                    <li className="bullet">Bake for 20 - 25 minutes or until golden brown.</li>
+                    <li className="bullet">Bake for 18 - 20 minutes or until golden brown.</li>
                     Enjoy warm!
                 </section>
                 <section className="col-lg-4 px-4 instructions">
                     <img src={airFryer} className="air-fryer" alt="Air Fryer" />
                     <h5>Air Fryer</h5>
                     <li className="bullet green-padding">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
-                    <li className="bullet">Set to 375°F fro 12 - 15 minutes or until golden brown.</li>
+                    <li className="bullet">Set to 375°F for 12 - 15 minutes or until golden brown.</li>
                     Enjoy warm!
                 </section>
                 <section className="col-lg-4 px-4 instructions">

@@ -598,6 +598,7 @@ html, body {
 
 #row-correction {
   margin-right: 0;
+  margin-left: 0;
 }
 
 #icons-container, #icons-container-2 {
@@ -2090,6 +2091,54 @@ and (max-width: 580px) {
 
 /* MODAL MODAL MODAL MODAL MODAL MODAL MODAL */
 
+.modal-container {
+  display: none;
+  position: fixed;
+  z-index: 10; 
+  padding-top: 10%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  /* padding: 20px; */
+  /* border: 1px solid #888; */
+  border: 0;
+  border-radius: 15px;
+  width: 50%;
+}
+
+.modal-header {
+  /* border: 0; */
+  padding: 2% 3%;
+  /* background-color: rgb(228, 228, 228); */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.modal-body p {
+  margin-bottom: 0;
+}
+
+.modal-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 1.5vw;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
 /* ADMIN PRODUCTS ADMIN PRODUCTS ADMIN PRODUCTS */

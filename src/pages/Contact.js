@@ -1,4 +1,4 @@
-import { createRef } from 'react'
+import { createRef, useState } from 'react'
 import { useMutation, gql } from "@apollo/client"
 
 import background1 from '../assets/img/contact-background-1.png'
@@ -7,6 +7,8 @@ import logo from '../assets/img/logo.png'
 import logoOrange from '../assets/img/medium-logo.png'
 import dot1 from '../assets/img/contact-dot1.png'
 import dot2 from '../assets/img/contact-dot2.png'
+
+import Modal from '../components/Modal'
 
 
 const CREATE_CONTACT = gql`
@@ -21,6 +23,8 @@ const CREATE_CONTACT = gql`
 `
 
 const Contact = () => {
+    
+    const [modalOptions, setModalOptions] = useState({})
     
     const fullName = createRef()
     const email = createRef()
@@ -44,12 +48,19 @@ const Contact = () => {
             }
         })
 
-        alert("Thank you for your interest in Cheesy Bittes. We will contact you as soon as possible.")
+        setModalOptions({
+            header: 'Contact Information',
+            body: 'Thank you for your interest in Cheesy Bittes. We will contact you as soon as possible.',
+        })
+
+        const modal = document.getElementById('modal')
+        modal.style.display = 'block'
 
         document.getElementById("footer-form").reset();
     }
 
     return <>
+        <Modal {...modalOptions} />
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
         <img src={dot1} className="contact-dot" id="contact-dot-1" alt="Dot 1" />

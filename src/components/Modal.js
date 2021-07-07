@@ -1,6 +1,4 @@
-
-
-const Modal = ({ body, header }) => {
+const Modal = ({ header, body, acceptText, rejectText, accept }) => {
 
     const closeModal = () => {
         console.log('Closing...')
@@ -9,10 +7,31 @@ const Modal = ({ body, header }) => {
     }
 
     return <>
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onClick={closeModal}></span>
-                <p>Some text in the Modal..</p>
+        <div id="modal" className="modal-container">
+            <div className="modal-content">
+                <div className="modal-header row" id="row-correction">
+                    <div className="col-10">
+                        <strong>{header}</strong>
+                    </div>
+                    <div className="col-2">
+                        <span className="modal-close" onClick={closeModal}>
+                            <i className="bi-x-lg" />
+                        </span>
+                    </div>
+                </div>
+                <div className="modal-body">
+                    <p>{body}</p>
+                </div>
+                <div className="modal-footer">
+                    {   rejectText &&
+                        <button className="btn-danger btn" onClick={closeModal}>
+                            {rejectText}
+                        </button>
+                    }
+                    <button className="btn-success btn" onClick={accept ? accept : closeModal}>
+                        {acceptText ? acceptText : 'OK'}
+                    </button>
+                </div>
             </div>
         </div>
     </>

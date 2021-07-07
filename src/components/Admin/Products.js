@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useQuery, useMutation, gql } from "@apollo/client"
 import { useDispatch, useSelector } from 'react-redux'
 
+import Modal from '../Modal'
+
 
 const GET_PRODUCTS = gql`
     query {
@@ -33,11 +35,14 @@ const UPDATE_PRODUCT = gql`
 
 const Products = ({ Loading }) => {
 
+    const modal = document.getElementById('modal')
+
     const dispatch = useDispatch()
 
     const { data, loading: productLoading } = useQuery(GET_PRODUCTS)
     const [updateProduct, { loading: updateLoading, error: updateError, data: updateData }] = useMutation(UPDATE_PRODUCT)
 
+    const [modalOptions, setModalOptions] = useState({})
     const [imagesRemoved, setImagesRemoved] = useState([])
     const [newImages, setNewImages] = useState([])
     const [newProducts, setNewProducts] = useState([])
@@ -45,14 +50,30 @@ const Products = ({ Loading }) => {
     const products = useSelector(state => state.products)
 
     useEffect(() => {
-        if (updateError)
-            return alert('There was an error saving changes, please try again.')
+        if (updateError) {
+            setModalOptions({
+                header: 'Admin Products',
+                body: 'There was an error saving changes, please try again.',
+            })
+
+            modal.style.display = 'block'
+        }
         
-        if (updateData)
+        if (updateData) {
             if (updateData.editProduct.result === true)
-                return alert('Changes Saved Successfully.')
+                setModalOptions({
+                    header: 'Admin Products',
+                    body: 'Changes Saved Successfully.',
+                })
             else
-                return alert('There was an error saving changes, please try again.')
+                setModalOptions({
+                    header: 'Admin Products',
+                    body: 'There was an error saving changes, please try again.',
+                })
+
+            modal.style.display = 'block'
+        }
+        // eslint-disable-next-line
     }, [updateError, updateData])
 
     useEffect(() => {
@@ -119,89 +140,92 @@ const Products = ({ Loading }) => {
     return <>
         {productLoading ? <Loading document="Products" /> : 
             newProducts.map((product, i) => {
-                return <form className="admin-product" key={i} onSubmit={e => saveProduct(e, product, i)}>
-                    <div className="row">
-                        <div className="col-6">
-                            <label className="form-label">Name</label>
-                            <input className="form-control" id={`name-${i}`} defaultValue={product.name} />
-                        </div>
-                        <div className="col-3">
-                            <label className="form-label">Price (USD)</label>
-                            <input type="text" className="form-control" id={`price-${i}`} defaultValue={product.price} />
-                        </div>
-                        <div className="col-3">
-                            <label className="form-label">Path</label>
-                            <input className="form-control" defaultValue={product.path} disabled />
-                        </div>
-                    </div>
-
-                    <label className="form-label">Images</label>
-                    <section className="admin-images row" id="row-correction">
-                        {product.images.map((image, j) => {
-                            const exists = imagesRemoved.includes(`${i}${j}`)
-                            if (exists) return null
-                            return <div className="image-container col" key={j}>
-                                <img src={image} className="admin-product-image" id={`image${i}${j}`} alt={`${image.split('/')[1]}`} />
-                                <button className="edit-image" type="button" onClick={() => editImage(image)}>
-                                    <i className="bi-arrow-left-right" />
-                                    <input type="file" hidden id={`${image}`} className="admin-image-input" onChange={event => uploadImage(event, i, j)} />
-                                </button>
-                                <button className="view-image" type="button" onClick={() => viewImage(image)}>
-                                    <i className="bi-arrows-fullscreen" />
-                                </button>
-                                <button className="remove-image" type="button" onClick={() => removeImage(i, j)}>
-                                    <i className="bi-x-lg" />
-                                </button>
+                return <div key={i}>
+                    <Modal {...modalOptions} />
+                    <form className="admin-product" onSubmit={e => saveProduct(e, product, i)}>
+                        <div className="row">
+                            <div className="col-6">
+                                <label className="form-label">Name</label>
+                                <input className="form-control" id={`name-${i}`} defaultValue={product.name} />
                             </div>
-                        })}
-                        {newImages.map((image, j) => {
-                            const exists = newImages.includes(image[1])
-                            if (image[0] !== i && !exists) return null
-                            return <div className="image-container col" key={j}>
-                                <img src={image[1]} className="admin-product-image" id={`image${i}${product.images.length + j}`} alt="Product" />
-                                <button className="edit-image" type="button" onClick={() => editImage(image[1])}>
-                                    <i className="bi-arrow-left-right" />
-                                    <input type="file" hidden id={`${image[1]}`} className="admin-image-input" onChange={event => uploadImage(event, i, product.images.length + j)} />
-                                </button>
-                                <button className="view-image" type="button" onClick={() => viewImage(image[1])}>
-                                    <i className="bi-arrows-fullscreen" />
-                                </button>
-                                <button className="remove-image" type="button" onClick={() => removeNewImage(image[1])}>
-                                    <i className="bi-x-lg" />
-                                </button>
+                            <div className="col-3">
+                                <label className="form-label">Price (USD)</label>
+                                <input type="text" className="form-control" id={`price-${i}`} defaultValue={product.price} />
                             </div>
-                        })}
-                        <div className="col-1 d-flex">
-                            <i className="bi bi-plus-circle-dotted my-auto" onClick={() => editImage('new-' + i)}></i>
-                            <input type="file" hidden id={`new-${i}`} className="admin-image-input" onChange={event => newImage(event, i)} />
+                            <div className="col-3">
+                                <label className="form-label">Path</label>
+                                <input className="form-control" defaultValue={product.path} disabled />
+                            </div>
                         </div>
-                    </section>
-                    <div className="form-text">The dimensions of the newly added images must be equal in length and width, (i.e., 150x150).</div>
-                    <div className="form-text">The first image will be the one shown on the screen of all products.</div>
 
-                    <label className="form-label">Description</label>
-                    <textarea className="form-control" id={`description-${i}`} defaultValue={product.description} rows="3" />
-                    <div className="form-text">Description that will appear on the page of all products.</div>
+                        <label className="form-label">Images</label>
+                        <section className="admin-images row" id="row-correction">
+                            {product.images.map((image, j) => {
+                                const exists = imagesRemoved.includes(`${i}${j}`)
+                                if (exists) return null
+                                return <div className="image-container col" key={j}>
+                                    <img src={image} className="admin-product-image" id={`image${i}${j}`} alt={`${image.split('/')[1]}`} />
+                                    <button className="edit-image" type="button" onClick={() => editImage(image)}>
+                                        <i className="bi-arrow-left-right" />
+                                        <input type="file" hidden id={`${image}`} className="admin-image-input" onChange={event => uploadImage(event, i, j)} />
+                                    </button>
+                                    <button className="view-image" type="button" onClick={() => viewImage(image)}>
+                                        <i className="bi-arrows-fullscreen" />
+                                    </button>
+                                    <button className="remove-image" type="button" onClick={() => removeImage(i, j)}>
+                                        <i className="bi-x-lg" />
+                                    </button>
+                                </div>
+                            })}
+                            {newImages.map((image, j) => {
+                                const exists = newImages.includes(image[1])
+                                if (image[0] !== i && !exists) return null
+                                return <div className="image-container col" key={j}>
+                                    <img src={image[1]} className="admin-product-image" id={`image${i}${product.images.length + j}`} alt="Product" />
+                                    <button className="edit-image" type="button" onClick={() => editImage(image[1])}>
+                                        <i className="bi-arrow-left-right" />
+                                        <input type="file" hidden id={`${image[1]}`} className="admin-image-input" onChange={event => uploadImage(event, i, product.images.length + j)} />
+                                    </button>
+                                    <button className="view-image" type="button" onClick={() => viewImage(image[1])}>
+                                        <i className="bi-arrows-fullscreen" />
+                                    </button>
+                                    <button className="remove-image" type="button" onClick={() => removeNewImage(image[1])}>
+                                        <i className="bi-x-lg" />
+                                    </button>
+                                </div>
+                            })}
+                            <div className="col-1 d-flex">
+                                <i className="bi bi-plus-circle-dotted my-auto" onClick={() => editImage('new-' + i)}></i>
+                                <input type="file" hidden id={`new-${i}`} className="admin-image-input" onChange={event => newImage(event, i)} />
+                            </div>
+                        </section>
+                        <div className="form-text">The dimensions of the newly added images must be equal in length and width, (i.e., 150x150).</div>
+                        <div className="form-text">The first image will be the one shown on the screen of all products.</div>
 
-                    <label className="form-label">Short Description</label>
-                    <textarea className="form-control" id={`shortDescription-${i}`} defaultValue={product.shortDescription} rows="3" />
-                    <div className="form-text">Description that will appear on the individual product page.</div>
+                        <label className="form-label">Description</label>
+                        <textarea className="form-control" id={`description-${i}`} defaultValue={product.description} rows="3" />
+                        <div className="form-text">Description that will appear on the page of all products.</div>
 
-                    <label className="form-label">Ingredients</label>
-                    {product.ingredients.map((ingredient, j) => {
-                        return <textarea className={`form-control mb-1 ingredient-${i}`} defaultValue={ingredient} rows="3" key={ingredient} />
-                    })}
-                    {updateLoading ? <>
-                        <button type="submit" className="btn btn-success mb-5 mt-2" disabled>
-                            <span className="spinner-border spinner-border-sm text-light me-2" role="status"></span>
-                            <span>Saving...</span>
-                        </button>
-                    </> : <>
-                        <button type="submit" className="btn btn-success mb-5 mt-2">
-                            <span>Save Changes</span>
-                        </button>
-                    </>}
-                </form>
+                        <label className="form-label">Short Description</label>
+                        <textarea className="form-control" id={`shortDescription-${i}`} defaultValue={product.shortDescription} rows="3" />
+                        <div className="form-text">Description that will appear on the individual product page.</div>
+
+                        <label className="form-label">Ingredients</label>
+                        {product.ingredients.map((ingredient, j) => {
+                            return <textarea className={`form-control mb-1 ingredient-${i}`} defaultValue={ingredient} rows="3" key={ingredient} />
+                        })}
+                        {updateLoading ? <>
+                            <button type="submit" className="btn btn-success mb-5 mt-2" disabled>
+                                <span className="spinner-border spinner-border-sm text-light me-2" role="status"></span>
+                                <span>Saving...</span>
+                            </button>
+                        </> : <>
+                            <button type="submit" className="btn btn-success mb-5 mt-2">
+                                <span>Save Changes</span>
+                            </button>
+                        </>}
+                    </form>
+                </div>
             })
         }
     </>

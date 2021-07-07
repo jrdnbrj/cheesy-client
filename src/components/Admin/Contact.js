@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
 import { useQuery, useMutation, gql } from "@apollo/client"
+
+import Modal from '../Modal'
 
 
 const GET_CONTACTS = gql`
@@ -15,25 +18,63 @@ const GET_CONTACTS = gql`
 
 const DELETE_CONTACT = gql`
     mutation ($id: String!) {
-        deleteContact(id: $id)
+        deleteContact(id: $id) {
+            result
+        }
     }
 `
 
 const Contact = ({ Loading }) => {
 
+    const modal = document.getElementById('modal')
+
+    const [contacts, setContacts] = useState()
+    const [modalOptions, setModalOptions] = useState({})
+
     const [deleteContact, { data, error }] = useMutation(DELETE_CONTACT)
-    const { data: contacts, loading: contactsLoading } = useQuery(GET_CONTACTS)
-    contacts && console.log('Contacts:', contacts)
+    const { data: contactsData, loading: contactsLoading, refetch } = useQuery(GET_CONTACTS)
+
+    contactsData && console.log('Contacts:', contacts)
     error && console.log('error:', error)
     data && console.log('data:', data.deleteContact)
 
-    const removeContact = id => {
-        console.log('Hola', id)
-        deleteContact({ variables: { id } })
+    useEffect(() => {
+        setContacts(contactsData)
+    }, [contactsData])
+
+    useEffect(() => {
+        if (data) {
+            if (data.deleteContact) {
+                setModalOptions({
+                    header: 'Contact Removed',
+                    body: 'Has been successfully deleted.',
+                })
+                refetch()
+            }
+            else
+                setModalOptions({
+                    header: 'Remove Contact',
+                    body: 'there was an error trying to remove a contact, please try again.',
+                })
+        }
+        // eslint-disable-next-line
+    }, [data])
+
+    const showModal = (id, fullName) => {
+        setModalOptions({
+            header: 'Remove Contact',
+            body: `Are you sure you want to delete the contact information of "${fullName}"?`,
+            acceptText: 'Remove',
+            rejectText: 'Cancel',
+            accept: () => deleteContact({ variables: { id } }),
+        })
+
+        modal.style.display = 'block'
     }
 
     return <>
         {contactsLoading ? <Loading document="Contacts" /> : <>
+            <Modal {...modalOptions} />
             <table className="table table-striped table-hover my-5">
                 <thead>
                     <tr>
@@ -54,7 +95,7 @@ const Contact = ({ Loading }) => {
                             <td>{contact.phone}</td>
                             <td>{contact.message}</td>
                             <td>
-                                <button className="remove-contact" onClick={() => removeContact(contact.id)}>
+                                <button className="remove-contact" onClick={() => showModal(contact.id, contact.fullName)}>
                                     <i className="bi-x-lg" />
                                 </button>
                             </td>
