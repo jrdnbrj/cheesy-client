@@ -2088,7 +2088,11 @@ and (max-width: 580px) {
   font-size: 1.4vw;
 }
 
-/* ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN */
+/* MODAL MODAL MODAL MODAL MODAL MODAL MODAL */
+
+
+
+/* ADMIN PRODUCTS ADMIN PRODUCTS ADMIN PRODUCTS */
 
 .admin-product {
   margin: 5%;
@@ -2154,4 +2158,11 @@ and (max-width: 580px) {
   background-color: #E9ECEF;
   padding: 40%;
   border-radius: 20px;
+}
+
+/* ADMIN CONTACT ADMIN CONTACT ADMIN CONTACT */
+
+.remove-contact {
+  background-color: transparent;
+  border: 0;
 }

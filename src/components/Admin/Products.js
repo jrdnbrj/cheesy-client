@@ -143,14 +143,14 @@ const Products = ({ Loading }) => {
                             return <div className="image-container col" key={j}>
                                 <img src={image} className="admin-product-image" id={`image${i}${j}`} alt={`${image.split('/')[1]}`} />
                                 <button className="edit-image" type="button" onClick={() => editImage(image)}>
-                                    <i className="bi-arrow-left-right"></i>
+                                    <i className="bi-arrow-left-right" />
                                     <input type="file" hidden id={`${image}`} className="admin-image-input" onChange={event => uploadImage(event, i, j)} />
                                 </button>
                                 <button className="view-image" type="button" onClick={() => viewImage(image)}>
-                                    <i className="bi-arrows-fullscreen"></i>
+                                    <i className="bi-arrows-fullscreen" />
                                 </button>
                                 <button className="remove-image" type="button" onClick={() => removeImage(i, j)}>
-                                    <i className="bi-x-lg"></i>
+                                    <i className="bi-x-lg" />
                                 </button>
                             </div>
                         })}
@@ -160,14 +160,14 @@ const Products = ({ Loading }) => {
                             return <div className="image-container col" key={j}>
                                 <img src={image[1]} className="admin-product-image" id={`image${i}${product.images.length + j}`} alt="Product" />
                                 <button className="edit-image" type="button" onClick={() => editImage(image[1])}>
-                                    <i className="bi-arrow-left-right"></i>
+                                    <i className="bi-arrow-left-right" />
                                     <input type="file" hidden id={`${image[1]}`} className="admin-image-input" onChange={event => uploadImage(event, i, product.images.length + j)} />
                                 </button>
                                 <button className="view-image" type="button" onClick={() => viewImage(image[1])}>
-                                    <i className="bi-arrows-fullscreen"></i>
+                                    <i className="bi-arrows-fullscreen" />
                                 </button>
                                 <button className="remove-image" type="button" onClick={() => removeNewImage(image[1])}>
-                                    <i className="bi-x-lg"></i>
+                                    <i className="bi-x-lg" />
                                 </button>
                             </div>
                         })}
