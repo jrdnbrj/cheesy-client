@@ -26,7 +26,7 @@ const DELETE_CONTACT = gql`
 
 const Contact = ({ Loading }) => {
 
-    const modal = document.getElementById('modal')
+    const modal = document.getElementById('modal-contact-admin')
 
     const [contacts, setContacts] = useState()
     const [modalOptions, setModalOptions] = useState({})
@@ -54,7 +54,7 @@ const Contact = ({ Loading }) => {
             else
                 setModalOptions({
                     header: 'Remove Contact',
-                    body: 'there was an error trying to remove a contact, please try again.',
+                    body: 'There was an error trying to remove a contact, please try again.',
                 })
         }
         // eslint-disable-next-line
@@ -74,7 +74,7 @@ const Contact = ({ Loading }) => {
 
     return <>
         {contactsLoading ? <Loading document="Contacts" /> : <>
-            <Modal {...modalOptions} />
+            <Modal id="modal-contact-admin" {...modalOptions} />
             <table className="table table-striped table-hover my-5">
                 <thead>
                     <tr>

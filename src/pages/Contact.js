@@ -53,14 +53,14 @@ const Contact = () => {
             body: 'Thank you for your interest in Cheesy Bittes. We will contact you as soon as possible.',
         })
 
-        const modal = document.getElementById('modal')
+        const modal = document.getElementById('modal-contact')
         modal.style.display = 'block'
 
         document.getElementById("footer-form").reset();
     }
 
     return <>
-        <Modal {...modalOptions} />
+        <Modal id="modal-contact" {...modalOptions} />
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
         <img src={dot1} className="contact-dot" id="contact-dot-1" alt="Dot 1" />

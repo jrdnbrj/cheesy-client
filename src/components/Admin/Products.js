@@ -35,7 +35,7 @@ const UPDATE_PRODUCT = gql`
 
 const Products = ({ Loading }) => {
 
-    const modal = document.getElementById('modal')
+    const modal = document.getElementById('modal-products-admin')
 
     const dispatch = useDispatch()
 
@@ -141,7 +141,7 @@ const Products = ({ Loading }) => {
         {productLoading ? <Loading document="Products" /> : 
             newProducts.map((product, i) => {
                 return <div key={i}>
-                    <Modal {...modalOptions} />
+                    <Modal id="modal-products-admin" {...modalOptions} />
                     <form className="admin-product" onSubmit={e => saveProduct(e, product, i)}>
                         <div className="row">
                             <div className="col-6">

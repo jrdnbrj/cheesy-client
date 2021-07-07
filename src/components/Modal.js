@@ -1,13 +1,13 @@
-const Modal = ({ header, body, acceptText, rejectText, accept }) => {
+const Modal = ({ id, header, body, acceptText, rejectText, accept }) => {
 
     const closeModal = () => {
         console.log('Closing...')
-        const modal = document.getElementById('modal')
+        const modal = document.getElementById(id ? id : 'modal')
         modal.style.display = 'none'
     }
 
     return <>
-        <div id="modal" className="modal-container">
+        <div id={id ? id : 'modal'} className="modal-container">
             <div className="modal-content">
                 <div className="modal-header row" id="row-correction">
                     <div className="col-10">
