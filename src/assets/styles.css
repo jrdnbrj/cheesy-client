@@ -2021,7 +2021,6 @@ and (max-width: 580px) {
 }
 
 .payment {
-  /* padding: 5% 1%; */
   padding-top: 5%;
   padding-left: 4%;
   padding-right: 1%;
@@ -2033,8 +2032,18 @@ and (max-width: 580px) {
   padding-right: 4%;
 }
 
+.shipping {
+  padding-left: 0;
+  padding-right: 1%;
+}
+
+.billing {
+  padding-left: 1%;
+  padding-right: 0;
+}
+
 .payment span {
-  font-size: 2vw;
+  font-size: 1.5vw;
   margin-left: 5%;
   font-family: Nunito Bold;
 }
@@ -2042,7 +2051,7 @@ and (max-width: 580px) {
 .contact-info {
   border: 1px solid #ccc;
   border-radius: 20px;
-  padding: 3%;
+  padding: 5%;
   margin: 5% 0;
 }
 
@@ -2052,7 +2061,7 @@ and (max-width: 580px) {
   padding: 1% 3%;
   border: 0;
   border-bottom: 1px solid #ccc;
-  font-size: 1.5vw;
+  font-size: 1vw;
 }
 
 .state {
@@ -2062,13 +2071,12 @@ and (max-width: 580px) {
 
 .zip-code {
   padding: 0;
-
 }
 
 .same-as {
-  margin-left: 3%;
+  margin-left: 1%;
   margin-bottom: 5%;
-  font-size: 1.3vw;
+  font-size: 1vw;
 }
 
 .square {
@@ -2077,14 +2085,31 @@ and (max-width: 580px) {
 
 .square-pay {
   font-size: 1.5vw;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 1% 3%;
-  background-color: #ececec;
+  border: 0;
+  border-radius: 30px;
+  padding: 0.4% 5%;
+  background-color: #FFC439;
+  display: block;
+  margin: 0 auto;
+  font-family: Nunito Bold;
+}
+
+.or {
+  display: block;
+  margin: 0 !important;
+  text-align: center;
+  padding-bottom: 5%;
+  font-size: 2vw !important;
+}
+
+#paypal-button {
+  text-align: center;
+  margin-bottom: 8%;
 }
 
 .cart-item img {
   width: 140%;
+  /* text-align: center !important; */
 }
 
 .cart-item span {
@@ -2094,10 +2119,14 @@ and (max-width: 580px) {
 
 .cart-item p {
   margin: 1%;
+  font-size: 1.2vw;
+  font-family: Nunito Bold;
 }
 
 .receipt {
   margin-top: 20%;
+  margin-bottom: 20%;
+  font-family: Nunito Bold;
 }
 
 .receipt div {
@@ -2105,6 +2134,65 @@ and (max-width: 580px) {
   justify-content: space-between;
   margin: 2%;
   font-size: 1.4vw;
+}
+
+@media (max-width: 990px) {
+  .my-cart {
+    font-size: 5vw;
+  }
+  .payment {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .cart-item img {
+    width: 80%;
+  }
+  .cart-item span {
+    font-size: 7vw;
+    font-family: Nunito Black;
+  }
+  .cart-item p {
+    margin: 1%;
+    font-size: 4vw;
+  }
+  .square-pay {
+    font-size: 2.5vw;
+  }
+  .or {
+    font-size: 3.5vw !important;
+  }
+  .receipt {
+    margin-left: 10%;
+    margin-right: 10%;
+   margin-bottom: 10%;
+  }
+  .receipt div {
+    font-size: 3vw;
+  }
+  .shipping {
+    padding-right: 0;
+  }
+  .billing {
+    padding-left: 0;
+  }
+  .payment span {
+    font-size: 4vw;
+  }
+  .contact-info {
+    padding: 2%;
+  }
+  .contact-info input {
+    padding: 1% 3%;
+    font-size: 3vw;
+  }
+  .state input {
+    padding-left: 5%;
+  }
+  .same-as {
+    margin-left: 4%;
+    /* margin-bottom: 5%; */
+    font-size: 2.5vw;
+  }
 }
 
 /* MODAL MODAL MODAL MODAL MODAL MODAL MODAL */

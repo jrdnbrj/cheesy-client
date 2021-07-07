@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, createRef } from 'react'
 import { gql } from "@apollo/client"
 import { useSelector } from 'react-redux'
 import client from '../adapters/apolloClient'
@@ -20,13 +20,6 @@ const CAPTURE_ORDER = gql`
 `
 
 const Checkout = () => {
-
-    // const modal = document.getElementById('modal-checkout')
-    const [modalOptions, setModalOptions] = useState({})
-
-    const cart = useSelector(state => state.cart)
-    const subtotal = useSelector(state => state.subtotal)
-
 
     // PayPal
     useEffect(() => {
@@ -70,6 +63,7 @@ const Checkout = () => {
         }).render("#paypal-button");
     }, [])
 
+
     // Square
     useEffect(() => {
         const main = async () => {
@@ -95,67 +89,119 @@ const Checkout = () => {
         main()
     }, [])
 
+
+    const [modalOptions, setModalOptions] = useState({})
+    // const [modalOptions, setModalOptions] = useState({})
+
+    const cart = useSelector(state => state.cart)
+    const subtotal = useSelector(state => state.subtotal)
+
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [address, setAddress] = useState('')
+    const [suite, setSuite] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [zipCode, setZipCode] = useState('')
+
+    const [name2, setName2] = useState('')
+    const [lastName2, setLastName2] = useState('')
+    const [phone2, setPhone2] = useState('')
+    const [email2, setEmail2] = useState('')
+    const [address2, setAddress2] = useState('')
+    const [suite2, setSuite2] = useState('')
+    const [city2, setCity2] = useState('')
+    const [state2, setState2] = useState('')
+    const [zipCode2, setZipCode2] = useState('')
+
+    const check = createRef()
+
+    const isChecked = () => {
+        if (check.current.checked) {
+            setName2(name); setLastName2(lastName)
+            setPhone2(phone); setEmail2(email)
+            setAddress2(address); setSuite2(suite)
+            setCity2(city); setState2(state)
+            setZipCode2(zipCode)
+        } else {
+            setName2(''); setLastName2('')
+            setPhone2(''); setEmail2('')
+            setAddress2(''); setSuite2('')
+            setCity2(''); setState2('')
+            setZipCode2('')
+        }
+    }
+
+    const pay = e => {
+        e.preventDefault()
+        console.log('Form enviado')
+    }
+
     return <>
         <Modal id="modal-checkout" {...modalOptions} />
         <section className="row" id="row-correction">
-            <section className="col-lg-7 payment">
-                <section className="row" id="row-correction">
-                    <section className="col-6">
-                        <span>Shipping Information</span>
-                        <section className="contact-info">
-                            <input placeholder="Name" type="text" />
-                            <input placeholder="Last Name" type="text" />
-                            <input placeholder="Phone" type="text" />
-                            <input placeholder="Email" type="email" />
-                            <input placeholder="Address" type="text" />
-                            <input placeholder="Apt, suite" type="text" />
-                            <input placeholder="City" type="text" />
-                            <div className="row" id="row-correction">
-                                <div className="col-7 state">
-                                    <input placeholder="State" type="text" />
+            <section className="col-lg-7 order-sm-2 order-lg-1 payment">
+                <form onSubmit={pay}>
+                    <section className="row" id="row-correction">
+                        <section className="col-lg-6 shipping">
+                            <span>Shipping Information</span>
+                            <section className="contact-info">
+                                <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" type="text" required />
+                                <input value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Last Name" type="text" required />
+                                <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone" type="text" required />
+                                <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" type="email" required />
+                                <input value={address} onChange={e => setAddress(e.target.value)} placeholder="Address" type="text" required />
+                                <input value={suite} onChange={e => setSuite(e.target.value)} placeholder="Apt, suite" type="text" required />
+                                <input value={city} onChange={e => setCity(e.target.value)} placeholder="City" type="text" required />
+                                <div className="row" id="row-correction">
+                                    <div className="col-7 state">
+                                        <input value={state} onChange={e => setState(e.target.value)} placeholder="State" type="text" required />
+                                    </div>
+                                    <div className="col-5 zip-code">
+                                        <input value={zipCode} onChange={e => setZipCode(e.target.value)} placeholder="Zip Code" type="text" required />
+                                    </div>
                                 </div>
-                                <div className="col-5 zip-code">
-                                    <input placeholder="Zip Code" type="text" />
+                            </section>
+                        </section>
+                        <section className="col-lg-6 billing">
+                            <span>Billing Information</span>
+                            <section className="contact-info">
+                                <input value={name2} onChange={e => setName2(e.target.value)} placeholder="Name" type="text" required />
+                                <input value={lastName2} onChange={e => setLastName2(e.target.value)} placeholder="Last Name" type="text" required />
+                                <input value={phone2} onChange={e => setPhone2(e.target.value)} placeholder="Phone" type="text" required />
+                                <input value={email2} onChange={e => setEmail2(e.target.value)} placeholder="Email" type="email" required />
+                                <input value={address2} onChange={e => setAddress2(e.target.value)} placeholder="Address" type="text" required />
+                                <input value={suite2} onChange={e => setSuite2(e.target.value)} placeholder="Apt, suite" type="text" required />
+                                <input value={city2} onChange={e => setCity2(e.target.value)} placeholder="City" type="text" required />
+                                <div className="row" id="row-correction">
+                                    <div className="col-7 state">
+                                        <input value={state2} onChange={e => setState2(e.target.value)} placeholder="State" type="text" required />
+                                    </div>
+                                    <div className="col-5 zip-code">
+                                        <input value={zipCode2} onChange={e => setZipCode2(e.target.value)} placeholder="Zip Code" type="text" required />
+                                    </div>
                                 </div>
-                            </div>
+                            </section>
                         </section>
                     </section>
-                    <section className="col-6">
-                        <span>Billing Information</span>
-                        <section className="contact-info">
-                            <input placeholder="Name" type="text" />
-                            <input placeholder="Last Name" type="text" />
-                            <input placeholder="Phone" type="text" />
-                            <input placeholder="Email" type="email" />
-                            <input placeholder="Address" type="text" />
-                            <input placeholder="Apt, suite" type="text" />
-                            <input placeholder="City" type="text" />
-                            <div className="row" id="row-correction">
-                                <div className="col-7 state">
-                                    <input placeholder="State" type="text" />
-                                </div>
-                                <div className="col-5 zip-code">
-                                    <input placeholder="Zip Code" type="text" />
-                                </div>
-                            </div>
-                        </section>
+                    <div className="form-check same-as">
+                        <input className="form-check-input" ref={check} type="checkbox" id="check" onChange={isChecked} />
+                        <label className="form-check-label" htmlFor="check">
+                            Billing Addres same as Shipping Address
+                        </label>
+                    </div>
+                    <span>Payment Information</span>
+                    <section className="square">
+                        <div id="card-container"></div>
+                        <button className="square-pay" id="card-button" type="button">Pay</button>
                     </section>
-                </section>
-                <div className="form-check same-as">
-                    <input className="form-check-input" type="checkbox" id="check" />
-                    <label className="form-check-label" htmlFor="check">
-                        Billing Addres same as Shipping Address
-                    </label>
-                </div>
-                <span>Payment</span>
-                <section className="square">
-                    <div id="card-container"></div>
-                    <button className="square-pay" id="card-button" type="button">Pay</button>
-                </section>
-
+                </form>
+                <span className="or">or</span>
                 <div id="paypal-button"></div>
             </section>
-            <section className="col-lg-5 cart">
+            <section className="col-lg-5 order-sm-1 order-lg-2 cart">
                 <span className="my-cart">My Cart</span>
                 { cart.map((item, i) => {
                     return <section className="row cart-item" id="row-correction" key={i}>
@@ -169,7 +215,7 @@ const Checkout = () => {
                                     <p>{item.bundleUp}-pack.</p>
                                     <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
                                     <p>amount: {item.amount}</p>
-                                    <p>price: {item.price.toFixed(2)}</p>
+                                    <p>price: {item.total.toFixed(2)}</p>
                                 </> :
                                 <>
                                     <span>{item.name}</span>
@@ -180,7 +226,7 @@ const Checkout = () => {
                                     })}
                                     <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
                                     <p>amount: {item.amount}</p>
-                                    <p>price: {item.price.toFixed(2)}</p>
+                                    <p>price: {item.total.toFixed(2)}</p>
                                 </>
                             }
                         </section>
@@ -189,7 +235,7 @@ const Checkout = () => {
                 <section className="receipt">
                     <div>
                         <span>Subtotal</span>
-                        <span>${subtotal}</span>
+                        <span>${parseFloat(subtotal).toFixed(2)}</span>
                     </div>
                     <div>
                         <span>Estimated Shipping</span>
@@ -201,7 +247,7 @@ const Checkout = () => {
                     </div>
                     <div>
                         <span>Total</span>
-                        <span>${subtotal}</span>
+                        <span>${parseFloat(subtotal).toFixed(2)}</span>
                     </div>
                 </section>
             </section>
