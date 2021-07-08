@@ -27,7 +27,6 @@ const Cart = () => {
     const cart = useSelector(state => state.cart)
     const subtotal = useSelector(state => state.subtotal)
 
-    console.log('subtotal:', typeof subtotal)
     console.log('CART:', cart)
 
     const updateItem = (i, amount, price) => {

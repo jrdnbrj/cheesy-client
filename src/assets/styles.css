@@ -1240,8 +1240,91 @@ and (max-width: 580px) {
   padding-top: 9%;
 }
 
+.oven:hover {
+  animation: heartbeat 1.2s ease-in-out infinite both;
+}
+
+.air-fryer:hover {
+  animation: wobble-hor-bottom 1s infinite both;
+}
+
 .important {
   padding-top: 13%;
+}
+
+.important:hover {
+  animation: shake-horizontal 1.1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+}
+
+@keyframes heartbeat {
+  from {
+    transform: scale(1);
+    transform-origin: center center;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    transform: scale(0.91);
+    animation-timing-function: ease-in;
+  }
+  17% {
+    transform: scale(0.98);
+    animation-timing-function: ease-out;
+  }
+  33% {
+    transform: scale(0.87);
+    animation-timing-function: ease-in;
+  }
+  45% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  90% {
+    transform: translateX(-8px);
+  }
 }
 
 .bullet {
@@ -2084,14 +2167,22 @@ and (max-width: 580px) {
 }
 
 .square-pay {
-  font-size: 1.5vw;
+  font-size: 1.7vw;
   border: 0;
   border-radius: 30px;
-  padding: 0.4% 5%;
+  padding: 1% 0;
   background-color: #FFC439;
   display: block;
   margin: 0 auto;
   font-family: Nunito Bold;
+  width: 30%;
+  color: #414545;
+  text-align: center;
+}
+
+.square-pay img {
+  width: 45%;
+  margin-bottom: 1%;
 }
 
 .or {
@@ -2156,7 +2247,14 @@ and (max-width: 580px) {
     font-size: 4vw;
   }
   .square-pay {
-    font-size: 2.5vw;
+    width: 40%;
+  }
+  .square-pay span {
+    font-size: 3vw !important;
+  }
+  .square-pay img {
+    width: 40%;
+    margin-bottom: 2%;
   }
   .or {
     font-size: 3.5vw !important;
@@ -2164,7 +2262,7 @@ and (max-width: 580px) {
   .receipt {
     margin-left: 10%;
     margin-right: 10%;
-   margin-bottom: 10%;
+    margin-bottom: 10%;
   }
   .receipt div {
     font-size: 3vw;

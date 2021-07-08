@@ -1,9 +1,11 @@
 import { useEffect, useState, createRef } from 'react'
 import { gql } from "@apollo/client"
 import { useSelector } from 'react-redux'
-import client from '../adapters/apolloClient'
 
+import client from '../adapters/apolloClient'
 import Modal from '../components/Modal'
+
+import SquareLogo from '../assets/img/square-logo.png'
 
 
 const CREATE_ORDER = gql`
@@ -195,7 +197,10 @@ const Checkout = () => {
                     <span>Payment Information</span>
                     <section className="square">
                         <div id="card-container"></div>
-                        <button className="square-pay" id="card-button" type="button">Pay</button>
+                        <button className="square-pay" id="card-button" type="button">
+                            <img src={SquareLogo} alt="Square logo" />
+                            <span>Pay</span>
+                        </button>
                     </section>
                 </form>
                 <span className="or">or</span>

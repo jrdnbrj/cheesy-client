@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -19,6 +20,23 @@ const Product = () => {
 
     const products = useSelector(state => state.products)
 
+    useEffect(() => {
+        const mouseMove = (e, element) => {
+            element.style.transform = `translate(${(-e.offsetX)/12 + 'px'}, ${(-e.offsetY)/12 + 'px'})`
+        }
+        const mozzarella = document.getElementById('mozzarella-img')
+        const cheddar = document.getElementById('cheddar-img')
+        const peperjack = document.getElementById('pepperjack-img')
+        const mix = document.getElementById('mix-img')
+        const fruits = document.getElementById('fruits-img')
+
+        mozzarella.addEventListener("mousemove", (e) => mouseMove(e, mozzarella));
+        cheddar.addEventListener("mousemove", (e) => mouseMove(e, cheddar));
+        peperjack.addEventListener("mousemove", (e) => mouseMove(e, peperjack));
+        mix.addEventListener("mousemove", (e) => mouseMove(e, mix));
+        fruits.addEventListener("mousemove", (e) => mouseMove(e, fruits));
+    })
+
     return <>
         <img src={header} className="home-header" alt="Products Header" />
         <img src={logo} className="home-logo d-flex mx-auto" alt="Cheesy Bittes Logo" />
@@ -29,7 +47,7 @@ const Product = () => {
         
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`${products && products[0] && products[0].images[0]}`} className="product-img" alt="Mozzarella" />
+                <img src={`${products && products[0] && products[0].images[0]}`} id="mozzarella-img" className="product-img" alt="Mozzarella" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
                 <Link to="/mozzarella" style={{ textDecoration: 'none' }}>
@@ -44,7 +62,7 @@ const Product = () => {
         <section className="row product-list" id="row-correction">
             <section className="col col-hidden"></section>
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`${products && products[0] && products[1].images[0]}`} className="product-img" alt="Cheddar" />
+                <img src={`${products && products[0] && products[1].images[0]}`} id="cheddar-img" className="product-img" alt="Cheddar" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
                 <Link to="/cheddar" style={{ textDecoration: 'none' }}>
@@ -57,7 +75,7 @@ const Product = () => {
 
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`${products && products[0] && products[2].images[0]}`} className="product-img" alt="Pepper Jack" />
+                <img src={`${products && products[0] && products[2].images[0]}`} id="pepperjack-img" className="product-img" alt="Pepper Jack" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
                 <Link to="/pepperjack" style={{ textDecoration: 'none' }}>
@@ -72,7 +90,7 @@ const Product = () => {
         <section className="row product-list pb-5" id="row-correction">
             <section className="col col-hidden"></section>
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`${products && products[0] && products[3].images[0]}`} className="product-img-2" alt="Mix Them Up!" />
+                <img src={`${products && products[0] && products[3].images[0]}`} id="mix-img" className="product-img-2" alt="Mix Them Up!" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
                 <Link to="/mix" style={{ textDecoration: 'none' }}>
@@ -85,7 +103,7 @@ const Product = () => {
 
         <section className="row product-list" id="row-correction">
             <section className="col-lg-5 col-sm-5 col-5 text-end">
-                <img src={`${products && products[0] && products[4].images[0]}`} className="product-img-2" alt="Bittes & Fruits" />
+                <img src={`${products && products[0] && products[4].images[0]}`} id="fruits-img" className="product-img-2" alt="Bittes & Fruits" />
             </section>
             <section className="col-lg-5 col-sm-7 col-7 product-text">
                 <Link to="/fruits" style={{ textDecoration: 'none' }}>
