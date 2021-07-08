@@ -1751,15 +1751,15 @@ and (max-width: 580px) {
   font-size: 1.48vw;
 }
 
-.passion, .mango {
+.smoothie-name-1, .smoothie-name-3 {
   margin-left: 20%;
 }
 
-.blackberry {
+.smoothie-name-2 {
   margin-left: 5%;
 }
 
-.soursop {
+.smoothie-name-0 {
   margin-left: 35%;
 }
 
@@ -1899,12 +1899,21 @@ and (max-width: 580px) {
   .smoothies span {
     font-size: 3.5vw;
   }
-  .soursop, .passion, 
-  .mango, .blackberry {
+  .smoothie-name-1, 
+  .smoothie-name-3, .smoothie-name-2 {
     margin-left: 0%;
+  }
+  .smoothie-name-0 {
+    margin-left: 11%;
   }
   .smoothies .text-center {
     margin-top: 10%;
+  }
+  .ingredients-strawberry,
+  .passion-strawberry,
+  .mango-strawberry,
+  .blackberry-strawberry {
+    font-size: 2vw;
   }
   .btn-bundle {
     padding: 7px 0;
@@ -2411,6 +2420,14 @@ and (max-width: 580px) {
   background-color: #E9ECEF;
   padding: 40%;
   border-radius: 20px;
+}
+
+.admin-smoothies {
+
+}
+
+.admin-smoothies img {
+  width: 100%;
 }
 
 /* ADMIN CONTACT ADMIN CONTACT ADMIN CONTACT */

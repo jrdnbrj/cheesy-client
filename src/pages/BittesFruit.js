@@ -13,14 +13,6 @@ import logo from '../assets/img/logo.png'
 import dot1 from '../assets/img/product-dot1.png'
 import dot2 from '../assets/img/product-dot2.png'
 
-// import strawberry from '../assets/img/smoothie-strawberry.png'
-import soursop from '../assets/img/smoothie-soursop.png'
-import passion from '../assets/img/smoothie-passionfruit.png'
-import mango from '../assets/img/smoothie-mango.png'
-import blackberry from '../assets/img/smoothie-blackberry.png'
-// import bread1 from '../assets/img/bread-1.png'
-// import bread2 from '../assets/img/bread-2.png'
-
 
 const GET_PRODUCT = gql`
     query($path: String!) {
@@ -30,6 +22,7 @@ const GET_PRODUCT = gql`
             shortDescription
             ingredients
             price
+            smoothies
         }
     }
 `
@@ -39,12 +32,14 @@ const Products = () => {
     const modal = document.getElementById('modal-fruits')
     const [modalOptions, setModalOptions] = useState({})
 
+    const smoothieNames = []
+
     const dispatch = useDispatch()
     const location = useLocation()
     const path = location.pathname
     const { data } = useQuery(GET_PRODUCT, { variables: { path }})
 
-    // data && console.log('Fruits:', data.getProductByPath)
+    data && console.log('Fruits:', data.getProductByPath)
 
     const [ss, setSs] = useState(0)
     const [pf, setPf] = useState(0)
@@ -128,7 +123,12 @@ const Products = () => {
 
         const sum = ss + pf + ab + mg
         if (sum === 3)
-            payload['choose3'] = [['Soursop', ss], ['Passion', pf], ['Blackberry', ab], ['Mango', mg]]
+            payload['choose3'] = [
+                [smoothieNames[0], ss], 
+                [smoothieNames[1], pf], 
+                [smoothieNames[2], ab], 
+                [smoothieNames[3], mg]
+            ]
         else {
             modal.style.display = 'block'
             return setModalOptions({
@@ -222,34 +222,16 @@ const Products = () => {
             </section>
             <section className="row smoothies mt-5" id="row-correction">
                 <section className="col smoothie-col"></section>
-                <section className="col-lg-2 col-sm-6 text-center">
-                    <span className="soursop">Soursop</span>
-                    <img src={soursop} className="smoothie" alt="Strawberry" />
-                    <div className="ingredients-strawberry">
-                        Ingredients: Soursop, Antioxidant (Ascorbic acid). May contain sulfite parts.
-                    </div>
-                </section>
-                <section className="col-lg-2 col-sm-6 text-center">
-                    <span className="passion">Passion Fruit</span>
-                    <img src={passion} className="smoothie" alt="Pasison" />
-                    <div className="passion-strawberry">
-                        Ingredients: Passion Fruit, Antioxidant (Ascorbic Acid). May Contain Sulfite Parts.
-                    </div>
-                </section>
-                <section className="col-lg-2 col-sm-6 text-center">
-                    <span className="blackberry">Andean Blackberry</span>
-                    <img src={blackberry} className="smoothie" alt="Blackberry" />
-                    <div className="blackberry-strawberry">
-                        Ingredients: Strawberry, Antioxidant (Ascorbic acid). May contain sulfite parts.
-                    </div>
-                </section>
-                <section className="col-lg-2 col-sm-6 text-center">
-                    <span className="mango">Mango</span>
-                    <img src={mango} className="smoothie" alt="Mango" />
-                    <div className="mango-strawberry">
-                        Ingredients: Mango, Antioxidant (Ascorbic acid). May contain sulfite parts.
-                    </div>
-                </section>
+                {data && data.getProductByPath.smoothies.map((smoothie, i) => {
+                    smoothieNames[i] = smoothie[0]
+                    return <section className="col-lg-2 col-sm-6 text-center" key={i}>
+                        <span className={`smoothie-name-${i}`}>{smoothie[0]}</span>
+                        <img src={smoothie[1]} className="smoothie" alt="Pasison" />
+                        <div className="passion-strawberry">
+                            Ingredients: {smoothie[2]}
+                        </div>
+                    </section>
+                })}
                 <section className="col smoothie-col"></section>
             </section>
             <section>
@@ -297,7 +279,7 @@ const Products = () => {
                         <div className="dropdown-menu show">
                             <div className="choose-input row" id="row-correction">
                                 <div className="col-10">
-                                    <span className="radio-bundle">SOURSOP</span>
+                                    <span className="radio-bundle">{smoothieNames[0]}</span>
                                 </div>
                                 <section className="col-2">
                                     <button onClick={() => down(ss, setSs)}>-</button>
@@ -307,7 +289,7 @@ const Products = () => {
                             </div>
                             <div className="choose-input row" id="row-correction">
                                 <div className="col-10">
-                                    <span className="radio-bundle">PASSION FRUIT</span>
+                                    <span className="radio-bundle">{smoothieNames[1]}</span>
                                 </div>
                                 <section className="col-2">
                                     <button onClick={() => down(pf, setPf)}>-</button>
@@ -317,7 +299,7 @@ const Products = () => {
                             </div>
                             <div className="choose-input row" id="row-correction">
                                 <div className="col-10">
-                                    <span className="radio-bundle">ANDEAN BLACKBERRY</span>
+                                    <span className="radio-bundle">{smoothieNames[2]}</span>
                                 </div>
                                 <section className="col-2">
                                     <button onClick={() => down(ab, setAb)}>-</button>
@@ -327,7 +309,7 @@ const Products = () => {
                             </div>
                             <div className="choose-input row" id="row-correction">
                                 <div className="col-10">
-                                    <span className="radio-bundle">MANGO</span>
+                                    <span className="radio-bundle">{smoothieNames[3]}</span>
                                 </div>
                                 <section className="col-2">
                                     <button onClick={() => down(mg, setMg)}>-</button>
