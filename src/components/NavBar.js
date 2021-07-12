@@ -1,12 +1,38 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import mediumLogo from '../assets/img/medium-logo.png'
 import smallLogo from '../assets/img/small-logo.png'
 import cart from '../assets/img/cart.png'
-// import Cart from '../components/Cart'
+
 
 const NavBar = () => {
-    return <nav className="navbar navbar-expand-lg navbar-light navbar-bg">
+
+    useEffect(() => {
+
+        const autohide = document.querySelector('.autohide')
+        let lastScroll = 0
+
+        window.onscroll = e => {
+            const currentScroll = document.documentElement.scrollTop
+
+            if (lastScroll <= currentScroll) {
+                if (currentScroll < 107)
+                    autohide.classList.remove('navbar-sticky')
+                else {
+                    autohide.classList.remove('scrolled-up')
+                    autohide.classList.add('scrolled-down')
+                }
+            } else {
+                autohide.classList.remove('scrolled-down')
+                autohide.classList.add('scrolled-up')
+                autohide.classList.add('navbar-sticky')
+            }
+            lastScroll = currentScroll
+        }
+    })
+
+    return <nav className="navbar navbar-expand-lg navbar-light navbar-bg autohide">
         <div className="container-fluid mx-auto">
             <button className="navbar-toggler" id="hamburguer-btn" type="button" data-bs-toggle="collapse" data-bs-target="#nav-tog" aria-controls="nav-tog" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="bi-list hamburguer-icon" ></i>

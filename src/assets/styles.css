@@ -159,6 +159,20 @@ body::-webkit-scrollbar-track-piece {
   width: 90%;
 }
 
+.scrolled-down{
+  transform: translateY(-100%); transition: all 0.3s ease-in-out;
+}
+
+.scrolled-up{
+  transform: translateY(0); transition: all 0.3s ease-in-out;
+}
+
+.navbar-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+
 /* CART CART CART CART CART CART CART CART CART CART CART */
 
 
@@ -220,6 +234,11 @@ body::-webkit-scrollbar-track-piece {
   color: #FEFEFE;
   margin: auto 0;
   padding-right: 0;
+  margin-left: 4%;
+}
+
+.remove-section {
+  width: 8%;
 }
 
 .remove-item {
@@ -232,7 +251,7 @@ body::-webkit-scrollbar-track-piece {
 
 .cart-description p {
   color: #FEFEFE;
-  font-size: 1.8vw;
+  font-size: 2vw;
   font-family: Nunito Black;
   text-align: center;
   margin-bottom: 0;

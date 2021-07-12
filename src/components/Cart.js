@@ -86,8 +86,10 @@ const Cart = () => {
                                             </p>
                                                <p className="item-description">
                                                     Fruit:
-                                                    {item.choose3.map(smoothie => {
-                                                            return <span className="flavor-cart"> {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}, </span>
+                                                    {item.choose3.map((smoothie, i) => {
+                                                        return <span className="flavor-cart" key={i}>
+                                                            {smoothie[1] !== 0 ? ` ${smoothie[0]}x${smoothie[1]}` : ''} 
+                                                        </span>
                                                     })}
                                                 </p>
                                             <p className="item-description">
@@ -102,7 +104,7 @@ const Cart = () => {
                                         <input value={item.total && item.total.toFixed(2)} type="number" className="cart-input-price" disabled />
                                     </section>
                                 </section>
-                                <section className="col-lg-2 col-sm-2 col-2">
+                                <section className="col-lg-2 col-sm-2 col-2 remove-section">
                                     <button className="remove-item" onClick={() => removeItem(i)}>x</button>
                                 </section>
                             </section>
