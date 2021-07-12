@@ -151,7 +151,7 @@ const Product = () => {
                     </div>
                 </section>
                 <section className="col-lg-6 col-sm-12 information">
-                    <h5>{data && data.getProductByPath.name} Cheesy Bittes</h5>
+                    <h5>{data && data.getProductByPath.name}</h5>
                     <section className="description">
                         <p>{data && data.getProductByPath.shortDescription}</p>
                         <span>15 Pieces (12.6 OZ)</span>

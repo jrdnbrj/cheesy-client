@@ -117,7 +117,7 @@ const Products = () => {
             modal.style.display = 'block'
             return setModalOptions({
                 header: 'Add to Cart',
-                body: 'You must choose a BUNDLE UP option.',
+                body: 'You must choose your Cheesy Bittes option.',
             })
         }
 
@@ -133,7 +133,7 @@ const Products = () => {
             modal.style.display = 'block'
             return setModalOptions({
                 header: 'Add to Cart',
-                body: 'You must choose 3 fruit smoothies to continue.',
+                body: 'You must choose 3 fruit flavors to continue.',
             })
         }
 
@@ -186,7 +186,7 @@ const Products = () => {
                     </div>
                 </section>
                 <section className="col-lg-6 col-sm-12 information">
-                    <h5>{data && data.getProductByPath.name} Cheesy Bittes</h5>
+                    <h5>{data && data.getProductByPath.name}</h5>
                     <section className="description">
                         <p>{data && data.getProductByPath.shortDescription}</p>
                         <span>15 Pieces (12.6 OZ)</span>
@@ -370,7 +370,7 @@ const Products = () => {
                 </section>
             </section>
             <section className="address-fruit py-5">
-                <button className="btn-add" onClick={addToCart}>ADD TO CART</button>
+                <button className="btn-add" onClick={addToCart} disabled >Coming Soon</button>
                 <address>
                     <p>If you live within 10 miles of Eau Claire (54703) we will deliver to your door for free.</p>
                     <span>DM us!</span>

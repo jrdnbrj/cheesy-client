@@ -230,6 +230,7 @@ const Checkout = () => {
                                         </p>
                                     })}
                                     <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                    {/* <p>amount: {item.amount}</p> */}
                                     <p>amount: {item.amount}</p>
                                     <p>price: {item.total.toFixed(2)}</p>
                                 </>
@@ -240,7 +241,11 @@ const Checkout = () => {
                 <section className="receipt">
                     <div>
                         <span>Subtotal</span>
-                        <span>${parseFloat(subtotal).toFixed(2)}</span>
+                        <span>$ {parseFloat(subtotal).toFixed(2)}</span>
+                    </div>
+                    <div>
+                        <span>Promo Code</span>
+                        <span>-$ 10</span>
                     </div>
                     <div>
                         <span>Estimated Shipping</span>
@@ -252,7 +257,7 @@ const Checkout = () => {
                     </div>
                     <div>
                         <span>Total</span>
-                        <span>${parseFloat(subtotal).toFixed(2)}</span>
+                        <span>$ {parseFloat(subtotal).toFixed(2)}</span>
                     </div>
                 </section>
             </section>

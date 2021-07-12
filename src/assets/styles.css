@@ -161,6 +161,8 @@ body::-webkit-scrollbar-track-piece {
 
 /* CART CART CART CART CART CART CART CART CART CART CART */
 
+
+
 .cart-background {
   position: absolute;
   height: 100%;
@@ -174,7 +176,7 @@ body::-webkit-scrollbar-track-piece {
 }
 
 .offcanvas-end {
-  width: 30%;
+  width: 40%;
 }
 
 .offcanvas-header {
@@ -237,8 +239,12 @@ body::-webkit-scrollbar-track-piece {
 }
 
 .item-description {
-  font-size: 1.4vw !important;
+  font-size: 1vw !important;
   font-family: Nunito Bold !important;
+}
+
+.choose-1-cart, .flavor-cart {
+  font-size: 0.9vw !important;
 }
 
 .cart-description section {
@@ -1696,7 +1702,7 @@ and (max-width: 580px) {
 }
 
 .address {
-  margin: 3.5% 12.5% 0 17%;
+  margin: 6.5% 12.5% 0 17%;
 }
 
 .btn-add {
@@ -2296,9 +2302,11 @@ and (max-width: 580px) {
 .cart-item span {
   font-size: 2vw;
   font-family: Nunito Black;
+  color: #414545;
 }
 
 .cart-item p {
+  color: #414545;
   margin: 1%;
   font-size: 1.2vw;
   font-family: Nunito Bold;

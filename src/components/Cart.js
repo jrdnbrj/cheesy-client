@@ -82,13 +82,14 @@ const Cart = () => {
                                         </p> :
                                         <>
                                             <p className="item-description">
-                                                {item.choose1}
+                                                Bittes: <span className="choose-1-cart">{item.choose1}</span>
                                             </p>
-                                            {item.choose3.map(smoothie => {
-                                                return <p className="item-description" key={smoothie}>
-                                                    {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}
+                                               <p className="item-description">
+                                                    Fruit:
+                                                    {item.choose3.map(smoothie => {
+                                                            return <span className="flavor-cart"> {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}, </span>
+                                                    })}
                                                 </p>
-                                            })}
                                             <p className="item-description">
                                                 {item.buyOnce ? ' Once' : ` Club${item.joinClub}mo`}
                                             </p>
