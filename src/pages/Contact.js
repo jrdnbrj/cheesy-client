@@ -1,4 +1,4 @@
-import { createRef, useState } from 'react'
+import { createRef, useState, useEffect } from 'react'
 import { useMutation, gql } from "@apollo/client"
 
 import background1 from '../assets/img/contact-background-1.png'
@@ -9,6 +9,7 @@ import dot1 from '../assets/img/contact-dot1.png'
 import dot2 from '../assets/img/contact-dot2.png'
 
 import Modal from '../components/Modal'
+import { loadScript } from "@paypal/paypal-js"
 
 
 const CREATE_CONTACT = gql`
@@ -34,6 +35,55 @@ const Contact = () => {
     const [createContact, { error }] = useMutation(CREATE_CONTACT)
 
     error && alert('An unexpected error occurred, please try again.')
+
+    useEffect(() => {
+        loadScript({ 
+            'client-id': 'AYJPPVW7DLJ6bCDexWjlveGFEuyqNklD6vndKp8T-4nRemjrQFqv73kk87aqHgaXGHb0lHpt0BFR_5xz', 
+            'vault': true, 
+            'intent': 'subscription' 
+        }).then(paypal => {
+            paypal.Buttons({
+                style: {
+                    color: 'gold',
+                    shape: 'pill',
+                    size: 'responsive',
+                    layout: 'horizontal',
+                    label: 'checkout',
+                    // tagline: false
+                },
+                createSubscription: function(data, actions) {
+                    console.log('Create Subscription.')
+                    const response =  actions.subscription.create({
+                        "plan_id": "P-8MN77060VY799034YMDWT3JY",
+                        // "shipping_amount": {
+                        //     "currency_code": "USD",
+                        //     "value": "10.00"
+                        // },
+                        "application_context": {
+                            "brand_name": "Cheesy Bittes",
+                            "user_action": "SUBSCRIBE_NOW",
+                            "return_url": "https://cheesybittes.netlify.app/checkout",
+                            "cancel_url": "https://cheesybittes.netlify.app/checkout"
+                        }
+                    });
+                    return response
+                },
+                onApprove: function(data, actions) {
+                    console.log('Subscription Approve.')
+                    console.log(data)
+                    console.log(data.subscriptionID)
+                },
+                onError: function(error) {
+                    console.log('Subscription Error:', error)
+                },
+                onCancel: function () {
+                    console.log('Subscription Cancelled.')
+                },
+            }).render('#paypal-button-subscription')
+        }).catch(err => {
+            console.error("failed to load the PayPal JS SDK script", err)
+        })
+    })
 
     const saveContact = e => {
         e.preventDefault()
@@ -68,6 +118,7 @@ const Contact = () => {
         <img src={background1} className="contact-header" alt="Products Background" />
         <section className="row contact-background mx-auto" id="row-correction">
             <section className="col-xs-12 col-sm-12 col-lg-6 contact-text order-2 order-sm-2 order-lg-1">
+                <div id="paypal-button-subscription"></div>
                 <address>
                     <p className="pb-5">We make our cheesy bittes with love and hope they make you smile! 
                     <br />If you have any questions or just want to chat, let us know

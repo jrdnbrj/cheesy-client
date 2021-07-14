@@ -170,12 +170,10 @@ body::-webkit-scrollbar-track-piece {
 .navbar-sticky {
   position: sticky;
   top: 0;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 /* CART CART CART CART CART CART CART CART CART CART CART */
-
-
 
 .cart-background {
   position: absolute;

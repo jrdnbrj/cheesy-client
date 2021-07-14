@@ -1,6 +1,7 @@
 import { useEffect, useState, createRef } from 'react'
 import { gql } from "@apollo/client"
 import { useSelector } from 'react-redux'
+import { loadScript } from "@paypal/paypal-js"
 
 import client from '../adapters/apolloClient'
 import Modal from '../components/Modal'
@@ -26,43 +27,93 @@ const Checkout = () => {
     // PayPal
     useEffect(() => {
         const modal = document.getElementById('modal-checkout')
-        window.paypal.Buttons({
-            style: {
-                color: 'gold',
-                shape: 'pill',
-                size: 'responsive',
-                layout: 'horizontal',
-                label: 'checkout',
-                // tagline: false
-            },
-            createOrder: function(data, actions) {
-                console.log('Creando Orden')
-                return client.query({ query: CREATE_ORDER }).then(({ data }) => data.createOrder)
-            },
-            onApprove: function(data, actions) {
-                console.log('approved')
-                return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID } })
-                    .then(data => {
-                        return console.log('Data Captured:', data.data.captureOrder)
+
+        loadScript({ 
+            'client-id': 'AYJPPVW7DLJ6bCDexWjlveGFEuyqNklD6vndKp8T-4nRemjrQFqv73kk87aqHgaXGHb0lHpt0BFR_5xz', 
+        }).then(paypal => {
+            paypal.Buttons({
+                style: {
+                    color: 'gold',
+                    shape: 'pill',
+                    size: 'responsive',
+                    layout: 'horizontal',
+                    label: 'checkout',
+                    // tagline: false
+                },
+                createOrder: function(data, actions) {
+                    console.log('Creando Orden')
+                    return client.query({ query: CREATE_ORDER }).then(({ data }) => data.createOrder)
+                },
+                onApprove: function(data, actions) {
+                    console.log('approved')
+                    return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID } })
+                        .then(data => {
+                            return console.log('Data Captured:', data.data.captureOrder)
+                        })
+                },
+                onError: function(error) {
+                    console.log('Error:', error)
+                    setModalOptions({
+                        header: 'Checkout',
+                        body: 'It seems that there was an error with the transaction, please try again.',
                     })
-            },
-            onError: function(error) {
-                console.log('Error:', error)
-                setModalOptions({
-                    header: 'Checkout',
-                    body: 'It seems that there was an error with the transaction, please try again.',
-                })
-                modal.style.display = 'block'
-            },
-            onCancel: function () {
-                console.log('Cancelled')
-                setModalOptions({
-                    header: 'Checkout',
-                    body: 'You have canceled the transaction. Not sure what you are doing? Get in touch with us.',
-                })
-                modal.style.display = 'block'
-            },
-        }).render("#paypal-button");
+                    modal.style.display = 'block'
+                },
+                onCancel: function () {
+                    console.log('Cancelled')
+                    setModalOptions({
+                        header: 'Checkout',
+                        body: 'You have canceled the transaction. Not sure what you are doing? Get in touch with us.',
+                    })
+                    modal.style.display = 'block'
+                },
+            }).render("#paypal-button")
+        })
+
+        // loadScript({ 
+        //     'client-id': 'AYJPPVW7DLJ6bCDexWjlveGFEuyqNklD6vndKp8T-4nRemjrQFqv73kk87aqHgaXGHb0lHpt0BFR_5xz', 
+        //     'vault': true, 
+        //     'intent': 'subscription' 
+        // }).then(paypal => {
+        //     paypal.Buttons({
+        //         style: {
+        //             color: 'gold',
+        //             shape: 'pill',
+        //             size: 'responsive',
+        //             layout: 'horizontal',
+        //             label: 'checkout',
+        //             // tagline: false
+        //         },
+        //         createSubscription: function(data, actions) {
+        //             console.log('Create Subscription.')
+        //             const response =  actions.subscription.create({
+        //                 "plan_id": "P-8MN77060VY799034YMDWT3JY",
+        //                 // "shipping_amount": {
+        //                 //     "currency_code": "USD",
+        //                 //     "value": "10.00"
+        //                 // },
+        //                 "application_context": {
+        //                     "brand_name": "Cheesy Bittes",
+        //                     "user_action": "SUBSCRIBE_NOW",
+        //                     "return_url": "https://cheesybittes.netlify.app/checkout",
+        //                     "cancel_url": "https://cheesybittes.netlify.app/checkout"
+        //                 }
+        //             });
+        //             return response
+        //         },
+        //         onApprove: function(data, actions) {
+        //             console.log('Subscription Approve.')
+        //         },
+        //         onError: function(error) {
+        //             console.log('Subscription Error:', error)
+        //         },
+        //         onCancel: function () {
+        //             console.log('Subscription Cancelled.')
+        //         },
+        //     }).render('#paypal-button-subscription')
+        // }).catch(err => {
+        //     console.error("failed to load the PayPal JS SDK script", err)
+        // })
     }, [])
 
 
@@ -205,6 +256,7 @@ const Checkout = () => {
                 </form>
                 <span className="or">or</span>
                 <div id="paypal-button"></div>
+                {/* <div id="paypal-button-subscription"></div> */}
             </section>
             <section className="col-lg-5 order-sm-1 order-lg-2 cart">
                 <span className="my-cart">My Cart</span>

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.20",
+    "@paypal/paypal-js": "^4.0.6",
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
     "bootstrap-icons": "^1.5.0",
