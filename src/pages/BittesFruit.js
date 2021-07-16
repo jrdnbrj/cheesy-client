@@ -159,6 +159,14 @@ const Products = () => {
         dispatch({ type: 'APPEND_TO_CART', payload })
     }
 
+    const comingSoon = () => {
+        setModalOptions({
+            header: 'Add to Cart',
+            body: 'Coming Soon',
+        })
+        modal.style.display = 'block'
+    }
+
     return <>
         <Modal id="modal-fruits" {...modalOptions} />
         <img src={header} className="home-header" alt="Products Header" />
@@ -370,7 +378,8 @@ const Products = () => {
                 </section>
             </section>
             <section className="address-fruit py-5">
-                <button className="btn-add" onClick={addToCart} disabled >Coming Soon</button>
+                <button className="btn-add" onClick={comingSoon}>Coming Soon</button>
+                {/* <button className="btn-add" onClick={addToCart}>Coming Soon</button> */}
                 <address>
                     <p>If you live within 10 miles of Eau Claire (54703) we will deliver to your door for free.</p>
                     <span>DM us!</span>

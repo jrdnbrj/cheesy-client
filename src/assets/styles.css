@@ -170,7 +170,7 @@ body::-webkit-scrollbar-track-piece {
 .navbar-sticky {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 /* CART CART CART CART CART CART CART CART CART CART CART */
@@ -1975,6 +1975,10 @@ and (max-width: 580px) {
   font-family: Nunito Bold;
 }
 
+.address-fruit button {
+  opacity: 0.6;
+}
+
 .address-fruit p {
   font-size: 1.7vw;
   margin-bottom: 0;
@@ -2528,10 +2532,6 @@ and (max-width: 580px) {
   border-radius: 20px;
 }
 
-.admin-smoothies {
-
-}
-
 .admin-smoothies img {
   width: 100%;
 }
@@ -2541,4 +2541,19 @@ and (max-width: 580px) {
 .remove-contact {
   background-color: transparent;
   border: 0;
+}
+
+/* ADMIN SALES SQUARE ADMIN SALES SQUARE */
+
+.square-payments,
+.square-customers, 
+.square-invoices,
+.square-catalogs,
+.paypal-plans,
+.paypal-orders {
+  margin: 3%;
+}
+
+.settings {
+  margin: 3% 55% 3% 5%;
 }
