@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery, gql } from "@apollo/client"
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 
 import Modal from '../components/Modal'
 
@@ -34,7 +34,7 @@ const Products = () => {
 
     const smoothieNames = []
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const location = useLocation()
     const path = location.pathname
     const { data } = useQuery(GET_PRODUCT, { variables: { path }})
@@ -90,74 +90,74 @@ const Products = () => {
         radio4.addEventListener('change', toDo)
     })
 
-    const addToCart = () => {
-        const payload = { 
-            path,
-            amount: 1,
-            price: parseFloat(data.getProductByPath.price),
-            image: data.getProductByPath.images[0],
-            name: data.getProductByPath.name,
-            total: parseFloat(data.getProductByPath.price)
-        }
+    // const addToCart = () => {
+    //     const payload = { 
+    //         path,
+    //         amount: 1,
+    //         price: parseFloat(data.getProductByPath.price),
+    //         image: data.getProductByPath.images[0],
+    //         name: data.getProductByPath.name,
+    //         total: parseFloat(data.getProductByPath.price)
+    //     }
 
-        const radio1 = document.getElementById('radio-button1')
-        const radio2 = document.getElementById('radio-button2')
-        const radio3 = document.getElementById('radio-button3')
-        const radio4 = document.getElementById('radio-button4')
-        const radio5 = document.getElementById('radio-button5')
-        const radio6 = document.getElementById('radio-button6')
-        const buyOnce = document.getElementById('buy-once-radio')
+    //     const radio1 = document.getElementById('radio-button1')
+    //     const radio2 = document.getElementById('radio-button2')
+    //     const radio3 = document.getElementById('radio-button3')
+    //     const radio4 = document.getElementById('radio-button4')
+    //     const radio5 = document.getElementById('radio-button5')
+    //     const radio6 = document.getElementById('radio-button6')
+    //     const buyOnce = document.getElementById('buy-once-radio')
 
-        if (radio1.checked || radio2.checked || radio3.checked || radio4.checked)
-            payload['choose1'] = radio1.checked ? 'Mozzarella' : 
-                                    radio2.checked ? 'Cheddar' : 
-                                    radio3.checked ? 'Pepper Jack' : 
-                                    radio4.checked ? 'Mix Them Up!' : '-' 
-        else {
-            modal.style.display = 'block'
-            return setModalOptions({
-                header: 'Add to Cart',
-                body: 'You must choose your Cheesy Bittes option.',
-            })
-        }
+    //     if (radio1.checked || radio2.checked || radio3.checked || radio4.checked)
+    //         payload['choose1'] = radio1.checked ? 'Mozzarella' : 
+    //                                 radio2.checked ? 'Cheddar' : 
+    //                                 radio3.checked ? 'Pepper Jack' : 
+    //                                 radio4.checked ? 'Mix Them Up!' : '-' 
+    //     else {
+    //         modal.style.display = 'block'
+    //         return setModalOptions({
+    //             header: 'Add to Cart',
+    //             body: 'You must choose your Cheesy Bittes option.',
+    //         })
+    //     }
 
-        const sum = ss + pf + ab + mg
-        if (sum === 3)
-            payload['choose3'] = [
-                [smoothieNames[0], ss], 
-                [smoothieNames[1], pf], 
-                [smoothieNames[2], ab], 
-                [smoothieNames[3], mg]
-            ]
-        else {
-            modal.style.display = 'block'
-            return setModalOptions({
-                header: 'Add to Cart',
-                body: 'You must choose 3 fruit flavors to continue.',
-            })
-        }
+    //     const sum = ss + pf + ab + mg
+    //     if (sum === 3)
+    //         payload['choose3'] = [
+    //             [smoothieNames[0], ss], 
+    //             [smoothieNames[1], pf], 
+    //             [smoothieNames[2], ab], 
+    //             [smoothieNames[3], mg]
+    //         ]
+    //     else {
+    //         modal.style.display = 'block'
+    //         return setModalOptions({
+    //             header: 'Add to Cart',
+    //             body: 'You must choose 3 fruit flavors to continue.',
+    //         })
+    //     }
 
-        if (radio5.checked || radio6.checked || buyOnce.checked) {
-            payload['buyOnce'] = buyOnce.checked
-            payload['joinClub'] = radio5.checked ? 1 : radio6.checked ? 2 : false
-        } else {
-            modal.style.display = 'block'
-            return setModalOptions({
-                header: 'Add to Cart',
-                body: 'You must choose if you want to BUY ONCE or if you want to JOIN THE CLUB!',
-            })
-        }
+    //     if (radio5.checked || radio6.checked || buyOnce.checked) {
+    //         payload['buyOnce'] = buyOnce.checked
+    //         payload['joinClub'] = radio5.checked ? 1 : radio6.checked ? 2 : false
+    //     } else {
+    //         modal.style.display = 'block'
+    //         return setModalOptions({
+    //             header: 'Add to Cart',
+    //             body: 'You must choose if you want to BUY ONCE or if you want to JOIN THE CLUB!',
+    //         })
+    //     }
 
-        console.log('Payload:', payload)
+    //     console.log('Payload:', payload)
 
-        setModalOptions({
-            header: 'Add to Cart',
-            body: 'Item added to cart',
-        })
-        modal.style.display = 'block'
+    //     setModalOptions({
+    //         header: 'Add to Cart',
+    //         body: 'Item added to cart',
+    //     })
+    //     modal.style.display = 'block'
 
-        dispatch({ type: 'APPEND_TO_CART', payload })
-    }
+    //     dispatch({ type: 'APPEND_TO_CART', payload })
+    // }
 
     const comingSoon = () => {
         setModalOptions({
