@@ -16,7 +16,7 @@ import airFryer from '../assets/img/air-fryer.png'
 import important from '../assets/img/important.png'
 
 
-const Product = () => {
+const Products = () => {
 
     const products = useSelector(state => state.products)
 
@@ -137,10 +137,10 @@ const Product = () => {
                 <section className="col-lg-4 px-4 instructions">
                     <img src={important} className="important" alt="Important" />
                     <h5>Important</h5>
-                    <li className="bullet green-padding">Do not microwave</li>
-                    <li className="bullet">Do not spray or grease</li>
-                    <li className="bullet">Keep frozen until ready to bake</li>
-                    Do not allow to thaw
+                    <li className="bullet green-padding">Do not microwave.</li>
+                    <li className="bullet">Do not spray or grease.</li>
+                    <li className="bullet">Keep frozen until ready to bake.</li>
+                    Do not allow to thaw.
                 </section>
             </section>
         </section>
@@ -148,4 +148,4 @@ const Product = () => {
     </>
 }
 
-export default Product
+export default Products

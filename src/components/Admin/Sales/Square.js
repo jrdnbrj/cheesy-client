@@ -61,9 +61,9 @@ const Square = () => {
                         return <tr key={index}>
                             <th scope="row">{index + 1}</th>
                             <td>{payment.status}</td>
-                            <td>$ {payment.amount_money.amount}</td>
+                            <td>$ {payment.amount_money.amount / 100}</td>
                             <td>{payment.card_details.card.card_brand}</td>
-                            <td>{payment.created_at}</td>
+                            <td>{payment.created_at.replace('T', ' ')}</td>
                         </tr>
                     })}
                 </tbody>
@@ -116,9 +116,9 @@ const Square = () => {
                             <td>{catalog.subscription_plan_data.name}</td>
                             <td>
                                 <span>{catalog.subscription_plan_data.phases[0].cadence}</span>
-                                <span> ${catalog.subscription_plan_data.phases[0].recurring_price_money.amount}</span>
+                                <span> ${catalog.subscription_plan_data.phases[0].recurring_price_money.amount / 100}</span>
                             </td>
-                            <td>{catalog.updated_at}</td>
+                            <td>{catalog.updated_at.replace('T', ' ')}</td>
                         </tr>
                     })}
                 </tbody>
@@ -141,8 +141,8 @@ const Square = () => {
                         return <tr key={index}>
                             <th scope="row">{index + 1}</th>
                             <td>{invoice.status}</td>
-                            <td>$ {invoice.payment_requests[0].computed_amount_money.amount}</td>
-                            <td>{invoice.created_at}</td>
+                            <td>$ {invoice.payment_requests[0].computed_amount_money.amount / 100}</td>
+                            <td>{invoice.created_at.replace('T', ' ')}</td>
                             <td>{invoice.primary_recipient.customer_id}</td>
                         </tr>
                     })}

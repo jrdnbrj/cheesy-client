@@ -1,5 +1,5 @@
 import { useEffect, useState, createRef } from 'react'
-import { gql } from "@apollo/client"
+import { gql, useMutation } from "@apollo/client"
 import { useSelector } from 'react-redux'
 
 import client from '../adapters/apolloClient'
@@ -16,8 +16,22 @@ const CREATE_ORDER = gql`
 `
 
 const CAPTURE_ORDER = gql`
-    query ($order_id: String!, $cart: JSONString!) {
+    query ($order_id: String!, $cart: [CartType]!) {
         captureOrder(orderId: $order_id, cart: $cart)
+    }
+`
+
+const CREATE_PAYMENT = gql`
+    query ($paymentToken: String!, $amount: String!) {
+        createPayment(paymentToken: $paymentToken, amount: $amount)
+    }
+`
+
+const CREATE_CHECKOUT_CONTACT = gql`
+    mutation ($billingInfo: CheckoutInfoInputType, $shippingInfo: CheckoutInfoInputType) {
+        createCheckoutContact(billingInfo: $billingInfo, shippingInfo: $shippingInfo) {
+            response
+        }
     }
 `
 
@@ -52,6 +66,8 @@ const Checkout = () => {
 
     const check = createRef()
 
+    const [createCheckoutContact] = useMutation(CREATE_CHECKOUT_CONTACT)
+
     // PayPal
     useEffect(() => {
         const modal = document.getElementById('modal-checkout')
@@ -66,7 +82,7 @@ const Checkout = () => {
                 label: 'checkout',
                 // tagline: false
             },
-            createOrder: function(data, actions) {
+            createOrder: function (data, actions) {
                 console.log('Creando Orden')
                 if (!validateFormFields()) {
                     formValid = false
@@ -76,32 +92,38 @@ const Checkout = () => {
                 return client.query({ query: CREATE_ORDER, variables: { amount }})
                     .then(({ data }) => data.createOrder)
             },
-            onApprove: function(data, actions) {
+            onApprove: function (data, actions) {
                 console.log('approved')
                 document.getElementById('submit-button').click()
                 return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart } })
                     .then(data => {
-                        const status = data.data.captureOrder.status
-                        if (status === 'COMPLETED') {
+                        const order = JSON.parse(data.data.captureOrder)
+
+                        if (order.status === 'COMPLETED')
                             setModalOptions({
-                                header: 'Checkout',
+                                header: 'PayPal Checkout',
                                 body: 'Your order was completed successfully!! We will send your order as soon as possible.',
                             })
-                            modal.style.display = 'block'
-                        }
+                        else
+                            setModalOptions({
+                                header: 'PayPal Checkout',
+                                body: `An error may have occurred with the transaction. Status: ${order.status}`,
+                            })
+                        
+                        modal.style.display = 'block'
                     })
             },
-            onError: function(error) {
+            onError: function (error) {
                 console.log('Error:', error)
                 if (!formValid) {
                     setModalOptions({
-                        header: 'Checkout',
+                        header: 'PayPal Checkout',
                         body: 'You must fill in the billing and shipping information to continue.',
                     })
                     formValid = true
                 } else {
                     setModalOptions({
-                        header: 'Checkout',
+                        header: 'PayPal Checkout',
                         body: 'It seems that there was an error with the transaction, please try again.',
                     })
                 }
@@ -110,7 +132,7 @@ const Checkout = () => {
             onCancel: function () {
                 console.log('Cancelled')
                 setModalOptions({
-                    header: 'Checkout',
+                    header: 'PayPal Checkout',
                     body: 'You have canceled the transaction. Not sure what you are doing? Get in touch with us.',
                 })
                 modal.style.display = 'block'
@@ -134,7 +156,7 @@ const Checkout = () => {
                 event.preventDefault()
                 if (!validateFormFields()) {
                     setModalOptions({
-                        header: 'Checkout',
+                        header: 'Square Checkout',
                         body: 'You must fill in the billing and shipping information to continue.',
                     })
                     modal.style.display = 'block'
@@ -143,10 +165,42 @@ const Checkout = () => {
                         const result = await card.tokenize();
                         if (result.status === 'OK') {
                             document.getElementById('submit-button').click()
+                            
                             console.log(`Payment token is: ${result.token}`)
+
+                            const amount = document.getElementById('checkout-total').innerHTML
+                            const paymentToken = result.token
+
+                            return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount }})
+                                .then(({ data }) => {
+                                    console.log('data.createPayment:', data.createPayment)
+                                    if (data.createPayment === 'COMPLETED')
+                                        setModalOptions({
+                                            header: 'Square Checkout',
+                                            body: 'Your order was completed successfully!! We will send your order as soon as possible.',
+                                        })
+                                    else 
+                                        setModalOptions({
+                                            header: 'Square Checkout',
+                                            body: `An error may have occurred with the transaction. Status: ${data.createPayment}`,
+                                        })
+                                        
+                                    modal.style.display = 'block'
+                                })
+                        } else {
+                            setModalOptions({
+                                header: 'Square Checkout',
+                                body: 'There was an error reading the card, please try again',
+                            })
+                            modal.style.display = 'block'
                         }
                     } catch (e) {
-                        console.error(e);
+                        console.log('.Square Error:', e);
+                        setModalOptions({
+                            header: 'Square Checkout',
+                            body: 'There was an error with the transaction, please try again',
+                        })
+                        modal.style.display = 'block'
                     }
                 }
             };
@@ -155,7 +209,6 @@ const Checkout = () => {
             cardButton.addEventListener('click', eventHandler);
         }
         main()
-        // eslint-disable-next-line
     }, [])
 
     const isChecked = () => {
@@ -171,6 +224,11 @@ const Checkout = () => {
             setState2(''); setZipCode2('')
         }
     }
+
+    useEffect(() => {
+        isChecked()
+        // eslint-disable-next-line
+    }, [name, phone, email, address, suite, city, state, zipCode])
 
     const validateFormFields = () => {
         const name = document.getElementById('name').value
@@ -206,6 +264,30 @@ const Checkout = () => {
     const pay = event => {
         event.preventDefault()
         console.log('Enviando Formulario...')
+        createCheckoutContact({ 
+            variables: {
+                shippingInfo: {
+                    name,
+                    phone,
+                    email,
+                    address,
+                    address2: suite,
+                    city,
+                    state,
+                    zipCode
+                },
+                billingInfo: {
+                    name: name2,
+                    phone: phone2,
+                    email: email2,
+                    address: address2,
+                    address2: suite2,
+                    city: city2,
+                    state: state2,
+                    zipCode: zipCode2
+                },
+            }
+        })
     }
 
     return <>
@@ -220,7 +302,7 @@ const Checkout = () => {
                             <section className="contact-info">
                                 <input value={name} id="name" onChange={e => onChange(e, setName)} placeholder="Name" type="text" required />
                                 <input value={phone} id="phone" onChange={e => onChange(e, setPhone)} placeholder="Phone" type="text" required />
-                                <input value={email} id="email" onChange={e => onChange(e, setEmail)} placeholder="Email" type="email" required />
+                                <input value={email} id="email" onChange={e => onChange(e, setEmail)} placeholder="Email" type="text" required />
                                 <input value={address} id="address" onChange={e => onChange(e, setAddress)} placeholder="Address" type="text" required />
                                 <input value={suite} id="suite" onChange={e => onChange(e, setSuite)} placeholder="Apt, suite" type="text" required />
                                 <input value={city} id="city" onChange={e => onChange(e, setCity)} placeholder="City" type="text" required />
@@ -239,7 +321,7 @@ const Checkout = () => {
                             <section className="contact-info">
                                 <input value={name2} id="name2" onChange={e => onChange(e, setName2)} placeholder="Name" type="text" required />
                                 <input value={phone2} id="phone2" onChange={e => onChange(e, setPhone2)} placeholder="Phone" type="text" required />
-                                <input value={email2} id="email2" onChange={e => onChange(e, setEmail2)} placeholder="Email" type="email" required />
+                                <input value={email2} id="email2" onChange={e => onChange(e, setEmail2)} placeholder="Email" type="text" required />
                                 <input value={address2} id="address2" onChange={e => onChange(e, setAddress2)} placeholder="Address" type="text" required />
                                 <input value={suite2} id="suite2" onChange={e => onChange(e, setSuite2)} placeholder="Apt, suite" type="text" required />
                                 <input value={city2} id="city2" onChange={e => onChange(e, setCity2)} placeholder="City" type="text" required />
