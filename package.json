@@ -4,12 +4,9 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.20",
-    "@paypal/paypal-js": "^4.0.6",
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
     "bootstrap-icons": "^1.5.0",
-    "braintree": "^3.6.0",
-    "braintree-web": "^2.32.1",
     "flickity": "^2.2.2",
     "graphql": "^15.5.0",
     "react": "^17.0.2",
