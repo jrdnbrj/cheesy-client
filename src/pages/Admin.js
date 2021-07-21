@@ -1,6 +1,7 @@
 import Products from '../components/Admin/Products'
 import Contact from '../components/Admin/Contact'
 import Sales from '../components/Admin/Sales'
+import Coupons from '../components/Admin/Coupons'
 // import loading from '../assets/img/loading.gif'
 
 const Admin = () => {
@@ -24,6 +25,9 @@ const Admin = () => {
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-sales" type="button" role="tab" aria-controls="nav-sales" aria-selected="false">
                 Sales
             </button>
+            <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-coupons" type="button" role="tab" aria-controls="nav-coupons" aria-selected="false">
+                Coupons
+            </button>
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-settings" aria-selected="false">
                 Settings
             </button>
@@ -37,6 +41,9 @@ const Admin = () => {
             </div>
             <div className="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
                 <Sales Loading={Loading} />
+            </div>
+            <div className="tab-pane fade" id="nav-coupons" role="tabpanel" aria-labelledby="nav-coupons-tab">
+                <Coupons Loading={Loading} />
             </div>
             <div className="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
                 <section className="settings">
