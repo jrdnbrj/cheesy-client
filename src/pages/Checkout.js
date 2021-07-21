@@ -1,5 +1,5 @@
 import { useEffect, useState, createRef } from 'react'
-import { gql, useMutation } from "@apollo/client"
+import { gql, useMutation, useLazyQuery } from "@apollo/client"
 import { useSelector } from 'react-redux'
 
 import client from '../adapters/apolloClient'
@@ -35,6 +35,16 @@ const CREATE_CHECKOUT_CONTACT = gql`
     }
 `
 
+const CHECK_COUPON = gql`
+    query ($code: String!) {
+        checkCoupon(code: $code) {
+            code
+            discount
+            isActive
+        }
+    }
+`
+
 const Checkout = () => {
 
     const [showPayPal, setShowPayPal] = useState(true)
@@ -45,6 +55,33 @@ const Checkout = () => {
     const subtotal = useSelector(state => state.subtotal)
 
     const [total, setTotal] = useState(0)
+    const [discount, setDiscount] = useState(0)
+    const [discountRate, setDiscountRate] = useState(0)
+    const [freeShippinp, setFreeShipping] = useState(false)
+
+    const [couponCode, setCouponCode] = useState('')
+    const [couponError, setCouponError] = useState('')
+
+    const [checkCoupon] = useLazyQuery(CHECK_COUPON, { 
+        onCompleted: data => {
+            const response = data.checkCoupon
+            if (!response.isActive)
+                setCouponError(response.code)
+            else if (response.discount === '0') {
+                setFreeShipping(true)
+                setDiscount(0)
+                setDiscountRate(0)
+            }
+            else {
+                setCouponError('')
+                setFreeShipping(false)
+
+                const discount = subtotal * response.discount / 100
+                setDiscount(discount.toFixed(2))
+                setDiscountRate(response.discount)
+            }
+        }
+    })
 
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -256,10 +293,24 @@ const Checkout = () => {
     }
 
     useEffect(() => {
-        setTotal(subtotal)
-    }, [subtotal])
+        setTotal(subtotal - discount)
+    }, [subtotal, discount])
 
     const onChange = (e, set) => set(e.target.value)
+
+    const changeCode = value => {
+        setCouponError('')
+        setCouponCode(value)
+    }
+
+    const addCoupon = () => {
+        if (couponCode === '') {
+            setCouponError('Please enter a coupon code.')
+            return
+        }
+        checkCoupon({ variables: { code: couponCode } })
+        setCouponError('')
+    }
 
     const pay = event => {
         event.preventDefault()
@@ -391,17 +442,26 @@ const Checkout = () => {
                     </section>
                 })}
                 <section className="receipt">
+                    {couponError && <div className="alert alert-danger">{couponError}</div>}
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Coupon Code" value={couponCode} onChange={e => changeCode(e.target.value)} />
+                        <button class="btn btn-secondary" type="button" onClick={addCoupon}>Add Coupon</button>
+                    </div>
                     <div>
                         <span>Subtotal</span>
                         <span>$ {parseFloat(subtotal).toFixed(2)}</span>
                     </div>
                     <div>
                         <span>Promo Code</span>
-                        <span>-$ 10</span>
+                        <span>
+                            {discount && <span><span className="form-text">{discountRate}%</span> -$ {discount}</span> }
+                        </span>
                     </div>
                     <div>
                         <span>Estimated Shipping</span>
-                        <span></span>
+                        <span>
+                            {freeShippinp && <span className="form-text">Free Shipping</span> }
+                        </span>
                     </div>
                     <div>
                         <span>Estimated Tax</span>

@@ -2350,6 +2350,10 @@ and (max-width: 580px) {
   font-size: 1.4vw;
 }
 
+.receipt .input-group {
+  width: 96%;
+}
+
 @media (max-width: 990px) {
   .my-cart {
     font-size: 5vw;
@@ -2540,14 +2544,10 @@ and (max-width: 580px) {
   width: 100%;
 }
 
-/* ADMIN CONTACT ADMIN CONTACT ADMIN CONTACT */
-
 .remove-contact {
   background-color: transparent;
   border: 0;
 }
-
-/* ADMIN SALES SQUARE ADMIN SALES SQUARE */
 
 .square-payments,
 .square-customers, 
@@ -2560,4 +2560,14 @@ and (max-width: 580px) {
 
 .settings {
   margin: 3% 55% 3% 5%;
+}
+
+.coupons-icons {
+  font-size: 120%;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.add-icon {
+  font-size: 237%;
 }
