@@ -2,6 +2,7 @@ import Products from '../components/Admin/Products'
 import Contact from '../components/Admin/Contact'
 import Sales from '../components/Admin/Sales'
 import Coupons from '../components/Admin/Coupons'
+import CheesyBittes from '../components/Admin/CheesyBittes'
 // import loading from '../assets/img/loading.gif'
 
 const Admin = () => {
@@ -28,6 +29,9 @@ const Admin = () => {
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-coupons" type="button" role="tab" aria-controls="nav-coupons" aria-selected="false">
                 Coupons
             </button>
+            <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-cheesy" type="button" role="tab" aria-controls="nav-cheesy" aria-selected="false">
+                Cheesy Bittes
+            </button>
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-settings" aria-selected="false">
                 Settings
             </button>
@@ -44,6 +48,9 @@ const Admin = () => {
             </div>
             <div className="tab-pane fade" id="nav-coupons" role="tabpanel" aria-labelledby="nav-coupons-tab">
                 <Coupons Loading={Loading} />
+            </div>
+            <div className="tab-pane fade" id="nav-cheesy" role="tabpanel" aria-labelledby="nav-cheesy-tab">
+                <CheesyBittes Loading={Loading} />
             </div>
             <div className="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
                 <section className="settings">

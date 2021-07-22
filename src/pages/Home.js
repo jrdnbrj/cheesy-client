@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useQuery, gql } from "@apollo/client"
 
 import backgroundHover from '../assets/img/background-hover.png'
 import homeHeader1 from '../assets/img/home-header-1.jpg'
@@ -36,9 +37,21 @@ import breadSandwich from '../assets/img/bread-sandwich.png'
 import Flickity from 'react-flickity-component'
 
 
+const GET_HOME = gql`
+    query {
+        getHome {
+            name
+            description
+        }
+    }
+`
+
 const Home = () => {
 
+    const { data } = useQuery(GET_HOME)
+
     useEffect(() => {
+        if (!data) return
         const hover1 = document.getElementById('hover-1')
         const hover2 = document.getElementById('hover-2')
         const hover3 = document.getElementById('hover-3')
@@ -53,7 +66,7 @@ const Home = () => {
             hovers.map(hover => hover.classList.remove('hover-active'))
             hovers[x].classList.add('hover-active')
         })
-    })
+    }, [data])
 
     return <>
         <section className="home-background">
@@ -92,18 +105,12 @@ const Home = () => {
                 </div>
                 <section className="hover-container">
                     <img src={backgroundHover} className="background-hover" alt="background Hover" />
-                    <section id="hover-1" className="hover-active">
-                        <p className="hover-text">Inspired by Ecuador's traditional pan de yuca and delish Wisconsin cheese, our cheesy bittes are like nothing you have tried before. The taste is out of this world!</p>
-                        <h5 className="hover-title">MOZZARELLA</h5>
-                    </section>
-                    <section id="hover-2" className="">
-                        <p className="hover-text">Made with simple ingredients, every bite is the perfect mix of crispiness and fluff, and ooh so cheesy.​ So so cheesy!</p>
-                        <h5 className="hover-title">CHEDDAR CHEESE</h5>
-                    </section>
-                    <section id="hover-3" className="">
-                        <p className="hover-text">Perfect to share or keep to yourself, these naturally gluten-free snacks will steal your heart and make you do a happy dance. We hope you love them!</p>
-                        <h5 className="hover-title">PEPPER JACK</h5>
-                    </section>
+                    {data && data.getHome.map((item, i) => {
+                        return <section id={`hover-${i+1}`} className={!i ? `hover-active` : ''}>
+                            <p className="hover-text">{item.description}</p>
+                            <h5 className="hover-title">{item.name}</h5>
+                        </section>
+                    })}
                 </section>
                 <button className="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
                     <img src={leftArrow} className="arrow arrow-right" aria-hidden="true" alt="Previous Arrow" />

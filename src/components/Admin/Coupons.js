@@ -166,7 +166,7 @@ const Coupons = ({ Loading }) => {
                             if (!coupon.isActive) return null
                             return <tr key={coupon.code}>
                                 <td>{coupon.code}</td>
-                                <td>{coupon.discount === '0' ? 'Free Shipping' : `${coupon.discount} %`}</td>
+                                <td>{coupon.discount === '0' ? 'Free Shipping' : `${coupon.discount}%`}</td>
                                 <td>
                                     <i className="bi bi-x-circle-fill coupons-icons" onClick={() => remove(coupon.code)} />
                                     <i className="bi bi-arrow-right-square-fill coupons-icons" onClick={() => deactivate(coupon.code)} />
@@ -196,7 +196,7 @@ const Coupons = ({ Loading }) => {
                                     <i className="bi bi-x-circle-fill coupons-icons" onClick={() => remove(coupon.code)} />
                                 </td>
                                 <td>{coupon.code}</td>
-                                <td>{coupon.discount === '0' ? 'Free Shipping' : `${coupon.discount} %`}</td>
+                                <td>{coupon.discount === '0' ? 'Free Shipping' : `${coupon.discount}%`}</td>
                             </tr>
                         }
                     )}

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useQuery, gql } from "@apollo/client"
 
 import background2 from '../assets/img/family-background-2.png'
 import background3 from '../assets/img/family-background-3.png'
@@ -27,9 +28,20 @@ import carousel5 from '../assets/img/family-carousel-5.png'
 import Flickity from 'react-flickity-component'
 
 
+const GET_FAMILY = gql`
+    query {
+        getFamily {
+            title
+            description
+        }
+    }
+`
+
 const Family = () => {
 
-    useEffect(() => document.getElementById('our-family-video').play())
+    const { data } = useQuery(GET_FAMILY)
+
+    useEffect(() => document.getElementById('our-family-video').play(), [])
 
     return <>
         <section className="background1">
@@ -43,10 +55,10 @@ const Family = () => {
             <section className="row py-5" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
-                        <h5 className="col-9 family-title">All about the family</h5>
+                        <h5 className="col-9 family-title">{data && data.getFamily[0].title}</h5>
                         <img src={iconPerson} className="icon-person col-3 my-auto" alt="All about the family Icon" />
                     </section>
-                    <p className="paragraph">We are a small, family business that decided to pair the flavors of Ecuador and Wisconsin to share them with you! We are so thankful for this journey and hope you enjoy every cheesy bitte.</p>
+                    <p className="paragraph">{data && data.getFamily[0].description}</p>
                 </section>
                 <section className="col-lg-4 col-sm-12 col-12 text-center">
                     <img src={aboutFamily} className="about-family" alt="All about the family" />
@@ -58,19 +70,19 @@ const Family = () => {
                 </section>
                 <section className="col-lg-8 col-sm-12 order-sm-1 col-12 order-1 family-group1">
                     <section className="row">
-                        <h5 className="col-8 family-title">How we started</h5>
+                        <h5 className="col-8 family-title">{data && data.getFamily[1].title}</h5>
                         <img src={iconBread} className="icon-bread col-4 my-auto" alt="How we started Icon" />
                     </section>
-                    <p className="paragraph">After being diagnosed with celiac disease one of the only treats I could enjoy was pan de yuca.  When we moved to the United States, I was excited to find so many gluten-free options but missed the flavors of home that reminded me of family, friends, and time together. We decided to recreate our traditional pan de yuca recipe and pack it with exquisite Wisconsin cheese! The business was born in 2021 with our Cheesy Bittes.</p>
+                    <p className="paragraph">{data && data.getFamily[1].description}</p>
                 </section>
             </section>
             <section className="row py-5" id="row-correction">
                 <section className="col-lg-8 col-sm-12 col-12 family-group1">
                     <section className="row">
-                        <h5 className="col-9 family-title pt-2">Wisconsin proud!</h5>
+                        <h5 className="col-9 family-title pt-2">{data && data.getFamily[2].title}</h5>
                         <img src={iconHouse} className="icon-house col-3 my-auto" alt="Wisconsin proud Icon" />
                     </section>
-                    <p className="paragraph">The dreamy cheese we use in our recipes is made with milk from dedicated dairy farm families, so our products carry the Proudly Wisconsin Cheese badge. Farming is a labor of love, and we are all about loving our community.</p>
+                    <p className="paragraph">{data && data.getFamily[2].description}</p>
                 </section>
                 <section className="col-lg-4 col-sm-12 col-12 text-center">
                     <img src={wisconsin} className="proud mt-2" alt="All about the family" />
@@ -83,8 +95,8 @@ const Family = () => {
         <section className="row background3" id="row-correction">
             <img src={america} className="america col-lg-5 order-lg-1 col-sm-12 order-sm-2 order-2 mx-auto" alt="America" />
             <section className="col-lg-7 col-lg-2 col-sm-12 order-sm-1 order-1 my-auto giving-back">
-                <h2>Giving back</h2>
-                <p>We donate a percentage of sales to scholarships for first-generation BIPOC students when you choose one of our products.  Join us in supporting their dreams while spreading some love.</p>    
+                <h2>{data && data.getFamily[3].title}</h2>
+                <p>{data && data.getFamily[3].description}</p>    
             </section>
         </section>
         <section className="background4">
