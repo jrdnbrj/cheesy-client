@@ -443,9 +443,9 @@ const Checkout = () => {
                 })}
                 <section className="receipt">
                     {couponError && <div className="alert alert-danger">{couponError}</div>}
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Coupon Code" value={couponCode} onChange={e => changeCode(e.target.value)} />
-                        <button class="btn btn-secondary" type="button" onClick={addCoupon}>Add Coupon</button>
+                    <div className="input-group mb-3">
+                        <input type="text" className="form-control" placeholder="Coupon Code" value={couponCode} onChange={e => changeCode(e.target.value)} />
+                        <button className="btn btn-secondary" type="button" onClick={addCoupon}>Add Coupon</button>
                     </div>
                     <div>
                         <span>Subtotal</span>

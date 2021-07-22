@@ -3,6 +3,7 @@ import Contact from '../components/Admin/Contact'
 import Sales from '../components/Admin/Sales'
 import Coupons from '../components/Admin/Coupons'
 import CheesyBittes from '../components/Admin/CheesyBittes'
+import Settings from '../components/Admin/Settings'
 // import loading from '../assets/img/loading.gif'
 
 const Admin = () => {
@@ -53,12 +54,7 @@ const Admin = () => {
                 <CheesyBittes Loading={Loading} />
             </div>
             <div className="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
-                <section className="settings">
-                    <label className="form-label">Discount percentage each months in club</label>
-                    <input className="form-control" placeholder="5%" />
-                    <label className="form-label">Discount percentage every two months in club</label>
-                    <input className="form-control" placeholder="10%" />
-                </section>
+                <Settings Loading={Loading} />
             </div>
         </div>
     </div>

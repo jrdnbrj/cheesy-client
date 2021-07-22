@@ -94,7 +94,6 @@ const CheesyBittes = ({ Loading }) => {
 
     const saveHome = e => {
         e.preventDefault()
-        console.log('SaveHome')
 
         const names = document.querySelectorAll('.home-names')
         const descriptions = document.querySelectorAll('.home-descriptions')
@@ -113,7 +112,6 @@ const CheesyBittes = ({ Loading }) => {
 
     const saveFamily = e => {
         e.preventDefault()
-        console.log('SaveFamily')
 
         const titles = document.querySelectorAll('.family-titles')
         const descriptions = document.querySelectorAll('.family-descriptions')

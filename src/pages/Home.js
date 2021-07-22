@@ -106,7 +106,7 @@ const Home = () => {
                 <section className="hover-container">
                     <img src={backgroundHover} className="background-hover" alt="background Hover" />
                     {data && data.getHome.map((item, i) => {
-                        return <section id={`hover-${i+1}`} className={!i ? `hover-active` : ''}>
+                        return <section id={`hover-${i+1}`} className={!i ? `hover-active` : ''} key={i}>
                             <p className="hover-text">{item.description}</p>
                             <h5 className="hover-title">{item.name}</h5>
                         </section>

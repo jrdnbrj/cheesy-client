@@ -25,6 +25,15 @@ const GET_PRODUCT = gql`
     }
 `
 
+const GET_SETTINGS = gql`
+    query getSettings {
+        getSettings {
+            discountMonth
+            discount2months
+        }
+    }
+`
+
 const Product = () => {
 
     const modal = document.getElementById('modal-product')
@@ -34,8 +43,18 @@ const Product = () => {
     const location = useLocation()
     const path = location.pathname
     const { data } = useQuery(GET_PRODUCT, { variables: { path }})
+    const { data: discounts } = useQuery(GET_SETTINGS)
+
+    const [month, setMonth] = useState(discounts?.getSettings.discountMonth)
+    const [twoMonths, setTwoMonths] = useState(discounts?.getSettings.discount2months)
+
+    useEffect(() => {
+        setMonth(discounts?.getSettings.discountMonth)
+        setTwoMonths(discounts?.getSettings.discount2months)
+    }, [discounts])
 
     const [price, setPrice] = useState(0)
+    const [subtotal, setSubtotal] = useState(0)
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
@@ -47,8 +66,13 @@ const Product = () => {
             if(radio1.checked || radio2.checked) bundleUp.className += ' checked'
             else bundleUp.classList.remove('checked')
 
-            if (radio1.checked) setTotal(price * 6)
-            if (radio2.checked) setTotal(price * 9)
+            if (radio1.checked) {
+                setTotal(price * 6)
+                setSubtotal(price * 6)
+            } else if (radio2.checked) {
+                setTotal(price * 9)
+                setSubtotal(price * 9)
+            }
         }
 
         const radio1 = document.getElementById('radio-button1')
@@ -65,6 +89,10 @@ const Product = () => {
         const toDo = () => {
             if(radio3.checked || radio4.checked) button.className += ' checked'
             else button.classList.remove('checked')
+
+            if (radio3.checked) setTotal(subtotal - subtotal * (month / 100))
+            else if (radio4.checked) setTotal(subtotal - subtotal * (twoMonths / 100))
+            else setTotal(subtotal)
         }
 
         const radio3 = document.getElementById('radio-button3')
@@ -81,10 +109,10 @@ const Product = () => {
         const payload = { 
             path,
             amount: 1,
-            price: parseFloat(total),
+            price: parseFloat(total.toFixed(2)),
             image: data.getProductByPath.images[0],
             name: data.getProductByPath.name,
-            total: parseFloat(total)
+            total: parseFloat(total.toFixed(2))
         }
 
         const radio1 = document.getElementById('radio-button1')
