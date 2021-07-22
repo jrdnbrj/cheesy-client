@@ -19,12 +19,6 @@ import iconHouse from '../assets/img/icon-house.png'
 
 import video from '../assets/img/our-family-video.mp4'
 
-import carousel1 from '../assets/img/family-carousel-1.png'
-import carousel2 from '../assets/img/family-carousel-2.png'
-import carousel3 from '../assets/img/family-carousel-3.png'
-import carousel4 from '../assets/img/family-carousel-4.png'
-import carousel5 from '../assets/img/family-carousel-5.png'
-
 import Flickity from 'react-flickity-component'
 
 
@@ -37,9 +31,19 @@ const GET_FAMILY = gql`
     }
 `
 
+const GET_INSTAGRAM_MEDIA = gql`
+    query {
+        getInstagramMedia(count: 5) {
+            url
+            image
+        }
+    }
+`
+
 const Family = () => {
 
     const { data } = useQuery(GET_FAMILY)
+    const { data: media } = useQuery(GET_INSTAGRAM_MEDIA)
 
     useEffect(() => document.getElementById('our-family-video').play(), [])
 
@@ -110,11 +114,11 @@ const Family = () => {
                     wrapAround: 'fill'
                 }
             }>
-                <img src={carousel1} alt="Bread as a Sandwich" />
-                <img src={carousel2} alt="Bread with Chocolate" />
-                <img src={carousel3} alt="Bread with Coffee" />
-                <img src={carousel4} alt="Bread Pizza" />
-                <img src={carousel5} alt="Bread on a Plate" />
+                {media?.getInstagramMedia.map((media, i) => {
+                    return <a href={media.url} target="_blank" rel="noreferrer" key={i}>
+                        <img src={`data:image/png;base64,${media.image}`} alt="Instagram Media" />
+                    </a>
+                })}
             </Flickity>
         </section>
         <img src={background3} className="background5" alt="Family Background" />
