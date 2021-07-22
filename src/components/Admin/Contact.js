@@ -31,12 +31,11 @@ const Contact = ({ Loading }) => {
     const [contacts, setContacts] = useState()
     const [modalOptions, setModalOptions] = useState({})
 
-    const [deleteContact, { data, error }] = useMutation(DELETE_CONTACT)
+    const [deleteContact, { data }] = useMutation(DELETE_CONTACT)
     const { data: contactsData, loading: contactsLoading, refetch } = useQuery(GET_CONTACTS)
 
-    contactsData && console.log('Contacts:', contacts)
-    error && console.log('error:', error)
-    data && console.log('data:', data.deleteContact)
+    // contactsData && console.log('Contacts:', contacts)
+    // data && console.log('data:', data.deleteContact)
 
     useEffect(() => {
         setContacts(contactsData)

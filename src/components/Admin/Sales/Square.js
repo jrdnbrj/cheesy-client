@@ -29,19 +29,19 @@ const Square = () => {
     
     const { data: paymentsData } = useQuery(GET_PAYMENTS)
     const payments = paymentsData && JSON.parse(paymentsData.listPayments).payments
-    paymentsData && console.log('payments:', payments)
+    // paymentsData && console.log('payments:', payments)
 
     const { data } = useQuery(GET_CUSTOMERS)
     const customers = data && JSON.parse(data.listCustomers).customers
-    data && console.log('Customers:', customers)
+    // data && console.log('Customers:', customers)
 
     const { data: invoicesData } = useQuery(GET_INVOICES)
     const invoices = invoicesData && JSON.parse(invoicesData.listInvoices).invoices
-    invoicesData && console.log('Invoices:', invoices)
+    // invoicesData && console.log('Invoices:', invoices)
 
     const { data: catalogsData } = useQuery(GET_CATALOGS)
     const catalogs = catalogsData && JSON.parse(catalogsData.listCatalogs).objects
-    catalogsData && console.log('catalogs:', catalogs)
+    // catalogsData && console.log('catalogs:', catalogs)
     
     return <>
         <section className="square-payments">

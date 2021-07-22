@@ -65,7 +65,7 @@ const Coupons = ({ Loading }) => {
     const [activateCoupon] = useMutation(ACTIVATE_COUPON, { onCompleted })
     const [deactivateCoupon] = useMutation(DEACTIVATE_COUPON, { onCompleted })
     const [deleteCoupon] = useMutation(DELETE_COUPON, { onCompleted })
-    data && console.log(data)
+    // data && console.log(data)
 
     const [coupons, setCoupons] = useState([])
     const [couponError, setCouponError] = useState('')

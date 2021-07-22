@@ -2471,6 +2471,20 @@ and (max-width: 580px) {
   cursor: pointer;
 }
 
+/* LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN */
+
+.login-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: Nunito Black;
+}
+
+.admin-logo {
+  width: 50%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 
 /* ADMIN PRODUCTS ADMIN PRODUCTS ADMIN PRODUCTS */
 

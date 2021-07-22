@@ -1,7 +1,8 @@
 const _state = {
     products: [],
     cart: JSON.parse(localStorage.getItem('cart')) || [],
-    subtotal: localStorage.getItem('subtotal') || 0
+    subtotal: localStorage.getItem('subtotal') || 0,
+    token: localStorage.getItem('token') || undefined
 }
 
 const reducers = (state = _state, action) => {
@@ -29,6 +30,12 @@ const reducers = (state = _state, action) => {
             return {
                 ...state,
                 subtotal: parseFloat(action.subtotal)
+            }
+        case 'SET_TOKEN':
+            localStorage.setItem('token', action.token)
+            return {
+                ...state,
+                token: action.token
             }
         default: return { ...state }
     }

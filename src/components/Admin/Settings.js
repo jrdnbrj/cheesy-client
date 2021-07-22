@@ -15,7 +15,7 @@ const Settings = ({ Loading }) => {
 
     const { data, loading } = useQuery(GET_SETTINGS)
 
-    data && console.log(data)
+    // data && console.log(data)
 
     const [month, setMonth] = useState(data?.getSettings.discountMonth)
     const [twoMonths, setTwoMonths] = useState(data?.getSettings.discount2months)

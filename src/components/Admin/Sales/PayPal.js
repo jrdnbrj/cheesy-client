@@ -33,11 +33,11 @@ const PayPal = () => {
     
     const { data } = useQuery(GET_PLANS)
     const plans = data && JSON.parse(data.listPlans).plans
-    data && console.log('plans:', plans)
+    // data && console.log('plans:', plans)
 
     const { data: orderData } = useQuery(GET_ORDERS)
     const orders = orderData && orderData.listOrders
-    orderData && console.log('orders:', orders)
+    // orderData && console.log('orders:', orders)
     
     return <>
         <section className="paypal-plans">

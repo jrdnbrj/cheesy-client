@@ -149,7 +149,7 @@ const Products = ({ Loading }) => {
 
         const smoothies = namesS.map((item, i) => [item, smoothiesImg[i], ingredientsS[i]])
 
-        console.log('smoothies:', smoothies)
+        // console.log('smoothies:', smoothies)
 
         updateProduct({ variables: {
             name,
