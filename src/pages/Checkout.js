@@ -82,7 +82,6 @@ const Checkout = () => {
                 setFreeShipping(true)
                 setDiscount(0)
                 setDiscountRate(0)
-                // setShippingValue(0)
             } else {
                 setFreeShipping(false)
 
@@ -96,7 +95,7 @@ const Checkout = () => {
     const [checkShipping] = useLazyQuery(CHECK_SHIPPING, { 
         onCompleted: data => {
             const { response, value } = data.getShippingByState
-            console.log(response, value)
+            
             if (response) {
                 setShippingError('')
                 setShippingValue(value)
