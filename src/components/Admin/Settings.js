@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery, gql } from "@apollo/client"
 
 
@@ -11,14 +11,27 @@ const GET_SETTINGS = gql`
     }
 `
 
+const GET_SHIPPINGS = gql`
+    query shippings {
+        getShippings {
+            state
+            value
+        }
+    }
+`
+
 const Settings = ({ Loading }) => {
 
     const { data, loading } = useQuery(GET_SETTINGS)
+    const { data: shippings, loading: shippingsLoading } = useQuery(GET_SHIPPINGS)
 
-    // data && console.log(data)
+    const [month, setMonth] = useState('')
+    const [twoMonths, setTwoMonths] = useState('')
 
-    const [month, setMonth] = useState(data?.getSettings.discountMonth)
-    const [twoMonths, setTwoMonths] = useState(data?.getSettings.discount2months)
+    useEffect(() => {
+        setMonth(data?.getSettings.discountMonth)
+        setTwoMonths(data?.getSettings.discount2months)
+    }, [data])
 
     const [password, setPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
@@ -27,11 +40,17 @@ const Settings = ({ Loading }) => {
         e.preventDefault()
     }
 
+    const updateShippings = e => {
+        e.preventDefault()
+    }
+
     const updatePassword = e => {
         e.preventDefault()
     }
 
     if (loading) return <Loading document="Settings" />
+
+    if (shippingsLoading) return <Loading document="Shipping Values" />
 
     return <>
         <section className="settings">
@@ -57,6 +76,23 @@ const Settings = ({ Loading }) => {
                 </div>
                 <button type="submit" className="btn btn-success mb-5 mx-5">
                     <span>Save Discounts</span>
+                </button>
+            </form>
+            <form onSubmit={updateShippings} className="shipping-values">
+                <h1 className="display-6 mx-5">Shipping Values</h1>
+                <div className="row mx-5" id="row-correction">
+                    {shippings?.getShippings.map(shipping => {
+                        return <div className="col-3 my-2" key={shipping.state}>
+                            <label className="form-label">{shipping.state}</label>
+                            <div className="input-group">
+                                <span className="input-group-text" id="basic-addon1">$</span>
+                                <input type="number" className="form-control shipping-value" defaultValue={shipping.value} />
+                            </div>
+                        </div>
+                    })}
+                </div>
+                <button type="submit" className="btn btn-success mb-5 mt-3 mx-5">
+                    <span>Save Changes</span>
                 </button>
             </form>
             <form onSubmit={updatePassword}>

@@ -45,6 +45,15 @@ const CHECK_COUPON = gql`
     }
 `
 
+const CHECK_SHIPPING = gql`
+    query ($state: String!) {
+        getShippingByState(state: $state) {
+            response
+            value
+        }
+    }
+`
+
 const Checkout = () => {
 
     const [showPayPal, setShowPayPal] = useState(true)
@@ -56,11 +65,13 @@ const Checkout = () => {
 
     const [total, setTotal] = useState(0)
     const [discount, setDiscount] = useState(0)
+    const [shippingValue, setShippingValue] = useState(0)
     const [discountRate, setDiscountRate] = useState(0)
-    const [freeShippinp, setFreeShipping] = useState(false)
+    const [freeShipping, setFreeShipping] = useState(false)
 
     const [couponCode, setCouponCode] = useState('')
     const [couponError, setCouponError] = useState('')
+    const [shippingError, setShippingError] = useState('')
 
     const [checkCoupon] = useLazyQuery(CHECK_COUPON, { 
         onCompleted: data => {
@@ -71,15 +82,29 @@ const Checkout = () => {
                 setFreeShipping(true)
                 setDiscount(0)
                 setDiscountRate(0)
-            }
-            else {
-                setCouponError('')
+                // setShippingValue(0)
+            } else {
                 setFreeShipping(false)
 
                 const discount = subtotal * response.discount / 100
                 setDiscount(discount.toFixed(2))
                 setDiscountRate(response.discount)
             }
+        }
+    })
+
+    const [checkShipping] = useLazyQuery(CHECK_SHIPPING, { 
+        onCompleted: data => {
+            const { response, value } = data.getShippingByState
+            console.log(response, value)
+            if (response) {
+                setShippingError('')
+                setShippingValue(value)
+            } else {
+                setShippingError(value)
+                setShippingValue(0)
+            }
+
         }
     })
 
@@ -227,7 +252,7 @@ const Checkout = () => {
                         } else {
                             setModalOptions({
                                 header: 'Square Checkout',
-                                body: 'There was an error reading the card, please try again',
+                                body: 'There was an error reading the card, please try again.',
                             })
                             modal.style.display = 'block'
                         }
@@ -246,6 +271,7 @@ const Checkout = () => {
             cardButton.addEventListener('click', eventHandler);
         }
         main()
+        // eslint-disable-next-line
     }, [])
 
     const isChecked = () => {
@@ -285,6 +311,10 @@ const Checkout = () => {
         const state2 = document.getElementById('state2').value
         const zipCode2 = document.getElementById('zipcode2').value
 
+        const shippingAlert = document.getElementById('shipping-alert')
+
+        if (shippingAlert && shippingAlert.innerHTML !== '') return false
+        
         if (name === '' || phone === '' || email === '' || address === '' || suite === '' || city === '' || state === '' || zipCode === '' || 
         name2 === '' || phone2 === '' || email2 === '' || address2 === '' || suite2 === '' || city2 === '' || state2 === '' || zipCode2 === '')
             return false
@@ -293,10 +323,18 @@ const Checkout = () => {
     }
 
     useEffect(() => {
-        setTotal(subtotal - discount)
-    }, [subtotal, discount])
+        if (freeShipping) 
+            setTotal(subtotal - discount)
+        else
+            setTotal(subtotal - discount + parseFloat(shippingValue))
+    }, [subtotal, discount, shippingValue, freeShipping])
 
     const onChange = (e, set) => set(e.target.value)
+
+    const onChangeState = (e, set) => {
+        set(e.target.value)
+        checkShipping({ variables: { state: e.target.value }})
+    }
 
     const changeCode = value => {
         setCouponError('')
@@ -359,7 +397,7 @@ const Checkout = () => {
                                 <input value={city} id="city" onChange={e => onChange(e, setCity)} placeholder="City" type="text" required />
                                 <div className="row" id="row-correction">
                                     <div className="col-7 state">
-                                        <input value={state} id="state" onChange={e => onChange(e, setState)} placeholder="State" type="text" required />
+                                        <input value={state} id="state" onChange={e => onChangeState(e, setState)} placeholder="State" type="text" required />
                                     </div>
                                     <div className="col-5 zip-code">
                                         <input value={zipCode} id="zipcode" onChange={e => onChange(e, setZipCode)} placeholder="Zip Code" type="text" required />
@@ -387,6 +425,7 @@ const Checkout = () => {
                             </section>
                         </section>
                     </section>
+                    {shippingError && <div className="alert alert-danger" id="shipping-alert">{shippingError}</div>}
                     <div className="form-check same-as">
                         <input className="form-check-input" ref={check} type="checkbox" id="check" onChange={isChecked} />
                         <label className="form-check-label" htmlFor="check">
@@ -460,12 +499,9 @@ const Checkout = () => {
                     <div>
                         <span>Estimated Shipping</span>
                         <span>
-                            {freeShippinp && <span className="form-text">Free Shipping</span> }
+                            {freeShipping ? <span className="form-text">Free Shipping</span> :
+                                shippingValue ? <span>$ {shippingValue}</span> : ''}
                         </span>
-                    </div>
-                    <div>
-                        <span>Estimated Tax</span>
-                        <span></span>
                     </div>
                     <div>
                         <span>Total</span>

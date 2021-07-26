@@ -20,14 +20,8 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
   border-radius: 10px !important;
   box-shadow: inset 0 0 5px grey; 
-  /* background-color: red; */
 }
 
-body::-webkit-scrollbar-track-piece {
-  /* background-color: #FEFEFE; */
-  /* background-color: red; */
-
-}
 
 /* FONTS FONTS FONTS FONTS FONTS FONTS FONTS FONTS */
 
@@ -2578,6 +2572,10 @@ and (max-width: 580px) {
 
 .settings {
   margin: 5%;
+}
+
+.shipping-values .col-3 {
+  width: 20%;
 }
 
 .coupons-icons {
