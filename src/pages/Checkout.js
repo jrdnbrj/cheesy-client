@@ -2,30 +2,9 @@ import { useEffect, useState, createRef } from 'react'
 import { gql, useMutation, useLazyQuery } from "@apollo/client"
 import { useSelector } from 'react-redux'
 
-import client from '../adapters/apolloClient'
 import Modal from '../components/Modal'
+import Payment from '../components/Payment'
 
-import SquareLogo from '../assets/img/square-logo.png'
-
-
-const CREATE_ORDER = gql`
-    query ($amount: String!) {
-        createOrder(amount: $amount)
-    }
-
-`
-
-const CAPTURE_ORDER = gql`
-    query ($order_id: String!, $cart: [CartType]!) {
-        captureOrder(orderId: $order_id, cart: $cart)
-    }
-`
-
-const CREATE_PAYMENT = gql`
-    query ($paymentToken: String!, $amount: String!) {
-        createPayment(paymentToken: $paymentToken, amount: $amount)
-    }
-`
 
 const CREATE_CHECKOUT_CONTACT = gql`
     mutation ($billingInfo: CheckoutInfoInputType, $shippingInfo: CheckoutInfoInputType) {
@@ -59,6 +38,7 @@ const Checkout = () => {
     const [showPayPal, setShowPayPal] = useState(true)
 
     const [modalOptions, setModalOptions] = useState({})
+    const [checkout, setCheckout] = useState(false)
 
     const cart = useSelector(state => state.cart)
     const subtotal = useSelector(state => state.subtotal)
@@ -72,6 +52,8 @@ const Checkout = () => {
     const [couponCode, setCouponCode] = useState('')
     const [couponError, setCouponError] = useState('')
     const [shippingError, setShippingError] = useState('')
+
+    const [formLoading, setFormLoading] = useState(false)
 
     const [checkCoupon] = useLazyQuery(CHECK_COUPON, { 
         onCompleted: data => {
@@ -89,13 +71,21 @@ const Checkout = () => {
                 setDiscount(discount.toFixed(2))
                 setDiscountRate(response.discount)
             }
+        },
+        onError: ({ error }) => {
+            const modal = document.getElementById('modal-checkout')
+            setModalOptions({
+                header: 'Shipping Information',
+                body: 'An error occurred trying to verify the coupon, please try again.',
+            })
+            modal.style.display = 'block'
         }
     })
 
     const [checkShipping] = useLazyQuery(CHECK_SHIPPING, { 
         onCompleted: data => {
             const { response, value } = data.getShippingByState
-            
+
             if (response) {
                 setShippingError('')
                 setShippingValue(value)
@@ -103,7 +93,14 @@ const Checkout = () => {
                 setShippingError(value)
                 setShippingValue(0)
             }
-
+        },
+        onError: ({ error }) => {
+            const modal = document.getElementById('modal-checkout')
+            setModalOptions({
+                header: 'Shipping Information',
+                body: 'An error occurred trying to verify the shipping cost, please try again.',
+            })
+            modal.style.display = 'block'
         }
     })
 
@@ -127,151 +124,31 @@ const Checkout = () => {
 
     const check = createRef()
 
-    const [createCheckoutContact] = useMutation(CREATE_CHECKOUT_CONTACT)
+    const [createCheckoutContact] = useMutation(CREATE_CHECKOUT_CONTACT, {
+        onCompleted: ({ createCheckoutContact: data }) => {
+            const modal = document.getElementById('modal-checkout')
 
-    // PayPal
-    useEffect(() => {
-        const modal = document.getElementById('modal-checkout')
-        let formValid = true
+            setFormLoading(false)
 
-        const button = window.paypal.Buttons({
-            style: {
-                color: 'gold',
-                shape: 'pill',
-                size: 'responsive',
-                layout: 'horizontal',
-                label: 'checkout',
-                // tagline: false
-            },
-            createOrder: function (data, actions) {
-                console.log('Creando Orden')
-                if (!validateFormFields()) {
-                    formValid = false
-                    return
-                }
-                const amount = document.getElementById('checkout-total').innerHTML
-                return client.query({ query: CREATE_ORDER, variables: { amount }})
-                    .then(({ data }) => data.createOrder)
-            },
-            onApprove: function (data, actions) {
-                console.log('approved')
-                document.getElementById('submit-button').click()
-                return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart } })
-                    .then(data => {
-                        const order = JSON.parse(data.data.captureOrder)
-
-                        if (order.status === 'COMPLETED')
-                            setModalOptions({
-                                header: 'PayPal Checkout',
-                                body: 'Your order was completed successfully!! We will send your order as soon as possible.',
-                            })
-                        else
-                            setModalOptions({
-                                header: 'PayPal Checkout',
-                                body: `An error may have occurred with the transaction. Status: ${order.status}`,
-                            })
-                        
-                        modal.style.display = 'block'
-                    })
-            },
-            onError: function (error) {
-                console.log('Error:', error)
-                if (!formValid) {
-                    setModalOptions({
-                        header: 'PayPal Checkout',
-                        body: 'You must fill in the billing and shipping information to continue.',
-                    })
-                    formValid = true
-                } else {
-                    setModalOptions({
-                        header: 'PayPal Checkout',
-                        body: 'It seems that there was an error with the transaction, please try again.',
-                    })
-                }
-                modal.style.display = 'block'
-            },
-            onCancel: function () {
-                console.log('Cancelled')
+            if (data.response === 'success') setCheckout(true)
+            else {
                 setModalOptions({
-                    header: 'PayPal Checkout',
-                    body: 'You have canceled the transaction. Not sure what you are doing? Get in touch with us.',
+                    header: 'Shipping and Billing Information',
+                    body: 'An error occurred saving billing information and shipping information, please try again.',
                 })
                 modal.style.display = 'block'
-            },
-        })
-        
-        if(showPayPal) button.render('#paypal-button')
-        // eslint-disable-next-line
-    }, [])
-
-    // Square
-    useEffect(() => {
-        const modal = document.getElementById('modal-checkout')
-
-        const main = async () => {
-            const payments = window.Square.payments('sandbox-sq0idb-QrUq90laeC8jv6V6en0VyA', 'LWB5K8RGJYJSY');
-            const card = await payments.card();
-            await card.attach('#card-container');
-
-            const eventHandler = async event => {
-                event.preventDefault()
-                if (!validateFormFields()) {
-                    setModalOptions({
-                        header: 'Square Checkout',
-                        body: 'You must fill in the billing and shipping information to continue.',
-                    })
-                    modal.style.display = 'block'
-                } else {
-                    try {
-                        const result = await card.tokenize();
-                        if (result.status === 'OK') {
-                            document.getElementById('submit-button').click()
-                            
-                            console.log(`Payment token is: ${result.token}`)
-
-                            const amount = document.getElementById('checkout-total').innerHTML
-                            const paymentToken = result.token
-
-                            return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount }})
-                                .then(({ data }) => {
-                                    console.log('data.createPayment:', data.createPayment)
-                                    if (data.createPayment === 'COMPLETED')
-                                        setModalOptions({
-                                            header: 'Square Checkout',
-                                            body: 'Your order was completed successfully!! We will send your order as soon as possible.',
-                                        })
-                                    else 
-                                        setModalOptions({
-                                            header: 'Square Checkout',
-                                            body: `An error may have occurred with the transaction. Status: ${data.createPayment}`,
-                                        })
-                                        
-                                    modal.style.display = 'block'
-                                })
-                        } else {
-                            setModalOptions({
-                                header: 'Square Checkout',
-                                body: 'There was an error reading the card, please try again.',
-                            })
-                            modal.style.display = 'block'
-                        }
-                    } catch (e) {
-                        console.log('.Square Error:', e);
-                        setModalOptions({
-                            header: 'Square Checkout',
-                            body: 'There was an error with the transaction, please try again',
-                        })
-                        modal.style.display = 'block'
-                    }
-                }
-            };
-
-            const cardButton = document.getElementById('card-button');
-            cardButton.addEventListener('click', eventHandler);
+            }
+        },
+        onError: ({ error }) => {
+            const modal = document.getElementById('modal-checkout')
+            setFormLoading(false)
+            setModalOptions({
+                header: 'Shipping and Billing Information',
+                body: 'An error occurred saving billing information and shipping information, please try again.',
+            })
+            modal.style.display = 'block'
         }
-        main()
-        // eslint-disable-next-line
-    }, [])
+    })
 
     const isChecked = () => {
         if (check.current.checked) {
@@ -293,39 +170,18 @@ const Checkout = () => {
     }, [name, phone, email, address, suite, city, state, zipCode])
 
     const validateFormFields = () => {
-        const name = document.getElementById('name').value
-        const phone = document.getElementById('phone').value
-        const email = document.getElementById('email').value
-        const address = document.getElementById('address').value
-        const suite = document.getElementById('suite').value
-        const city = document.getElementById('city').value
-        const state = document.getElementById('state').value
-        const zipCode = document.getElementById('zipcode').value
-        const name2 = document.getElementById('name2').value
-        const phone2 = document.getElementById('phone2').value
-        const email2 = document.getElementById('email2').value
-        const address2 = document.getElementById('address2').value
-        const suite2 = document.getElementById('suite2').value
-        const city2 = document.getElementById('city2').value
-        const state2 = document.getElementById('state2').value
-        const zipCode2 = document.getElementById('zipcode2').value
-
-        const shippingAlert = document.getElementById('shipping-alert')
-
-        if (shippingAlert && shippingAlert.innerHTML !== '') return false
-        
-        if (name === '' || phone === '' || email === '' || address === '' || suite === '' || city === '' || state === '' || zipCode === '' || 
-        name2 === '' || phone2 === '' || email2 === '' || address2 === '' || suite2 === '' || city2 === '' || state2 === '' || zipCode2 === '')
+        if (name === '' || phone === '' || email === '' || address === '' || 
+            suite === '' || city === '' || state === '' || zipCode === '' || 
+            name2 === '' || phone2 === '' || email2 === '' || address2 === '' || 
+            suite2 === '' || city2 === '' || state2 === '' || zipCode2 === '')
             return false
         
         return true
     }
 
     useEffect(() => {
-        if (freeShipping) 
-            setTotal(subtotal - discount)
-        else
-            setTotal(subtotal - discount + parseFloat(shippingValue))
+        if (freeShipping) setTotal(subtotal - discount)
+        else setTotal(subtotal - discount + parseFloat(shippingValue))
     }, [subtotal, discount, shippingValue, freeShipping])
 
     const onChange = (e, set) => set(e.target.value)
@@ -351,31 +207,40 @@ const Checkout = () => {
 
     const pay = event => {
         event.preventDefault()
-        console.log('Enviando Formulario...')
         createCheckoutContact({ 
             variables: {
                 shippingInfo: {
-                    name,
-                    phone,
-                    email,
-                    address,
-                    address2: suite,
-                    city,
-                    state,
-                    zipCode
+                    name, phone, email, address, 
+                    address2: suite, city,
+                    state, zipCode
                 },
                 billingInfo: {
-                    name: name2,
-                    phone: phone2,
-                    email: email2,
-                    address: address2,
-                    address2: suite2,
-                    city: city2,
-                    state: state2,
-                    zipCode: zipCode2
+                    name: name2, phone: phone2,
+                    email: email2, address: address2,
+                    address2: suite2, city: city2,
+                    state: state2, zipCode: zipCode2
                 },
             }
         })
+    }
+
+    const proceedToCheckout = () => {
+        setFormLoading(true)
+
+        const modal = document.getElementById('modal-checkout')
+        
+        if (shippingError) {
+            setFormLoading(false)
+            setModalOptions({ header: 'Shipping Information', body: shippingError })
+            modal.style.display = 'block'
+        } else if (!validateFormFields()) {
+            setFormLoading(false)
+            setModalOptions({
+                header: 'Shipping and Billing Information',
+                body: 'You must fill in the billing and shipping information to continue.',
+            })
+            modal.style.display = 'block'
+        } else document.getElementById('submit-button').click()
     }
 
     return <>
@@ -431,19 +296,16 @@ const Checkout = () => {
                             Billing Addres same as Shipping Address
                         </label>
                     </div>
-                    <span>Payment Information</span>
                 </form>
-                <section className="square">
-                    <div id="card-container"></div>
-                    <button className="square-pay" id="card-button" type="submit">
-                        <img src={SquareLogo} alt="Square logo" />
-                        <span>Pay</span>
-                    </button>
-                </section>
-                { showPayPal && <>
-                    <span className="or">or</span>
-                    <div id="paypal-button"></div>
-                </> }
+                {checkout ? 
+                    <Payment subtotal={subtotal} discount={discount} freeShipping={freeShipping} shipping={shippingValue} total={total} cart={cart} paypal={showPayPal} />
+                    : formLoading ? 
+                        <button className="proceed" onClick={proceedToCheckout} disabled>
+                            <div className="spinner-border text-secondary" role="status" />
+                            PROCEED TO CHECKOUT
+                        </button> : 
+                        <button className="proceed" onClick={proceedToCheckout}>PROCEED TO CHECKOUT</button>
+                }
             </section>
             <section className="col-lg-5 order-sm-1 order-lg-2 cart">
                 <span className="my-cart">My Cart</span>
@@ -471,7 +333,6 @@ const Checkout = () => {
                                         </p>
                                     })}
                                     <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
-                                    {/* <p>amount: {item.amount}</p> */}
                                     <p>amount: {item.amount}</p>
                                     <p>price: {item.total.toFixed(2)}</p>
                                 </>

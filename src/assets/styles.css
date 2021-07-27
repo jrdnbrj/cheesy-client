@@ -2281,6 +2281,24 @@ and (max-width: 580px) {
   font-size: 1vw;
 }
 
+.proceed {
+  background-color: #FFC439;
+  border: 0;
+  border-radius: 25px;
+  padding: 2%;
+  font-size: 1.3vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Nunito Bold;
+}
+
+.proceed .spinner-border {
+  margin-right: 10px;
+  width: 23px;
+  height: 23px;
+}
+
 .square {
   padding: 5% 0;
 }
