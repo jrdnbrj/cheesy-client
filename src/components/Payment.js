@@ -15,13 +15,13 @@ const CREATE_ORDER = gql`
 `
 
 const CAPTURE_ORDER = gql`
-    query ($order_id: String!, $cart: [CartType]!) {
+    query ($order_id: String!, $cart: [CartInputType]!) {
         captureOrder(orderId: $order_id, cart: $cart)
     }
 `
 
 const CREATE_PAYMENT = gql`
-    query ($paymentToken: String!, $amount: String!, $contactId: String!, $cart: [CartType]!, $shipping: String!, $discount: String!) {
+    query ($paymentToken: String!, $amount: String!, $contactId: String!, $cart: [CartInputType]!, $shipping: String!, $discount: String!) {
         createPayment(paymentToken: $paymentToken, amount: $amount, contactId: $contactId, cart: $cart, shipping: $shipping, discount: $discount)
     }
 `
@@ -122,19 +122,21 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
 
                         return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount: total, contactId, cart, shipping, discount }})
                             .then(({ data }) => {
-                                console.log(data)
                                 console.log('data.createPayment:', data.createPayment)
                                 if (data.createPayment === 'COMPLETED')
                                     setModalOptions({
                                         header: 'Square Checkout',
                                         body: 'Your order was completed successfully!! We will send your order as soon as possible.',
                                     })
-                                else 
-                                    setModalOptions({
-                                        header: 'Square Checkout',
-                                        body: `An error may have occurred with the transaction. Status: ${data.createPayment}`,
-                                    })
+                                else setModalOptions({ header: 'Square Checkout', body: data.createPayment })
                                     
+                                modal.style.display = 'block'
+                            }).catch(err => {
+                                console.log('Square Error:', err)
+                                setModalOptions({
+                                    header: 'Square Checkout',
+                                    body: 'There was an error with the transaction, please try again.',
+                                })
                                 modal.style.display = 'block'
                             })
                     } else {

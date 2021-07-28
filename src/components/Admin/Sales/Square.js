@@ -25,6 +25,22 @@ const GET_CATALOGS = gql`
     }
 `
 
+const GET_ERRORS = gql`
+    query {
+        listSquareErrors {
+            category
+            code
+            detail
+            field
+            customerId
+            cardId
+            amount
+            type
+            createdAt
+        }
+    }
+`
+
 const Square = () => {
     
     const { data: paymentsData } = useQuery(GET_PAYMENTS)
@@ -42,6 +58,10 @@ const Square = () => {
     const { data: catalogsData } = useQuery(GET_CATALOGS)
     const catalogs = catalogsData && JSON.parse(catalogsData.listCatalogs).objects
     // catalogsData && console.log('catalogs:', catalogs)
+
+    const { data: errorsData } = useQuery(GET_ERRORS)
+    const errors = errorsData && errorsData.listSquareErrors
+    errorsData && console.log('listSquareErrors:', errorsData.listSquareErrors)
     
     return <>
         <section className="square-payments">
@@ -144,6 +164,39 @@ const Square = () => {
                             <td>$ {invoice.payment_requests[0].computed_amount_money.amount / 100}</td>
                             <td>{invoice.created_at.replace('T', ' ')}</td>
                             <td>{invoice.primary_recipient.customer_id}</td>
+                        </tr>
+                    })}
+                </tbody>
+            </table>
+        </section>
+        <section className="square-errors pb-5">
+            <h1 className="display-6">Errors</h1>
+            <table className="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Detail</th>
+                        <th scope="col">amount</th>
+                        <th scope="col">Card ID</th>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {errors?.map((error, index) => {
+                        return <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{error.type}</td>
+                            <td>{error.code}</td>
+                            <td>{error.detail}</td>
+                            <td>$ {error.amount}</td>
+                            <td>{error.cardId}</td>
+                            <td>{error.customerId}</td>
+                            <td>{error.category}</td>
+                            <td>{error.createdAt.replace('T', ' ')}</td>
                         </tr>
                     })}
                 </tbody>
