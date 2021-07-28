@@ -1973,7 +1973,7 @@ and (max-width: 580px) {
   font-family: Nunito Bold;
 }
 
-.address-fruit button {
+.address-fruit .soon {
   opacity: 0.6;
 }
 

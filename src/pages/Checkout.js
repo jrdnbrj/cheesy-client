@@ -10,6 +10,7 @@ const CREATE_CHECKOUT_CONTACT = gql`
     mutation ($billingInfo: CheckoutInfoInputType, $shippingInfo: CheckoutInfoInputType) {
         createCheckoutContact(billingInfo: $billingInfo, shippingInfo: $shippingInfo) {
             response
+            id
         }
     }
 `
@@ -48,6 +49,7 @@ const Checkout = () => {
     const [shippingValue, setShippingValue] = useState(0)
     const [discountRate, setDiscountRate] = useState(0)
     const [freeShipping, setFreeShipping] = useState(false)
+    const [contactID, setContactID] = useState('')
 
     const [couponCode, setCouponCode] = useState('')
     const [couponError, setCouponError] = useState('')
@@ -129,9 +131,11 @@ const Checkout = () => {
             const modal = document.getElementById('modal-checkout')
 
             setFormLoading(false)
-
-            if (data.response === 'success') setCheckout(true)
-            else {
+            console.log(data, data.id)
+            if (data.response) {
+                setContactID(data.id)
+                setCheckout(true)
+            } else {
                 setModalOptions({
                     header: 'Shipping and Billing Information',
                     body: 'An error occurred saving billing information and shipping information, please try again.',
@@ -243,6 +247,15 @@ const Checkout = () => {
         } else document.getElementById('submit-button').click()
     }
 
+    const paymentOptions = () => {
+        return {
+            subtotal, discount, freeShipping, 
+            shipping: shippingValue, total,
+            cart, paypal: showPayPal, 
+            id: contactID
+        }
+    }
+
     return <>
         <Modal id="modal-checkout" {...modalOptions} />
         <section className="row" id="row-correction">
@@ -298,7 +311,7 @@ const Checkout = () => {
                     </div>
                 </form>
                 {checkout ? 
-                    <Payment subtotal={subtotal} discount={discount} freeShipping={freeShipping} shipping={shippingValue} total={total} cart={cart} paypal={showPayPal} />
+                    <Payment {...paymentOptions()} />
                     : formLoading ? 
                         <button className="proceed" onClick={proceedToCheckout} disabled>
                             <div className="spinner-border text-secondary" role="status" />

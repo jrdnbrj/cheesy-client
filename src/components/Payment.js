@@ -21,14 +21,14 @@ const CAPTURE_ORDER = gql`
 `
 
 const CREATE_PAYMENT = gql`
-    query ($paymentToken: String!, $amount: String!) {
-        createPayment(paymentToken: $paymentToken, amount: $amount)
+    query ($paymentToken: String!, $amount: String!, $cart: [CartType]!, $id: String!) {
+        createPayment(paymentToken: $paymentToken, amount: $amount, cart: $cart, id: $id)
     }
 `
 
-const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, paypal }) => {
+const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, paypal, id }) => {
     
-    console.log(subtotal, discount, freeShipping, shipping, total, cart)
+    console.log(subtotal, discount, freeShipping, shipping, total, cart, id)
 
     const [modalOptions, setModalOptions] = useState({})
 
@@ -56,8 +56,8 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                 onApprove: function (data, actions) {
                     console.log('approved')
                     return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart } })
-                        .then(data => {
-                            const order = JSON.parse(data.data.captureOrder)
+                        .then(({ data }) => {
+                            const order = JSON.parse(data.captureOrder)
 
                             if (order.status === 'COMPLETED')
                                 setModalOptions({
@@ -112,18 +112,17 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
             await card.attach('#card-container');
 
             const eventHandler = async event => {
-                console.log("Total:", total)
                 event.preventDefault()
                 try {
                     const result = await card.tokenize();
                     if (result.status === 'OK') {
                         console.log(`Payment token is: ${result.token}`)
 
-                        const amount = document.getElementById('checkout-total').innerHTML
                         const paymentToken = result.token
 
-                        return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount }})
+                        return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount: total, cart, id }})
                             .then(({ data }) => {
+                                console.log(data)
                                 console.log('data.createPayment:', data.createPayment)
                                 if (data.createPayment === 'COMPLETED')
                                     setModalOptions({
