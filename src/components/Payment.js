@@ -21,14 +21,14 @@ const CAPTURE_ORDER = gql`
 `
 
 const CREATE_PAYMENT = gql`
-    query ($paymentToken: String!, $amount: String!, $cart: [CartType]!, $id: String!) {
-        createPayment(paymentToken: $paymentToken, amount: $amount, cart: $cart, id: $id)
+    query ($paymentToken: String!, $amount: String!, $contactId: String!, $cart: [CartType]!, $shipping: String!, $discount: String!) {
+        createPayment(paymentToken: $paymentToken, amount: $amount, contactId: $contactId, cart: $cart, shipping: $shipping, discount: $discount)
     }
 `
 
-const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, paypal, id }) => {
+const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, paypal, contactId }) => {
     
-    console.log(subtotal, discount, freeShipping, shipping, total, cart, id)
+    console.log(subtotal, discount, freeShipping, shipping, total, cart, contactId)
 
     const [modalOptions, setModalOptions] = useState({})
 
@@ -120,7 +120,7 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
 
                         const paymentToken = result.token
 
-                        return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount: total, cart, id }})
+                        return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount: total, contactId, cart, shipping, discount }})
                             .then(({ data }) => {
                                 console.log(data)
                                 console.log('data.createPayment:', data.createPayment)

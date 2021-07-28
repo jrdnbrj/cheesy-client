@@ -32,8 +32,8 @@ const Cart = () => {
     const updateItem = (i, amount, price) => {
         if (cart[i].amount < 1  && amount < 0) return
 
-        cart[i].amount += amount
-        cart[i].total += parseFloat(price)
+        cart[i].amount += amount.toFixed(2)
+        cart[i].total += parseFloat(price).toFixed(2)
 
         dispatch({ type: 'SET_CART', payload: [...cart] })
     }
@@ -78,7 +78,7 @@ const Cart = () => {
                                     { item.path !== '/fruits' ?
                                         <p className="item-description">
                                             {item.bundleUp}-pk.
-                                            {item.buyOnce ? ' Once' : ` Club${item.joinClub}mo`}
+                                            {item.buyOnce ? ' Once' : item.joinClub ? ` Club${item.interval}mo` : ''}
                                         </p> :
                                         <>
                                             <p className="item-description">
@@ -93,7 +93,7 @@ const Cart = () => {
                                                     })}
                                                 </p>
                                             <p className="item-description">
-                                                {item.buyOnce ? ' Once' : ` Club${item.joinClub}mo`}
+                                                {item.buyOnce ? ' Once' : item.joinClub ? ` Club${item.interval}mo` : ''}
                                             </p>
                                         </>
                                     }

@@ -139,7 +139,8 @@ const Products = () => {
 
         if (radio5.checked || radio6.checked || buyOnce.checked) {
             payload['buyOnce'] = buyOnce.checked
-            payload['joinClub'] = radio5.checked ? 1 : radio6.checked ? 2 : false
+            payload['joinClub'] = radio5.checked || radio5.checked ? true : false
+            payload['interval'] = radio5.checked ? 1 : radio6.checked ? 2 : 0
         } else {
             modal.style.display = 'block'
             return setModalOptions({

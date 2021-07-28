@@ -1,6 +1,7 @@
 import { useEffect, useState, createRef } from 'react'
 import { gql, useMutation, useLazyQuery } from "@apollo/client"
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import Modal from '../components/Modal'
 import Payment from '../components/Payment'
@@ -35,6 +36,8 @@ const CHECK_SHIPPING = gql`
 `
 
 const Checkout = () => {
+
+    const history = useHistory()
 
     const [showPayPal, setShowPayPal] = useState(true)
 
@@ -154,6 +157,11 @@ const Checkout = () => {
         }
     })
 
+    useEffect(() => {
+        if (cart.length === 0) history.push('/')
+        // eslint-disable-next-line
+    }, [cart])
+
     const isChecked = () => {
         if (check.current.checked) {
             setName2(name); setPhone2(phone)
@@ -252,7 +260,7 @@ const Checkout = () => {
             subtotal, discount, freeShipping, 
             shipping: shippingValue, total,
             cart, paypal: showPayPal, 
-            id: contactID
+            contactId: contactID
         }
     }
 
@@ -333,7 +341,10 @@ const Checkout = () => {
                                 <>
                                     <span>{item.name}</span>
                                     <p>{item.bundleUp}-pack.</p>
-                                    <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                    <p>
+                                        {item.buyOnce ? ' Once' : item.joinClub ? 
+                                        ` Club ${item.interval} ${item.interval > 1 ? 'months' : 'month'}` : ''}
+                                    </p>
                                     <p>Amount: {item.amount}</p>
                                     <p>Price: {item.total.toFixed(2)}</p>
                                 </> :
@@ -345,7 +356,10 @@ const Checkout = () => {
                                             {smoothie[1] !== 0 ? `${smoothie[0]}x${smoothie[1]}` : ''}
                                         </p>
                                     })}
-                                    <p>{item.buyOnce ? ' Once' : ` Club ${item.joinClub}month`}</p>
+                                    <p>
+                                        {item.buyOnce ? ' Once' : item.joinClub ? 
+                                        ` Club ${item.interval} ${item.interval > 1 ? 'months' : 'month'}` : ''}
+                                    </p>
                                     <p>amount: {item.amount}</p>
                                     <p>price: {item.total.toFixed(2)}</p>
                                 </>
