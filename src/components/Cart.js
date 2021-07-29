@@ -32,8 +32,8 @@ const Cart = () => {
     const updateItem = (i, amount, price) => {
         if (cart[i].amount < 1  && amount < 0) return
 
-        cart[i].amount += amount.toFixed(2)
-        cart[i].total += parseFloat(price).toFixed(2)
+        cart[i].amount += amount
+        cart[i].total += parseFloat(price)
 
         dispatch({ type: 'SET_CART', payload: [...cart] })
     }
@@ -46,7 +46,7 @@ const Cart = () => {
     const getSubtotal = () => {
         const prices = cart.map(item => item.total)
         const subtotal = prices.reduce((a, b) => a + b, 0)
-        dispatch({ type: 'SET_SUBTOTAL', subtotal: subtotal.toFixed(2) })
+        dispatch({ type: 'SET_SUBTOTAL', subtotal: parseFloat(subtotal).toFixed(2) })
     }
 
     // eslint-disable-next-line

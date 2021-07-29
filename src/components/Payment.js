@@ -15,8 +15,8 @@ const CREATE_ORDER = gql`
 `
 
 const CAPTURE_ORDER = gql`
-    query ($order_id: String!, $cart: [CartInputType]!) {
-        captureOrder(orderId: $order_id, cart: $cart)
+    query ($order_id: String!, $cart: [CartInputType]!, $contactId: String!, $shipping: String!, $discount: String!) {
+        captureOrder(orderId: $order_id, cart: $cart, contactId: $contactId, shipping: $shipping, discount: $discount)
     }
 `
 
@@ -55,7 +55,7 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                 },
                 onApprove: function (data, actions) {
                     console.log('approved')
-                    return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart } })
+                    return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart, contactId, shipping, discount } })
                         .then(({ data }) => {
                             const order = JSON.parse(data.captureOrder)
 

@@ -15,6 +15,14 @@ const GET_ORDERS = gql`
                 subscriptionId
                 startDate
             }
+            paypal {
+                orderId
+                status
+                value
+                fullName
+                email
+                createTime
+            }
             cart {
                 amount
                 price
@@ -58,7 +66,7 @@ const Orders = () => {
     const { data } = useQuery(GET_ORDERS)
 
     return <>
-        <table className="table table-striped table-hover">
+        <table className="table table-striped table-hover my-5">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -66,16 +74,31 @@ const Orders = () => {
                     <th scope="col">Status</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Method</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {data?.getOrders.map((order, index) => {
                     return <tr key={index}>
                         <th scope="row">{index + 1}</th>
-                        <td>{order.type} {order.type === 'SUBSCRIPTION' ? order.cart[0].interval === 1 ? '(Month)' : '(Two Months)' : ''}</td>
-                        <td>{order.square.status}</td>
-                        <td>$ {order.square.totalMoney / 100}</td>
-                        <td>{order.square ? 'Square' : order.paypal ? 'PayPal' : '-'}</td>
+                        {order.square ? 
+                            <>
+                                <td>{order.type} {order.type === 'SUBSCRIPTION' ? order.cart[0].interval === 1 ? '(Month)' : '(Two Months)' : ''}</td>
+                                <td>{order.square.status}</td>
+                                <td>$ {order.square.totalMoney / 100}</td>
+                                <td>Square</td>
+                            </> :
+                            <>
+                                <td>{order.type}</td>
+                                <td>{order.paypal.status}</td>
+                                <td>$ {order.paypal.value}</td>
+                                <td>PayPal</td>
+                            </>
+                        }
+                        <td>
+                            <i class="bi bi-arrow-return-left me-2" onClick={() => console.log('Refund')}></i>
+                            <i className="bi bi-x-square-fill" onClick={() => console.log('Cancel')} />
+                        </td>
                     </tr>
                 })}
             </tbody>

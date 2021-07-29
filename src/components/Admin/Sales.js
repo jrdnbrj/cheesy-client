@@ -1,6 +1,6 @@
 import Orders from './Sales/Orders'
 import Square from './Sales/Square'
-import PayPal from './Sales/PayPal'
+// import PayPal from './Sales/PayPal'
 
 
 const Sales = ({ Loading }) => {
@@ -12,9 +12,9 @@ const Sales = ({ Loading }) => {
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-square" type="button" role="tab" aria-controls="nav-square" aria-selected="false">
                 Square
             </button>
-            <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-paypal" type="button" role="tab" aria-controls="nav-paypal" aria-selected="false">
+            {/* <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-paypal" type="button" role="tab" aria-controls="nav-paypal" aria-selected="false">
                 PayPal
-            </button>
+            </button> */}
         </nav>
         <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
@@ -23,9 +23,9 @@ const Sales = ({ Loading }) => {
             <div className="tab-pane fade" id="nav-square" role="tabpanel" aria-labelledby="nav-square-tab">
                 <Square Loading={Loading} />
             </div>
-            <div className="tab-pane fade" id="nav-paypal" role="tabpanel" aria-labelledby="nav-paypal-tab">
+            {/* <div className="tab-pane fade" id="nav-paypal" role="tabpanel" aria-labelledby="nav-paypal-tab">
                 <PayPal Loading={Loading} />
-            </div>
+            </div> */}
         </div>
     </section>
 }
