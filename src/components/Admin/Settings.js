@@ -39,6 +39,14 @@ const UPDATE_PASSWORD = gql`
     }
 `
 
+const UPDATE_SHIPPING = gql`
+    mutation ($values: [String]!) {
+        updateShipping(values: $values) {
+            response
+        }
+    }
+`
+
 const Settings = ({ Loading }) => {
 
     const modal = document.getElementById('modal-settings')
@@ -95,6 +103,32 @@ const Settings = ({ Loading }) => {
         }
     })
 
+    const [updateShipping] = useMutation(UPDATE_SHIPPING, {
+        onCompleted: ({ updateShipping: { response } }) => {
+            setChangingShipping(false)
+            if (response === true) {
+                setModalOptions({
+                    header: 'Update Shipping',
+                    body: 'Changes Saved Successfully.',
+                })
+            } else
+                setModalOptions({
+                    header: 'Update Shipping',
+                    body: 'There was an error trying to save the new shipping values, please try again.',
+                })
+            modal.style.display = 'block'
+        },
+        onError: (error) => {
+            setChangingShipping(false)
+            setModalOptions({
+                header: 'Update Shipping',
+                body: 'There was an error trying to save the new shipping values, please try again.',
+            })
+            modal.style.display = 'block'
+        }
+
+    })
+
     const [month, setMonth] = useState('')
     const [twoMonths, setTwoMonths] = useState('')
 
@@ -105,6 +139,7 @@ const Settings = ({ Loading }) => {
 
     const [changingDiscounts, setChangingDiscounts] = useState(false)
     const [changingPassword, setChangingPassword] = useState(false)
+    const [changingShipping, setChangingShipping] = useState(false)
 
     const [modalOptions, setModalOptions] = useState({})
 
@@ -121,6 +156,16 @@ const Settings = ({ Loading }) => {
 
     const saveShippings = e => {
         e.preventDefault()
+        setChangingShipping(true)
+        const shipping = document.querySelectorAll('.shipping-value')
+
+        const values = []
+
+        for(let i = 0; i < shipping.length; i++) {
+            values.push(shipping[i].value)
+        }
+
+        updateShipping({ variables: { values }})
     }
 
     const savePassword = e => {
@@ -194,9 +239,15 @@ const Settings = ({ Loading }) => {
                         </div>
                     })}
                 </div>
-                <button type="submit" className="btn btn-success mb-5 mt-3">
-                    <span>Save Changes</span>
-                </button>
+                {changingShipping ?
+                    <button type="button" className="btn btn-success mb-5" disabled>
+                        <div className="spinner-border spin me-2" role="status" />
+                        <span>Saving Shipping Values</span>
+                    </button> : 
+                    <button type="submit" className="btn btn-success mb-5">
+                        <span>Save Shipping Values</span>
+                    </button>
+                }
             </form>
             <form onSubmit={savePassword}>
                 <h1 className="display-6">Password</h1>
@@ -208,8 +259,8 @@ const Settings = ({ Loading }) => {
                     <input type="password" className="form-control" placeholder="New Password Again" value={newPassword2} 
                         onChange={e => setNewPassword2(e.target.value)} id="password-3" required />
                     {passwordVisible ? 
-                        <i class="bi bi-eye-slash" onClick={seePassword} /> : 
-                        <i class="bi bi-eye" onClick={seePassword} />
+                        <i className="bi bi-eye-slash" onClick={seePassword} /> : 
+                        <i className="bi bi-eye" onClick={seePassword} />
                     }
                 </div>
                 <div className="form-text">Your password must be 8-20 characters long.</div>
