@@ -96,7 +96,7 @@ const Orders = () => {
                             </>
                         }
                         <td>
-                            <i class="bi bi-arrow-return-left me-2" onClick={() => console.log('Refund')}></i>
+                            <i className="bi bi-arrow-return-left me-2" onClick={() => console.log('Refund')} />
                             <i className="bi bi-x-square-fill" onClick={() => console.log('Cancel')} />
                         </td>
                     </tr>

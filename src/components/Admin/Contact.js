@@ -34,9 +34,6 @@ const Contact = ({ Loading }) => {
     const [deleteContact, { data }] = useMutation(DELETE_CONTACT)
     const { data: contactsData, loading: contactsLoading, refetch } = useQuery(GET_CONTACTS)
 
-    // contactsData && console.log('Contacts:', contacts)
-    // data && console.log('data:', data.deleteContact)
-
     useEffect(() => {
         setContacts(contactsData)
     }, [contactsData])

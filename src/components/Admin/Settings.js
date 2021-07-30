@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useQuery, gql } from "@apollo/client"
+import { useQuery, useMutation, gql } from "@apollo/client"
+
+import Modal from '../Modal'
 
 
 const GET_SETTINGS = gql`
@@ -20,32 +22,126 @@ const GET_SHIPPINGS = gql`
     }
 `
 
+const UPDATE_DISCOUNTS = gql`
+    mutation ($month: String!, $twoMonths: String!) {
+        updateDiscounts(month: $month, twoMonths: $twoMonths) {
+            month
+            twoMonths
+        }
+    }
+`
+
+const UPDATE_PASSWORD = gql`
+    mutation ($password: String!, $newPassword: String!) {
+        updatePassword(password: $password, newPassword: $newPassword) {
+            response
+        }
+    }
+`
+
 const Settings = ({ Loading }) => {
+
+    const modal = document.getElementById('modal-settings')
 
     const { data, loading } = useQuery(GET_SETTINGS)
     const { data: shippings, loading: shippingsLoading } = useQuery(GET_SHIPPINGS)
 
+    const [updateDiscounts] = useMutation(UPDATE_DISCOUNTS, {
+        onCompleted: () => {
+            setChangingDiscounts(false)
+            setModalOptions({
+                header: 'Update Discounts',
+                body: 'Changes Saved Successfully.',
+            })
+            modal.style.display = 'block'
+        },
+        onError: (error) => {
+            setChangingDiscounts(false)
+            setModalOptions({
+                header: 'Update Discounts',
+                body: 'There was an error trying to save the new percentages, please try again.',
+            })
+            console.log('updateDiscounts error', error)
+            modal.style.display = 'block'
+        }
+    })
+
+    const [updatePassword] = useMutation(UPDATE_PASSWORD, {
+        onCompleted: ({ updatePassword: { response } }) => {
+            setChangingPassword(false)
+            if (response === 'OK') {
+                setModalOptions({
+                    header: 'Update Password',
+                    body: 'Changes Saved Successfully.',
+                })
+                setPassword('')
+                setNewPassword('')
+                setNewPassword2('')
+            } else
+                setModalOptions({
+                    header: 'Update Password',
+                    body: response,
+                })
+            modal.style.display = 'block'
+        },
+        onError: (error) => {
+            setChangingPassword(false)
+            setModalOptions({
+                header: 'Update Password',
+                body: 'There was an error trying to save the new password, please try again.',
+            })
+            console.log('updateDiscounts error', error)
+            modal.style.display = 'block'
+        }
+    })
+
     const [month, setMonth] = useState('')
     const [twoMonths, setTwoMonths] = useState('')
+
+    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [newPassword2, setNewPassword2] = useState('')
+    const [passwordVisible, setPasswordVisible] = useState(false)
+
+    const [changingDiscounts, setChangingDiscounts] = useState(false)
+    const [changingPassword, setChangingPassword] = useState(false)
+
+    const [modalOptions, setModalOptions] = useState({})
 
     useEffect(() => {
         setMonth(data?.getSettings.discountMonth)
         setTwoMonths(data?.getSettings.discount2months)
     }, [data])
 
-    const [password, setPassword] = useState('')
-    const [newPassword, setNewPassword] = useState('')
+    const saveDiscounts = e => {
+        e.preventDefault()
+        setChangingDiscounts(true)
+        updateDiscounts({ variables: { month, twoMonths }})
+    }
 
-    const updateDiscounts = e => {
+    const saveShippings = e => {
         e.preventDefault()
     }
 
-    const updateShippings = e => {
+    const savePassword = e => {
         e.preventDefault()
+        setChangingPassword(true)
+        updatePassword({ variables: { password, newPassword }})
     }
 
-    const updatePassword = e => {
-        e.preventDefault()
+    const seePassword = () => {
+        const pass = document.getElementById('password-1')
+        if (pass.type === 'password') {
+            setPasswordVisible(true)
+            document.getElementById('password-1').type = 'text'
+            document.getElementById('password-2').type = 'text'
+            document.getElementById('password-3').type = 'text'
+        } else {
+            setPasswordVisible(false)
+            document.getElementById('password-1').type = 'password'
+            document.getElementById('password-2').type = 'password'
+            document.getElementById('password-3').type = 'password'
+        }
     }
 
     if (loading) return <Loading document="Settings" />
@@ -54,10 +150,11 @@ const Settings = ({ Loading }) => {
 
     return <>
         <section className="settings">
-            <form onSubmit={updateDiscounts}>
-                <h1 className="display-6 mx-5">Discounts</h1>
+            <Modal id="modal-settings" {...modalOptions} />
+            <form onSubmit={saveDiscounts}>
+                <h1 className="display-6">Discounts</h1>
                 <div className="row g-3">
-                    <div className="col mx-5">
+                    <div className="col">
                         <label className="form-label ms-1">Discount percentage each months in club</label>
                         <div className="input-group mb-3">
                             <input className="form-control" type="number" 
@@ -65,7 +162,7 @@ const Settings = ({ Loading }) => {
                             <span className="input-group-text" id="basic-addon1">%</span>
                         </div>
                     </div>
-                    <div className="col mx-5">
+                    <div className="col">
                         <label className="form-label ms-1">Discount percentage every two months in club</label>
                         <div className="input-group mb-3">
                             <input className="form-control" type="number" 
@@ -74,13 +171,19 @@ const Settings = ({ Loading }) => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-success mb-5 mx-5">
-                    <span>Save Discounts</span>
-                </button>
+                {changingDiscounts ?
+                    <button type="button" className="btn btn-success mb-5" disabled>
+                        <div className="spinner-border spin me-2" role="status" />
+                        <span>Saving Discounts</span>
+                    </button> : 
+                    <button type="submit" className="btn btn-success mb-5">
+                        <span>Save Discounts</span>
+                    </button>
+                }
             </form>
-            <form onSubmit={updateShippings} className="shipping-values">
-                <h1 className="display-6 mx-5">Shipping Values</h1>
-                <div className="row mx-5" id="row-correction">
+            <form onSubmit={saveShippings} className="shipping-values">
+                <h1 className="display-6">Shipping Values</h1>
+                <div className="row" id="row-correction">
                     {shippings?.getShippings.map(shipping => {
                         return <div className="col-3 my-2" key={shipping.state}>
                             <label className="form-label">{shipping.state}</label>
@@ -91,22 +194,34 @@ const Settings = ({ Loading }) => {
                         </div>
                     })}
                 </div>
-                <button type="submit" className="btn btn-success mb-5 mt-3 mx-5">
+                <button type="submit" className="btn btn-success mb-5 mt-3">
                     <span>Save Changes</span>
                 </button>
             </form>
-            <form onSubmit={updatePassword}>
-                <h1 className="display-6 mx-5">Password</h1>
-                <div className="input-group mx-5">
-                    <input type="password" className="form-control" placeholder="Current Password" 
-                        value={password} onChange={e => setPassword(e.target.value)} />
-                    <input type="password" className="form-control" placeholder="New Password"
-                        value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+            <form onSubmit={savePassword}>
+                <h1 className="display-6">Password</h1>
+                <div className="input-group">
+                    <input type="password" className="form-control" placeholder="Current Password" value={password} 
+                        onChange={e => setPassword(e.target.value)} id="password-1" required />
+                    <input type="password" className="form-control" placeholder="New Password" value={newPassword} 
+                        onChange={e => setNewPassword(e.target.value)} id="password-2" required />
+                    <input type="password" className="form-control" placeholder="New Password Again" value={newPassword2} 
+                        onChange={e => setNewPassword2(e.target.value)} id="password-3" required />
+                    {passwordVisible ? 
+                        <i class="bi bi-eye-slash" onClick={seePassword} /> : 
+                        <i class="bi bi-eye" onClick={seePassword} />
+                    }
                 </div>
-                <div className="form-text mx-5">Your password must be 6-20 characters long.</div>
-                <button type="submit" className="btn btn-success mb-5 mt-3 mx-5">
-                    <span>Change Password</span>
-                </button>
+                <div className="form-text">Your password must be 8-20 characters long.</div>
+                {changingPassword ?
+                    <button type="button" className="btn btn-success mb-5" disabled>
+                        <div className="spinner-border spin me-2" role="status" />
+                        <span>Changing Password</span>
+                    </button> : 
+                    <button type="submit" className="btn btn-success mb-5">
+                        <span>Change Password</span>
+                    </button>
+                }
             </form>
         </section>
     </>

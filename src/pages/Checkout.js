@@ -183,9 +183,9 @@ const Checkout = () => {
 
     const validateFormFields = () => {
         if (name === '' || phone === '' || email === '' || address === '' || 
-            suite === '' || city === '' || state === '' || zipCode === '' || 
+            city === '' || state === '' || zipCode === '' || 
             name2 === '' || phone2 === '' || email2 === '' || address2 === '' || 
-            suite2 === '' || city2 === '' || state2 === '' || zipCode2 === '')
+            city2 === '' || state2 === '' || zipCode2 === '')
             return false
         
         return true
@@ -278,7 +278,7 @@ const Checkout = () => {
                                 <input value={phone} id="phone" onChange={e => onChange(e, setPhone)} placeholder="Phone" type="text" required />
                                 <input value={email} id="email" onChange={e => onChange(e, setEmail)} placeholder="Email" type="text" required />
                                 <input value={address} id="address" onChange={e => onChange(e, setAddress)} placeholder="Address" type="text" required />
-                                <input value={suite} id="suite" onChange={e => onChange(e, setSuite)} placeholder="Apt, suite" type="text" required />
+                                <input value={suite} id="suite" onChange={e => onChange(e, setSuite)} placeholder="Apt, suite" type="text" />
                                 <input value={city} id="city" onChange={e => onChange(e, setCity)} placeholder="City" type="text" required />
                                 <div className="row" id="row-correction">
                                     <div className="col-7 state">
@@ -297,7 +297,7 @@ const Checkout = () => {
                                 <input value={phone2} id="phone2" onChange={e => onChange(e, setPhone2)} placeholder="Phone" type="text" required />
                                 <input value={email2} id="email2" onChange={e => onChange(e, setEmail2)} placeholder="Email" type="text" required />
                                 <input value={address2} id="address2" onChange={e => onChange(e, setAddress2)} placeholder="Address" type="text" required />
-                                <input value={suite2} id="suite2" onChange={e => onChange(e, setSuite2)} placeholder="Apt, suite" type="text" required />
+                                <input value={suite2} id="suite2" onChange={e => onChange(e, setSuite2)} placeholder="Apt, suite" type="text" />
                                 <input value={city2} id="city2" onChange={e => onChange(e, setCity2)} placeholder="City" type="text" required />
                                 <div className="row" id="row-correction">
                                     <div className="col-7 state">
@@ -346,7 +346,7 @@ const Checkout = () => {
                                         ` Club ${item.interval} ${item.interval > 1 ? 'months' : 'month'}` : ''}
                                     </p>
                                     <p>Amount: {item.amount}</p>
-                                    <p>Price: {item.total.toFixed(2)}</p>
+                                    <p>Total: $ {item.total.toFixed(2)}</p>
                                 </> :
                                 <>
                                     <span>{item.name}</span>
@@ -361,7 +361,7 @@ const Checkout = () => {
                                         ` Club ${item.interval} ${item.interval > 1 ? 'months' : 'month'}` : ''}
                                     </p>
                                     <p>amount: {item.amount}</p>
-                                    <p>price: {item.total.toFixed(2)}</p>
+                                    <p>Total: $ {item.total.toFixed(2)}</p>
                                 </>
                             }
                         </section>

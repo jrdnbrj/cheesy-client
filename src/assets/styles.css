@@ -2589,7 +2589,7 @@ and (max-width: 580px) {
 }
 
 .settings {
-  margin: 5%;
+  margin: 5% 15%;
 }
 
 .shipping-values .col-3 {
@@ -2604,4 +2604,15 @@ and (max-width: 580px) {
 
 .add-icon {
   font-size: 237%;
+}
+
+.spin {
+  width: 18px;
+  height: 18px;
+}
+
+.bi-eye, .bi-eye-slash {
+  font-size: 1.5vw;
+  padding-left: 1%;
+  padding-top: 0.4%;
 }

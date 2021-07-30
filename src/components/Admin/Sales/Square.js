@@ -61,7 +61,7 @@ const Square = () => {
 
     const { data: errorsData } = useQuery(GET_ERRORS)
     const errors = errorsData && errorsData.listSquareErrors
-    errorsData && console.log('listSquareErrors:', errorsData.listSquareErrors)
+    // errorsData && console.log('listSquareErrors:', errorsData.listSquareErrors)
     
     return <>
         <section className="square-payments">

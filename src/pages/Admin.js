@@ -42,7 +42,7 @@ const Admin = () => {
 
     const Loading = ({ document }) => {
         return <section className="loading">
-            <div className="spinner-border" role="status"></div>
+            <div className="spinner-border" role="status" />
             <p>Loading {document}...</p>
         </section>
     }
