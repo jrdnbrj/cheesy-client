@@ -52,6 +52,7 @@ const Products = ({ Loading }) => {
 
     useEffect(() => {
         if (updateError) {
+            console.log('updateError:', updateError)
             setModalOptions({
                 header: 'Admin Products',
                 body: 'There was an error saving changes, please try again.',
@@ -93,15 +94,14 @@ const Products = ({ Loading }) => {
     const removeImage = (i, j) => setImagesRemoved([...imagesRemoved, `${i}${j}`])
 
     const uploadImage = (event, i, j) => {
-        // const url = URL.createObjectURL(event.target.files[0])
-
+        console.log('uploadImage')
         const reader = new FileReader()
         reader.readAsDataURL(event.target.files[0])
         reader.onloadend = () => document.getElementById(`image${i}${j}`).src = reader.result
-        // reader.onloadend = () => setUploadedImages([...uploadedImages, [i, reader.result, j]])
     }
 
     const newImage = (event, i) => {
+        console.log('newImage')
         const url = URL.createObjectURL(event.target.files[0])
 
         const reader = new FileReader()
@@ -149,8 +149,6 @@ const Products = ({ Loading }) => {
 
         const smoothies = namesS.map((item, i) => [item, smoothiesImg[i], ingredientsS[i]])
 
-        // console.log('smoothies:', smoothies)
-
         updateProduct({ variables: {
             name,
             price,
@@ -176,7 +174,7 @@ const Products = ({ Loading }) => {
                             </div>
                             <div className="col-3">
                                 <label className="form-label">Price (USD)</label>
-                                <input type="text" className="form-control" id={`price-${i}`} defaultValue={product.price} />
+                                <input type="number" step="any" className="form-control" id={`price-${i}`} defaultValue={product.price} />
                                 <div className="form-text">Price of one box.</div>
                             </div>
                             <div className="col-3">

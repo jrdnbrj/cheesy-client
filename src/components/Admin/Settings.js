@@ -234,7 +234,7 @@ const Settings = ({ Loading }) => {
                             <label className="form-label">{shipping.state}</label>
                             <div className="input-group">
                                 <span className="input-group-text" id="basic-addon1">$</span>
-                                <input type="number" className="form-control shipping-value" defaultValue={shipping.value} />
+                                <input type="number" className="form-control shipping-value" step="any" defaultValue={shipping.value} />
                             </div>
                         </div>
                     })}

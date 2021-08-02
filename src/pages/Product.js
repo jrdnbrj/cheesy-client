@@ -274,7 +274,7 @@ const Product = () => {
             <section className="address py-5">
                 <button className="btn-add" onClick={addToCart}>ADD TO CART</button>
                 <address>
-                    <p>If you live within 10 miles of Eau Claire (54703) we will deliver to your door for free.</p>
+                    <p>If you live within 10 miles of Eau Claire WI (54703) send us a message to order! We will deliver to your door for free.</p>
                     <span>DM us!</span>
                     <a href="https://www.facebook.com/Cheesybittes/" target="_blank" rel="noreferrer">
                         <i className="bi-facebook icon-2"></i>

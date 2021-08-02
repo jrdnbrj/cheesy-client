@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { gql } from "@apollo/client"
+import { useDispatch } from 'react-redux'
 
 import client from '../adapters/apolloClient'
 import Modal from '../components/Modal'
@@ -27,8 +28,8 @@ const CREATE_PAYMENT = gql`
 `
 
 const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, paypal, contactId }) => {
-    
-    console.log(subtotal, discount, freeShipping, shipping, total, cart, contactId)
+
+    const dispatch = useDispatch()
 
     const [modalOptions, setModalOptions] = useState({})
 
@@ -55,6 +56,7 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                 },
                 onApprove: function (data, actions) {
                     console.log('approved')
+                    dispatch({ type: 'SET_CART', payload: [] })
                     return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart, contactId, shipping, discount } })
                         .then(({ data }) => {
                             const order = JSON.parse(data.captureOrder)
@@ -123,12 +125,13 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                         return client.query({ query: CREATE_PAYMENT, variables: { paymentToken, amount: total, contactId, cart, shipping, discount }})
                             .then(({ data }) => {
                                 console.log('data.createPayment:', data.createPayment)
-                                if (data.createPayment === 'COMPLETED')
+                                if (data.createPayment === 'COMPLETED') {
+                                    dispatch({ type: 'SET_CART', payload: [] })
                                     setModalOptions({
                                         header: 'Square Checkout',
-                                        body: 'Your order was completed successfully!! We will send your order as soon as possible.',
+                                        body: 'Your order was completed successfully!! We will ship your happiness package as soon as possible. Thank you.',
                                     })
-                                else setModalOptions({ header: 'Square Checkout', body: data.createPayment })
+                                } else setModalOptions({ header: 'Square Checkout', body: data.createPayment })
                                     
                                 modal.style.display = 'block'
                             }).catch(err => {
