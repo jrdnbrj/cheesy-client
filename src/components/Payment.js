@@ -56,7 +56,7 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                 },
                 onApprove: function (data, actions) {
                     console.log('approved')
-                    dispatch({ type: 'SET_CART', payload: [] })
+                    // dispatch({ type: 'SET_CART', payload: [] })
                     return client.query({ query: CAPTURE_ORDER, variables: { order_id: data.orderID, cart, contactId, shipping, discount } })
                         .then(({ data }) => {
                             const order = JSON.parse(data.captureOrder)
@@ -65,6 +65,8 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                                 setModalOptions({
                                     header: 'PayPal Checkout',
                                     body: 'Your order was completed successfully!! We will send your order as soon as possible.',
+                                    acceptText: 'OK',
+                                    accept: () => dispatch({ type: 'SET_CART', payload: [] })
                                 })
                             else
                                 setModalOptions({
@@ -80,7 +82,7 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                     if (!formValid) {
                         setModalOptions({
                             header: 'PayPal Checkout',
-                            body: 'You must fill in the billing and shipping information to continue.',
+                            body: 'You must fill in the billing and shipping information to continue.'
                         })
                         formValid = true
                     } else {
@@ -126,10 +128,12 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                             .then(({ data }) => {
                                 console.log('data.createPayment:', data.createPayment)
                                 if (data.createPayment === 'COMPLETED') {
-                                    dispatch({ type: 'SET_CART', payload: [] })
+                                    // dispatch({ type: 'SET_CART', payload: [] })
                                     setModalOptions({
                                         header: 'Square Checkout',
                                         body: 'Your order was completed successfully!! We will ship your happiness package as soon as possible. Thank you.',
+                                        acceptText: 'OK',
+                                        accept: () => dispatch({ type: 'SET_CART', payload: [] })
                                     })
                                 } else setModalOptions({ header: 'Square Checkout', body: data.createPayment })
                                     

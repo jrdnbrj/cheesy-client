@@ -9,6 +9,8 @@ const GET_ORDERS = gql`
         getOrders {
             type
             createdAt
+            shipping
+            discount
             square {
                 createdAt
                 status
@@ -102,13 +104,18 @@ const Orders = ({ Loading }) => {
         onCompleted: ({ cancelSubscription: response }) => {
             console.log('cancel subscription completed:', response)
             const modal = document.getElementById('modal-orders')
+            console.log(response)
             if (response === 'CANCELED') {
                 setModalOptions({
                     header: 'Cancel Subscription',
                     body: 'The subscription has been successfully canceled.',
                 })
                 refetch()
-            }
+            } else 
+                setModalOptions({
+                    header: 'Cancel Subscription',
+                    body: 'The subscription may not have been canceled, please check the subscription information again.',
+                })
             modal.style.display = 'block'
         },
         onError: (error) => {
@@ -130,7 +137,7 @@ const Orders = ({ Loading }) => {
         onError: (error) => {
             const modal = document.getElementById('modal-orders')
             setModalOptions({
-                header: 'Cancel Subscription',
+                header: 'Retrieve Subscription',
                 body: 'An error occurred trying to get subscription information. Please try again.',
             })
             modal.style.display = 'block'
@@ -146,7 +153,7 @@ const Orders = ({ Loading }) => {
         onError: (error) => {
             const modal = document.getElementById('modal-orders')
             setModalOptions({
-                header: 'Cancel Subscription',
+                header: 'Retrieve Payment',
                 body: 'An error has occurred trying to get payment information. Please try again.',
             })
             modal.style.display = 'block'
@@ -162,7 +169,7 @@ const Orders = ({ Loading }) => {
         onError: (error) => {
             const modal = document.getElementById('modal-orders')
             setModalOptions({
-                header: 'Cancel Subscription',
+                header: 'Retrieve Order',
                 body: 'An error has occurred trying to get order information. Please try again.',
             })
             modal.style.display = 'block'
@@ -170,9 +177,9 @@ const Orders = ({ Loading }) => {
         fetchPolicy: "no-cache"
     })
 
-    // const cancel = subscriptionId => {
-    //     cancelSubscription({ variables: { subscriptionId } })
-    // }
+    const cancel = subscriptionId => {
+        cancelSubscription({ variables: { subscriptionId } })
+    }
 
     const openModal = i => {
         setModalIndex(i)
@@ -227,9 +234,18 @@ const Orders = ({ Loading }) => {
                 delete modalData['plan']['id']
                 delete modalData['plan']['is_deleted']
                 delete modalData['plan']['present_at_all_locations']
-                delete modalData['plan']['subscription_plan_data']['phases']['ordinal']
+                delete modalData['plan']['subscription_plan_data']['phases'][0]['ordinal']
 
                 return <section className="mt-3">
+                    {modalData.canceled_date && modalData.status === 'PENDING' ?
+                        <div className="alert alert-primary" role="alert">
+                            The subscription will be canceled in {modalData.canceled_date}
+                        </div> :
+                        modalData.status === 'CANCELED' ?
+                        <div className="alert alert-primary" role="alert">
+                            The subscription has been canceled on {modalData.canceled_date}
+                        </div> : null
+                    }
                     <JSONPretty  id="json-pretty" data={modalData} />
                 </section>
             }
@@ -237,7 +253,16 @@ const Orders = ({ Loading }) => {
         if (orderData) {
             modalData = JSON.parse(orderData.getOrder)
             if (modalData.id === id) {
-                // delete modalData['id']
+                delete modalData['intent']
+                delete modalData['purchase_units'][0]['reference_id']
+                delete modalData['purchase_units'][0]['amount']['breakdown']
+                delete modalData['purchase_units'][0]['description']
+                delete modalData['purchase_units'][0]['shipping']
+                delete modalData['purchase_units'][0]['payments']['captures'][0]['amount']
+                delete modalData['purchase_units'][0]['payments']['captures'][0]['final_capture']
+                delete modalData['purchase_units'][0]['payments']['captures'][0]['seller_protection']
+                delete modalData['purchase_units'][0]['payments']['captures'][0]['links']
+                delete modalData['links']
                 
                 return <section className="mt-3">
                     <JSONPretty  id="json-pretty" data={modalData} />
@@ -256,15 +281,12 @@ const Orders = ({ Loading }) => {
             const sub = JSON.parse(subscription.retrieveSubscription)
             if (sub.id === id2) return true
         }
-        console.log('asdasdasd')
         return false
     }
 
     const isOrder = id => {
-        console.log('asdas')
         if (orderData) {
             const order = JSON.parse(orderData.getOrder)
-            console.log(order)
             if (order.id === id) return true
         }
         return false
@@ -305,10 +327,12 @@ const Orders = ({ Loading }) => {
                                             <strong>Type: </strong>
                                             <span>{order.type}</span>
                                         </li>
-                                        <li className="list-group-item">
-                                            <strong>Start Date: </strong>
-                                            <span>{order.square.startDate}</span>
-                                        </li>
+                                        {order.type === 'SUBSCRIPTION' &&
+                                            <li className="list-group-item">
+                                                <strong>Start Date: </strong>
+                                                <span>{order.square.startDate.replace('T', ' ')}</span>
+                                            </li>
+                                        }
                                         <li className="list-group-item">
                                             <strong>Payment Method: </strong>
                                             <span>Square</span>
@@ -331,8 +355,16 @@ const Orders = ({ Loading }) => {
                                     </> : null
                                 }
                                 <li className="list-group-item">
+                                    <strong>Shipping Value: </strong>
+                                    <span>$ {order.shipping}</span>
+                                </li>
+                                <li className="list-group-item">
+                                    <strong>Discount: </strong>
+                                    <span>$ {order.discount}</span>
+                                </li>
+                                <li className="list-group-item">
                                     <strong>Created at: </strong>
-                                    <span>{order.createdAt}</span>
+                                    <span>{order.createdAt.replace('T', ' ')}</span>
                                 </li>
                             </ul>
                         </section>
@@ -342,7 +374,7 @@ const Orders = ({ Loading }) => {
                                 return <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
                                     {item.name}
                                     <section>
-                                        <span className="badge bg-secondary rounded-pill mx-1">{item.amount}</span>
+                                        <span className="badge bg-primary rounded-pill mx-1">{item.amount}</span>
                                         <span className="badge bg-success rounded-pill mx-1">$ {item.total}</span>
                                     </section>
                                 </li>
@@ -421,22 +453,25 @@ const Orders = ({ Loading }) => {
                             </li>
                         </ul>
                     </section>
+                    {order.type === 'SUBSCRIPTION' && 
+                        <button className="btn btn-primary d-block mx-auto mt-3" onClick={() => cancel(order.square.subscriptionId)}>
+                            Cancel Subscription
+                        </button>}
                     {order.square ? isPayment(order.square.paymentId, order.square.subscriptionId) ? 
-                        <ModalInfo id={order.square.paymentId} id2={order.square.subscriptionId} /> :
-                        order.paypal ? isOrder(order.paypal.orderId) ?
-                        <ModalInfo id={order.paypal.orderId} id2={0} /> :
-                        order.type === 'SUBSCRIPTION' ?
+                        <ModalInfo id={order.square.paymentId} id2={order.square.subscriptionId} /> : 
+                        order.type === 'SUBSCRIPTION' ? 
                         <button className="btn btn-primary d-block mx-auto mt-3" onClick={() => requestSubscription(order.square.subscriptionId)}>
                             Request Subscription Info
                         </button> :
                         order.type === 'ONCE' ? 
                         <button className="btn btn-primary d-block mx-auto mt-3" onClick={() => requestPayment(order.square.paymentId)}>
                             Request Payment Info
-                        </button> : null : null :
+                        </button> : null : null}
+                    {order.paypal ? isOrder(order.paypal.orderId) ?
+                        <ModalInfo id={order.paypal.orderId} id2={0} /> : 
                         <button className="btn btn-primary d-block mx-auto mt-3" onClick={() => requestOrder(order.paypal.orderId)}>
                             Request Order Info
-                        </button>
-                    }
+                        </button> : null }
                 </div>
                 <div className="modal-footer">
                     <button className="btn-success btn" onClick={closeModal}>
@@ -447,14 +482,16 @@ const Orders = ({ Loading }) => {
         </div>
     }
 
-    if (networkStatus === networkStatus.refetch || loading) {
+    if (networkStatus === networkStatus.refetch || loading)
         return <Loading document="Orders" />
-    }
+
+    if (loadingPayment || loadingSubscription || loadingOrder)
+        return <Loading document="Order Info" />
 
     return <>
         <Modal id="modal-orders" {...modalOptions} />
         <InfoModal />
-        {loadingPayment || loadingSubscription || loadingOrder ? <Loading document="Order Info" /> : null}
+        {/* {loadingPayment || loadingSubscription || loadingOrder ? <Loading document="Order Info" /> : null} */}
         <table className="table table-striped table-hover my-5">
             <thead>
                 <tr>
@@ -473,7 +510,7 @@ const Orders = ({ Loading }) => {
                             <>
                                 <td>{order.type} {order.type === 'SUBSCRIPTION' ? order.cart[0].interval === 1 ? '(Month)' : '(Two Months)' : ''}</td>
                                 <td>{order.checkoutInfo.shippingInformation.name}</td>
-                                <td>$ {order.square.totalMoney / 100}</td>
+                                <td>$ {(order.square.totalMoney / 100).toFixed(2)}</td>
                                 <td>Square</td>
                                 {/* <td>
                                     <i className="bi bi-arrow-return-left me-2" onClick={() => console.log('Refund')} />
