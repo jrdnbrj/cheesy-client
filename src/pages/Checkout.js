@@ -396,6 +396,9 @@ const Checkout = () => {
                             $ <span id="checkout-total">{parseFloat(total).toFixed(2)}</span>
                         </span>
                     </div>
+                    <div class="alert alert-dark" role="alert">
+                        Shipping days are Monday and Tuesday.
+                    </div>
                 </section>
             </section>
         </section>

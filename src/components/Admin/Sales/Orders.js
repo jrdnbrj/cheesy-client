@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery, useLazyQuery, gql } from "@apollo/client"
 
 import Modal from '../../Modal'
@@ -94,6 +94,8 @@ const Orders = ({ Loading }) => {
 
     const [modalOptions, setModalOptions] = useState({})
     const [modalIndex, setModalIndex] = useState(0)
+    const [dateFrom, setDateFrom] = useState('')
+    const [dateTo, setDateTo] = useState('')
 
     const { data, refetch, networkStatus, loading } = useQuery(GET_ORDERS, { 
         fetchPolicy: "no-cache", 
@@ -203,6 +205,10 @@ const Orders = ({ Loading }) => {
     const requestOrder = orderId => {
         getOrder({ variables: { orderId } })
     }
+
+    useEffect(() => {
+        console.log(dateFrom, dateTo, typeof dateFrom)
+    }, [dateFrom, dateTo])
 
     const ModalInfo = ({ id, id2 }) => {
         let modalData = {}
@@ -491,7 +497,16 @@ const Orders = ({ Loading }) => {
     return <>
         <Modal id="modal-orders" {...modalOptions} />
         <InfoModal />
-        {/* {loadingPayment || loadingSubscription || loadingOrder ? <Loading document="Order Info" /> : null} */}
+        <section className="row mt-3" id="row-correction">
+            <div className="col px-5">
+                <label>Date From</label>
+                <input type="date" className="form-control date-from" value={dateFrom} onChange={e => setDateFrom(e.target.value)} />
+            </div>
+            <div className="col px-5">
+                <label>Date To</label>
+                <input type="date" className="form-control date-to" value={dateTo} onChange={e => setDateTo(e.target.value)} />
+            </div>
+        </section>
         <table className="table table-striped table-hover my-5">
             <thead>
                 <tr>
