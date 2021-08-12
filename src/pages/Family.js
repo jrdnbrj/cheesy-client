@@ -97,6 +97,7 @@ const Family = () => {
             <source src={video} type="video/mp4" />
         </video>
         <section className="row background3" id="row-correction">
+            <span className="video-msg">Video courtesy of Dairy Farmers of Wisconsin</span>
             <img src={america} className="america col-lg-5 order-lg-1 col-sm-12 order-sm-2 order-2 mx-auto" alt="America" />
             <section className="col-lg-7 col-lg-2 col-sm-12 order-sm-1 order-1 my-auto giving-back">
                 <h2>{data && data.getFamily[3].title}</h2>
