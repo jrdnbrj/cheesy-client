@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context'
 
 
 const httpLink = createHttpLink({
-  uri: process.env.NODE_ENV === 'production' ? 'https://server.cheesybittes.com/' : 'http://localhost:8000/gql',
+  uri: process.env.NODE_ENV === 'production' ? 'https://server.cheesybittes.com/gql' : 'http://localhost:8000/gql',
 })
 
 const authLink = setContext((_, { headers }) => {
