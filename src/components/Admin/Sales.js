@@ -1,10 +1,24 @@
+import { useQuery, gql } from '@apollo/client'
 import Orders from './Sales/Orders'
 import Square from './Sales/Square'
 // import PayPal from './Sales/PayPal'
 
 
+const GET_DATETIME = gql`
+    query datetime {
+        getDatetime
+    }
+`
+
 const Sales = ({ Loading }) => {
+
+    const { data } = useQuery(GET_DATETIME, { fetchPolicy: "no-cache" })
+
+
     return <section className="mt-5">
+        <span className="float-end">
+            <strong>Server Datetime: </strong>{(new Date(data?.getDatetime.split('.')[0])).toString()}
+        </span>
         <nav className="nav nav-tabs" role="tablist">
             <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="true">
                 Orders
@@ -18,7 +32,7 @@ const Sales = ({ Loading }) => {
         </nav>
         <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
-                <Orders Loading={Loading} />
+                <Orders Loading={Loading} datetime={data?.getDatetime.split('.')[0]} />
             </div>
             <div className="tab-pane fade" id="nav-square" role="tabpanel" aria-labelledby="nav-square-tab">
                 <Square Loading={Loading} />

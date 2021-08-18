@@ -90,17 +90,24 @@ const CANCEL_SUBSCRIPTION = gql`
     }
 `
 
-const Orders = ({ Loading }) => {
+const Orders = ({ Loading, datetime }) => {
 
+    const [orders, setOrders] = useState([])
     const [modalOptions, setModalOptions] = useState({})
     const [modalIndex, setModalIndex] = useState(0)
     const [dateFrom, setDateFrom] = useState('')
     const [dateTo, setDateTo] = useState('')
+    const [getDatetime, setDatetime] = useState('')
+    const [getDatetime2, setDatetime2] = useState('')
 
     const { data, refetch, networkStatus, loading } = useQuery(GET_ORDERS, { 
         fetchPolicy: "no-cache", 
         notifyOnNetworkStatusChange: true 
     })
+
+    useEffect(() => {
+        ordersPerWeek(data?.getOrders, getDatetime, getDatetime2)
+    }, [data])
 
     const [cancelSubscription] = useLazyQuery(CANCEL_SUBSCRIPTION, {
         onCompleted: ({ cancelSubscription: response }) => {
@@ -186,7 +193,7 @@ const Orders = ({ Loading }) => {
     const openModal = i => {
         setModalIndex(i)
         const modal = document.getElementById('info-modal')
-        modal.style.display = 'block'
+        if (modal) modal.style.display = 'block'
     }
 
     const closeModal = () => {
@@ -206,9 +213,123 @@ const Orders = ({ Loading }) => {
         getOrder({ variables: { orderId } })
     }
 
+    const onChangeDate = (fromDate, toDate) => {
+        const from = new Date(fromDate.replace(/-/g, '/'))
+        const to = new Date(toDate.replace(/-/g, '/'))
+
+        const ordersFilter = []
+
+        data?.getOrders.forEach(order => {
+            const createdAt = new Date(order.createdAt)
+
+            if (from instanceof Date && !isNaN(from) && to instanceof Date && !isNaN(to)) {
+                if (createdAt >= from && createdAt <= to)
+                    ordersFilter.push(order)
+            } else if (from instanceof Date && !isNaN(from) && createdAt >= from)
+                ordersFilter.push(order)
+            else if (to instanceof Date && !isNaN(to) && createdAt <= to)
+                ordersFilter.push(order)
+        })
+
+        setOrders(ordersFilter)
+    }
+
+    const onChangeFrom = e => {
+        setDateFrom(e.target.value)
+        onChangeDate(e.target.value, dateTo)
+    }
+
+    const onChangeTo = e => {
+        setDateTo(e.target.value)
+        onChangeDate(dateFrom, e.target.value)
+    }
+
+    const lastWeek = () => {
+        const newFrom = new Date(getDatetime)
+        newFrom.setDate(newFrom.getDate() - 7)
+        setDatetime(newFrom)
+
+        const newTo = new Date(getDatetime2)
+        newTo.setDate(newTo.getDate() - 7)
+        setDatetime2(newTo)
+
+        ordersPerWeek(data?.getOrders, newFrom, newTo)
+    }
+
+    const nextWeek = () => {
+        const newFrom = new Date(getDatetime)
+        newFrom.setDate(newFrom.getDate() + 7)
+        setDatetime(newFrom)
+
+        const newTo = new Date(getDatetime2)
+        newTo.setDate(newTo.getDate() + 7)
+        setDatetime2(newTo)
+
+        ordersPerWeek(data?.getOrders, newFrom, newTo)
+    }
+
+    const ordersPerWeek = (ord, f, t) => {
+        const dateTempFrom = new Date(f)
+        dateTempFrom.setDate(dateTempFrom.getDate() - 9)
+
+        const dateTempTo = new Date(t)
+        dateTempTo.setDate(dateTempTo.getDate() - 9)
+
+        // console.log(dateTempFrom)
+        // console.log(dateTempTo)
+
+        const monthTFrom = new Date(f)
+        monthTFrom.setMonth(monthTFrom.getMonth() - 1)
+
+        const monthTTo = new Date(t)
+        monthTTo.setMonth(monthTTo.getMonth() - 1)
+
+        // console.log(monthTFrom)
+        // console.log(monthTTo)
+
+        const monthFrom2 = new Date(f)
+        monthFrom2.setMonth(monthFrom2.getMonth() - 2)
+
+        const monthTo2 = new Date(t)
+        monthTo2.setMonth(monthTo2.getMonth() - 2)
+
+        // console.log(monthFrom2)
+        // console.log(monthTo2)
+
+        const ordersFilter = []
+
+        ord?.forEach(order => {
+            const createdAt = new Date(order.createdAt)
+            if (order.type === 'ONCE') {
+                if (createdAt >= dateTempFrom && createdAt <= dateTempTo) {
+                    ordersFilter.push(order)
+                }
+            } else if (order.type === 'SUBSCRIPTION') {
+                if (order.cart[0].interval === 1) {
+                    if (createdAt >= monthTFrom && createdAt <= monthTTo) {
+                        ordersFilter.push(order)
+                    }
+                } else if (order.cart[0].interval === 2) {
+                    if (createdAt >= monthFrom2 && createdAt <= monthTo2) {
+                        ordersFilter.push(order)
+                    }
+                }
+            }
+        })
+
+        setOrders(ordersFilter)
+    }
+
     useEffect(() => {
-        console.log(dateFrom, dateTo, typeof dateFrom)
-    }, [dateFrom, dateTo])
+        const weekDateFrom = new Date(datetime)
+        weekDateFrom.setDate(weekDateFrom.getDate() - weekDateFrom.getDay() + 1)
+        setDatetime(weekDateFrom)
+
+        const weekDateTo = new Date()
+        weekDateTo.setDate(weekDateFrom.getDate() + 6)
+        setDatetime2(weekDateTo)
+
+    }, [datetime])
 
     const ModalInfo = ({ id, id2 }) => {
         let modalData = {}
@@ -300,7 +421,10 @@ const Orders = ({ Loading }) => {
     }
 
     const InfoModal = () => {
-        const order = data.getOrders[modalIndex]
+        const order = orders[modalIndex]
+
+        if (!order) return null
+        
         const billing = order.checkoutInfo.billingInformation
         const shipping = order.checkoutInfo.shippingInformation
         
@@ -496,17 +620,29 @@ const Orders = ({ Loading }) => {
 
     return <>
         <Modal id="modal-orders" {...modalOptions} />
-        <InfoModal />
+        {orders && <InfoModal />}
         <section className="row mt-3" id="row-correction">
             <div className="col px-5">
                 <label>Date From</label>
-                <input type="date" className="form-control date-from" value={dateFrom} onChange={e => setDateFrom(e.target.value)} />
+                <input type="date" className="form-control date-from" value={dateFrom} onChange={onChangeFrom} />
             </div>
             <div className="col px-5">
                 <label>Date To</label>
-                <input type="date" className="form-control date-to" value={dateTo} onChange={e => setDateTo(e.target.value)} />
+                <input type="date" className="form-control date-to" value={dateTo} onChange={onChangeTo} />
             </div>
         </section>
+        <div className="row mt-4 d-flex align-items-center" id="row-correction">
+            <div className="col-1">
+                <i className="bi bi-caret-left-square-fill" onClick={lastWeek} />
+            </div>
+            <div className="col text-center">
+                <p className="">{(new Date(getDatetime)).toString()}</p>
+                <p className="">{(new Date(getDatetime2)).toString()}</p>
+            </div>
+            <div className="col-1">
+                <i className="bi bi-caret-right-square-fill" onClick={nextWeek} />
+            </div>
+        </div>
         <table className="table table-striped table-hover my-5">
             <thead>
                 <tr>
@@ -518,7 +654,7 @@ const Orders = ({ Loading }) => {
                 </tr>
             </thead>
             <tbody>
-                {data?.getOrders.map((order, index) => {
+                {orders?.map((order, index) => {
                     return <tr key={index} onClick={() => openModal(index)}>
                         <th scope="row">{index + 1}</th>
                         {order.square ? 
@@ -527,12 +663,6 @@ const Orders = ({ Loading }) => {
                                 <td>{order.checkoutInfo.shippingInformation.name}</td>
                                 <td>$ {(order.square.totalMoney / 100).toFixed(2)}</td>
                                 <td>Square</td>
-                                {/* <td>
-                                    <i className="bi bi-arrow-return-left me-2" onClick={() => console.log('Refund')} />
-                                    {order.type === 'SUBSCRIPTION' &&
-                                        <i className="bi bi-x-square-fill" onClick={() => cancel(order.square.subscriptionId)} />
-                                    }
-                                </td> */}
                             </> :
                             <>
                                 <td>{order.type}</td>
