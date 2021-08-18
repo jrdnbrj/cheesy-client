@@ -107,6 +107,7 @@ const Orders = ({ Loading, datetime }) => {
 
     useEffect(() => {
         ordersPerWeek(data?.getOrders, getDatetime, getDatetime2)
+        // eslint-disable-next-line
     }, [data])
 
     const [cancelSubscription] = useLazyQuery(CANCEL_SUBSCRIPTION, {
