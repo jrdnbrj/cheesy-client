@@ -95,7 +95,7 @@ const CheesyBittes = ({ Loading }) => {
         }
     })
 
-    const [updateTerms, { loading: termsLoading, error: saveTermsError }] = useMutation(UPDATE_TERMS, {
+    const [updateTerms, { error: saveTermsError }] = useMutation(UPDATE_TERMS, {
         onCompleted: () => {
             const modal = document.getElementById('modal-cheesy-home')
             setModalOptions({
