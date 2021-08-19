@@ -881,6 +881,11 @@ and (max-width: 580px) {
   padding-bottom: 15% !important;
 }
 
+.see-terms {
+  font-size: 1.5vw;
+  color: #D89731;
+}
+
 .icon {
   padding-right: 5vw;
   font-size: 3vw;
@@ -2631,4 +2636,8 @@ and (max-width: 580px) {
   font-size: 1.5vw;
   padding-left: 1%;
   padding-top: 0.4%;
+}
+
+.admin-terms {
+  padding-bottom: 5%;
 }

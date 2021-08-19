@@ -44,6 +44,14 @@ const UPDATE_FAMILY = gql`
     }
 `
 
+const UPDATE_TERMS = gql`
+    mutation ($data: String) {
+        updateTerms(data: $data) {
+            response
+        }
+    }
+`
+
 const CheesyBittes = ({ Loading }) => {
 
     const { loading: loadingHome, data: home } = useQuery(GET_HOME)
@@ -62,7 +70,7 @@ const CheesyBittes = ({ Loading }) => {
             const modal = document.getElementById('modal-cheesy-home')
             setModalOptions({
                 header: 'Cheesy Bittes Home Info',
-                body: 'There was an error trying to save changes, please try again',
+                body: 'There was an error trying to save changes, please try again.',
             })
             modal.style.display = 'block'
         }
@@ -81,7 +89,26 @@ const CheesyBittes = ({ Loading }) => {
             const modal = document.getElementById('modal-cheesy-home')
             setModalOptions({
                 header: 'Cheesy Bittes Our Family',
-                body: 'There was an error trying to save changes, please try again',
+                body: 'There was an error trying to save changes, please try again.',
+            })
+            modal.style.display = 'block'
+        }
+    })
+
+    const [updateTerms, { loading: termsLoading, error: saveTermsError }] = useMutation(UPDATE_TERMS, {
+        onCompleted: () => {
+            const modal = document.getElementById('modal-cheesy-home')
+            setModalOptions({
+                header: 'Cheesy Bittes Terms',
+                body: 'File Saved Successfully.',
+            })
+            modal.style.display = 'block'
+        },
+        onError: () => {
+            const modal = document.getElementById('modal-cheesy-home')
+            setModalOptions({
+                header: 'Cheesy Bittes Terms',
+                body: 'There was an error trying to save the file, please reload the page and try again.',
             })
             modal.style.display = 'block'
         }
@@ -89,6 +116,7 @@ const CheesyBittes = ({ Loading }) => {
 
     saveHomeError && console.log('saveHomeError:', saveHomeError)
     saveFamilyError && console.log('saveFamilyError:', saveFamilyError)
+    saveTermsError && console.log('saveTermsError:', saveTermsError)
 
     const [modalOptions, setModalOptions] = useState({})
 
@@ -127,6 +155,20 @@ const CheesyBittes = ({ Loading }) => {
 
         updateFamily({ variables: { familyData } })
     }
+
+    const saveTerms = e => {
+        e.preventDefault()
+
+        console.log('e.target.files[0]:', e.target.files[0])
+
+        const reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0])
+        reader.onloadend = () =>  {
+            updateTerms({ variables: {  data: reader.result } })
+            console.log('reader.result:', reader.result)
+        }
+    }
+
 
     if (loadingHome) {
         return <Loading document="Home Information" />
@@ -183,6 +225,25 @@ const CheesyBittes = ({ Loading }) => {
                     </button>
                 </>}
             </form>
+        </section>
+        <section className="admin-terms">
+            <h1 className="display-6">Terms & Conditions</h1>
+            <section className="my-4">
+                <div className="form-text">Upload only files in PDF format.</div>
+                <div className="input-group mb-3">
+                    <input type="file" className="form-control" id="inputGroupFile02" onChange={saveTerms} />
+                </div>
+            </section>
+            {/* {termsLoading ? <>
+                <button type="submit" className="btn btn-success mb-5 mt-2" disabled>
+                    <span className="spinner-border spinner-border-sm text-light me-2" role="status"></span>
+                    <span>Saving...</span>
+                </button>
+            </> : <>
+                <button type="submit" className="btn btn-success mb-5 mt-2">
+                    <span>Save Changes</span>
+                </button>
+            </>} */}
         </section>
     </>
 }
