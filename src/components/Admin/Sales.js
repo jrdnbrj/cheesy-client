@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client'
 import Orders from './Sales/Orders'
-import Square from './Sales/Square'
+// import Square from './Sales/Square'
 // import PayPal from './Sales/PayPal'
 
 
@@ -35,7 +35,7 @@ const Sales = ({ Loading }) => {
                 <Orders Loading={Loading} datetime={data?.getDatetime.split('.')[0]} />
             </div>
             <div className="tab-pane fade" id="nav-square" role="tabpanel" aria-labelledby="nav-square-tab">
-                <Square Loading={Loading} />
+                {/* <Square Loading={Loading} /> */}
             </div>
             {/* <div className="tab-pane fade" id="nav-paypal" role="tabpanel" aria-labelledby="nav-paypal-tab">
                 <PayPal Loading={Loading} />
