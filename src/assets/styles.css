@@ -1094,10 +1094,11 @@ and (max-width: 580px) {
 
 .video-msg {
   position: absolute;
-  left: 0;
+  right: 0;
   margin-top: -10%;
   font-family: Nunito Bold;
   font-size: 1.3vw;
+  color: #FEFEFE;
 }
 
 .background3, .background4 {
