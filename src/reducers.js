@@ -1,8 +1,9 @@
 const _state = {
     products: [],
-    cart: JSON.parse(localStorage.getItem('cart')) || [],
+    cart: JSON.parse(localStorage.getItem('cart') || '[]'),
     subtotal: localStorage.getItem('subtotal') || 0,
-    token: localStorage.getItem('token') || undefined
+    token: localStorage.getItem('token') || undefined,
+    orders: []
 }
 
 const reducers = (state = _state, action) => {
@@ -36,6 +37,11 @@ const reducers = (state = _state, action) => {
             return {
                 ...state,
                 token: action.token
+            }
+        case 'SET_ORDERS':
+            return {
+                ...state,
+                orders: action.orders
             }
         default: return { ...state }
     }

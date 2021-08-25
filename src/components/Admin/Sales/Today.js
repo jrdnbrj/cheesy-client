@@ -1,9 +1,71 @@
-import { useState } from 'react'
-import { useLazyQuery, gql } from "@apollo/client"
-import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useQuery, useLazyQuery, gql } from "@apollo/client"
+import { useDispatch } from 'react-redux'
 
 import Modal from '../../Modal'
 import JSONPretty from 'react-json-pretty'
+
+const GET_ORDERS = gql`
+    query {
+        getOrders {
+            type
+            createdAt
+            shipping
+            discount
+            square {
+                createdAt
+                status
+                buyerEmailAddress
+                totalMoney
+                paymentId
+                subscriptionId
+                startDate
+            }
+            paypal {
+                orderId
+                status
+                value
+                fullName
+                email
+                createTime
+            }
+            cart {
+                amount
+                price
+                name
+                total
+                bundleUp
+                buyOnce
+                joinClub
+                interval
+                choose1
+                choose3
+            }
+            checkoutInfo {
+                shippingInformation {
+                    name
+                    phone
+                    email
+                    address
+                    address2
+                    city
+                    state
+                    zipCode
+                }
+                billingInformation {
+                    name
+                    phone
+                    email
+                    address
+                    address2
+                    city
+                    state
+                    zipCode
+                }
+            }
+        }
+    }
+`
 
 const RETRIEVE_SUBSCRIPTION = gql`
     query ($subscriptionId: String!) {
@@ -29,20 +91,67 @@ const CANCEL_SUBSCRIPTION = gql`
     }
 `
 
-const Orders = ({ Loading, datetime }) => {
+const Today = ({ Loading, datetime }) => {
 
-    const orders = useSelector(state => state.orders)
+    const dispatch = useDispatch()
 
+    const [orders, setOrders] = useState([])
     const [modalOptions, setModalOptions] = useState({})
     const [modalIndex, setModalIndex] = useState(0)
+    const [dateFrom, setDateFrom] = useState('')
+    const [dateTo, setDateTo] = useState('')
+    const [getDatetime, setDatetime] = useState('')
+    const [getDatetime2, setDatetime2] = useState('')
 
-    const [retrieveSubscription, { data: subscription, loading: loadingSubscription }] = useLazyQuery(RETRIEVE_SUBSCRIPTION, {
-        onCompleted: () => {
-            const modal = document.getElementById('info-modal')
+    const { data, refetch, networkStatus, loading } = useQuery(GET_ORDERS, { 
+        fetchPolicy: "no-cache", 
+        notifyOnNetworkStatusChange: true,
+        onCompleted: ({ getOrders }) => {
+            dispatch({ type: 'SET_ORDERS', orders: getOrders })
+        }
+    })
+
+    useEffect(() => {
+        ordersPerWeek(data?.getOrders, getDatetime, getDatetime2)
+        // eslint-disable-next-line
+    }, [data])
+
+    const [cancelSubscription] = useLazyQuery(CANCEL_SUBSCRIPTION, {
+        onCompleted: ({ cancelSubscription: response }) => {
+            console.log('cancel subscription completed:', response)
+            const modal = document.getElementById('modal-today')
+            console.log(response)
+            if (response === 'CANCELED') {
+                setModalOptions({
+                    header: 'Cancel Subscription',
+                    body: 'The subscription has been successfully canceled.',
+                })
+                refetch()
+            } else 
+                setModalOptions({
+                    header: 'Cancel Subscription',
+                    body: 'The subscription may not have been canceled, please check the subscription information again.',
+                })
             modal.style.display = 'block'
         },
         onError: (error) => {
-            const modal = document.getElementById('modal-orders')
+            console.log('cancel subscription error', error)
+            const modal = document.getElementById('modal-today')
+            setModalOptions({
+                header: 'Cancel Subscription',
+                body: 'There was an error trying to unsubscribe. Please try again.',
+            })
+            modal.style.display = 'block'
+        }
+    })
+
+    const [retrieveSubscription, { data: subscription, loading: loadingSubscription }] = useLazyQuery(RETRIEVE_SUBSCRIPTION, {
+        onCompleted: () => {
+            const modal = document.getElementById('today-modal')
+            modal.style.display = 'block'
+        },
+        onError: (error) => {
+            const modal = document.getElementById('modal-today')
             setModalOptions({
                 header: 'Retrieve Subscription',
                 body: 'An error occurred trying to get subscription information. Please try again.',
@@ -54,11 +163,11 @@ const Orders = ({ Loading, datetime }) => {
 
     const [getPayment, { data: payment, loading: loadingPayment }] = useLazyQuery(GET_PAYMENT, {
         onCompleted: () => {
-            const modal = document.getElementById('info-modal')
+            const modal = document.getElementById('today-modal')
             modal.style.display = 'block'
         },
         onError: (error) => {
-            const modal = document.getElementById('modal-orders')
+            const modal = document.getElementById('modal-today')
             setModalOptions({
                 header: 'Retrieve Payment',
                 body: 'An error has occurred trying to get payment information. Please try again.',
@@ -70,11 +179,11 @@ const Orders = ({ Loading, datetime }) => {
 
     const [getOrder, { data: orderData, loading: loadingOrder }] = useLazyQuery(GET_ORDER, {
         onCompleted: () => {
-            const modal = document.getElementById('info-modal')
+            const modal = document.getElementById('today-modal')
             modal.style.display = 'block'
         },
         onError: (error) => {
-            const modal = document.getElementById('modal-orders')
+            const modal = document.getElementById('modal-today')
             setModalOptions({
                 header: 'Retrieve Order',
                 body: 'An error has occurred trying to get order information. Please try again.',
@@ -84,14 +193,18 @@ const Orders = ({ Loading, datetime }) => {
         fetchPolicy: "no-cache"
     })
 
+    const cancel = subscriptionId => {
+        cancelSubscription({ variables: { subscriptionId } })
+    }
+
     const openModal = i => {
         setModalIndex(i)
-        const modal = document.getElementById('info-modal')
+        const modal = document.getElementById('today-modal')
         if (modal) modal.style.display = 'block'
     }
 
     const closeModal = () => {
-        const modal = document.getElementById('info-modal')
+        const modal = document.getElementById('today-modal')
         modal.style.display = 'none'
     }
 
@@ -106,6 +219,124 @@ const Orders = ({ Loading, datetime }) => {
     const requestOrder = orderId => {
         getOrder({ variables: { orderId } })
     }
+
+    const onChangeDate = (fromDate, toDate) => {
+        const from = new Date(fromDate.replace(/-/g, '/'))
+        const to = new Date(toDate.replace(/-/g, '/'))
+
+        const ordersFilter = []
+
+        data?.getOrders.forEach(order => {
+            const createdAt = new Date(order.createdAt)
+
+            if (from instanceof Date && !isNaN(from) && to instanceof Date && !isNaN(to)) {
+                if (createdAt >= from && createdAt <= to)
+                    ordersFilter.push(order)
+            } else if (from instanceof Date && !isNaN(from) && createdAt >= from)
+                ordersFilter.push(order)
+            else if (to instanceof Date && !isNaN(to) && createdAt <= to)
+                ordersFilter.push(order)
+        })
+
+        setOrders(ordersFilter)
+    }
+
+    const onChangeFrom = e => {
+        setDateFrom(e.target.value)
+        onChangeDate(e.target.value, dateTo)
+    }
+
+    const onChangeTo = e => {
+        setDateTo(e.target.value)
+        onChangeDate(dateFrom, e.target.value)
+    }
+
+    const lastWeek = () => {
+        const newFrom = new Date(getDatetime)
+        newFrom.setDate(newFrom.getDate() - 7)
+        setDatetime(newFrom)
+
+        const newTo = new Date(getDatetime2)
+        newTo.setDate(newTo.getDate() - 7)
+        setDatetime2(newTo)
+
+        ordersPerWeek(data?.getOrders, newFrom, newTo)
+    }
+
+    const nextWeek = () => {
+        const newFrom = new Date(getDatetime)
+        newFrom.setDate(newFrom.getDate() + 7)
+        setDatetime(newFrom)
+
+        const newTo = new Date(getDatetime2)
+        newTo.setDate(newTo.getDate() + 7)
+        setDatetime2(newTo)
+
+        ordersPerWeek(data?.getOrders, newFrom, newTo)
+    }
+
+    const ordersPerWeek = (ord, f, t) => {
+        const dateTempFrom = new Date(f)
+        dateTempFrom.setDate(dateTempFrom.getDate() - 9)
+
+        const dateTempTo = new Date(t)
+        dateTempTo.setDate(dateTempTo.getDate() - 9)
+
+        // console.log(dateTempFrom)
+        // console.log(dateTempTo)
+
+        const monthTFrom = new Date(f)
+        monthTFrom.setMonth(monthTFrom.getMonth() - 1)
+
+        const monthTTo = new Date(t)
+        monthTTo.setMonth(monthTTo.getMonth() - 1)
+
+        // console.log(monthTFrom)
+        // console.log(monthTTo)
+
+        const monthFrom2 = new Date(f)
+        monthFrom2.setMonth(monthFrom2.getMonth() - 2)
+
+        const monthTo2 = new Date(t)
+        monthTo2.setMonth(monthTo2.getMonth() - 2)
+
+        // console.log(monthFrom2)
+        // console.log(monthTo2)
+
+        const ordersFilter = []
+
+        ord?.forEach(order => {
+            const createdAt = new Date(order.createdAt)
+            if (order.type === 'ONCE') {
+                if (createdAt >= dateTempFrom && createdAt <= dateTempTo) {
+                    ordersFilter.push(order)
+                }
+            } else if (order.type === 'SUBSCRIPTION') {
+                if (order.cart[0].interval === 1) {
+                    if (createdAt >= monthTFrom && createdAt <= monthTTo) {
+                        ordersFilter.push(order)
+                    }
+                } else if (order.cart[0].interval === 2) {
+                    if (createdAt >= monthFrom2 && createdAt <= monthTo2) {
+                        ordersFilter.push(order)
+                    }
+                }
+            }
+        })
+
+        setOrders(ordersFilter)
+    }
+
+    useEffect(() => {
+        const weekDateFrom = new Date(datetime)
+        weekDateFrom.setDate(weekDateFrom.getDate() - weekDateFrom.getDay() + 1)
+        setDatetime(weekDateFrom)
+
+        const weekDateTo = new Date()
+        weekDateTo.setDate(weekDateFrom.getDate() + 6)
+        setDatetime2(weekDateTo)
+
+    }, [datetime])
 
     const ModalInfo = ({ id, id2 }) => {
         let modalData = {}
@@ -204,7 +435,7 @@ const Orders = ({ Loading, datetime }) => {
         const billing = order.checkoutInfo.billingInformation
         const shipping = order.checkoutInfo.shippingInformation
         
-        return <div id='info-modal' className="modal-container">
+        return <div id='today-modal' className="modal-container">
             <div className="modal-content-info">
                 <div className="modal-header row" id="row-correction">
                     <div className="col-10">
@@ -221,12 +452,24 @@ const Orders = ({ Loading, datetime }) => {
                         <section className="col">
                             <h4>Information</h4>
                             <ul className="list-group">
+                                {order.type === 'SUBSCRIPTION' &&
+                                    <li className="list-group-item">
+                                        <strong>Interval: </strong>
+                                        <span>{order.cart[0].interval === 1 ? 'Monthly' : order.cart[0].interval === 2 ? 'Bi-Monthly' : ''}</span>
+                                    </li>
+                                }
                                 {order.square ? 
                                     <>
                                         <li className="list-group-item">
                                             <strong>Type: </strong>
                                             <span>{order.type}</span>
                                         </li>
+                                        {order.type === 'SUBSCRIPTION' &&
+                                            <li className="list-group-item">
+                                                <strong>Start Date: </strong>
+                                                <span>{order.square.startDate.replace('T', ' ')}</span>
+                                            </li>
+                                        }
                                         <li className="list-group-item">
                                             <strong>Payment Method: </strong>
                                             <span>Square</span>
@@ -347,6 +590,10 @@ const Orders = ({ Loading, datetime }) => {
                             </li>
                         </ul>
                     </section>
+                    {order.type === 'SUBSCRIPTION' && 
+                        <button className="btn btn-primary d-block mx-auto mt-3" onClick={() => cancel(order.square.subscriptionId)}>
+                            Cancel Subscription
+                        </button>}
                     {order.square ? isPayment(order.square.paymentId, order.square.subscriptionId) ? 
                         <ModalInfo id={order.square.paymentId} id2={order.square.subscriptionId} /> : 
                         order.type === 'SUBSCRIPTION' ? 
@@ -372,12 +619,37 @@ const Orders = ({ Loading, datetime }) => {
         </div>
     }
 
+    if (networkStatus === networkStatus.refetch || loading)
+        return <Loading document="Orders" />
+
     if (loadingPayment || loadingSubscription || loadingOrder)
         return <Loading document="Order Info" />
 
     return <>
-        <Modal id="modal-orders" {...modalOptions} />
+        <Modal id="modal-today" {...modalOptions} />
         {orders && <InfoModal />}
+        <section className="row mt-3" id="row-correction">
+            <div className="col px-5">
+                <label>Date From</label>
+                <input type="date" className="form-control date-from" value={dateFrom} onChange={onChangeFrom} />
+            </div>
+            <div className="col px-5">
+                <label>Date To</label>
+                <input type="date" className="form-control date-to" value={dateTo} onChange={onChangeTo} />
+            </div>
+        </section>
+        <div className="row mt-4 d-flex align-items-center" id="row-correction">
+            <div className="col-1">
+                <i className="bi bi-caret-left-square-fill" onClick={lastWeek} />
+            </div>
+            <div className="col text-center">
+                <p className="">{(new Date(getDatetime)).toString()}</p>
+                <p className="">{(new Date(getDatetime2)).toString()}</p>
+            </div>
+            <div className="col-1">
+                <i className="bi bi-caret-right-square-fill" onClick={nextWeek} />
+            </div>
+        </div>
         <table className="table table-striped table-hover my-5">
             <thead>
                 <tr>
@@ -390,12 +662,11 @@ const Orders = ({ Loading, datetime }) => {
             </thead>
             <tbody>
                 {orders?.map((order, index) => {
-                    if (order.type === 'SUBSCRIPTION') return null
                     return <tr key={index} onClick={() => openModal(index)}>
                         <th scope="row">{index + 1}</th>
                         {order.square ? 
                             <>
-                                <td>{order.type}</td>
+                                <td>{order.type} {order.type === 'SUBSCRIPTION' ? order.cart[0].interval === 1 ? '(Month)' : '(Two Months)' : ''}</td>
                                 <td>{order.checkoutInfo.shippingInformation.name}</td>
                                 <td>$ {(order.square.totalMoney / 100).toFixed(2)}</td>
                                 <td>Square</td>
@@ -414,4 +685,4 @@ const Orders = ({ Loading, datetime }) => {
     </>
 }
 
-export default Orders
+export default Today

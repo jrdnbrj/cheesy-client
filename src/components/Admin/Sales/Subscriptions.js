@@ -29,20 +29,48 @@ const CANCEL_SUBSCRIPTION = gql`
     }
 `
 
-const Orders = ({ Loading, datetime }) => {
+const Subscriptions = ({ Loading }) => {
 
     const orders = useSelector(state => state.orders)
 
     const [modalOptions, setModalOptions] = useState({})
     const [modalIndex, setModalIndex] = useState(0)
 
-    const [retrieveSubscription, { data: subscription, loading: loadingSubscription }] = useLazyQuery(RETRIEVE_SUBSCRIPTION, {
-        onCompleted: () => {
-            const modal = document.getElementById('info-modal')
+    const [cancelSubscription] = useLazyQuery(CANCEL_SUBSCRIPTION, {
+        onCompleted: ({ cancelSubscription: response }) => {
+            console.log('cancel subscription completed:', response)
+            const modal = document.getElementById('modal-subscriptions')
+            console.log(response)
+            if (response === 'CANCELED') {
+                setModalOptions({
+                    header: 'Cancel Subscription',
+                    body: 'The subscription has been successfully canceled.',
+                })
+            } else 
+                setModalOptions({
+                    header: 'Cancel Subscription',
+                    body: 'The subscription may not have been canceled, please check the subscription information again.',
+                })
             modal.style.display = 'block'
         },
         onError: (error) => {
-            const modal = document.getElementById('modal-orders')
+            console.log('cancel subscription error', error)
+            const modal = document.getElementById('modal-subscriptions')
+            setModalOptions({
+                header: 'Cancel Subscription',
+                body: 'There was an error trying to unsubscribe. Please try again.',
+            })
+            modal.style.display = 'block'
+        }
+    })
+
+    const [retrieveSubscription, { data: subscription, loading: loadingSubscription }] = useLazyQuery(RETRIEVE_SUBSCRIPTION, {
+        onCompleted: () => {
+            const modal = document.getElementById('subscriptions-modal')
+            modal.style.display = 'block'
+        },
+        onError: (error) => {
+            const modal = document.getElementById('modal-subscriptions')
             setModalOptions({
                 header: 'Retrieve Subscription',
                 body: 'An error occurred trying to get subscription information. Please try again.',
@@ -54,11 +82,11 @@ const Orders = ({ Loading, datetime }) => {
 
     const [getPayment, { data: payment, loading: loadingPayment }] = useLazyQuery(GET_PAYMENT, {
         onCompleted: () => {
-            const modal = document.getElementById('info-modal')
+            const modal = document.getElementById('subscriptions-modal')
             modal.style.display = 'block'
         },
         onError: (error) => {
-            const modal = document.getElementById('modal-orders')
+            const modal = document.getElementById('modal-subscriptions')
             setModalOptions({
                 header: 'Retrieve Payment',
                 body: 'An error has occurred trying to get payment information. Please try again.',
@@ -70,11 +98,11 @@ const Orders = ({ Loading, datetime }) => {
 
     const [getOrder, { data: orderData, loading: loadingOrder }] = useLazyQuery(GET_ORDER, {
         onCompleted: () => {
-            const modal = document.getElementById('info-modal')
+            const modal = document.getElementById('subscriptions-modal')
             modal.style.display = 'block'
         },
         onError: (error) => {
-            const modal = document.getElementById('modal-orders')
+            const modal = document.getElementById('modal-subscriptions')
             setModalOptions({
                 header: 'Retrieve Order',
                 body: 'An error has occurred trying to get order information. Please try again.',
@@ -84,14 +112,18 @@ const Orders = ({ Loading, datetime }) => {
         fetchPolicy: "no-cache"
     })
 
+    const cancel = subscriptionId => {
+        cancelSubscription({ variables: { subscriptionId } })
+    }
+
     const openModal = i => {
         setModalIndex(i)
-        const modal = document.getElementById('info-modal')
+        const modal = document.getElementById('subscriptions-modal')
         if (modal) modal.style.display = 'block'
     }
 
     const closeModal = () => {
-        const modal = document.getElementById('info-modal')
+        const modal = document.getElementById('subscriptions-modal')
         modal.style.display = 'none'
     }
 
@@ -204,7 +236,7 @@ const Orders = ({ Loading, datetime }) => {
         const billing = order.checkoutInfo.billingInformation
         const shipping = order.checkoutInfo.shippingInformation
         
-        return <div id='info-modal' className="modal-container">
+        return <div id='subscriptions-modal' className="modal-container">
             <div className="modal-content-info">
                 <div className="modal-header row" id="row-correction">
                     <div className="col-10">
@@ -221,12 +253,22 @@ const Orders = ({ Loading, datetime }) => {
                         <section className="col">
                             <h4>Information</h4>
                             <ul className="list-group">
+                                <li className="list-group-item">
+                                    <strong>Interval: </strong>
+                                    <span>{order.cart[0].interval === 1 ? 'Monthly' : order.cart[0].interval === 2 ? 'Bi-Monthly' : ''}</span>
+                                </li>
                                 {order.square ? 
                                     <>
                                         <li className="list-group-item">
                                             <strong>Type: </strong>
                                             <span>{order.type}</span>
                                         </li>
+                                        {order.type === 'SUBSCRIPTION' &&
+                                            <li className="list-group-item">
+                                                <strong>Start Date: </strong>
+                                                <span>{order.square.startDate.replace('T', ' ')}</span>
+                                            </li>
+                                        }
                                         <li className="list-group-item">
                                             <strong>Payment Method: </strong>
                                             <span>Square</span>
@@ -347,6 +389,10 @@ const Orders = ({ Loading, datetime }) => {
                             </li>
                         </ul>
                     </section>
+                    {order.type === 'SUBSCRIPTION' && 
+                        <button className="btn btn-primary d-block mx-auto mt-3" onClick={() => cancel(order.square.subscriptionId)}>
+                            Cancel Subscription
+                        </button>}
                     {order.square ? isPayment(order.square.paymentId, order.square.subscriptionId) ? 
                         <ModalInfo id={order.square.paymentId} id2={order.square.subscriptionId} /> : 
                         order.type === 'SUBSCRIPTION' ? 
@@ -376,13 +422,13 @@ const Orders = ({ Loading, datetime }) => {
         return <Loading document="Order Info" />
 
     return <>
-        <Modal id="modal-orders" {...modalOptions} />
+        <Modal id="modal-subscriptions" {...modalOptions} />
         {orders && <InfoModal />}
         <table className="table table-striped table-hover my-5">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Type</th>
+                    <th scope="col">Types</th>
                     <th scope="col">Customer</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Method</th>
@@ -390,12 +436,12 @@ const Orders = ({ Loading, datetime }) => {
             </thead>
             <tbody>
                 {orders?.map((order, index) => {
-                    if (order.type === 'SUBSCRIPTION') return null
+                    if (order.type === 'ONCE') return null
                     return <tr key={index} onClick={() => openModal(index)}>
                         <th scope="row">{index + 1}</th>
                         {order.square ? 
                             <>
-                                <td>{order.type}</td>
+                                <td>{order.type} {order.type === 'SUBSCRIPTION' ? order.cart[0].interval === 1 ? '(Month)' : '(Two Months)' : ''}</td>
                                 <td>{order.checkoutInfo.shippingInformation.name}</td>
                                 <td>$ {(order.square.totalMoney / 100).toFixed(2)}</td>
                                 <td>Square</td>
@@ -414,4 +460,4 @@ const Orders = ({ Loading, datetime }) => {
     </>
 }
 
-export default Orders
+export default Subscriptions

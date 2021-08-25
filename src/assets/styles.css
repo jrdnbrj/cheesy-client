@@ -1113,7 +1113,7 @@ and (max-width: 580px) {
 
 .video-msg {
   float: right;
-  margin-top: -10%;
+  margin-top: -9%;
   font-family: Nunito Bold;
   font-size: 1.3vw;
   color: #FEFEFE;

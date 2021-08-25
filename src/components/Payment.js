@@ -111,7 +111,8 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
         const modal = document.getElementById('modal-payment')
 
         const main = async () => {
-            const payments = window.Square.payments('sq0idp--TzA0-jaVxtdBfH4hQAdRA', 'LPAYA4VJRRXKH');
+            const payments = window.Square.payments('sandbox-sq0idb-QrUq90laeC8jv6V6en0VyA', 'LWB5K8RGJYJSY');
+            // const payments = window.Square.payments('sq0idp--TzA0-jaVxtdBfH4hQAdRA', '	LPAYA4VJRRXKH');
             const card = await payments.card();
             await card.attach('#card-container');
 
@@ -128,7 +129,6 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                             .then(({ data }) => {
                                 console.log('data.createPayment:', data.createPayment)
                                 if (data.createPayment === 'COMPLETED') {
-                                    // dispatch({ type: 'SET_CART', payload: [] })
                                     setModalOptions({
                                         header: 'Square Checkout',
                                         body: 'Your order was completed successfully!! We will ship your happiness package as soon as possible. Thank you.',
