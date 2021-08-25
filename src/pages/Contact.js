@@ -80,6 +80,11 @@ const Contact = () => {
                     <a href="mailto:info@cheesybittes.com"><i className="bi-envelope-fill contact-icon"></i></a>
                     <p className="pt-5">Kindi Foods LLC<br />Eau Claire, WI 54703</p>
                 </address>
+                <span>
+                    <a href="https://server.cheesybittes.com/static/terms.pdf" target="_blank" rel="noreferrer" className="see-terms-2">
+                        See Terms & Conditions
+                    </a>
+                </span>
             </section>
             <section className="col-sx-12 col-sm-12 col-lg-6 contact-form order-1 order-sm-1 order-lg-2">
                 <img src={logoOrange} className="form-logo-orange" alt="Cheesy Bittes Medium Logo Orange" />

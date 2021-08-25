@@ -40,7 +40,7 @@ const NavBar = () => {
             <Link className="nav-link small-logo-container" to="/">
                 <img src={smallLogo} className="small-logo" alt="Cheesy Bittes Logo" />
             </Link>
-            <Link className="nav-link cart-logo-2-container" to="/" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <Link className="nav-link cart-logo-2-container" to="/" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 <img src={cart} className="cart-logo-2" alt="Cart Logo" />
             </Link>
             <div className="collapse navbar-collapse" id="nav-tog">
@@ -60,7 +60,7 @@ const NavBar = () => {
                         <Link className="nav-link" id="item-nav" to="/contact">Contact us</Link>
                     </li>
                     <li className="nav-item my-auto">
-                        <Link to="/" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <Link to="/" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                             <img src={cart} className="cart-logo" id="item-nav" alt="Cart Logo" />
                         </Link>
                     </li>

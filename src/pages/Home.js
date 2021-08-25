@@ -19,7 +19,6 @@ import rightArrow from '../assets/img/arrow-right.png'
 import leftArrow from '../assets/img/arrow-left.png'
 import shopNowShadow from '../assets/img/shop-now-shadow.png'
 import homeEnd from '../assets/img/home-background-2.png'
-// import loadingGif from '../assets/img/loading.gif'
 
 import simpleIngredients from '../assets/img/simple-ingredients.png'
 import vegetarianFriendly from '../assets/img/vegetarian-friendly.png'

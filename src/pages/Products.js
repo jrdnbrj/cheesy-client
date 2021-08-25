@@ -87,7 +87,7 @@ const Products = () => {
             <section className="col col-hidden"></section>
         </section>
 
-        <section className="row product-list pb-5" id="row-correction">
+        <section className="row product-list" id="row-correction">
             <section className="col col-hidden"></section>
             <section className="col-lg-5 col-sm-5 col-5 text-end">
                 <img src={`${products && products[0] && products[3].images[0]}`} id="mix-img" className="product-img-2" alt="Mix Them Up!" />
@@ -125,14 +125,14 @@ const Products = () => {
                     <li className="bullet">Pre-heat oven to 400°F.</li>
                     <li className="bullet">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
                     <li className="bullet">Bake for 18 - 20 minutes or until golden brown.</li>
-                    Enjoy warm!
+                    <li className="bullet">Enjoy warm!</li>
                 </section>
                 <section className="col-lg-4 px-4 instructions">
                     <img src={airFryer} className="air-fryer" alt="Air Fryer" />
                     <h5>Air Fryer</h5>
                     <li className="bullet green-padding">Place frozen cheese bread balls onto parchment paper, about 1 inch apart.</li>
                     <li className="bullet">Set to 375°F for 12 - 15 minutes or until golden brown.</li>
-                    Enjoy warm!
+                    <li className="bullet">Enjoy warm!</li>
                 </section>
                 <section className="col-lg-4 px-4 instructions">
                     <img src={important} className="important" alt="Important" />
@@ -140,7 +140,7 @@ const Products = () => {
                     <li className="bullet green-padding">Do not microwave.</li>
                     <li className="bullet">Do not spray or grease.</li>
                     <li className="bullet">Keep frozen until ready to bake.</li>
-                    Do not allow to thaw.
+                    <li className="bullet">Do not allow to thaw.</li>
                 </section>
             </section>
         </section>

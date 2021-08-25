@@ -59,7 +59,6 @@ const Footer = () => {
                 </address>
                 <span>
                     <a href="https://server.cheesybittes.com/static/terms.pdf" target="_blank" rel="noreferrer" className="see-terms">
-                    {/* <a href="https://localhost:8000/static/terms.pdf" target="_blank" rel="noreferrer"> */}
                         See Terms & Conditions
                     </a>
                 </span>
