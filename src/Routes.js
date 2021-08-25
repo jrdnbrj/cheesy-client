@@ -12,6 +12,9 @@ import BittesFruit from "./pages/BittesFruit"
 import Checkout from "./pages/Checkout"
 import Admin from "./pages/Admin"
 
+import Error404 from "./pages/Error404"
+
+
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -31,6 +34,8 @@ const Routes = () => {
           <Route exact path="/checkout" component={Checkout} />
 
           <Route exact path="/admin" component={Admin} />
+
+          <Route component={Error404} />
         </Switch>
       </Layout>
     </BrowserRouter>

@@ -895,7 +895,7 @@ and (max-width: 580px) {
 .see-terms-2 {
   font-size: 1.5vw;
   color: #FEFEFE;
-  padding-bottom: 10%;
+  padding-bottom: 2%;
 }
 
 .see-terms-2:hover {
@@ -2662,4 +2662,16 @@ and (max-width: 580px) {
 
 .admin-terms {
   padding-bottom: 5%;
+}
+
+.msg-404 {
+  color: #FEFEFE;
+  font-family: Nunito Black;
+  font-size: 2.4vw;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.bigger {
+  transform: scale(1.1);
 }

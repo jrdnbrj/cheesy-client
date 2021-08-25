@@ -166,7 +166,7 @@ const Product = () => {
                     <div id="mix-carousel" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {data && data.getProductByPath.images.map((img, index) => {
-                                return <div className={`carousel-item ${!index ? 'active' : ''}`} key={index}>
+                                return <div className={`carousel-item ${!index ? 'active bigger' : ''}`} key={index}>
                                     <img src={`${img}`} className="" alt={`Mix Them Up ${index+1}`} />
                                 </div>
                             })}
