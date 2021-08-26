@@ -9,8 +9,8 @@ import SquareLogo from '../assets/img/square-logo.png'
 
 
 const CREATE_ORDER = gql`
-    query ($amount: String!) {
-        createOrder(amount: $amount)
+    query ($amount: String!, $discount: String!, $shipping: String!, $cart: [CartInputType]!, $contactId: String!) {
+        createOrder(amount: $amount, discount: $discount, shipping: $shipping, cart: $cart, contactId: $contactId)
     }
 
 `
@@ -50,8 +50,7 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
                 },
                 createOrder: function (data, actions) {
                     console.log('Creando Orden')
-                    const amount = document.getElementById('checkout-total').innerHTML
-                    return client.query({ query: CREATE_ORDER, variables: { amount }})
+                    return client.query({ query: CREATE_ORDER, variables: { amount: total, discount, shipping, cart, contactId }})
                         .then(({ data }) => data.createOrder)
                 },
                 onApprove: function (data, actions) {

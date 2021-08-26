@@ -23,11 +23,6 @@ const GET_ORDER = gql`
     }
 `
 
-const CANCEL_SUBSCRIPTION = gql`
-    query ($subscriptionId: String!) {
-        cancelSubscription(subscriptionId: $subscriptionId)
-    }
-`
 
 const Orders = ({ Loading, datetime }) => {
 

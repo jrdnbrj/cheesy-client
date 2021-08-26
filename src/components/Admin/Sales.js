@@ -24,14 +24,17 @@ const Sales = ({ Loading }) => {
             <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-today" type="button" role="tab" aria-controls="nav-today" aria-selected="true">
                 Today
             </button>
-            <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-square" type="button" role="tab" aria-controls="nav-square" aria-selected="false">
+            {/* <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-square" type="button" role="tab" aria-controls="nav-square" aria-selected="false">
                 Square
-            </button>
+            </button> */}
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="false">
                 Orders
             </button>
             <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-subscriptions" type="button" role="tab" aria-controls="nav-subscriptions" aria-selected="false">
                 Subscriptions
+            </button>
+            <button className="nav-link" data-bs-toggle="tab" data-bs-target="#nav-errors" type="button" role="tab" aria-controls="nav-errors" aria-selected="false">
+                Errors
             </button>
         </nav>
         <div className="tab-content" id="nav-tabContent">
@@ -46,6 +49,8 @@ const Sales = ({ Loading }) => {
             </div>
             <div className="tab-pane fade" id="nav-subscriptions" role="tabpanel" aria-labelledby="nav-subscriptions-tab">
                 <Subscriptions Loading={Loading} />
+            </div>
+            <div className="tab-pane fade" id="nav-errors" role="tabpanel" aria-labelledby="nav-errors-tab">
             </div>
         </div>
     </section>
