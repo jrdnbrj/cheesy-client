@@ -110,8 +110,8 @@ const Payment = ({ subtotal, discount, freeShipping, shipping, total, cart, payp
         const modal = document.getElementById('modal-payment')
 
         const main = async () => {
-            const payments = window.Square.payments('sandbox-sq0idb-QrUq90laeC8jv6V6en0VyA', 'LWB5K8RGJYJSY');
-            // const payments = window.Square.payments('sq0idp--TzA0-jaVxtdBfH4hQAdRA', '	LPAYA4VJRRXKH');
+            // const payments = window.Square.payments('sandbox-sq0idb-QrUq90laeC8jv6V6en0VyA', 'LWB5K8RGJYJSY');
+            const payments = window.Square.payments('sq0idp--TzA0-jaVxtdBfH4hQAdRA', '	LPAYA4VJRRXKH');
             const card = await payments.card();
             await card.attach('#card-container');
 
