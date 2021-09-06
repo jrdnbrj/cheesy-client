@@ -163,7 +163,7 @@ const Products = () => {
     const comingSoon = () => {
         setModalOptions({
             header: 'Add to Cart',
-            body: 'Coming Soon',
+            body: 'We are working on some yummy surprises. Coming soon...',
         })
         modal.style.display = 'block'
     }

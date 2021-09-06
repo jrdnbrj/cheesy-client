@@ -14,6 +14,7 @@ const GET_PRODUCTS = gql`
             shortDescription
             ingredients
             price
+            percentage
             path
             smoothies
         }
@@ -22,11 +23,11 @@ const GET_PRODUCTS = gql`
 
 const UPDATE_PRODUCT = gql`
     mutation editProduct(
-        $name: String!, $price: Decimal!, $path: String!, $images: [String]!, $description: String!, 
+        $name: String!, $price: Decimal!, $percentage: Decimal!, $path: String!, $images: [String]!, $description: String!, 
         $shortDescription: String!, $ingredients: [String]!, $smoothies: [[String]]!
     ) {
         editProduct(
-            name: $name, price: $price, path: $path, description: $description, images: $images, 
+            name: $name, price: $price, percentage: $percentage, path: $path, description: $description, images: $images, 
             ingredients: $ingredients, shortDescription: $shortDescription, smoothies: $smoothies
         ) {
             result
@@ -119,6 +120,7 @@ const Products = ({ Loading }) => {
 
         const name = document.getElementById(`name-${i}`).value
         const price = document.getElementById(`price-${i}`).value
+        const percentage = document.getElementById(`percentage-${i}`).value
         const description = document.getElementById(`description-${i}`).value
         const shortDescription = document.getElementById(`shortDescription-${i}`).value
 
@@ -152,6 +154,7 @@ const Products = ({ Loading }) => {
         updateProduct({ variables: {
             name,
             price,
+            percentage,
             path: product.path,
             description,
             images,
@@ -168,7 +171,7 @@ const Products = ({ Loading }) => {
                     <Modal id="modal-products-admin" {...modalOptions} />
                     <form className="admin-product" onSubmit={e => saveProduct(e, product, i)}>
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col-4">
                                 <label className="form-label">Name</label>
                                 <input className="form-control" id={`name-${i}`} defaultValue={product.name} />
                             </div>
@@ -178,6 +181,11 @@ const Products = ({ Loading }) => {
                                 <div className="form-text">Price of one box.</div>
                             </div>
                             <div className="col-3">
+                                <label className="form-label">Percentage</label>
+                                <input type="number" step="any" className="form-control" id={`percentage-${i}`} defaultValue={product.percentage} />
+                                <div className="form-text">Discount % for 9 boxes.</div>
+                            </div>
+                            <div className="col-2">
                                 <label className="form-label">Path</label>
                                 <input className="form-control" defaultValue={product.path} disabled />
                             </div>

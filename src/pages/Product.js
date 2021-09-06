@@ -21,6 +21,7 @@ const GET_PRODUCT = gql`
             shortDescription
             ingredients
             price
+            percentage
         }
     }
 `
@@ -54,24 +55,29 @@ const Product = () => {
     }, [discounts])
 
     const [price, setPrice] = useState(0)
+    const [percentage, setPercentage] = useState(0)
     const [subtotal, setSubtotal] = useState(0)
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
         data && setPrice(data.getProductByPath.price)
+        data && setPercentage(data.getProductByPath.percentage)
     }, [data])
 
     useEffect(() => {
         const toDo = () => {
             if(radio1.checked || radio2.checked) bundleUp.className += ' checked'
             else bundleUp.classList.remove('checked')
+            
+            console.log(typeof price, price)
 
             if (radio1.checked) {
-                setTotal(price * 6)
-                setSubtotal(price * 6)
+                setTotal(parseFloat(price) * 6)
+                setSubtotal(parseFloat(price) * 6)
             } else if (radio2.checked) {
-                setTotal(price * 9)
-                setSubtotal(price * 9)
+                console.log(1 - percentage / 100)
+                setTotal(parseFloat(price) * 9 * (1 - percentage / 100))
+                setSubtotal(parseFloat(price) * 9 * (1 - percentage / 100))
             }
         }
 
@@ -82,7 +88,6 @@ const Product = () => {
         radio1.addEventListener('change', toDo)
         radio2.addEventListener('change', toDo)
         bundleUp.addEventListener('change', toDo)
-
     })
 
     useEffect(() => {
